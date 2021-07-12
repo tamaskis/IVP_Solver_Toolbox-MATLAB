@@ -1,0 +1,334 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>tableau2eqns</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-07-11"><meta name="DC.source" content="tableau2eqns_doc.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>tableau2eqns</tt></h1><!--introduction--><p>Propagation equations from Butcher tableau.</p><p><a href="ODE_Solver_Toolbox_Contents.html">Back to ODE Solver Toolbox Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Input/Output Parameters</a></li><li><a href="#3">Example #1: RK2 (Midpoint method)</a></li><li><a href="#4">Example #2: RK2 (Heun's method)</a></li><li><a href="#5">Example #3: (Ralston's method)</a></li><li><a href="#6">Example #4: (Kutta's third-order method)</a></li><li><a href="#7">Example #5: (Heun's third-order method)</a></li><li><a href="#8">Example #6: (Ralston's third-order method)</a></li><li><a href="#9">Example #7: (Strong Stability Preserving Runge-Kutta third-order method)</a></li><li><a href="#10">Example #8: (Runge-Kutta fourth-order method)</a></li><li><a href="#11">Example #9: (Ralston's fourth-order method)</a></li><li><a href="#12">Example #10: (3/8-Rule fourth-order method)</a></li></ul></div><h2 id="1">Syntax</h2><pre class="language-matlab">tableau2eqns(T)
+tableau2eqns(T,name)
+tableau2eqns(__,<span class="string">'decimal'</span>)
+</pre><h2 id="2">Input/Output Parameters</h2><p>
+  <table border=1>
+      <tr>
+          <td></td>
+          <td style="text-align:center"><b>Symbol</b></td>
+          <td style="text-align:center"><b>Variable</b></td>
+          <td style="text-align:center"><b>Description</b></td>
+          <td style="text-align:center"><b>Format</b></td>
+      </tr>
+      <tr>
+          <td rowspan="3" style="text-align:center"><b>Input</b></td>
+          <td style="text-align:center">-</td>
+          <td><TT>T</TT></td>
+          <td>Butcher tableau</td>
+          <td style="text-align:center">1×FIX SIZE<BR>double</td>
+      </tr>
+      <tr>
+          <td style="text-align:center">-</td>
+          <td><TT>name</TT></td>
+          <td>(OPTIONAL) name of Runge-Kutta method corresponding to the Butcher tableau</td>
+          <td style="text-align:center">string</td>
+      </tr>
+      <tr>
+          <td style="text-align:center">-</td>
+          <td><TT>type</TT></td>
+          <td>(OPTIONAL) print coefficients as <TT>'decimal'</TT> or <TT>'fraction'</TT> (defaults to <TT>'fraction'</TT>)</td>
+          <td style="text-align:center">char</td>
+      </tr>
+  </table>
+</p><h2 id="3">Example #1: RK2 (Midpoint method)</h2><pre class="codeinput">T = [0    0    0;
+     1/2  1/2  0;
+     0    0    1];
+tableau2eqns(T,<span class="string">"RK2 (Midpoint method)"</span>);
+</pre><pre class="codeoutput">RK2 (Midpoint method)
+---------------------
+k1 = f(t(i), y(i))
+k2 = f(t(i) + h/2, y(i) + h*k1/2)
+y(i+1) = y(i) + h(k2)
+
+
+</pre><h2 id="4">Example #2: RK2 (Heun's method)</h2><pre class="codeinput">T = [0  0    0;
+     1  1    0;
+     0  1/2  1/2];
+tableau2eqns(T,<span class="string">"RK2 (Heun's method)"</span>);
+</pre><pre class="codeoutput">RK2 (Heun's method)
+-------------------
+k1 = f(t(i), y(i))
+k2 = f(t(i) + h, y(i) + h*k1)
+y(i+1) = y(i) + (h/2)(k1 + k2)
+
+
+</pre><h2 id="5">Example #3: (Ralston's method)</h2><pre class="codeinput">T = [0    0    0;
+     2/3  2/3  0;
+     0    1/4  3/4];
+tableau2eqns(T,<span class="string">"RK2 (Ralston's method)"</span>);
+</pre><pre class="codeoutput">RK2 (Ralston's method)
+----------------------
+k1 = f(t(i), y(i))
+k2 = f(t(i) + 2h/3, y(i) + 2h*k1/3)
+y(i+1) = y(i) + (h/4)(k1 + 3k2)
+
+
+</pre><h2 id="6">Example #4: (Kutta's third-order method)</h2><pre class="codeinput">T = [0     0    0    0;
+     1/2   1/2  0    0;
+     1    -1    2    0;
+     0     1/6  2/3  1/6];
+tableau2eqns(T,<span class="string">"RK3 (Kutta's third-order method)"</span>);
+</pre><pre class="codeoutput">RK3 (Kutta's third-order method)
+--------------------------------
+k1 = f(t(i), y(i))
+k2 = f(t(i) + h/2, y(i) + h*k1/2)
+k3 = f(t(i) + h, y(i) - h*k1 + 2h*k2)
+y(i+1) = y(i) + (h/6)(k1 + 4k2 + k3)
+
+
+</pre><h2 id="7">Example #5: (Heun's third-order method)</h2><pre class="codeinput">T = [0    0    0    0;
+     1/3  1/3  0    0;
+     2/3  0    2/3  0;
+     0    1/4  0    3/4];
+tableau2eqns(T,<span class="string">"RK3 (Heun's third-order method)"</span>);
+</pre><pre class="codeoutput">RK3 (Heun's third-order method)
+-------------------------------
+k1 = f(t(i), y(i))
+k2 = f(t(i) + h/3, y(i) + h*k1/3)
+k3 = f(t(i) + 2h/3, y(i) + 2h*k2/3)
+y(i+1) = y(i) + (h/4)(k1 + 3k3)
+
+
+</pre><h2 id="8">Example #6: (Ralston's third-order method)</h2><pre class="codeinput">T = [0    0    0    0;
+     1/2  1/2  0    0;
+     3/4  0    3/4  0;
+     0    2/9  1/3  4/9];
+tableau2eqns(T,<span class="string">"RK3 (Ralston's third-order method)"</span>);
+</pre><pre class="codeoutput">RK3 (Ralston's third-order method)
+----------------------------------
+k1 = f(t(i), y(i))
+k2 = f(t(i) + h/2, y(i) + h*k1/2)
+k3 = f(t(i) + 3h/4, y(i) + 3h*k2/4)
+y(i+1) = y(i) + (h/9)(2k1 + 3k2 + 4k3)
+
+
+</pre><h2 id="9">Example #7: (Strong Stability Preserving Runge-Kutta third-order method)</h2><pre class="codeinput">T = [0    0     0    0;
+     1    1     0    0;
+     1/2  1/4   1/4  0;
+     0    1/6   1/6  2/3];
+tableau2eqns(T,<span class="string">"SSPRK3 (Strong Stability Preserving Runge-Kutta third-order method)"</span>);
+</pre><pre class="codeoutput">SSPRK3 (Strong Stability Preserving Runge-Kutta third-order method)
+-------------------------------------------------------------------
+k1 = f(t(i), y(i))
+k2 = f(t(i) + h, y(i) + h*k1)
+k3 = f(t(i) + h/2, y(i) + h*k1/4 + h*k2/4)
+y(i+1) = y(i) + (h/6)(k1 + k2 + 4k3)
+
+
+</pre><h2 id="10">Example #8: (Runge-Kutta fourth-order method)</h2><pre class="codeinput">T = [0     0     0    0    0;
+     1/2   1/2   0    0    0;
+     1/2   0     1/2  0    0;
+     1     0     0    1    0;
+     0     1/6   1/3  1/3  1/6];
+tableau2eqns(T,<span class="string">"RK4 (Runge-Kutta fourth-order method)"</span>);
+</pre><pre class="codeoutput">RK4 (Runge-Kutta fourth-order method)
+-------------------------------------
+k1 = f(t(i), y(i))
+k2 = f(t(i) + h/2, y(i) + h*k1/2)
+k3 = f(t(i) + h/2, y(i) + h*k2/2)
+k4 = f(t(i) + h, y(i) + h*k3)
+y(i+1) = y(i) + (h/6)(k1 + 2k2 + 2k3 + k4)
+
+
+</pre><h2 id="11">Example #9: (Ralston's fourth-order method)</h2><pre class="codeinput">T = [0           0            0             0            0;
+     0.4         0.4          0             0            0;
+     0.45573725  0.29697761   0.15875964    0            0;
+     1           0.21810040  -3.05096516    3.83286476   0;
+     0           0.17476028  -0.55148066    1.20553560   0.17118478];
+tableau2eqns(T,<span class="string">"RK4 (Ralston's fourth-order method)"</span>,<span class="string">'decimal'</span>);
+</pre><pre class="codeoutput">RK4 (Ralston's fourth-order method)
+-----------------------------------
+k1 = f(t(i), y(i))
+k2 = f(t(i) + 0.40000000h, y(i) + 0.40000000h*k1)
+k3 = f(t(i) + 0.45573725h, y(i) + 0.29697761h*k1 + 0.15875964h*k2)
+k4 = f(t(i) + h, y(i) + 0.21810040h*k1 - 3.05096516h*k2 + 3.83286476h*k3)
+y(i+1) = y(i) + h(0.17476028k1 - 0.55148066k2 + 1.20553560k3 + 0.17118478k4)
+
+
+</pre><h2 id="12">Example #10: (3/8-Rule fourth-order method)</h2><pre class="codeinput">T = [0     0     0    0    0;
+     1/3   1/3   0    0    0;
+     2/3  -1/3   1    0    0;
+     1     1    -1    1    0;
+     0     1/8   3/8  3/8  1/8];
+tableau2eqns(T,<span class="string">"3/8-Rule fourth-order method"</span>);
+</pre><pre class="codeoutput">3/8-Rule fourth-order method
+----------------------------
+k1 = f(t(i), y(i))
+k2 = f(t(i) + h/3, y(i) + h*k1/3)
+k3 = f(t(i) + 2h/3, y(i) - h*k1/3 + h*k2)
+k4 = f(t(i) + h, y(i) + h*k1 - h*k2 + h*k3)
+y(i+1) = y(i) + (h/8)(k1 + 3k2 + 3k3 + k4)
+
+
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2021a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |tableau2eqns|
+% Propagation equations from Butcher tableau.
+% 
+% <ODE_Solver_Toolbox_Contents.html Back to ODE Solver Toolbox Contents>.
+%% Syntax
+%   tableau2eqns(T)
+%   tableau2eqns(T,name)
+%   tableau2eqns(__,'decimal')
+%% Input/Output Parameters
+% <html>
+%   <table border=1>
+%       <tr>
+%           <td></td>
+%           <td style="text-align:center"><b>Symbol</b></td>
+%           <td style="text-align:center"><b>Variable</b></td>
+%           <td style="text-align:center"><b>Description</b></td>
+%           <td style="text-align:center"><b>Format</b></td>
+%       </tr>
+%       <tr>
+%           <td rowspan="3" style="text-align:center"><b>Input</b></td>
+%           <td style="text-align:center">-</td>
+%           <td><TT>T</TT></td>
+%           <td>Butcher tableau</td>
+%           <td style="text-align:center">1×FIX SIZE<BR>double</td>
+%       </tr>
+%       <tr>
+%           <td style="text-align:center">-</td>
+%           <td><TT>name</TT></td>
+%           <td>(OPTIONAL) name of Runge-Kutta method corresponding to the Butcher tableau</td>
+%           <td style="text-align:center">string</td>
+%       </tr>
+%       <tr>
+%           <td style="text-align:center">-</td>
+%           <td><TT>type</TT></td>
+%           <td>(OPTIONAL) print coefficients as <TT>'decimal'</TT> or <TT>'fraction'</TT> (defaults to <TT>'fraction'</TT>)</td>
+%           <td style="text-align:center">char</td>
+%       </tr>
+%   </table>
+% </html>
+%% Example #1: RK2 (Midpoint method)
+T = [0    0    0;
+     1/2  1/2  0;
+     0    0    1];
+tableau2eqns(T,"RK2 (Midpoint method)");
+%% Example #2: RK2 (Heun's method)
+T = [0  0    0;
+     1  1    0;
+     0  1/2  1/2];
+tableau2eqns(T,"RK2 (Heun's method)");
+%% Example #3: (Ralston's method)
+T = [0    0    0;
+     2/3  2/3  0;
+     0    1/4  3/4];
+tableau2eqns(T,"RK2 (Ralston's method)");
+%% Example #4: (Kutta's third-order method)
+T = [0     0    0    0;
+     1/2   1/2  0    0;
+     1    -1    2    0;
+     0     1/6  2/3  1/6];
+tableau2eqns(T,"RK3 (Kutta's third-order method)");
+%% Example #5: (Heun's third-order method)
+T = [0    0    0    0;
+     1/3  1/3  0    0;
+     2/3  0    2/3  0;
+     0    1/4  0    3/4];
+tableau2eqns(T,"RK3 (Heun's third-order method)");
+%% Example #6: (Ralston's third-order method)
+T = [0    0    0    0;
+     1/2  1/2  0    0;
+     3/4  0    3/4  0;
+     0    2/9  1/3  4/9];
+tableau2eqns(T,"RK3 (Ralston's third-order method)");
+%% Example #7: (Strong Stability Preserving Runge-Kutta third-order method)
+T = [0    0     0    0;
+     1    1     0    0;
+     1/2  1/4   1/4  0;
+     0    1/6   1/6  2/3];
+tableau2eqns(T,"SSPRK3 (Strong Stability Preserving Runge-Kutta third-order method)");
+%% Example #8: (Runge-Kutta fourth-order method)
+T = [0     0     0    0    0;
+     1/2   1/2   0    0    0;
+     1/2   0     1/2  0    0;
+     1     0     0    1    0;
+     0     1/6   1/3  1/3  1/6];
+tableau2eqns(T,"RK4 (Runge-Kutta fourth-order method)");
+%% Example #9: (Ralston's fourth-order method)
+T = [0           0            0             0            0;
+     0.4         0.4          0             0            0;
+     0.45573725  0.29697761   0.15875964    0            0;
+     1           0.21810040  -3.05096516    3.83286476   0;
+     0           0.17476028  -0.55148066    1.20553560   0.17118478];
+tableau2eqns(T,"RK4 (Ralston's fourth-order method)",'decimal');
+%% Example #10: (3/8-Rule fourth-order method)
+T = [0     0     0    0    0;
+     1/3   1/3   0    0    0;
+     2/3  -1/3   1    0    0;
+     1     1    -1    1    0;
+     0     1/8   3/8  3/8  1/8];
+tableau2eqns(T,"3/8-Rule fourth-order method");
+##### SOURCE END #####
+--></body></html>
