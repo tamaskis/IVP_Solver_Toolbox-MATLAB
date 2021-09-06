@@ -10,8 +10,8 @@
 % SSPRK3, RK4, RK4_38.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2021-07-26
-% Website: tamaskis.github.io
+% Last Update: 2021-09-06
+% Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
 %--------------------------------------------------------------------------
@@ -19,19 +19,19 @@
 % ------
 % INPUT:
 % ------
-%   f           - (function handle) function defining ODE dy/dt = f(t,y)
+%   f           - (function_handle) function defining ODE dy/dt = f(t,y)
 %   interval    - defines interval over which to solve the ODE, 2 options:
-%                   --> [t0,tf] - (1×2) initial and final times
+%                   --> [t0,tf] - (1×2 double) initial and final times
 %                   --> {t0,C}  - (1×2 cell) initial time and function 
 %                                 handle for condition function C(t,y)
-%   y0          - (n×1) initial condition
-% 	h           - (1×1) step size
+%   y0          - (n×1 double) initial condition
+% 	h           - (1×1 double) step size
 %
 % -------
 % OUTPUT:
 % -------
-%   t       (m×1) time vector
-%   y       (m×n) matrix storing time history of state vector
+%   t       (m×1 double) time vector
+%   y       (m×n double) matrix storing time history of state vector
 %
 % -----
 % NOTE:
@@ -43,16 +43,22 @@
 %       chosen to match the convention used by MATLAB's ODE suite.
 %
 %==========================================================================
-function [t,y] = RK4_ralston(f,domain,y0,h)
+function [t,y] = RK4_ralston(f,interval,y0,h)
     
-    % determines type of implementation based on passed parameters
-    if iscell(domain)
-        t0 = domain{1};
-        C = domain{2};
+    % ---------------------------------------
+    % Determines which implementation to use.
+    % ---------------------------------------
+    
+    % event detection implementation
+    if iscell(interval)
+        t0 = interval{1};
+        C = interval{2};
         implementation = 'event';
+        
+    % time detection implementation
     else
-        t0 = domain(1);
-        tf = domain(2);
+        t0 = interval(1);
+        tf = interval(2);
         implementation = 'time';
     end
         
