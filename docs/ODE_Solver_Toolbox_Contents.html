@@ -1,0 +1,102 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>ODE Solver Toolbox Documentation</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-08-23"><meta name="DC.source" content="ODE_Solver_Toolbox_Contents.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>ODE Solver Toolbox Documentation</h1><!--introduction--><p><img vspace="5" hspace="5" src="ode_solver_toolbox_small.png" alt=""> </p><p>Copyright &copy; 2021 Tamas Kis</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">EXAMPLES</a></li><li><a href="#2">Single-Step Methods</a></li><li><a href="#3">Generating ODE Solver Equations</a></li></ul></div><h2 id="1">EXAMPLES</h2><p>Since all of the functions have an identical syntax, only one set of examples is included. These examples use the <a href="RK4_doc.html"><tt>RK4</tt></a> function, but could also be solved using any of the other solver functions in this toolbox.</p><h2 id="2">Single-Step Methods</h2><div><ul><li><a href="euler_doc.html"><b><tt>euler</tt></b></a> Euler method (1st-order).</li><li><a href="RK2_doc.html"><b><tt>RK2</tt></b></a> Midpoint method (2nd-order).</li><li><a href="RK2_heun_doc.html"><b><tt>RK2_heun</tt></b></a> Heun's second-order method (2nd-order).</li><li><a href="RK2_ralston_doc.html"><b><tt>RK2_ralston</tt></b></a> Ralston's second-order method (2nd-order).</li><li><a href="RK3_doc.html"><b><tt>RK3</tt></b></a> (Kutta's) Runge-Kutta third-order method (3rd-order).</li><li><a href="RK3_heun_doc.html"><b><tt>RK3_heun</tt></b></a> Heun's third-order method (3rd-order).</li><li><a href="RK3_ralston_doc.html"><b><tt>RK3_ralston</tt></b></a> Ralston's third-order method (3rd-order).</li><li><a href="SSPRK3_doc.html"><b><tt>SSPRK3</tt></b></a> Strong stability preserving Runge-Kutta third-order method (3rd-order).</li><li><a href="RK4_doc.html"><b><tt>RK4</tt></b></a> (Classic) Runge-Kutta fourth-order method (4th-order).</li><li><a href="RK4_ralston_doc.html"><b><tt>RK4_ralston</tt></b></a> Ralston's fourth-order method (4th-order).</li><li><a href="RK4_38_doc.html"><b><tt>RK4_38</tt></b></a> 3/8-Rule fourth-order method (4th-order).</li></ul></div><h2 id="3">Generating ODE Solver Equations</h2><div><ul><li><a href="AB_coefficients_doc.html"><b><tt>AB_coefficients</tt></b></a> Coefficients for the nth-order Adams-Bashforth predictor.</li><li><a href="AM_coefficients_doc.html"><b><tt>AM_coefficients</tt></b></a> Coefficients for the nth-order Adams-Moulton corrector.</li><li><a href="AB_predictor_doc.html"><b><tt>AB_predictor</tt></b></a> nth-order Adams-Bashforth predictor.</li><li><a href="AM_corrector_doc.html"><b><tt>AM_corrector</tt></b></a> nth-order Adams-Moulton corrector.</li><li><a href="ABM_equations_doc.html"><b><tt>ABM_equations</tt></b></a> nth-order Adams-Bashforth-Moulton equations.</li><li><a href="tableau2eqns_doc.html"><b><tt>tableau2eqns</tt></b></a> Propagation equations from Butcher tableau for explicit Runge-Kutta methods.</li></ul></div><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2021a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% ODE Solver Toolbox Documentation
+%
+% <<ode_solver_toolbox_small.png>>
+%
+% Copyright © 2021 Tamas Kis
+%% EXAMPLES
+% Since all of the functions have an identical syntax, only one set of
+% examples is included. These examples use the <RK4_doc.html |RK4|> function, 
+% but could also be solved using any of the other solver functions in this 
+% toolbox.
+%% Single-Step Methods
+% * <euler_doc.html *|euler|*> Euler method (1st-order).
+% * <RK2_doc.html *|RK2|*> Midpoint method (2nd-order).
+% * <RK2_heun_doc.html *|RK2_heun|*> Heun's second-order method (2nd-order).
+% * <RK2_ralston_doc.html *|RK2_ralston|*> Ralston's second-order method (2nd-order).
+% * <RK3_doc.html *|RK3|*> (Kutta's) Runge-Kutta third-order method (3rd-order).
+% * <RK3_heun_doc.html *|RK3_heun|*> Heun's third-order method (3rd-order).
+% * <RK3_ralston_doc.html *|RK3_ralston|*> Ralston's third-order method (3rd-order).
+% * <SSPRK3_doc.html *|SSPRK3|*> Strong stability preserving Runge-Kutta third-order method (3rd-order).
+% * <RK4_doc.html *|RK4|*> (Classic) Runge-Kutta fourth-order method (4th-order).
+% * <RK4_ralston_doc.html *|RK4_ralston|*> Ralston's fourth-order method (4th-order).
+% * <RK4_38_doc.html *|RK4_38|*> 3/8-Rule fourth-order method (4th-order).
+%% Generating ODE Solver Equations
+% * <AB_coefficients_doc.html *|AB_coefficients|*> Coefficients for the nth-order Adams-Bashforth predictor.
+% * <AM_coefficients_doc.html *|AM_coefficients|*> Coefficients for the nth-order Adams-Moulton corrector.
+% * <AB_predictor_doc.html *|AB_predictor|*> nth-order Adams-Bashforth predictor.
+% * <AM_corrector_doc.html *|AM_corrector|*> nth-order Adams-Moulton corrector.
+% * <ABM_equations_doc.html *|ABM_equations|*> nth-order Adams-Bashforth-Moulton equations.
+% * <tableau2eqns_doc.html *|tableau2eqns|*> Propagation equations from Butcher tableau for explicit Runge-Kutta methods.
+##### SOURCE END #####
+--></body></html>
