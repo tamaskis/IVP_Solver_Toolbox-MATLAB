@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>AB_coefficients</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-08-23"><meta name="DC.source" content="AB_coefficients_doc.m"><style type="text/css">
+      --><title>AB_coefficients</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-09-06"><meta name="DC.source" content="AB_coefficients_doc.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -106,14 +106,25 @@ AB_coefficients(n,<span class="string">'print'</span>)
       </tr>
   </table>
 </p><p><b>NOTE:</b> This function assumes the Adams-Bashforth predictor is written as</p><p><img src="AB_coefficients_doc_eq17001720812393322629.png" alt="$$\mathbf{y}_{i+1}=\mathbf{y}_{i}+h\sum_{j=1}^{n}b_{j}\mathbf{f}(t_{i-j+1},\mathbf{y}_{i-j+1})$$" style="width:166px;height:32px;"></p><h2 id="3">Example #1</h2><p><i>Return the numerators and denominators of the coefficients of the 3rd-order Adams-Bashforth predictor.</i></p><p><tt>AB_coefficients</tt> returns two quantities; <tt>num</tt> stores the numerators of the coefficients, while <tt>gcd</tt> stores the greatest common divisor of the coefficients. The numerators in <tt>num</tt> are already scaled to be used with <tt>gcd</tt>.</p><pre class="codeinput">[num,gcd] = AB_coefficients(3)
-</pre><pre class="codeoutput error">Undefined function 'same_denominator' for input arguments of type 'double'.
+</pre><pre class="codeoutput">
+num =
 
-Error in AB_coefficients (line 56)
-    [num,gcd] = same_denominator(b);
+    23
+   -16
+     5
 
-Error in AB_coefficients_doc (line 58)
-[num,gcd] = AB_coefficients(3)
+
+gcd =
+
+    12
+
 </pre><h2 id="4">Example #2</h2><p><i>Print the coefficients of the 3rd-order Adams-Bashforth predictor.</i></p><pre class="codeinput">AB_coefficients(3,<span class="string">'print'</span>);
+</pre><pre class="codeoutput">3th-order Adams-Bashforth predictor coefficients:
+b(1) = 23/12
+b(2) = -16/12
+b(3) = 5/12
+
+
 </pre><h2 id="5">See also</h2><p><a href="AM_coefficients_doc.html"><tt>AM_coefficients</tt></a> | <a href="AB_predictor_doc.html"><tt>AB_predictor</tt></a> | <a href="AM_corrector_doc.html"><tt>AM_corrector</tt></a> | <a href="ABM_equations_doc.html"><tt>ABM_equations</tt></a></p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2021a</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% |AB_coefficients|

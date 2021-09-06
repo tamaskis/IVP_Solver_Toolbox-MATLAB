@@ -1,7 +1,7 @@
 %% |AB_predictor|
 % nth-order Adams-Bashforth predictor.
 % 
-% <ODE_Solver_Toolbox_Contents.html Back to ODE Solver Toolbox Contents>.
+% <index.html Back to ODE Solver Toolbox Contents>.
 %% Syntax
 %   eqn = AB_predictor(n)
 %   AB_predictor(n,'print')

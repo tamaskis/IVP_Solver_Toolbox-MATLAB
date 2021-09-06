@@ -1,7 +1,7 @@
 %% |SSPRK3|
 % Strong stability preserving Runge-Kutta third-order method.
 % 
-% <ODE_Solver_Toolbox_Contents.html Back to ODE Solver Toolbox Contents>.
+% <index.html Back to ODE Solver Toolbox Contents>.
 %% Syntax
 %   [t,y] = SSPRK3(f,[t0,tf],y0,h)
 %   [t,y] = SSPRK3(f,{t0,C},y0,h)

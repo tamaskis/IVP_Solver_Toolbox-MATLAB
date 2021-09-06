@@ -1,7 +1,7 @@
 %% |RK3_ralston|
 % Ralston's third-order method (Runge-Kutta third-order method).
 % 
-% <ODE_Solver_Toolbox_Contents.html Back to ODE Solver Toolbox Contents>.
+% <index.html Back to ODE Solver Toolbox Contents>.
 %% Syntax
 %   [t,y] = RK3_ralston(f,[t0,tf],y0,h)
 %   [t,y] = RK3_ralston(f,{t0,C},y0,h)

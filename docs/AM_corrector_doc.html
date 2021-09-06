@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>AM_corrector</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-08-23"><meta name="DC.source" content="AM_corrector_doc.m"><style type="text/css">
+      --><title>AM_corrector</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-09-06"><meta name="DC.source" content="AM_corrector_doc.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -100,24 +100,46 @@ AM_corrector(n,<span class="string">'print'</span>)
       </tr>
   </table>
 </p><h2 id="3">Example #1: Return a string.</h2><p><i>Return the string storing the 3rd-order Adams-Moulton corrector.</i></p><pre class="codeinput">AM3_eqn = AM_corrector(3);
-</pre><pre class="codeoutput error">Undefined function 'same_denominator' for input arguments of type 'double'.
-
-Error in AM_coefficients (line 55)
-    [num,gcd] = same_denominator(b);
-
-Error in AM_corrector (line 37)
-    [num,gcd] = AM_coefficients(n);
-
-Error in AM_corrector_doc (line 42)
-AM3_eqn = AM_corrector(3);
 </pre><h2 id="4">Example #2: 1st-order Adams-Moulton corrector.</h2><pre class="codeinput">AM_corrector(1,<span class="string">'print'</span>);
+</pre><pre class="codeoutput">1st-order Adams-Moulton corrector:
+y(i+1) = y(i) + h(f(i+1))
+
+
 </pre><h2 id="5">Example #3: 2nd-order Adams-Moulton corrector.</h2><pre class="codeinput">AM_corrector(2,<span class="string">'print'</span>);
+</pre><pre class="codeoutput">2nd-order Adams-Moulton corrector:
+y(i+1) = y(i) + (h/2)(f(i+1) + f(i))
+
+
 </pre><h2 id="6">Example #4: 3rd-order Adams-Moulton corrector.</h2><pre class="codeinput">AM_corrector(3,<span class="string">'print'</span>);
+</pre><pre class="codeoutput">3rd-order Adams-Moulton corrector:
+y(i+1) = y(i) + (h/12)(5f(i+1) + 8f(i) - f(i-1))
+
+
 </pre><h2 id="7">Example #5: 4th-order Adams-Moulton corrector.</h2><pre class="codeinput">AM_corrector(4,<span class="string">'print'</span>);
+</pre><pre class="codeoutput">4th-order Adams-Moulton corrector:
+y(i+1) = y(i) + (h/24)(9f(i+1) + 19f(i) - 5f(i-1) + f(i-2))
+
+
 </pre><h2 id="8">Example #6: 5th-order Adams-Moulton corrector.</h2><pre class="codeinput">AM_corrector(5,<span class="string">'print'</span>);
+</pre><pre class="codeoutput">5th-order Adams-Moulton corrector:
+y(i+1) = y(i) + (h/720)(251f(i+1) + 646f(i) - 264f(i-1) + 106f(i-2) - 19f(i-3))
+
+
 </pre><h2 id="9">Example #7: 6th-order Adams-Moulton corrector.</h2><pre class="codeinput">AM_corrector(6,<span class="string">'print'</span>);
+</pre><pre class="codeoutput">6th-order Adams-Moulton corrector:
+y(i+1) = y(i) + (h/1440)(475f(i+1) + 1427f(i) - 798f(i-1) + 482f(i-2) - 173f(i-3) + 27f(i-4))
+
+
 </pre><h2 id="10">Example #8: 7th-order Adams-Moulton corrector.</h2><pre class="codeinput">AM_corrector(7,<span class="string">'print'</span>);
+</pre><pre class="codeoutput">7th-order Adams-Moulton corrector:
+y(i+1) = y(i) + (h/60480)(19087f(i+1) + 65112f(i) - 46461f(i-1) + 37504f(i-2) - 20211f(i-3) + 6312f(i-4) - 863f(i-5))
+
+
 </pre><h2 id="11">Example #9: 8th-order Adams-Moulton corrector.</h2><pre class="codeinput">AM_corrector(8,<span class="string">'print'</span>);
+</pre><pre class="codeoutput">8th-order Adams-Moulton corrector:
+y(i+1) = y(i) + (h/120960)(36799f(i+1) + 139849f(i) - 121797f(i-1) + 123133f(i-2) - 88547f(i-3) + 41499f(i-4) - 11351f(i-5) + 1375f(i-6))
+
+
 </pre><h2 id="12">See also</h2><p><a href="AB_coefficients_doc.html"><tt>AB_coefficients</tt></a> | <a href="AM_coefficients_doc.html"><tt>AM_coefficients</tt></a> | <a href="AB_corrector_doc.html"><tt>AB_corrector</tt></a> | <a href="ABM_equations_doc.html"><tt>ABM_equations</tt></a></p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2021a</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% |AM_corrector|

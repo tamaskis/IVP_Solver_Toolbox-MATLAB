@@ -1,7 +1,7 @@
 %% |AM_corrector|
 % nth-order Adams-Moulton corrector.
 % 
-% <ODE_Solver_Toolbox_Contents.html Back to ODE Solver Toolbox Contents>.
+% <index.html Back to ODE Solver Toolbox Contents>.
 %% Syntax
 %   eqn = AM_corrector(n)
 %   AM_corrector(n,'print')

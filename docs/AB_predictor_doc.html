@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>AB_predictor</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-08-23"><meta name="DC.source" content="AB_predictor_doc.m"><style type="text/css">
+      --><title>AB_predictor</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-09-06"><meta name="DC.source" content="AB_predictor_doc.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -100,24 +100,46 @@ AB_predictor(n,<span class="string">'print'</span>)
       </tr>
   </table>
 </p><h2 id="3">Example #1: Return a string.</h2><p><i>Return the string storing the 3rd-order Adams-Bashforth predictor.</i></p><pre class="codeinput">AB3_eqn = AB_predictor(3);
-</pre><pre class="codeoutput error">Undefined function 'same_denominator' for input arguments of type 'double'.
-
-Error in AB_coefficients (line 56)
-    [num,gcd] = same_denominator(b);
-
-Error in AB_predictor (line 38)
-    [num,gcd] = AB_coefficients(n);
-
-Error in AB_predictor_doc (line 42)
-AB3_eqn = AB_predictor(3);
 </pre><h2 id="4">Example #2: 1st-order Adams-Bashforth predictor.</h2><pre class="codeinput">AB_predictor(1,<span class="string">'print'</span>);
+</pre><pre class="codeoutput">1st-order Adams-Bashforth predictor:
+y(i+1) = y(i) + h(f(i))
+
+
 </pre><h2 id="5">Example #3: 2nd-order Adams-Bashforth predictor.</h2><pre class="codeinput">AB_predictor(2,<span class="string">'print'</span>);
+</pre><pre class="codeoutput">2nd-order Adams-Bashforth predictor:
+y(i+1) = y(i) + (h/2)(3f(i) - f(i-1))
+
+
 </pre><h2 id="6">Example #4: 3rd-order Adams-Bashforth predictor.</h2><pre class="codeinput">AB_predictor(3,<span class="string">'print'</span>);
+</pre><pre class="codeoutput">3rd-order Adams-Bashforth predictor:
+y(i+1) = y(i) + (h/12)(23f(i) - 16f(i-1) + 5f(i-2))
+
+
 </pre><h2 id="7">Example #5: 4th-order Adams-Bashforth predictor.</h2><pre class="codeinput">AB_predictor(4,<span class="string">'print'</span>);
+</pre><pre class="codeoutput">4th-order Adams-Bashforth predictor:
+y(i+1) = y(i) + (h/24)(55f(i) - 59f(i-1) + 37f(i-2) - 9f(i-3))
+
+
 </pre><h2 id="8">Example #6: 5th-order Adams-Bashforth predictor.</h2><pre class="codeinput">AB_predictor(5,<span class="string">'print'</span>);
+</pre><pre class="codeoutput">5th-order Adams-Bashforth predictor:
+y(i+1) = y(i) + (h/720)(1901f(i) - 2774f(i-1) + 2616f(i-2) - 1274f(i-3) + 251f(i-4))
+
+
 </pre><h2 id="9">Example #7: 6th-order Adams-Bashforth predictor.</h2><pre class="codeinput">AB_predictor(6,<span class="string">'print'</span>);
+</pre><pre class="codeoutput">6th-order Adams-Bashforth predictor:
+y(i+1) = y(i) + (h/1440)(4277f(i) - 7923f(i-1) + 9982f(i-2) - 7298f(i-3) + 2877f(i-4) - 475f(i-5))
+
+
 </pre><h2 id="10">Example #8: 7th-order Adams-Bashforth predictor.</h2><pre class="codeinput">AB_predictor(7,<span class="string">'print'</span>);
+</pre><pre class="codeoutput">7th-order Adams-Bashforth predictor:
+y(i+1) = y(i) + (h/60480)(198721f(i) - 447288f(i-1) + 705549f(i-2) - 688256f(i-3) + 407139f(i-4) - 134472f(i-5) + 19087f(i-6))
+
+
 </pre><h2 id="11">Example #9: 8th-order Adams-Bashforth predictor.</h2><pre class="codeinput">AB_predictor(8,<span class="string">'print'</span>);
+</pre><pre class="codeoutput">8th-order Adams-Bashforth predictor:
+y(i+1) = y(i) + (h/120960)(434241f(i) - 1152169f(i-1) + 2183877f(i-2) - 2664477f(i-3) + 2102243f(i-4) - 1041723f(i-5) + 295767f(i-6) - 36799f(i-7))
+
+
 </pre><h2 id="12">See also</h2><p><a href="AB_coefficients_doc.html"><tt>AB_coefficients</tt></a> | <a href="AM_coefficients_doc.html"><tt>AM_coefficients</tt></a> | <a href="AM_corrector_doc.html"><tt>AM_corrector</tt></a> | <a href="ABM_equations_doc.html"><tt>ABM_equations</tt></a></p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2021a</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% |AB_predictor|

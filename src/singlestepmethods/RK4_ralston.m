@@ -19,19 +19,19 @@
 % ------
 % INPUT:
 % ------
-%   f           - (function_handle) function defining ODE dy/dt = f(t,y)
-%   interval    - defines interval over which to solve the ODE, 2 options:
-%                   --> [t0,tf] - (1×2 double) initial and final times
-%                   --> {t0,C}  - (1×2 cell) initial time and function 
-%                                 handle for condition function C(t,y)
-%   y0          - (n×1 double) initial condition
-% 	h           - (1×1 double) step size
+%   f       - (function_handle) function defining ODE dy/dt = f(t,y)
+%   I       - defines interval over which to solve the ODE, 2 options:
+%               --> [t0,tf] - (1×2 double) initial and final times
+%               --> {t0,C}  - (1×2 cell) initial time and function handle
+%                             for condition function C(t,y)
+%   y0      - (n×1 double) initial condition
+%   h       - (1×1 double) step size
 %
 % -------
 % OUTPUT:
 % -------
-%   t       (m×1 double) time vector
-%   y       (m×n double) matrix storing time history of state vector
+%   t       - (m×1 double) time vector
+%   y       - (m×n double) matrix storing time history of state vector
 %
 % -----
 % NOTE:
@@ -43,26 +43,29 @@
 %       chosen to match the convention used by MATLAB's ODE suite.
 %
 %==========================================================================
-function [t,y] = RK4_ralston(f,interval,y0,h)
+function [t,y] = RK4_ralston(f,I,y0,h)
     
     % ---------------------------------------
     % Determines which implementation to use.
     % ---------------------------------------
     
     % event detection implementation
-    if iscell(interval)
-        t0 = interval{1};
-        C = interval{2};
+    if iscell(I)
+        t0 = I{1};
+        C = I{2};
         implementation = 'event';
         
     % time detection implementation
     else
-        t0 = interval(1);
-        tf = interval(2);
+        t0 = I(1);
+        tf = I(2);
         implementation = 'time';
     end
         
-    % time detection implementation (solves until final time)
+    % --------------------------------------------------------
+    % Time detection implementation (solves until final time).
+    % --------------------------------------------------------
+    
     if strcmp(implementation,'time')
 
         % number of subintervals between iterations
@@ -104,7 +107,10 @@ function [t,y] = RK4_ralston(f,interval,y0,h)
         % replaces last element of "t" with "tf"
         t(N+1) = tf;
     
-    % event detection implementation (solves while condition is satisfied)
+    % ---------------------------------------------------------------------
+    % Event detection implementation (solves while condition is satisfied).
+    % ---------------------------------------------------------------------
+    
     else
 
         % preallocates time vector and solution matrix

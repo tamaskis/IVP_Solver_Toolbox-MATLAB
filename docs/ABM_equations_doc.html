@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>ABM_equations</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-08-23"><meta name="DC.source" content="ABM_equations_doc.m"><style type="text/css">
+      --><title>ABM_equations</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-09-06"><meta name="DC.source" content="ABM_equations_doc.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -86,26 +86,53 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
       </tr>
   </table>
 </p><h2 id="3">Example #1: 1st-order Adams-Bashforth-Moulton equations.</h2><pre class="codeinput">ABM_equations(1);
-</pre><pre class="codeoutput error">Undefined function 'same_denominator' for input arguments of type 'double'.
+</pre><pre class="codeoutput">1st-order Adams-Bashforth-Moulton method:
+yp(i+1) = y(i) + h(f(i))
+y(i+1) = y(i) + h(f(t(i+1),yp(i+1)))
 
-Error in AB_coefficients (line 56)
-    [num,gcd] = same_denominator(b);
 
-Error in AB_predictor (line 38)
-    [num,gcd] = AB_coefficients(n);
-
-Error in ABM_equations (line 26)
-    eqn_AB = AB_predictor(n);
-
-Error in ABM_equations_doc (line 27)
-ABM_equations(1);
 </pre><h2 id="4">Example #2: 2nd-order Adams-Bashforth-Moulton equations.</h2><pre class="codeinput">ABM_equations(2);
+</pre><pre class="codeoutput">2nd-order Adams-Bashforth-Moulton method:
+yp(i+1) = y(i) + (h/2)(3f(i) - f(i-1))
+y(i+1) = y(i) + (h/2)(f(t(i+1),yp(i+1)) + f(i))
+
+
 </pre><h2 id="5">Example #3: 3rd-order Adams-Bashforth-Moulton equations.</h2><pre class="codeinput">ABM_equations(3);
+</pre><pre class="codeoutput">3rd-order Adams-Bashforth-Moulton method:
+yp(i+1) = y(i) + (h/12)(23f(i) - 16f(i-1) + 5f(i-2))
+y(i+1) = y(i) + (h/12)(5f(t(i+1),yp(i+1)) + 8f(i) - f(i-1))
+
+
 </pre><h2 id="6">Example #4: 4th-order Adams-Bashforth-Moulton equations.</h2><pre class="codeinput">ABM_equations(4);
+</pre><pre class="codeoutput">4th-order Adams-Bashforth-Moulton method:
+yp(i+1) = y(i) + (h/24)(55f(i) - 59f(i-1) + 37f(i-2) - 9f(i-3))
+y(i+1) = y(i) + (h/24)(9f(t(i+1),yp(i+1)) + 19f(i) - 5f(i-1) + f(i-2))
+
+
 </pre><h2 id="7">Example #5: 5th-order Adams-Bashforth-Moulton equations.</h2><pre class="codeinput">ABM_equations(5);
+</pre><pre class="codeoutput">5th-order Adams-Bashforth-Moulton method:
+yp(i+1) = y(i) + (h/720)(1901f(i) - 2774f(i-1) + 2616f(i-2) - 1274f(i-3) + 251f(i-4))
+y(i+1) = y(i) + (h/720)(251f(t(i+1),yp(i+1)) + 646f(i) - 264f(i-1) + 106f(i-2) - 19f(i-3))
+
+
 </pre><h2 id="8">Example #6: 6th-order Adams-Bashforth-Moulton equations.</h2><pre class="codeinput">ABM_equations(6);
+</pre><pre class="codeoutput">6th-order Adams-Bashforth-Moulton method:
+yp(i+1) = y(i) + (h/1440)(4277f(i) - 7923f(i-1) + 9982f(i-2) - 7298f(i-3) + 2877f(i-4) - 475f(i-5))
+y(i+1) = y(i) + (h/1440)(475f(t(i+1),yp(i+1)) + 1427f(i) - 798f(i-1) + 482f(i-2) - 173f(i-3) + 27f(i-4))
+
+
 </pre><h2 id="9">Example #7: 7th-order Adams-Bashforth-Moulton equations.</h2><pre class="codeinput">ABM_equations(7);
+</pre><pre class="codeoutput">7th-order Adams-Bashforth-Moulton method:
+yp(i+1) = y(i) + (h/60480)(198721f(i) - 447288f(i-1) + 705549f(i-2) - 688256f(i-3) + 407139f(i-4) - 134472f(i-5) + 19087f(i-6))
+y(i+1) = y(i) + (h/60480)(19087f(t(i+1),yp(i+1)) + 65112f(i) - 46461f(i-1) + 37504f(i-2) - 20211f(i-3) + 6312f(i-4) - 863f(i-5))
+
+
 </pre><h2 id="10">Example #8: 8th-order Adams-Bashforth-Moulton equations.</h2><pre class="codeinput">ABM_equations(8);
+</pre><pre class="codeoutput">8th-order Adams-Bashforth-Moulton method:
+yp(i+1) = y(i) + (h/120960)(434241f(i) - 1152169f(i-1) + 2183877f(i-2) - 2664477f(i-3) + 2102243f(i-4) - 1041723f(i-5) + 295767f(i-6) - 36799f(i-7))
+y(i+1) = y(i) + (h/120960)(36799f(t(i+1),yp(i+1)) + 139849f(i) - 121797f(i-1) + 123133f(i-2) - 88547f(i-3) + 41499f(i-4) - 11351f(i-5) + 1375f(i-6))
+
+
 </pre><h2 id="11">See also</h2><p><a href="AB_coefficients_doc.html"><tt>AB_coefficients</tt></a> | <a href="AM_coefficients_doc.html"><tt>AM_coefficients</tt></a> | <a href="ABM_equations_doc.html"><tt>AB_predictor</tt></a> | <a href="AM_corrector_doc.html"><tt>AM_corrector</tt></a> |</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2021a</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% |ABM_equations|

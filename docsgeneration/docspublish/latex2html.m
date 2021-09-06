@@ -5,10 +5,8 @@
 %
 %   html = latex2html(latex)
 %
-% Copyright © 2021 Tamas Kis
-% Last Update: 2021-08-11
-% Website: tamaskis.github.io
-% Contact: tamas.a.kis@outlook.com
+% Author: Tamas Kis
+% Last Update: 2021-08-27
 %
 %--------------------------------------------------------------------------
 %

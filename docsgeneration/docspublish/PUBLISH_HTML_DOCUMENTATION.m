@@ -1,17 +1,15 @@
 %% PUBLISH_HTML_DOCUMENTATION.m
 % Wrapper script to publish HTML documentation.
 %
-% Copyright © 2021 Tamas Kis
-% Last Update: 2021-08-11
-% Website: tamaskis.github.io
-% Contact: tamas.a.kis@outlook.com
+% Author: Tamas Kis
+% Last Update: 2021-08-27
 
 
 
 %% SCRIPT SETUP
 
 % clears Workspace and Command Window, closes all figures
-clear;clc;close all;
+clear; clc; close all;
 
 
 

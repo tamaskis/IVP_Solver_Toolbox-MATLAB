@@ -6,8 +6,8 @@
 %   [t,y] = ABM8(f,{t0,C},y0,h)
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2021-07-26
-% Website: tamaskis.github.io
+% Last Update: 2021-09-06
+% Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
 %--------------------------------------------------------------------------
@@ -15,19 +15,19 @@
 % ------
 % INPUT:
 % ------
-%   f           - (function handle) function defining ODE dy/dt = f(t,y)
-%   interval    - defines interval over which to solve the ODE, 2 options:
-%                   --> [t0,tf] - (1×2) initial and final times
-%                   --> {t0,C}  - (1×2 cell) initial time and function 
-%                                 handle for condition function C(t,y)
-%   y0          - (n×1) initial condition
-% 	h           - (1×1) step size
+%   f       - (function_handle) function defining ODE dy/dt = f(t,y)
+%   I       - defines interval over which to solve the ODE, 2 options:
+%               --> [t0,tf] - (1×2 double) initial and final times
+%               --> {t0,C}  - (1×2 cell) initial time and function handle
+%                             for condition function C(t,y)
+%   y0      - (n×1 double) initial condition
+%   h       - (1×1 double) step size
 %
 % -------
 % OUTPUT:
 % -------
-%   t       (m×1) time vector
-%   y       (m×n) matrix storing time history of state vector
+%   t       - (m×1 double) time vector
+%   y       - (m×n double) matrix storing time history of state vector
 %
 % -----
 % NOTE:
@@ -39,23 +39,26 @@
 %       chosen to match the convention used by MATLAB's ODE suite.
 %
 %==========================================================================
-function [t,y] = ABM8(f,domain,y0,h)
+function [t,y] = ABM8(f,I,y0,h)
     
-    % determines type of implementation based on passed parameters
-    if iscell(domain)
-        t0 = domain{1};
-        C = domain{2};
+    % ---------------------------------------
+    % Determines which implementation to use.
+    % ---------------------------------------
+    
+    if iscell(I)
+        t0 = I{1};
+        C = I{2};
         implementation = 'event';
     else
-        t0 = domain(1);
-        tf = domain(2);
+        t0 = I(1);
+        tf = I(2);
         implementation = 'time';
     end
-    
-    % preallocates array to store last 8 function evaluations
-    f8 = zeros(length(y0),8);
         
-    % time detection implementation (solves until final time)
+    % --------------------------------------------------------
+    % Time detection implementation (solves until final time).
+    % --------------------------------------------------------
+    
     if strcmp(implementation,'time')
 
         % number of subintervals between iterations
@@ -64,9 +67,11 @@ function [t,y] = ABM8(f,domain,y0,h)
         % last element of the time vector
         tN = t0+N*h;
         
-        % defines time vector and preallocates solution matrix
+        % defines time vector, preallocates solution matrix and array to 
+        % store last 8 function evaluations
         t = (t0:h:tN)';
         y = zeros(length(y0),length(t));
+        f8 = zeros(length(y0),8);
 
         % stores initial condition in solution matrix
         y(:,1) = y0;
@@ -119,12 +124,17 @@ function [t,y] = ABM8(f,domain,y0,h)
         % replaces last element of "t" with tf
         t(N+1) = tf;
     
-    % event detection implementation (solves while condition is satisfied)
+    % ---------------------------------------------------------------------
+    % Event detection implementation (solves while condition is satisfied).
+    % ---------------------------------------------------------------------
+    
     else
 
-        % preallocates time vector and solution matrix
+        % preallocates time vector, solution matrix, and array to store 
+        % last 8 function evaluations
         t = zeros(10000,1);
         y = zeros(length(y0),length(t));
+        f8 = zeros(length(y0),8);
         
         % stores initial condition in solution matrix
         t(1) = t0;

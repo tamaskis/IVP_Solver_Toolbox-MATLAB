@@ -1,7 +1,7 @@
 %% |tableau2eqns|
 % Propagation equations from Butcher tableau.
 % 
-% <ODE_Solver_Toolbox_Contents.html Back to ODE Solver Toolbox Contents>.
+% <index.html Back to ODE Solver Toolbox Contents>.
 %% Syntax
 %   tableau2eqns(T)
 %   tableau2eqns(T,name)

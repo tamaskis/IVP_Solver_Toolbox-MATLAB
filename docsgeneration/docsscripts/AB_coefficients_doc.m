@@ -1,7 +1,7 @@
 %% |AB_coefficients|
 % Coefficients for the nth-order Adams-Bashforth predictor.
 % 
-% <ODE_Solver_Toolbox_Contents.html Back to ODE Solver Toolbox Contents>.
+% <index.html Back to ODE Solver Toolbox Contents>.
 %% Syntax
 %   [num,gcd] = AB_coefficients(n)
 %   AB_coefficients(n,'print')

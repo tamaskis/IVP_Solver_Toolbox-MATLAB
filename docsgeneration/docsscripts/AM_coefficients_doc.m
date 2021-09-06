@@ -1,7 +1,7 @@
 %% |AM_coefficients|
 % Coefficients for the nth-order Adams-Moulton corrector.
 % 
-% <ODE_Solver_Toolbox_Contents.html Back to ODE Solver Toolbox Contents>.
+% <index.html Back to ODE Solver Toolbox Contents>.
 %% Syntax
 %   [num,gcd] = AM_coefficients(n)
 %   AM_coefficients(n,'print')

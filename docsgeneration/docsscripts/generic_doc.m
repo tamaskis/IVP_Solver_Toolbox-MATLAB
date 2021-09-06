@@ -1,7 +1,7 @@
 %% |REPLACE|
 % REPLACE_DESCRIPTION.
 % 
-% <ODE_Solver_Toolbox_Contents.html Back to ODE Solver Toolbox Contents>.
+% <index.html Back to ODE Solver Toolbox Contents>.
 %% Syntax
 %   [t,y] = REPLACE(f,[t0,tf],y0,h)
 %   [t,y] = REPLACE(f,{t0,C},y0,h)

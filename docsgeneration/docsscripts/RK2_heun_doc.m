@@ -1,7 +1,7 @@
 %% |RK2_heun|
 % Heun's method (Runge-Kutta second-order method).
 %
-% <ODE_Solver_Toolbox_Contents.html Back to ODE Solver Toolbox Contents>.
+% <index.html Back to ODE Solver Toolbox Contents>.
 %% Syntax
 %   [t,y] = RK2_heun(f,[t0,tf],y0,h)
 %   [t,y] = RK2_heun(f,{t0,C},y0,h)

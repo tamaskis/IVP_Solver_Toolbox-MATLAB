@@ -1,7 +1,7 @@
 %% |RK4_38|
 % 3/8-Rule fourth-order method (Runge-Kutta fourth-order method).
 % 
-% <ODE_Solver_Toolbox_Contents.html Back to ODE Solver Toolbox Contents>.
+% <index.html Back to ODE Solver Toolbox Contents>.
 %% Syntax
 %   [t,y] = RK4_38(f,[t0,tf],y0,h)
 %   [t,y] = RK4_38(f,{t0,C},y0,h)
