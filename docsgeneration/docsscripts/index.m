@@ -1,6 +1,6 @@
 %% ODE Solver Toolbox Documentation
 %
-% <<ode_solver_toolbox_small.png>>
+% <<ode_solver_toolbox.png>>
 %
 % Copyright © 2021 Tamas Kis
 %% EXAMPLES
@@ -20,6 +20,9 @@
 % * <RK4_doc.html *|RK4|*> (Classic) Runge-Kutta fourth-order method (4th-order).
 % * <RK4_ralston_doc.html *|RK4_ralston|*> Ralston's fourth-order method (4th-order).
 % * <RK4_38_doc.html *|RK4_38|*> 3/8-Rule fourth-order method (4th-order).
+%% Multistep Predictor Methods
+%% Multistep Predictor-Corrector Methods
+% * <ABM8_doc.html *|ABM8|*> Adams-Bashforth-Moulton 8th-order method.
 %% Generating ODE Solver Equations
 % * <AB_coefficients_doc.html *|AB_coefficients|*> Coefficients for the nth-order Adams-Bashforth predictor.
 % * <AM_coefficients_doc.html *|AM_coefficients|*> Coefficients for the nth-order Adams-Moulton corrector.

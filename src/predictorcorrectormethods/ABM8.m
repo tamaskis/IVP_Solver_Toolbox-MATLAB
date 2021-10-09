@@ -6,7 +6,7 @@
 %   [t,y] = ABM8(f,{t0,C},y0,h)
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2021-09-06
+% Last Update: 2021-10-09
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
@@ -15,7 +15,12 @@
 % ------
 % INPUT:
 % ------
-%   f       - (function_handle) function defining ODE dy/dt = f(t,y)
+%   f       - (function_handle) multivariate, vector-valued function 
+%             (f:R(n+1)->Rn) defining the ODE dy/dt = f(t,y)
+%               --> inputs to f are the current time (1×1 double) and the
+%                   current state vector (n×1 double)
+%               --> output of f is the state vector derivative at the
+%                   current time/state (n×1 double)
 %   I       - defines interval over which to solve the ODE, 2 options:
 %               --> [t0,tf] - (1×2 double) initial and final times
 %               --> {t0,C}  - (1×2 cell) initial time and function handle
@@ -26,14 +31,14 @@
 % -------
 % OUTPUT:
 % -------
-%   t       - (m×1 double) time vector
-%   y       - (m×n double) matrix storing time history of state vector
+%   t       - ((N+1)×1 double) time vector
+%   y       - ((N+1)×n double) matrix storing time history of state vector
 %
 % -----
 % NOTE:
 % -----
 %   --> n = dimension of state vector
-%   --> m = length of time vector
+%   --> N+1 = length of time vector
 %   --> The ith row of "y" is the TRANSPOSE of the state vector (i.e. the
 %       solution corresponding to the ith time in "t"). This convention is
 %       chosen to match the convention used by MATLAB's ODE suite.
@@ -136,6 +141,9 @@ function [t,y] = ABM8(f,I,y0,h)
         y = zeros(length(y0),length(t));
         f8 = zeros(length(y0),8);
         
+        % time vector for first 8 iterations
+        t(1:8) = (t0:h:(t0+7*h))';
+        
         % stores initial condition in solution matrix
         t(1) = t0;
         y(:,1) = y0;
@@ -165,8 +173,7 @@ function [t,y] = ABM8(f,I,y0,h)
         
             % expands t and y if needed
             if (j+1) > length(t)
-                t = [t;zeros(size(t))];
-                y = [y,zeros(size(y))];
+                [t,y] = expand_solution_arrays(t,y);
             end
             
             % updates stored function evaluations
@@ -197,4 +204,34 @@ function [t,y] = ABM8(f,I,y0,h)
     % transposes solution array so it is returned in "standard form"
     y = y';
     
+    % -------------
+    % Subfunctions.
+    % -------------
+    
+    %----------------------------------------------------------------------
+    % expand_solution_arrays
+    %
+    % Expands the arrays storing the ODE solution. This function is used to
+    % preallocate more space for the solution arrays (i.e. the time vector
+    % and the solution matrix) once they have become full.
+    %----------------------------------------------------------------------
+    %
+    % INPUT:
+    %   t       - ((N+1)×1 double) time vector
+    %  	y       - (n×(N+1) double) solution matrix
+    %
+    % OUTPUT:
+    %   t_new   - (2(N+1)×1 double) expanded time vector
+    %  	y_new   - (n×2(N+1) double) expanded solution matrix
+    %
+    % NOTE:
+    %   --> n = dimension of state vector
+    %   --> N+1 = length of time vector
+    %
+    %----------------------------------------------------------------------
+    function [t_new,y_new] = expand_solution_arrays(t,y)
+        t_new = [t;zeros(2*length(t),1)];
+        y_new = [y,zeros(size(y,1),2*length(t))];
+    end
+
 end
