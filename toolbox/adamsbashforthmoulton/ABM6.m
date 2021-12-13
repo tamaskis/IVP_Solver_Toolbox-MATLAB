@@ -14,7 +14,7 @@
 % Contact: tamas.a.kis@outlook.com
 %
 % TECHNICAL DOCUMENTATION:
-% https://tamaskis.github.io/documentation/Fixed-Step_ODE_Solvers.pdf
+% https://tamaskis.github.io/documentation/Fixed_Step_ODE_Solvers.pdf
 %
 % REFERENCES:
 %   [1] Montenbruck and Gill, "Satellite Orbits" (pp. 135-138)
@@ -115,7 +115,7 @@ function [t,y] = ABM6(f,I,y0,h,wb)
             h = -h;
         end
         
-        % number of subintervals between iterations
+        % number of subintervals between sample times
         N = ceil((tf-t0)/h);
         
         % last element of the time vector
@@ -130,7 +130,7 @@ function [t,y] = ABM6(f,I,y0,h,wb)
         % stores initial condition in solution matrix
         y(:,1) = y0;
         
-        % propagating state vector using RK4 for first "m" iterations
+        % propagating state vector using RK4 for first "m" sample times
         for n = 1:m
 
             % current sample time and state vector
@@ -151,7 +151,7 @@ function [t,y] = ABM6(f,I,y0,h,wb)
 
         end
         
-        % stores function evaluations for first m iterations
+        % stores function evaluations for first m sample times
         for n = 1:m
             fm(:,n) = f(t(n),y(:,n));
         end
@@ -196,14 +196,14 @@ function [t,y] = ABM6(f,I,y0,h,wb)
         y = zeros(length(y0),length(t));
         fm = zeros(length(y0),m);
         
-        % time vector for first m iterations
+        % time vector for first m sample times
         t(1:m) = (t0:h:(t0+(m-1)*h))';
         
         % stores initial condition in solution matrix
         t(1) = t0;
         y(:,1) = y0;
         
-        % propagating state vector using RK4 for first m iterations
+        % propagating state vector using RK4 for first m sample times
         for n = 1:m
 
             % current sample time and state vector

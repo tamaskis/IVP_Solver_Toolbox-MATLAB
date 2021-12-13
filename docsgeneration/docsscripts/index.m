@@ -46,6 +46,13 @@
 % * <RK4_ralston_doc.html *|RK4_ralston|*> Ralston's fourth-order method (4th-order).
 % * <RK4_38_doc.html *|RK4_38|*> 3/8-Rule fourth-order method (4th-order).
 %% Adams-Bashforth (Multistep Predictor) Methods
+% * <AB2_doc.html *|AB2|*> Adams-Bashforth 2nd-order method.
+% * <AB3_doc.html *|AB3|*> Adams-Bashforth 3rd-order method.
+% * <AB4_doc.html *|AB4|*> Adams-Bashforth 4th-order method.
+% * <AB5_doc.html *|AB5|*> Adams-Bashforth 5th-order method.
+% * <AB6_doc.html *|AB6|*> Adams-Bashforth 6th-order method.
+% * <AB7_doc.html *|AB7|*> Adams-Bashforth 7th-order method.
+% * <AB8_doc.html *|AB8|*> Adams-Bashforth 8th-order method.
 %% Adams-Bashforth-Moulton (Multistep Predictor-Corrector) Methods
 % * <ABM2_doc.html *|ABM2|*> Adams-Bashforth-Moulton 2nd-order method.
 % * <ABM3_doc.html *|ABM3|*> Adams-Bashforth-Moulton 3rd-order method.

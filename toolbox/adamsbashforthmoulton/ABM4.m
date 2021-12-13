@@ -14,7 +14,7 @@
 % Contact: tamas.a.kis@outlook.com
 %
 % TECHNICAL DOCUMENTATION:
-% https://tamaskis.github.io/documentation/Fixed-Step_ODE_Solvers.pdf
+% https://tamaskis.github.io/documentation/Fixed_Step_ODE_Solvers.pdf
 %
 % REFERENCES:
 %   [1] https://en.wikipedia.org/wiki/Linear_multistep_method
@@ -116,7 +116,7 @@ function [t,y] = ABM4(f,I,y0,h,wb)
             h = -h;
         end
         
-        % number of subintervals between iterations
+        % number of subintervals between sample times
         N = ceil((tf-t0)/h);
         
         % last element of the time vector
@@ -131,7 +131,7 @@ function [t,y] = ABM4(f,I,y0,h,wb)
         % stores initial condition in solution matrix
         y(:,1) = y0;
         
-        % propagating state vector using RK4 for first "m" iterations
+        % propagating state vector using RK4 for first "m" sample times
         for n = 1:m
 
             % current sample time and state vector
@@ -152,7 +152,7 @@ function [t,y] = ABM4(f,I,y0,h,wb)
 
         end
         
-        % stores function evaluations for first m iterations
+        % stores function evaluations for first m sample times
         for n = 1:m
             fm(:,n) = f(t(n),y(:,n));
         end
@@ -164,7 +164,7 @@ function [t,y] = ABM4(f,I,y0,h,wb)
             fm = [fm(:,2:end),f(t(n),y(:,n))];
             
             % predictor step
-            yp = y(:,n)+(h/24)*(55*fm(:,m)-59*fm(:,m-1)+fm(:,m-2)-...
+            yp = y(:,n)+(h/24)*(55*fm(:,m)-59*fm(:,m-1)+37*fm(:,m-2)-...
                 9*fm(:,m-3));
             
             % corrector step (state vector propagated to next sample time)
@@ -197,14 +197,14 @@ function [t,y] = ABM4(f,I,y0,h,wb)
         y = zeros(length(y0),length(t));
         fm = zeros(length(y0),m);
         
-        % time vector for first m iterations
+        % time vector for first m sample times
         t(1:m) = (t0:h:(t0+(m-1)*h))';
         
         % stores initial condition in solution matrix
         t(1) = t0;
         y(:,1) = y0;
         
-        % propagating state vector using RK4 for first m iterations
+        % propagating state vector using RK4 for first m sample times
         for n = 1:m
 
             % current sample time and state vector
@@ -235,7 +235,7 @@ function [t,y] = ABM4(f,I,y0,h,wb)
             fm = [fm(:,2:end),f(t(n),y(:,n))];
             
             % predictor step
-            yp = y(:,n)+(h/24)*(55*fm(:,m)-59*fm(:,m-1)+fm(:,m-2)-...
+            yp = y(:,n)+(h/24)*(55*fm(:,m)-59*fm(:,m-1)+37*fm(:,m-2)-...
                 9*fm(:,m-3));
             
             % corrector step (state vector propagated to next sample time)

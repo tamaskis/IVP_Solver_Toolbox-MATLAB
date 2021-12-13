@@ -1,0 +1,435 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>AB6</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-12-12"><meta name="DC.source" content="AB6_doc.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>AB6</tt></h1><!--introduction--><p>Adams-Bashforth 6th-order method.</p><p><a href="index.html">Back to ODE Solver Toolbox Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#4">Input/Output Parameters</a></li><li><a href="#5">Example #1: Time detection.</a></li><li><a href="#9">Example #2: Event detection.</a></li><li><a href="#13">Example #3: Backward integration (time detection case).</a></li><li><a href="#17">Example #4: Backward integration (event-detection case).</a></li><li><a href="#22">See also</a></li></ul></div><h2 id="1">Syntax</h2><pre class="language-matlab">[t,y] = AB6(f,[t0,tf],y0,h)
+[t,y] = AB6(f,{t0,C},y0,h)
+[t,y] = AB6(__,wb)
+</pre><h2 id="2">Description</h2><p><tt>[t,y] = AB6(f,[t0,tf],y0,h)</tt> solves the ODE defined by <tt>f(t,y)</tt> from <tt>t0</tt> until <tt>tf</tt> using the Adams-Bashforth 6th-order method with an initial condition <tt>y0</tt> and step size <tt>h</tt>.</p><p><tt>[t,y] = AB6(f,{t0,C},y0,h)</tt> does the same as the syntax above, but instead of terminating at a final time <tt>tf</tt>, the solver terminates once the condition function <tt>C(t,y)</tt> is no longer satisfied.</p><h2 id="4">Input/Output Parameters</h2><p>
+  <table border=1>
+      <tr>
+          <td></td>
+          <td style="text-align:center"><b>Variable</b></td>
+          <td style="text-align:center"><b>Symbol</b></td>
+          <td style="text-align:center"><b>Description</b></td>
+          <td style="text-align:center"><b>Format</b></td>
+      </tr>
+      <tr>
+          <td rowspan="7" style="text-align:center"><b>Input</b></td>
+          <td style="text-align:center"><TT>f</TT></td>
+          <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{f}(t,\mathbf{y})" title="" /></td>
+          <td>multivariate, vector-valued function (<img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{f}:\mathbb{R}\times\mathbb{R}^{p}\rightarrow\mathbb{R}^{p}" title="" />) defining the ordinary differential equation
+              <BR> - inputs to <TT>f</TT> are the current time (<TT>t</TT>, 1×1 double) and the current state vector (<TT>y</TT>, p×1 double)
+              <BR> - output of <TT>f</TT> is the state vector derivative (<TT>ydot</TT>, p×1 double) at the current time/state</td>
+          <td style="text-align:center">1×1<BR>function_handle</td>
+      </tr>
+      <tr>
+          <td style="text-align:center"><TT>t0</TT></td>
+          <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;t_{0}" title="t_{0}" /></td>
+          <td>initial time</td>
+          <td style="text-align:center">1×1<BR>double</td>
+      </tr>
+      <tr>
+          <td style="text-align:center"><TT>tf</TT></td>
+          <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;t_{f}" title="t_{f}" /></td>
+          <td>final time</td>
+          <td style="text-align:center">1×1<BR>double</td>
+      </tr>
+      <tr>
+          <td style="text-align:center"><TT>C</TT></td>
+          <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;C(t,\mathbf{y})" title="C(t,\mathbf{y})" /></td>
+          <td>condition function (<img src="https://latex.codecogs.com/svg.latex?\inline&space;C:\mathbb{R}\times\mathbb{R}^{p}\rightarrow\mathbb{B}" title="" />)
+              <BR> - inputs are the current time (<TT>t</TT>, 1×1 double) and the current state vector (<TT>y</TT>, p×1 double)
+              <BR> - output is a 1×1 logical (<TT>true</TT> if solver should continue running, <TT>false</TT> if solver should terminate)</td>
+          <td style="text-align:center">1×1<BR>function_handle</td>
+      </tr>
+      <tr>
+          <td style="text-align:center"><TT>y0</TT></td>
+          <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{y}_{0}" title="\mathbf{y}_{0}" /></td>
+          <td>initial condition</td>
+          <td style="text-align:center">p×1<BR>double</td>
+      </tr>
+      <tr>
+          <td style="text-align:center"><TT>h</TT></td>
+          <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;h" title="h" /></td>
+          <td>step size</td>
+          <td style="text-align:center">1×1<BR>double</td>
+      </tr>
+      <tr>
+          <td style="text-align:center"><TT>wb</TT></td>
+          <td style="text-align:center">-</td>
+          <td>waitbar parameters<BR>  - input as "<TT>true</TT>" if you want waitbar with default message displayed<BR>  - input as a char array storing a message if you want a custom message displayed on the waitbar</td>
+          <td style="text-align:center">char array<BR><i>or</i><BR>1×1 logical</td>
+      </tr>
+      <tr>
+          <td rowspan="2" style="text-align:center"><b>Output</b></td>
+          <td style="text-align:center"><TT>t</TT></td>
+          <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\mathbf{t}" title="\mathbf{t}" /></td>
+          <td>time vector</td>
+          <td style="text-align:center">(N+1)×1<BR>double</td>
+      </tr>
+      <tr>
+          <td style="text-align:center"><TT>y</TT></td>
+          <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\mathbf{Y}" title="\mathbf{Y}" /></td>
+          <td>solution matrix<BR>- the ith row of <TT>y</TT> stores the <i>transpose</i> of the solution corresponding to the ith time in <TT>t</TT> (see below)</td>
+          <td style="text-align:center">(N+1)×p<BR>double</td>
+      </tr>
+  </table>
+</p><p><b>Time vector and solution matrix:</b></p><p><img src="AB6_doc_eq00351604776159248561.png" alt="$$\mathbf{t}=\pmatrix{t_{0} \cr\vdots\cr t_{N}},\quad\quad\mathbf{Y}=\pmatrix{\mathbf{y}(t_{0})^{T} \cr\vdots\cr\mathbf{y}(t_{N})^{T}}$$" style="width:161px;height:47px;"></p><h2 id="5">Example #1: Time detection.</h2><p><i>Consider the <a href="https://en.wikipedia.org/wiki/Lorenz_system">Lorenz system</a>, with <img src="AB6_doc_eq10598098701086549063.png" alt="$\rho=28$" style="width:31px;height:10px;">, <img src="AB6_doc_eq09504551521648108209.png" alt="$\sigma=10$" style="width:32px;height:8px;">, and <img src="AB6_doc_eq11365456205604591879.png" alt="$\beta=8/3$" style="width:38px;height:11px;">:</i></p><p><img src="AB6_doc_eq12522653696802788271.png" alt="$$\dot{x}=\sigma(y-x)$$" style="width:61px;height:11px;"></p><p><img src="AB6_doc_eq08249287703923209870.png" alt="$$\dot{y}=x(\rho-z)-y$$" style="width:79px;height:11px;"></p><p><img src="AB6_doc_eq05852693962928183165.png" alt="$$\dot{z}=xy-\beta z$$" style="width:58px;height:10px;"></p><p><img src="AB6_doc_eq16480285280154179127.png" alt="$$x(0)=0,\quad y(0)=1,\quad z(0)=1.05$$" style="width:166px;height:11px;"></p><p><i>Plot the solution of this system for <img src="AB6_doc_eq10146963226942718528.png" alt="$t$" style="width:4px;height:8px;"> in the interval <img src="AB6_doc_eq06304400096136047540.png" alt="$[0,100]$" style="width:31px;height:11px;">.</i></p><p>First, we can rewrite this system in vector form by letting <img src="AB6_doc_eq07424480162765073272.png" alt="$x_{1}=x$" style="width:31px;height:7px;">, <img src="AB6_doc_eq13615542333068370140.png" alt="$x_{2}=y$" style="width:31px;height:8px;">, <img src="AB6_doc_eq15378844632759961823.png" alt="$x_{3}=z$" style="width:31px;height:7px;">, and <img src="AB6_doc_eq09552290014571489353.png" alt="$\mathbf{x}=(x_{1},x_{2},x_{3})^{T}$" style="width:77px;height:13px;">.</p><p><img src="AB6_doc_eq07610351996050725523.png" alt="$$\dot{\mathbf{x}}=\mathbf{f}(t,\mathbf{x})=\pmatrix{\sigma(x_{2}-x_{1})&#xA;\cr x_{1}(\rho-x_{3})-x_{2} \cr x_{1}x_{2}-\beta x_{3}}$$" style="width:158px;height:40px;"></p><p><img src="AB6_doc_eq04323907994782952243.png" alt="$$\mathbf{x}(0)=\pmatrix{0 \cr 1 \cr 1.05}$$" style="width:75px;height:40px;"></p><p>Defining the system and its initial condition in MATLAB,</p><pre class="codeinput"><span class="comment">% Lorenz parameters</span>
+rho = 28;
+sigma = 10;
+beta = 8/3;
+
+<span class="comment">% Lorenz equations in vector form</span>
+f = @(t,x) [sigma*(x(2)-x(1));
+            x(1)*(rho-x(3))-x(2);
+            x(1)*x(2)-beta*x(3)];
+
+<span class="comment">% initial condition</span>
+x0 = [0;
+      1;
+      1.05];
+</pre><p>Solving the system for <img src="AB6_doc_eq10146963226942718528.png" alt="$t$" style="width:4px;height:8px;"> in the interval <img src="AB6_doc_eq06304400096136047540.png" alt="$[0,100]$" style="width:31px;height:11px;"> using a time step (i.e. step size) of <img src="AB6_doc_eq11530064129305270029.png" alt="$\Delta t=0.001$" style="width:52px;height:9px;">,</p><pre class="codeinput">[t,x] = AB6(f,[0,100],x0,0.001);
+</pre><p>Plotting the solution,</p><pre class="codeinput">figure;
+plot3(x(:,1),x(:,2),x(:,3));
+view(45,20);
+grid <span class="string">on</span>;
+xlabel(<span class="string">'$x$'</span>,<span class="string">'Interpreter'</span>,<span class="string">'latex'</span>,<span class="string">'FontSize'</span>,18);
+ylabel(<span class="string">'$y$'</span>,<span class="string">'Interpreter'</span>,<span class="string">'latex'</span>,<span class="string">'FontSize'</span>,18);
+zlabel(<span class="string">'$z$'</span>,<span class="string">'Interpreter'</span>,<span class="string">'latex'</span>,<span class="string">'FontSize'</span>,18);
+</pre><img vspace="5" hspace="5" src="AB6_doc_01.png" alt=""> <h2 id="9">Example #2: Event detection.</h2><p><i>Consider the initial value problem</i></p><p><img src="AB6_doc_eq06165276169436960614.png" alt="$$\frac{dy}{dx}=y,\quad y(2)=3$$" style="width:90px;height:23px;"></p><p><i>Find the solution <img src="AB6_doc_eq17784377804790973832.png" alt="$y(t)$" style="width:18px;height:11px;"> until <img src="AB6_doc_eq08226474961517088074.png" alt="$y=10$" style="width:31px;height:10px;">.</i></p><p>First, let's define our ODE (<img src="AB6_doc_eq15749537601348477239.png" alt="$\frac{dy}{dt}=f(t,y)$" style="width:53px;height:15px;">) and initial condition in MATLAB.</p><pre class="codeinput">f = @(t,y) y;
+y2 = 3;
+</pre><p>Next, let's define the condition function, <img src="AB6_doc_eq05396980523725042131.png" alt="$C(t,y)$" style="width:31px;height:11px;">. Since we want to continue solving until <img src="AB6_doc_eq08226474961517088074.png" alt="$y=10$" style="width:31px;height:10px;">, we want the solver to run while <img src="AB6_doc_eq11724124807923600915.png" alt="$y\leq10$" style="width:31px;height:10px;">; this forms our condition. Therefore,</p><pre class="codeinput">C = @(t,y) y &lt;= 10;
+</pre><p>Solving for <img src="AB6_doc_eq14521328786523663806.png" alt="$y$" style="width:6px;height:8px;"> using a step size of <img src="AB6_doc_eq10072498013177321932.png" alt="$h=0.01$" style="width:40px;height:8px;">,</p><pre class="codeinput">[t,y] = AB6(f,{2,C},y2,0.01);
+</pre><p>Plotting the solution,</p><pre class="codeinput">figure;
+plot(t,y,<span class="string">'LineWidth'</span>,1.5);
+grid <span class="string">on</span>;
+xlabel(<span class="string">'$t$'</span>,<span class="string">'Interpreter'</span>,<span class="string">'latex'</span>,<span class="string">'FontSize'</span>,18);
+ylabel(<span class="string">'$y$'</span>,<span class="string">'Interpreter'</span>,<span class="string">'latex'</span>,<span class="string">'FontSize'</span>,18);
+</pre><img vspace="5" hspace="5" src="AB6_doc_02.png" alt=""> <h2 id="13">Example #3: Backward integration (time detection case).</h2><p><i>Consider the same ODE as in Example #2, but we are now given its value at <img src="AB6_doc_eq01961946856973312452.png" alt="$t=20$" style="width:29px;height:8px;">.</i></p><p><img src="AB6_doc_eq11712297061180240212.png" alt="$$\frac{dy}{dx}=y,\quad y(20)=50$$" style="width:101px;height:23px;"></p><p><i>Find <img src="AB6_doc_eq14770085807156189371.png" alt="$y(10)$" style="width:25px;height:11px;">. Then, confirm your result by solving the same ODE from <img src="AB6_doc_eq08325516970591449802.png" alt="$t=10$" style="width:29px;height:8px;"> to <img src="AB6_doc_eq01961946856973312452.png" alt="$t=20$" style="width:29px;height:8px;">, using <img src="AB6_doc_eq14770085807156189371.png" alt="$y(10)$" style="width:25px;height:11px;"> as the initial condition.</i></p><p>In this case, we know <img src="AB6_doc_eq14521328786523663806.png" alt="$y$" style="width:6px;height:8px;"> at <img src="AB6_doc_eq01961946856973312452.png" alt="$t=20$" style="width:29px;height:8px;">, and want to find <img src="AB6_doc_eq14521328786523663806.png" alt="$y$" style="width:6px;height:8px;"> at a <i>previous</i> time <img src="AB6_doc_eq08325516970591449802.png" alt="$t=10$" style="width:29px;height:8px;">. To do this, we need to solve the ODE backwards, <i>from</i> <img src="AB6_doc_eq01961946856973312452.png" alt="$t=20$" style="width:29px;height:8px;"> <i>to</i> <img src="AB6_doc_eq08325516970591449802.png" alt="$t=10$" style="width:29px;height:8px;">. First, let's define our ODE (<img src="AB6_doc_eq15749537601348477239.png" alt="$\frac{dy}{dt}=f(t,y)$" style="width:53px;height:15px;">) and initial condition in MATLAB.</p><pre class="codeinput">f = @(t,y) y;
+y20 = 50;
+</pre><p>Solving for <img src="AB6_doc_eq17784377804790973832.png" alt="$y(t)$" style="width:18px;height:11px;"> from <img src="AB6_doc_eq01961946856973312452.png" alt="$t=20$" style="width:29px;height:8px;"> to <img src="AB6_doc_eq08325516970591449802.png" alt="$t=10$" style="width:29px;height:8px;"> using a step size of <img src="AB6_doc_eq00842521489666112223.png" alt="$h=0.001$" style="width:45px;height:8px;">,</p><pre class="codeinput">[t,y] = AB6(f,[20,10],y20,0.001);
+</pre><p>The solution for <img src="AB6_doc_eq14521328786523663806.png" alt="$y$" style="width:6px;height:8px;"> corresponding to <img src="AB6_doc_eq08325516970591449802.png" alt="$t=10$" style="width:29px;height:8px;"> will be located at the last element of the solution matrix, since <img src="AB6_doc_eq08325516970591449802.png" alt="$t=10$" style="width:29px;height:8px;"> is stored in the last element of the time vector. Therefore, <img src="AB6_doc_eq14770085807156189371.png" alt="$y(10)$" style="width:25px;height:11px;"> is</p><pre class="codeinput">y10 = y(end)
+</pre><pre class="codeoutput">
+y10 =
+
+     2.838085450141028e-05
+
+</pre><p>Confirming our result by solving the same ODE but from <img src="AB6_doc_eq08325516970591449802.png" alt="$t=10$" style="width:29px;height:8px;"> to <img src="AB6_doc_eq01961946856973312452.png" alt="$t=20$" style="width:29px;height:8px;"> and using our result for <img src="AB6_doc_eq14770085807156189371.png" alt="$y(10)$" style="width:25px;height:11px;"> as the initial condition,</p><pre class="codeinput">[t,y] = AB6(f,[10,20],y10,0.001);
+y20 = y(end)
+</pre><pre class="codeoutput">
+y20 =
+
+  49.066051907672467
+
+</pre><h2 id="17">Example #4: Backward integration (event-detection case).</h2><p><i>Once again, consider</i></p><p><img src="AB6_doc_eq11712297061180240212.png" alt="$$\frac{dy}{dx}=y,\quad y(20)=50$$" style="width:101px;height:23px;"></p><p><i>Find <img src="AB6_doc_eq14770085807156189371.png" alt="$y(10)$" style="width:25px;height:11px;"> using an ODE solver with a condition function (i.e. event-detection).</i></p><p>First, let's define our ODE (<img src="AB6_doc_eq15749537601348477239.png" alt="$\frac{dy}{dt}=f(t,y)$" style="width:53px;height:15px;">) and initial condition in MATLAB.</p><pre class="codeinput">f = @(t,y) y;
+y20 = 50;
+</pre><p>The event that terminates the solver is when <img src="AB6_doc_eq08325516970591449802.png" alt="$t=10$" style="width:29px;height:8px;">. Therefore, we define the condition function as</p><pre class="codeinput">C = @(t,y) t &gt; 10;
+</pre><p>In the time-detection case (Example #3) we input <tt>[t0,tf] = [20,10]</tt>, so the solver knew to integrate backwards in time since <tt>t0 &gt; tf</tt>. Consequently, internally, the solver made the step size negative. However, for the event-detection case, just given <tt>t</tt> and <tt>C(t,y)</tt>, the solver won't know to use a negative step size to integrate backwards in time. Therefore, we must manually specify a negative step size. Solving for <img src="AB6_doc_eq14770085807156189371.png" alt="$y(10)$" style="width:25px;height:11px;">,</p><pre class="codeinput">[t,y] = AB6(f,{20,C},y20,-0.001);
+y10 = y(end)
+</pre><pre class="codeoutput">
+y10 =
+
+     2.840749865084907e-05
+
+</pre><p>Note that this is the same result we obtained earlier in Example #3.</p><h2 id="22">See also</h2><p><a href="AB2_doc.html"><tt>AB2</tt></a> | <a href="AB3_doc.html"><tt>AB3</tt></a> | <a href="AB4_doc.html"><tt>AB4</tt></a> | <a href="AB5_doc.html"><tt>AB5</tt></a> | <a href="AB7_doc.html"><tt>AB7</tt></a> | <a href="AB8_doc.html"><tt>AB8</tt></a></p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2021b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |AB6|
+% Adams-Bashforth 6th-order method.
+% 
+% <index.html Back to ODE Solver Toolbox Contents>.
+%% Syntax
+%   [t,y] = AB6(f,[t0,tf],y0,h)
+%   [t,y] = AB6(f,{t0,C},y0,h)
+%   [t,y] = AB6(__,wb)
+%% Description
+% |[t,y] = AB6(f,[t0,tf],y0,h)| solves the ODE defined by |f(t,y)| from 
+% |t0| until |tf| using the Adams-Bashforth 6th-order method with an
+% initial condition |y0| and step size |h|.
+%%
+% |[t,y] = AB6(f,{t0,C},y0,h)| does the same as the syntax above, but
+% instead of terminating at a final time |tf|, the solver terminates once
+% the condition function |C(t,y)| is no longer satisfied.
+%% Input/Output Parameters
+% <html>
+%   <table border=1>
+%       <tr>
+%           <td></td>
+%           <td style="text-align:center"><b>Variable</b></td>
+%           <td style="text-align:center"><b>Symbol</b></td>
+%           <td style="text-align:center"><b>Description</b></td>
+%           <td style="text-align:center"><b>Format</b></td>
+%       </tr>
+%       <tr>
+%           <td rowspan="7" style="text-align:center"><b>Input</b></td>
+%           <td style="text-align:center"><TT>f</TT></td>
+%           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{f}(t,\mathbf{y})" title="" /></td>
+%           <td>multivariate, vector-valued function (<img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{f}:\mathbb{R}\times\mathbb{R}^{p}\rightarrow\mathbb{R}^{p}" title="" />) defining the ordinary differential equation
+%               <BR> - inputs to <TT>f</TT> are the current time (<TT>t</TT>, 1×1 double) and the current state vector (<TT>y</TT>, p×1 double)
+%               <BR> - output of <TT>f</TT> is the state vector derivative (<TT>ydot</TT>, p×1 double) at the current time/state</td>
+%           <td style="text-align:center">1×1<BR>function_handle</td>
+%       </tr>
+%       <tr>
+%           <td style="text-align:center"><TT>t0</TT></td>
+%           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;t_{0}" title="t_{0}" /></td>
+%           <td>initial time</td>
+%           <td style="text-align:center">1×1<BR>double</td>
+%       </tr>
+%       <tr>
+%           <td style="text-align:center"><TT>tf</TT></td>
+%           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;t_{f}" title="t_{f}" /></td>
+%           <td>final time</td>
+%           <td style="text-align:center">1×1<BR>double</td>
+%       </tr>
+%       <tr>
+%           <td style="text-align:center"><TT>C</TT></td>
+%           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;C(t,\mathbf{y})" title="C(t,\mathbf{y})" /></td>
+%           <td>condition function (<img src="https://latex.codecogs.com/svg.latex?\inline&space;C:\mathbb{R}\times\mathbb{R}^{p}\rightarrow\mathbb{B}" title="" />)
+%               <BR> - inputs are the current time (<TT>t</TT>, 1×1 double) and the current state vector (<TT>y</TT>, p×1 double)
+%               <BR> - output is a 1×1 logical (<TT>true</TT> if solver should continue running, <TT>false</TT> if solver should terminate)</td>
+%           <td style="text-align:center">1×1<BR>function_handle</td>
+%       </tr>
+%       <tr>
+%           <td style="text-align:center"><TT>y0</TT></td>
+%           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{y}_{0}" title="\mathbf{y}_{0}" /></td>
+%           <td>initial condition</td>
+%           <td style="text-align:center">p×1<BR>double</td>
+%       </tr>
+%       <tr>
+%           <td style="text-align:center"><TT>h</TT></td>
+%           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;h" title="h" /></td>
+%           <td>step size</td>
+%           <td style="text-align:center">1×1<BR>double</td>
+%       </tr>
+%       <tr>
+%           <td style="text-align:center"><TT>wb</TT></td>
+%           <td style="text-align:center">-</td>
+%           <td>waitbar parameters<BR>  - input as "<TT>true</TT>" if you want waitbar with default message displayed<BR>  - input as a char array storing a message if you want a custom message displayed on the waitbar</td>
+%           <td style="text-align:center">char array<BR><i>or</i><BR>1×1 logical</td>
+%       </tr>
+%       <tr>
+%           <td rowspan="2" style="text-align:center"><b>Output</b></td>
+%           <td style="text-align:center"><TT>t</TT></td>
+%           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\mathbf{t}" title="\mathbf{t}" /></td>
+%           <td>time vector</td>
+%           <td style="text-align:center">(N+1)×1<BR>double</td>
+%       </tr>
+%       <tr>
+%           <td style="text-align:center"><TT>y</TT></td>
+%           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\mathbf{Y}" title="\mathbf{Y}" /></td>
+%           <td>solution matrix<BR>- the ith row of <TT>y</TT> stores the <i>transpose</i> of the solution corresponding to the ith time in <TT>t</TT> (see below)</td>
+%           <td style="text-align:center">(N+1)×p<BR>double</td>
+%       </tr>
+%   </table>
+% </html>
+%
+% *Time vector and solution matrix:*
+% 
+% $$\mathbf{t}=\pmatrix{t_{0} \cr\vdots\cr t_{N}},\quad\quad\mathbf{Y}=\pmatrix{\mathbf{y}(t_{0})^{T} \cr\vdots\cr\mathbf{y}(t_{N})^{T}}$$
+%% Example #1: Time detection.
+% _Consider the <https://en.wikipedia.org/wiki/Lorenz_system Lorenz system>, with $\rho=28$, $\sigma=10$, and
+% $\beta=8/3$:_
+%
+% $$\dot{x}=\sigma(y-x)$$
+%
+% $$\dot{y}=x(\rho-z)-y$$
+%
+% $$\dot{z}=xy-\beta z$$
+%
+% $$x(0)=0,\quad y(0)=1,\quad z(0)=1.05$$
+%
+% _Plot the solution of this system for $t$ in the interval $[0,100]$._
+%
+% First, we can rewrite this system in vector form by letting $x_{1}=x$,
+% $x_{2}=y$, $x_{3}=z$, and $\mathbf{x}=(x_{1},x_{2},x_{3})^{T}$.
+%
+% $$\dot{\mathbf{x}}=\mathbf{f}(t,\mathbf{x})=\pmatrix{\sigma(x_{2}-x_{1}) 
+% \cr x_{1}(\rho-x_{3})-x_{2} \cr x_{1}x_{2}-\beta x_{3}}$$
+%
+% $$\mathbf{x}(0)=\pmatrix{0 \cr 1 \cr 1.05}$$
+%
+% Defining the system and its initial condition in MATLAB,
+%%
+
+% Lorenz parameters
+rho = 28;
+sigma = 10;
+beta = 8/3;
+
+% Lorenz equations in vector form
+f = @(t,x) [sigma*(x(2)-x(1));
+            x(1)*(rho-x(3))-x(2);
+            x(1)*x(2)-beta*x(3)];
+        
+% initial condition
+x0 = [0;
+      1;
+      1.05];
+%%
+% Solving the system for $t$ in the interval $[0,100]$ using a time step 
+% (i.e. step size) of $\Delta t=0.001$,
+[t,x] = AB6(f,[0,100],x0,0.001);
+%%
+% Plotting the solution,
+figure;
+plot3(x(:,1),x(:,2),x(:,3));
+view(45,20);
+grid on;
+xlabel('$x$','Interpreter','latex','FontSize',18);
+ylabel('$y$','Interpreter','latex','FontSize',18);
+zlabel('$z$','Interpreter','latex','FontSize',18);
+%% Example #2: Event detection.
+% _Consider the initial value problem_
+%
+% $$\frac{dy}{dx}=y,\quad y(2)=3$$
+%
+% _Find the solution $y(t)$ until $y=10$._
+%
+% First, let's define our ODE ($\frac{dy}{dt}=f(t,y)$) and initial
+% condition in MATLAB.
+f = @(t,y) y;
+y2 = 3;
+%%
+% Next, let's define the condition function, $C(t,y)$. Since we want to
+% continue solving until $y=10$, we want the solver to run while $y\leq10$;
+% this forms our condition. Therefore,
+C = @(t,y) y <= 10;
+%%
+% Solving for $y$ using a step size of $h=0.01$,
+[t,y] = AB6(f,{2,C},y2,0.01);
+%%
+% Plotting the solution,
+figure;
+plot(t,y,'LineWidth',1.5);
+grid on;
+xlabel('$t$','Interpreter','latex','FontSize',18);
+ylabel('$y$','Interpreter','latex','FontSize',18);
+%% Example #3: Backward integration (time detection case).
+% _Consider the same ODE as in Example #2, but we are now given its value
+% at $t=20$._
+%
+% $$\frac{dy}{dx}=y,\quad y(20)=50$$
+%
+% _Find $y(10)$. Then, confirm your result by solving the same ODE from
+% $t=10$ to $t=20$, using $y(10)$ as the initial condition._
+%
+% In this case, we know $y$ at $t=20$, and want to find $y$ at a _previous_
+% time $t=10$. To do this, we need to solve the ODE backwards, _from_
+% $t=20$ _to_ $t=10$. First, let's define our ODE ($\frac{dy}{dt}=f(t,y)$) 
+% and initial condition in MATLAB.
+f = @(t,y) y;
+y20 = 50;
+%%
+% Solving for $y(t)$ from $t=20$ to $t=10$ using a step size of $h=0.001$,
+[t,y] = AB6(f,[20,10],y20,0.001);
+%%
+% The solution for $y$ corresponding to $t=10$ will be located at the last
+% element of the solution matrix, since $t=10$ is stored in the last
+% element of the time vector. Therefore, $y(10)$ is
+y10 = y(end)
+%%
+% Confirming our result by solving the same ODE but from $t=10$ to $t=20$
+% and using our result for $y(10)$ as the initial condition,
+[t,y] = AB6(f,[10,20],y10,0.001);
+y20 = y(end)
+%% Example #4: Backward integration (event-detection case).
+% _Once again, consider_ 
+%
+% $$\frac{dy}{dx}=y,\quad y(20)=50$$
+%
+% _Find $y(10)$ using an ODE solver with a condition function (i.e. event-detection)._
+%%
+% First, let's define our ODE ($\frac{dy}{dt}=f(t,y)$) and initial 
+% condition in MATLAB.
+f = @(t,y) y;
+y20 = 50;
+%%
+% The event that terminates the solver is when $t=10$. Therefore, we define
+% the condition function as
+C = @(t,y) t > 10;
+%%
+% In the time-detection case (Example #3) we input |[t0,tf] = [20,10]|, so 
+% the solver knew to integrate backwards in time since |t0 > tf|. 
+% Consequently, internally, the solver made the step size negative. 
+% However, for the event-detection case, just given |t| and |C(t,y)|, the 
+% solver won't know to use a negative step size to integrate backwards in
+% time. Therefore, we must manually specify a negative step size. Solving
+% for $y(10)$,
+[t,y] = AB6(f,{20,C},y20,-0.001);
+y10 = y(end)
+%% 
+% Note that this is the same result we obtained earlier in Example #3.
+%% See also
+% <AB2_doc.html |AB2|> | 
+% <AB3_doc.html |AB3|> | 
+% <AB4_doc.html |AB4|> | 
+% <AB5_doc.html |AB5|> | 
+% <AB7_doc.html |AB7|> | 
+% <AB8_doc.html |AB8|>
+##### SOURCE END #####
+--></body></html>
