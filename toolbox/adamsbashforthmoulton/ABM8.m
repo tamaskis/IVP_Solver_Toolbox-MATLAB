@@ -6,6 +6,8 @@
 %   [t,y] = ABM8(f,{t0,C},y0,h)
 %   [t,y] = ABM8(__,wb)
 %
+% See also ABM2, ABM3, ABM4, ABM5, ABM6, ABM7.
+%
 % Copyright © 2021 Tamas Kis
 % Last Update: 2021-12-12
 % Website: https://tamaskis.github.io
@@ -131,7 +133,7 @@ function [t,y] = ABM8(f,I,y0,h,wb)
         % propagating state vector using RK4 for first "m" iterations
         for n = 1:m
 
-            % solution at current iteration
+            % current sample time and state vector
             tn = t(n);
             yn = y(:,n);
 
@@ -141,7 +143,7 @@ function [t,y] = ABM8(f,I,y0,h,wb)
             k3 = f(tn+h/2,yn+h*k2/2);
             k4 = f(tn+h,yn+h*k3);
 
-            % dependent variable propogated to next time level
+            % state vector propagated to next sample time
             y(:,n+1) = yn+(h/6)*(k1+2*k2+2*k3+k4);
             
             % updates waitbar
@@ -165,7 +167,7 @@ function [t,y] = ABM8(f,I,y0,h,wb)
                 2183877*fm(:,m-2)-2664477*fm(:,m-3)+2102243*fm(:,m-4)-...
                 1041723*fm(:,m-5)+295767*fm(:,m-6)-36799*fm(:,m-7));
             
-            % corrector step (state vector propagated to next iteration)
+            % corrector step (state vector propagated to next sample time)
             y(:,n+1) = y(:,n)+(h/120960)*(36799*f(t(n+1),yp)+139849*...
                 fm(:,m)-121797*fm(:,m-1)+123133*fm(:,m-2)-88547*fm(:,m-...
                 3)+41499*fm(:,m-4)-11351*fm(:,m-5)+1375*fm(:,m-6));
@@ -206,7 +208,7 @@ function [t,y] = ABM8(f,I,y0,h,wb)
         % propagating state vector using RK4 for first m iterations
         for n = 1:m
 
-            % solution at current iteration
+            % current sample time and state vector
             tn = t(n);
             yn = y(:,n);
 
@@ -216,7 +218,7 @@ function [t,y] = ABM8(f,I,y0,h,wb)
             k3 = f(tn+h/2,yn+k2*h/2);
             k4 = f(tn+h,yn+k3*h);
 
-            % dependent variable propogated to next time level
+            % state vector propagated to next sample time
             y(:,n+1) = yn+(h/6)*(k1+2*k2+2*k3+k4);
 
         end
@@ -238,7 +240,7 @@ function [t,y] = ABM8(f,I,y0,h,wb)
                 2183877*fm(:,m-2)-2664477*fm(:,m-3)+2102243*fm(:,m-4)-...
                 1041723*fm(:,m-5)+295767*fm(:,m-6)-36799*fm(:,m-7));
             
-            % corrector step (state vector propagated to next iteration)
+            % corrector step (state vector propagated to next sample time)
             y(:,n+1) = y(:,n)+(h/120960)*(36799*f(t(n+1),yp)+139849*...
                 fm(:,m)-121797*fm(:,m-1)+123133*fm(:,m-2)-88547*fm(:,m-...
                 3)+41499*fm(:,m-4)-11351*fm(:,m-5)+1375*fm(:,m-6));

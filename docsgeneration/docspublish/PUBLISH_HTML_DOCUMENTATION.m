@@ -21,8 +21,8 @@ code_folders = ["../../toolbox"];
 
 % specific .m documentation files that should be published
 %   --> define as "[]" if you want to publish all .m documentation files
-%mfiles = ["index.m"];
-mfiles = ["ABM8_doc.m"];
+mfiles = ["index.m"];
+%mfiles = ["ABM8_doc.m"];
 %mfiles = ["AM_coefficients_doc.m"];
 %mfiles = [];
 

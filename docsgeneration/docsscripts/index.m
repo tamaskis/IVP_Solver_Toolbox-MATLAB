@@ -47,6 +47,12 @@
 % * <RK4_38_doc.html *|RK4_38|*> 3/8-Rule fourth-order method (4th-order).
 %% Adams-Bashforth (Multistep Predictor) Methods
 %% Adams-Bashforth-Moulton (Multistep Predictor-Corrector) Methods
+% * <ABM2_doc.html *|ABM2|*> Adams-Bashforth-Moulton 2nd-order method.
+% * <ABM3_doc.html *|ABM3|*> Adams-Bashforth-Moulton 3rd-order method.
+% * <ABM4_doc.html *|ABM4|*> Adams-Bashforth-Moulton 4th-order method.
+% * <ABM5_doc.html *|ABM5|*> Adams-Bashforth-Moulton 5th-order method.
+% * <ABM6_doc.html *|ABM6|*> Adams-Bashforth-Moulton 6th-order method.
+% * <ABM7_doc.html *|ABM7|*> Adams-Bashforth-Moulton 7th-order method.
 % * <ABM8_doc.html *|ABM8|*> Adams-Bashforth-Moulton 8th-order method.
 %% Generating ODE Solver Equations
 % * <AB_coefficients_doc.html *|AB_coefficients|*> Coefficients for the mth-order Adams-Bashforth predictor.
