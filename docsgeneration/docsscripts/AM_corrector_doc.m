@@ -1,39 +1,45 @@
 %% |AM_corrector|
-% nth-order Adams-Moulton corrector.
+% mth-order Adams-Moulton corrector.
 % 
 % <index.html Back to ODE Solver Toolbox Contents>.
 %% Syntax
-%   eqn = AM_corrector(n)
-%   AM_corrector(n,'print')
+%   eqn = AM_corrector(m)
+%   AM_corrector(m,'print')
+%% Description
+% |eqn = AM_corrector(m)| returns a string storing the mth-order 
+% Adams-Moulton corrector.
+%%
+% |AM_corrector(m,'print')| prints the mth-order Adams-Moulton predictor
+% to the Command Window.
 %% Input/Output Parameters
 % <html>
 %   <table border=1>
 %       <tr>
 %           <td></td>
-%           <td style="text-align:center"><b>Symbol</b></td>
 %           <td style="text-align:center"><b>Variable</b></td>
+%           <td style="text-align:center"><b>Symbol</b></td>
 %           <td style="text-align:center"><b>Description</b></td>
 %           <td style="text-align:center"><b>Format</b></td>
 %       </tr>
 %       <tr>
 %           <td rowspan="2" style="text-align:center"><b>Input</b></td>
-%           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;n" title="n" /></td>
-%           <td><TT>n</TT></td>
+%           <td style="text-align:center"><TT>m</TT></td>
+%           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;m" title="m" /></td>
 %           <td>order of Adams-Moulton corrector</td>
 %           <td style="text-align:center">1×1<BR>double</td>
 %       </tr>
 %       <tr>
+%           <td style="text-align:center"><TT>print</TT></td>
 %           <td style="text-align:center">-</td>
-%           <td><TT>print</TT></td>
 %           <td>(OPTIONAL) specify as <TT>'print'</TT> if you want to print the coefficients to the command window</td>
 %           <td style="text-align:center">char</td>
 %       </tr>
 %       <tr>
 %           <td rowspan="1" style="text-align:center"><b>Output</b></td>
+%           <td style="text-align:center"><TT>eqn</TT></td>
 %           <td style="text-align:center">-</td>
-%           <td><TT>eqn</TT></td>
-%           <td>nth-order Adams-Moulton corrector</td>
-%           <td style="text-align:center">string</td>
+%           <td>mth-order Adams-Moulton corrector</td>
+%           <td style="text-align:center">1×1<BR>string</td>
 %       </tr>
 %   </table>
 % </html>

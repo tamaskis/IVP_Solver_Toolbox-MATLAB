@@ -3,12 +3,37 @@
 % <<ode_solver_toolbox.png>>
 %
 % Copyright © 2021 Tamas Kis
-%% EXAMPLES
-% Since all of the functions have an identical syntax, only one set of
-% examples is included. These examples use the <RK4_doc.html |RK4|> function, 
-% but could also be solved using any of the other solver functions in this 
-% toolbox.
-%% Single-Step Methods
+%% Technical Documentation
+% Click <https://tamaskis.github.io/documentation/Fixed-Step_ODE_Solvers.pdf here>.
+%% Methology
+% All of the ODE solvers in this toolbox are implemented so that they can
+% be used individually without relying on any other function. Additionally,
+% all of the ODE solvers support both "time detection" (solving until some
+% final time) _and_ "event detection" (solving until some event occurs).
+%% Installation
+% The toolbox can be downloaded from <TODO: file exchange link> or 
+% <TODO: github link>.
+% The downloaded zip folder contains the following:
+%
+% * *docs* → Contains the HTML documentation. To open a copy of the HTML
+% documentation locally on your computer (without need of an internet
+% connection), open docs/index.html.
+% * *INSTALL* → Contains the toolbox installer (ODE Solver Toolbox.mltbx).
+% * *licenses* → Contains the software licenses.
+% * *README.md* → Markdown documentation for GitHub repository.
+% * *Technical Documentation* → Contains the technical documentation (Fixed_Step_ODE_Solvers.pdf).
+% * *tests* → Code for unit tests.
+% * *toolbox* → Contains all the functions specific to this toolbox.
+% * *toolbox/lib* → External libraries/functions required by this toolbox.
+%
+% *To install as a toolbox*, simply open "ODE Solver Toolbox.mltbx" in the 
+% "INSTALL" folder. MATLAB will automatically perform the installation and 
+% add all the functions included in the toolbox to the MATLAB search path.
+%
+% Alternatively, all the functions in the "toolbox/rungekutta", 
+% "toolbox/adamsbashforthmoulton", and "toolbox/adamsbashforth" folders can
+% be used independently.
+%% Explicit Runge-Kutta (Single-Step) Methods
 % * <euler_doc.html *|euler|*> Euler method (1st-order).
 % * <RK2_doc.html *|RK2|*> Midpoint method (2nd-order).
 % * <RK2_heun_doc.html *|RK2_heun|*> Heun's second-order method (2nd-order).
@@ -20,13 +45,15 @@
 % * <RK4_doc.html *|RK4|*> (Classic) Runge-Kutta fourth-order method (4th-order).
 % * <RK4_ralston_doc.html *|RK4_ralston|*> Ralston's fourth-order method (4th-order).
 % * <RK4_38_doc.html *|RK4_38|*> 3/8-Rule fourth-order method (4th-order).
-%% Multistep Predictor Methods
-%% Multistep Predictor-Corrector Methods
+%% Adams-Bashforth (Multistep Predictor) Methods
+%% Adams-Bashforth-Moulton (Multistep Predictor-Corrector) Methods
 % * <ABM8_doc.html *|ABM8|*> Adams-Bashforth-Moulton 8th-order method.
 %% Generating ODE Solver Equations
-% * <AB_coefficients_doc.html *|AB_coefficients|*> Coefficients for the nth-order Adams-Bashforth predictor.
-% * <AM_coefficients_doc.html *|AM_coefficients|*> Coefficients for the nth-order Adams-Moulton corrector.
-% * <AB_predictor_doc.html *|AB_predictor|*> nth-order Adams-Bashforth predictor.
-% * <AM_corrector_doc.html *|AM_corrector|*> nth-order Adams-Moulton corrector.
-% * <ABM_equations_doc.html *|ABM_equations|*> nth-order Adams-Bashforth-Moulton equations.
+% * <AB_coefficients_doc.html *|AB_coefficients|*> Coefficients for the mth-order Adams-Bashforth predictor.
+% * <AM_coefficients_doc.html *|AM_coefficients|*> Coefficients for the mth-order Adams-Moulton corrector.
+% * <AB_predictor_doc.html *|AB_predictor|*> mth-order Adams-Bashforth predictor.
+% * <AM_corrector_doc.html *|AM_corrector|*> mth-order Adams-Moulton corrector.
+% * <ABM_equations_doc.html *|ABM_equations|*> mth-order Adams-Bashforth-Moulton equations.
 % * <tableau2eqns_doc.html *|tableau2eqns|*> Propagation equations from Butcher tableau for explicit Runge-Kutta methods.
+%% External Libraries
+% * <https://www.mathworks.com/matlabcentral/fileexchange/95618-convert-fractions-to-same-denominator-same_denominator *|same_denominator|*> Scales a set of fractions so they each have the same denominator.

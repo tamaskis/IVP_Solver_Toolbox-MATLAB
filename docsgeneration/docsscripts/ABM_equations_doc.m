@@ -1,23 +1,26 @@
 %% |ABM_equations|
-% nth-order Adams-Bashforth-Moulton equations.
+% mth-order Adams-Bashforth-Moulton equations.
 % 
 % <index.html Back to ODE Solver Toolbox Contents>.
 %% Syntax
-%   ABM_equations(n)
+%   ABM_equations(m)
+%% Description
+% |ABM_equations(m)| prints the mth-order Adams-Bashforth-Moulton
+% predictor-corrector equations to the Command Window.
 %% Input/Output Parameters
 % <html>
 %   <table border=1>
 %       <tr>
 %           <td></td>
-%           <td style="text-align:center"><b>Symbol</b></td>
 %           <td style="text-align:center"><b>Variable</b></td>
+%           <td style="text-align:center"><b>Symbol</b></td>
 %           <td style="text-align:center"><b>Description</b></td>
 %           <td style="text-align:center"><b>Format</b></td>
 %       </tr>
 %       <tr>
 %           <td style="text-align:center"><b>Input</b></td>
-%           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;n" title="n" /></td>
-%           <td><TT>n</TT></td>
+%           <td style="text-align:center"><TT>m</TT></td>
+%           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;m" title="m" /></td>
 %           <td>order of Adams-Bashforth-Moulton method</td>
 %           <td style="text-align:center">1×1<BR>double</td>
 %       </tr>
@@ -43,4 +46,4 @@ ABM_equations(8);
 % <AB_coefficients_doc.html |AB_coefficients|> | 
 % <AM_coefficients_doc.html |AM_coefficients|> | 
 % <ABM_equations_doc.html |AB_predictor|> | 
-% <AM_corrector_doc.html |AM_corrector|> | 
+% <AM_corrector_doc.html |AM_corrector|>

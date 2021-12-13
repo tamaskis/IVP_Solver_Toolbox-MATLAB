@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>tableau2eqns</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-10-09"><meta name="DC.source" content="tableau2eqns_doc.m"><style type="text/css">
+      --><title>tableau2eqns</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-12-12"><meta name="DC.source" content="tableau2eqns_doc.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -67,124 +67,124 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1><tt>tableau2eqns</tt></h1><!--introduction--><p>Propagation equations from Butcher tableau.</p><p><a href="index.html">Back to ODE Solver Toolbox Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Input/Output Parameters</a></li><li><a href="#3">Example #1: RK2 (Midpoint method)</a></li><li><a href="#4">Example #2: RK2 (Heun's method)</a></li><li><a href="#5">Example #3: (Ralston's method)</a></li><li><a href="#6">Example #4: (Kutta's third-order method)</a></li><li><a href="#7">Example #5: (Heun's third-order method)</a></li><li><a href="#8">Example #6: (Ralston's third-order method)</a></li><li><a href="#9">Example #7: (Strong Stability Preserving Runge-Kutta third-order method)</a></li><li><a href="#10">Example #8: (Runge-Kutta fourth-order method)</a></li><li><a href="#11">Example #9: (Ralston's fourth-order method)</a></li><li><a href="#12">Example #10: (3/8-Rule fourth-order method)</a></li></ul></div><h2 id="1">Syntax</h2><pre class="language-matlab">tableau2eqns(T)
+  </style></head><body><div class="content"><h1><tt>tableau2eqns</tt></h1><!--introduction--><p>Propagation equations from Butcher tableau.</p><p><a href="index.html">Back to ODE Solver Toolbox Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#5">Input/Output Parameters</a></li><li><a href="#6">Example #1: RK2 (Midpoint method)</a></li><li><a href="#7">Example #2: RK2 (Heun's method)</a></li><li><a href="#8">Example #3: (Ralston's method)</a></li><li><a href="#9">Example #4: (Kutta's third-order method)</a></li><li><a href="#10">Example #5: (Heun's third-order method)</a></li><li><a href="#11">Example #6: (Ralston's third-order method)</a></li><li><a href="#12">Example #7: (Strong Stability Preserving Runge-Kutta third-order method)</a></li><li><a href="#13">Example #8: (Runge-Kutta fourth-order method)</a></li><li><a href="#14">Example #9: (Ralston's fourth-order method)</a></li><li><a href="#15">Example #10: (3/8-Rule fourth-order method)</a></li></ul></div><h2 id="1">Syntax</h2><pre class="language-matlab">tableau2eqns(T)
 tableau2eqns(T,name)
 tableau2eqns(__,<span class="string">'decimal'</span>)
-</pre><h2 id="2">Input/Output Parameters</h2><p>
+</pre><h2 id="2">Description</h2><p><tt>tableau2eqns(T)</tt> prints the propagation equations corresponding to a Butcher Tableau defined by <tt>T</tt> to the Command Window.</p><p><tt>tableau2eqns(T,name)</tt> does the same as the syntax above, but labels the equations with the name specified by <tt>name</tt>.</p><p><tt>tableau2eqns(,'decimal')</tt> does the same as the syntaxes above, but writes the coefficients of the propagation equations in decimal form.</p><h2 id="5">Input/Output Parameters</h2><p>
   <table border=1>
       <tr>
           <td></td>
-          <td style="text-align:center"><b>Symbol</b></td>
           <td style="text-align:center"><b>Variable</b></td>
+          <td style="text-align:center"><b>Symbol</b></td>
           <td style="text-align:center"><b>Description</b></td>
           <td style="text-align:center"><b>Format</b></td>
       </tr>
       <tr>
           <td rowspan="3" style="text-align:center"><b>Input</b></td>
+          <td style="text-align:center"><TT>T</TT></td>
           <td style="text-align:center">-</td>
-          <td><TT>T</TT></td>
           <td>Butcher tableau</td>
-          <td style="text-align:center">1×FIX SIZE<BR>double</td>
+          <td style="text-align:center">(s+1)×(s+1)<BR>double</td>
       </tr>
       <tr>
+          <td style="text-align:center"><TT>name</TT></td>
           <td style="text-align:center">-</td>
-          <td><TT>name</TT></td>
           <td>(OPTIONAL) name of Runge-Kutta method corresponding to the Butcher tableau</td>
-          <td style="text-align:center">string</td>
+          <td style="text-align:center">1×1<BR>string</td>
       </tr>
       <tr>
+          <td style="text-align:center"><TT>type</TT></td>
           <td style="text-align:center">-</td>
-          <td><TT>type</TT></td>
           <td>(OPTIONAL) print coefficients as <TT>'decimal'</TT> or <TT>'fraction'</TT> (defaults to <TT>'fraction'</TT>)</td>
           <td style="text-align:center">char</td>
       </tr>
   </table>
-</p><h2 id="3">Example #1: RK2 (Midpoint method)</h2><pre class="codeinput">T = [0    0    0;
+</p><p><b>NOTE:</b> s = number of stages of the explicit Runge-Kutta method</p><h2 id="6">Example #1: RK2 (Midpoint method)</h2><pre class="codeinput">T = [0    0    0;
      1/2  1/2  0;
      0    0    1];
 tableau2eqns(T,<span class="string">"RK2 (Midpoint method)"</span>);
 </pre><pre class="codeoutput">RK2 (Midpoint method)
 ---------------------
-k1 = f(t(i), y(i))
-k2 = f(t(i) + h/2, y(i) + h*k1/2)
-y(i+1) = y(i) + h(k2)
+k1 = f(t(n), y(n))
+k2 = f(t(n) + h/2, y(n) + h*k1/2)
+y(n+1) = y(n) + h(k2)
 
 
-</pre><h2 id="4">Example #2: RK2 (Heun's method)</h2><pre class="codeinput">T = [0  0    0;
+</pre><h2 id="7">Example #2: RK2 (Heun's method)</h2><pre class="codeinput">T = [0  0    0;
      1  1    0;
      0  1/2  1/2];
 tableau2eqns(T,<span class="string">"RK2 (Heun's method)"</span>);
 </pre><pre class="codeoutput">RK2 (Heun's method)
 -------------------
-k1 = f(t(i), y(i))
-k2 = f(t(i) + h, y(i) + h*k1)
-y(i+1) = y(i) + (h/2)(k1 + k2)
+k1 = f(t(n), y(n))
+k2 = f(t(n) + h, y(n) + h*k1)
+y(n+1) = y(n) + (h/2)(k1 + k2)
 
 
-</pre><h2 id="5">Example #3: (Ralston's method)</h2><pre class="codeinput">T = [0    0    0;
+</pre><h2 id="8">Example #3: (Ralston's method)</h2><pre class="codeinput">T = [0    0    0;
      2/3  2/3  0;
      0    1/4  3/4];
 tableau2eqns(T,<span class="string">"RK2 (Ralston's method)"</span>);
 </pre><pre class="codeoutput">RK2 (Ralston's method)
 ----------------------
-k1 = f(t(i), y(i))
-k2 = f(t(i) + 2h/3, y(i) + 2h*k1/3)
-y(i+1) = y(i) + (h/4)(k1 + 3k2)
+k1 = f(t(n), y(n))
+k2 = f(t(n) + 2h/3, y(n) + 2h*k1/3)
+y(n+1) = y(n) + (h/4)(k1 + 3k2)
 
 
-</pre><h2 id="6">Example #4: (Kutta's third-order method)</h2><pre class="codeinput">T = [0     0    0    0;
+</pre><h2 id="9">Example #4: (Kutta's third-order method)</h2><pre class="codeinput">T = [0     0    0    0;
      1/2   1/2  0    0;
      1    -1    2    0;
      0     1/6  2/3  1/6];
 tableau2eqns(T,<span class="string">"RK3 (Kutta's third-order method)"</span>);
 </pre><pre class="codeoutput">RK3 (Kutta's third-order method)
 --------------------------------
-k1 = f(t(i), y(i))
-k2 = f(t(i) + h/2, y(i) + h*k1/2)
-k3 = f(t(i) + h, y(i) - h*k1 + 2h*k2)
-y(i+1) = y(i) + (h/6)(k1 + 4k2 + k3)
+k1 = f(t(n), y(n))
+k2 = f(t(n) + h/2, y(n) + h*k1/2)
+k3 = f(t(n) + h, y(n) - h*k1 + 2h*k2)
+y(n+1) = y(n) + (h/6)(k1 + 4k2 + k3)
 
 
-</pre><h2 id="7">Example #5: (Heun's third-order method)</h2><pre class="codeinput">T = [0    0    0    0;
+</pre><h2 id="10">Example #5: (Heun's third-order method)</h2><pre class="codeinput">T = [0    0    0    0;
      1/3  1/3  0    0;
      2/3  0    2/3  0;
      0    1/4  0    3/4];
 tableau2eqns(T,<span class="string">"RK3 (Heun's third-order method)"</span>);
 </pre><pre class="codeoutput">RK3 (Heun's third-order method)
 -------------------------------
-k1 = f(t(i), y(i))
-k2 = f(t(i) + h/3, y(i) + h*k1/3)
-k3 = f(t(i) + 2h/3, y(i) + 2h*k2/3)
-y(i+1) = y(i) + (h/4)(k1 + 3k3)
+k1 = f(t(n), y(n))
+k2 = f(t(n) + h/3, y(n) + h*k1/3)
+k3 = f(t(n) + 2h/3, y(n) + 2h*k2/3)
+y(n+1) = y(n) + (h/4)(k1 + 3k3)
 
 
-</pre><h2 id="8">Example #6: (Ralston's third-order method)</h2><pre class="codeinput">T = [0    0    0    0;
+</pre><h2 id="11">Example #6: (Ralston's third-order method)</h2><pre class="codeinput">T = [0    0    0    0;
      1/2  1/2  0    0;
      3/4  0    3/4  0;
      0    2/9  1/3  4/9];
 tableau2eqns(T,<span class="string">"RK3 (Ralston's third-order method)"</span>);
 </pre><pre class="codeoutput">RK3 (Ralston's third-order method)
 ----------------------------------
-k1 = f(t(i), y(i))
-k2 = f(t(i) + h/2, y(i) + h*k1/2)
-k3 = f(t(i) + 3h/4, y(i) + 3h*k2/4)
-y(i+1) = y(i) + (h/9)(2k1 + 3k2 + 4k3)
+k1 = f(t(n), y(n))
+k2 = f(t(n) + h/2, y(n) + h*k1/2)
+k3 = f(t(n) + 3h/4, y(n) + 3h*k2/4)
+y(n+1) = y(n) + (h/9)(2k1 + 3k2 + 4k3)
 
 
-</pre><h2 id="9">Example #7: (Strong Stability Preserving Runge-Kutta third-order method)</h2><pre class="codeinput">T = [0    0     0    0;
+</pre><h2 id="12">Example #7: (Strong Stability Preserving Runge-Kutta third-order method)</h2><pre class="codeinput">T = [0    0     0    0;
      1    1     0    0;
      1/2  1/4   1/4  0;
      0    1/6   1/6  2/3];
 tableau2eqns(T,<span class="string">"SSPRK3 (Strong Stability Preserving Runge-Kutta third-order method)"</span>);
 </pre><pre class="codeoutput">SSPRK3 (Strong Stability Preserving Runge-Kutta third-order method)
 -------------------------------------------------------------------
-k1 = f(t(i), y(i))
-k2 = f(t(i) + h, y(i) + h*k1)
-k3 = f(t(i) + h/2, y(i) + h*k1/4 + h*k2/4)
-y(i+1) = y(i) + (h/6)(k1 + k2 + 4k3)
+k1 = f(t(n), y(n))
+k2 = f(t(n) + h, y(n) + h*k1)
+k3 = f(t(n) + h/2, y(n) + h*k1/4 + h*k2/4)
+y(n+1) = y(n) + (h/6)(k1 + k2 + 4k3)
 
 
-</pre><h2 id="10">Example #8: (Runge-Kutta fourth-order method)</h2><pre class="codeinput">T = [0     0     0    0    0;
+</pre><h2 id="13">Example #8: (Runge-Kutta fourth-order method)</h2><pre class="codeinput">T = [0     0     0    0    0;
      1/2   1/2   0    0    0;
      1/2   0     1/2  0    0;
      1     0     0    1    0;
@@ -192,14 +192,14 @@ y(i+1) = y(i) + (h/6)(k1 + k2 + 4k3)
 tableau2eqns(T,<span class="string">"RK4 (Runge-Kutta fourth-order method)"</span>);
 </pre><pre class="codeoutput">RK4 (Runge-Kutta fourth-order method)
 -------------------------------------
-k1 = f(t(i), y(i))
-k2 = f(t(i) + h/2, y(i) + h*k1/2)
-k3 = f(t(i) + h/2, y(i) + h*k2/2)
-k4 = f(t(i) + h, y(i) + h*k3)
-y(i+1) = y(i) + (h/6)(k1 + 2k2 + 2k3 + k4)
+k1 = f(t(n), y(n))
+k2 = f(t(n) + h/2, y(n) + h*k1/2)
+k3 = f(t(n) + h/2, y(n) + h*k2/2)
+k4 = f(t(n) + h, y(n) + h*k3)
+y(n+1) = y(n) + (h/6)(k1 + 2k2 + 2k3 + k4)
 
 
-</pre><h2 id="11">Example #9: (Ralston's fourth-order method)</h2><pre class="codeinput">T = [0           0            0             0            0;
+</pre><h2 id="14">Example #9: (Ralston's fourth-order method)</h2><pre class="codeinput">T = [0           0            0             0            0;
      0.4         0.4          0             0            0;
      0.45573725  0.29697761   0.15875964    0            0;
      1           0.21810040  -3.05096516    3.83286476   0;
@@ -207,14 +207,14 @@ y(i+1) = y(i) + (h/6)(k1 + 2k2 + 2k3 + k4)
 tableau2eqns(T,<span class="string">"RK4 (Ralston's fourth-order method)"</span>,<span class="string">'decimal'</span>);
 </pre><pre class="codeoutput">RK4 (Ralston's fourth-order method)
 -----------------------------------
-k1 = f(t(i), y(i))
-k2 = f(t(i) + 0.40000000h, y(i) + 0.40000000h*k1)
-k3 = f(t(i) + 0.45573725h, y(i) + 0.29697761h*k1 + 0.15875964h*k2)
-k4 = f(t(i) + h, y(i) + 0.21810040h*k1 - 3.05096516h*k2 + 3.83286476h*k3)
-y(i+1) = y(i) + h(0.17476028k1 - 0.55148066k2 + 1.20553560k3 + 0.17118478k4)
+k1 = f(t(n), y(n))
+k2 = f(t(n) + 0.40000000h, y(n) + 0.40000000h*k1)
+k3 = f(t(n) + 0.45573725h, y(n) + 0.29697761h*k1 + 0.15875964h*k2)
+k4 = f(t(n) + h, y(n) + 0.21810040h*k1 - 3.05096516h*k2 + 3.83286476h*k3)
+y(n+1) = y(n) + h(0.17476028k1 - 0.55148066k2 + 1.20553560k3 + 0.17118478k4)
 
 
-</pre><h2 id="12">Example #10: (3/8-Rule fourth-order method)</h2><pre class="codeinput">T = [0     0     0    0    0;
+</pre><h2 id="15">Example #10: (3/8-Rule fourth-order method)</h2><pre class="codeinput">T = [0     0     0    0    0;
      1/3   1/3   0    0    0;
      2/3  -1/3   1    0    0;
      1     1    -1    1    0;
@@ -222,14 +222,14 @@ y(i+1) = y(i) + h(0.17476028k1 - 0.55148066k2 + 1.20553560k3 + 0.17118478k4)
 tableau2eqns(T,<span class="string">"3/8-Rule fourth-order method"</span>);
 </pre><pre class="codeoutput">3/8-Rule fourth-order method
 ----------------------------
-k1 = f(t(i), y(i))
-k2 = f(t(i) + h/3, y(i) + h*k1/3)
-k3 = f(t(i) + 2h/3, y(i) - h*k1/3 + h*k2)
-k4 = f(t(i) + h, y(i) + h*k1 - h*k2 + h*k3)
-y(i+1) = y(i) + (h/8)(k1 + 3k2 + 3k3 + k4)
+k1 = f(t(n), y(n))
+k2 = f(t(n) + h/3, y(n) + h*k1/3)
+k3 = f(t(n) + 2h/3, y(n) - h*k1/3 + h*k2)
+k4 = f(t(n) + h, y(n) + h*k1 - h*k2 + h*k3)
+y(n+1) = y(n) + (h/8)(k1 + 3k2 + 3k3 + k4)
 
 
-</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2021a</a><br></p></div><!--
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2021b</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% |tableau2eqns|
 % Propagation equations from Butcher tableau.
@@ -239,37 +239,48 @@ y(i+1) = y(i) + (h/8)(k1 + 3k2 + 3k3 + k4)
 %   tableau2eqns(T)
 %   tableau2eqns(T,name)
 %   tableau2eqns(__,'decimal')
+%% Description
+% |tableau2eqns(T)| prints the propagation equations corresponding to a
+% Butcher Tableau defined by |T| to the Command Window.
+%%
+% |tableau2eqns(T,name)| does the same as the syntax above, but labels the
+% equations with the name specified by |name|.
+%%
+% |tableau2eqns(__,'decimal')| does the same as the syntaxes above, but
+% writes the coefficients of the propagation equations in decimal form.
 %% Input/Output Parameters
 % <html>
 %   <table border=1>
 %       <tr>
 %           <td></td>
-%           <td style="text-align:center"><b>Symbol</b></td>
 %           <td style="text-align:center"><b>Variable</b></td>
+%           <td style="text-align:center"><b>Symbol</b></td>
 %           <td style="text-align:center"><b>Description</b></td>
 %           <td style="text-align:center"><b>Format</b></td>
 %       </tr>
 %       <tr>
 %           <td rowspan="3" style="text-align:center"><b>Input</b></td>
+%           <td style="text-align:center"><TT>T</TT></td>
 %           <td style="text-align:center">-</td>
-%           <td><TT>T</TT></td>
 %           <td>Butcher tableau</td>
-%           <td style="text-align:center">1×FIX SIZE<BR>double</td>
+%           <td style="text-align:center">(s+1)×(s+1)<BR>double</td>
 %       </tr>
 %       <tr>
+%           <td style="text-align:center"><TT>name</TT></td>
 %           <td style="text-align:center">-</td>
-%           <td><TT>name</TT></td>
 %           <td>(OPTIONAL) name of Runge-Kutta method corresponding to the Butcher tableau</td>
-%           <td style="text-align:center">string</td>
+%           <td style="text-align:center">1×1<BR>string</td>
 %       </tr>
 %       <tr>
+%           <td style="text-align:center"><TT>type</TT></td>
 %           <td style="text-align:center">-</td>
-%           <td><TT>type</TT></td>
 %           <td>(OPTIONAL) print coefficients as <TT>'decimal'</TT> or <TT>'fraction'</TT> (defaults to <TT>'fraction'</TT>)</td>
 %           <td style="text-align:center">char</td>
 %       </tr>
 %   </table>
 % </html>
+%
+% *NOTE:* s = number of stages of the explicit Runge-Kutta method
 %% Example #1: RK2 (Midpoint method)
 T = [0    0    0;
      1/2  1/2  0;

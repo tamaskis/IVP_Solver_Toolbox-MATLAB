@@ -6,37 +6,48 @@
 %   tableau2eqns(T)
 %   tableau2eqns(T,name)
 %   tableau2eqns(__,'decimal')
+%% Description
+% |tableau2eqns(T)| prints the propagation equations corresponding to a
+% Butcher Tableau defined by |T| to the Command Window.
+%%
+% |tableau2eqns(T,name)| does the same as the syntax above, but labels the
+% equations with the name specified by |name|.
+%%
+% |tableau2eqns(__,'decimal')| does the same as the syntaxes above, but
+% writes the coefficients of the propagation equations in decimal form.
 %% Input/Output Parameters
 % <html>
 %   <table border=1>
 %       <tr>
 %           <td></td>
-%           <td style="text-align:center"><b>Symbol</b></td>
 %           <td style="text-align:center"><b>Variable</b></td>
+%           <td style="text-align:center"><b>Symbol</b></td>
 %           <td style="text-align:center"><b>Description</b></td>
 %           <td style="text-align:center"><b>Format</b></td>
 %       </tr>
 %       <tr>
 %           <td rowspan="3" style="text-align:center"><b>Input</b></td>
+%           <td style="text-align:center"><TT>T</TT></td>
 %           <td style="text-align:center">-</td>
-%           <td><TT>T</TT></td>
 %           <td>Butcher tableau</td>
-%           <td style="text-align:center">1×FIX SIZE<BR>double</td>
+%           <td style="text-align:center">(s+1)×(s+1)<BR>double</td>
 %       </tr>
 %       <tr>
+%           <td style="text-align:center"><TT>name</TT></td>
 %           <td style="text-align:center">-</td>
-%           <td><TT>name</TT></td>
 %           <td>(OPTIONAL) name of Runge-Kutta method corresponding to the Butcher tableau</td>
-%           <td style="text-align:center">string</td>
+%           <td style="text-align:center">1×1<BR>string</td>
 %       </tr>
 %       <tr>
+%           <td style="text-align:center"><TT>type</TT></td>
 %           <td style="text-align:center">-</td>
-%           <td><TT>type</TT></td>
 %           <td>(OPTIONAL) print coefficients as <TT>'decimal'</TT> or <TT>'fraction'</TT> (defaults to <TT>'fraction'</TT>)</td>
 %           <td style="text-align:center">char</td>
 %       </tr>
 %   </table>
 % </html>
+%
+% *NOTE:* s = number of stages of the explicit Runge-Kutta method
 %% Example #1: RK2 (Midpoint method)
 T = [0    0    0;
      1/2  1/2  0;
