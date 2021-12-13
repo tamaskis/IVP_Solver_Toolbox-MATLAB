@@ -8,7 +8,7 @@
 %   [t,y] = RK4_ralston(__,wb)
 %
 % See also euler, RK2, RK2_heun, RK2_ralston, RK3, RK3_heun, RK3_ralston, 
-% SSPRK3, RK4, RK4_ralston, RK4_38.
+% SSPRK3, RK4, RK4_38.
 %
 % Copyright © 2021 Tamas Kis
 % Last Update: 2021-12-12

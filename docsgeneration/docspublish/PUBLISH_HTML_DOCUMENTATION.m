@@ -22,17 +22,17 @@ code_folders = ["../../toolbox"];
 % specific .m documentation files that should be published
 %   --> define as "[]" if you want to publish all .m documentation files
 %mfiles = ["index.m"];
-mfiles = ["ABM4_doc.m"];
+%mfiles = ["ABM4_doc.m"];
 %mfiles = ["ABM8_doc.m"];
 %mfiles = ["AM_coefficients_doc.m"];
-%mfiles = [];
+mfiles = [];
 
 % specific image files that should be published
 %   --> define as "[]" if you want to publish all image files
 imagefiles = [];
 
 % true if contents of "docs" folder should be deleted, false otherwise
-delete_docs = false;
+delete_docs = true;
 
 
 

@@ -6,7 +6,7 @@
 %   [t,y] = RK3(f,{t0,C},y0,h)
 %   [t,y] = RK3(__,wb)
 %
-% See also euler, RK2, RK2_heun, RK2_ralston, RK3, RK3_heun, RK3_ralston, 
+% See also euler, RK2, RK2_heun, RK2_ralston, RK3_heun, RK3_ralston,
 % SSPRK3, RK4, RK4_ralston, RK4_38.
 %
 % Copyright © 2021 Tamas Kis
