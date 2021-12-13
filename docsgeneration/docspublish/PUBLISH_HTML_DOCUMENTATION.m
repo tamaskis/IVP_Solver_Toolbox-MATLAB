@@ -24,15 +24,15 @@ code_folders = ["../../toolbox"];
 %mfiles = ["index.m"];
 %mfiles = ["ABM4_doc.m"];
 %mfiles = ["ABM8_doc.m"];
-%mfiles = ["AM_coefficients_doc.m"];
-mfiles = [];
+mfiles = ["RK4_38_step_doc.m","index.m"];
+%mfiles = [];
 
 % specific image files that should be published
 %   --> define as "[]" if you want to publish all image files
 imagefiles = [];
 
 % true if contents of "docs" folder should be deleted, false otherwise
-delete_docs = true;
+delete_docs = false;
 
 
 

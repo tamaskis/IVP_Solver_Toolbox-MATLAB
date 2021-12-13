@@ -24,8 +24,8 @@
 % ------
 % INPUT:
 % ------
-%   f       - (1×1 function_handle) dy/dt = f(t,y) --> function defining
-%             ODE (f:R×Rp->Rp)
+%   f       - (1×1 function_handle) dy/dt = f(t,y) --> multivariate, 
+%             vector-valued function (f:R×Rp->Rp) defining ODE
 %   t       - (1×1 double) current sample time
 %   y       - (p×1 double) state (i.e. solution) at current sample time, t
 %   h       - (1×1 double) step size

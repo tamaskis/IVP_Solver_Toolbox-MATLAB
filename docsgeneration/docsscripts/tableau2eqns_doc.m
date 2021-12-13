@@ -13,7 +13,7 @@
 % |tableau2eqns(T,name)| does the same as the syntax above, but labels the
 % equations with the name specified by |name|.
 %%
-% |tableau2eqns(__,'decimal')| does the same as the syntaxes above, but
+% |tableau2eqns(...,'decimal')| does the same as the syntaxes above, but
 % writes the coefficients of the propagation equations in decimal form.
 %% Input/Output Parameters
 % <html>

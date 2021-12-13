@@ -14,6 +14,11 @@
 % |[t,y] = RK3_heun(f,{t0,C},y0,h)| does the same as the syntax above, but
 % instead of terminating at a final time |tf|, the solver terminates once
 % the condition function |C(t,y)| is no longer satisfied.
+%%
+% |[t,y] = RK3_heun(...,wb)| can be used with either of the syntaxes above
+% to define a waitbar. If |wb| is input as |true|, then a waitbar is 
+% displayed with the default message 'Solving ODE...'. To specify a custom 
+% waitbar message, input |wb| as a char array storing the desired message.
 %% Input/Output Parameters
 % <html>
 %   <table border=1>
@@ -28,7 +33,7 @@
 %           <td rowspan="7" style="text-align:center"><b>Input</b></td>
 %           <td style="text-align:center"><TT>f</TT></td>
 %           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{f}(t,\mathbf{y})" title="" /></td>
-%           <td>multivariate, vector-valued function (<img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{f}:\mathbb{R}\times\mathbb{R}^{p}\rightarrow\mathbb{R}^{p}" title="" />) defining the ordinary differential equation
+%           <td>multivariate, vector-valued function (<img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{f}:\mathbb{R}\times\mathbb{R}^{p}\rightarrow\mathbb{R}^{p}" title="" />) defining the ordinary differential equation defining the ordinary differential equation <img src="https://latex.codecogs.com/svg.latex?\inline&space;\frac{d\mathbf{y}}{dt}=\mathbf{f}(t,\mathbf{y})" title="" />
 %               <BR> - inputs to <TT>f</TT> are the current time (<TT>t</TT>, 1×1 double) and the current state vector (<TT>y</TT>, p×1 double)
 %               <BR> - output of <TT>f</TT> is the state vector derivative (<TT>ydot</TT>, p×1 double) at the current time/state</td>
 %           <td style="text-align:center">1×1<BR>function_handle</td>
@@ -145,7 +150,7 @@ zlabel('$z$','Interpreter','latex','FontSize',18);
 %% Example #2: Event detection.
 % _Consider the initial value problem_
 %
-% $$\frac{dy}{dx}=y,\quad y(2)=3$$
+% $$\frac{dy}{dt}=y,\quad y(2)=3$$
 %
 % _Find the solution $y(t)$ until $y=10$._
 %
@@ -172,7 +177,7 @@ ylabel('$y$','Interpreter','latex','FontSize',18);
 % _Consider the same ODE as in Example #2, but we are now given its value
 % at $t=20$._
 %
-% $$\frac{dy}{dx}=y,\quad y(20)=50$$
+% $$\frac{dy}{dt}=y,\quad y(20)=50$$
 %
 % _Find $y(10)$. Then, confirm your result by solving the same ODE from
 % $t=10$ to $t=20$, using $y(10)$ as the initial condition._
@@ -199,7 +204,7 @@ y20 = y(end)
 %% Example #4: Backward integration (event-detection case).
 % _Once again, consider_ 
 %
-% $$\frac{dy}{dx}=y,\quad y(20)=50$$
+% $$\frac{dy}{dt}=y,\quad y(20)=50$$
 %
 % _Find $y(10)$ using an ODE solver with a condition function (i.e. event-detection)._
 %%
