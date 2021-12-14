@@ -1,16 +1,16 @@
 %==========================================================================
 %
-% euler_step  Propagates the state vector forward one time step using the
-% Euler method.
+% RK1_euler_step  Propagates the state vector forward one time step using
+% the Euler (1st-order) method.
 %
-%   y_next = euler_step(f,t,y,h)
+%   y_next = RK1_euler_step(f,t,y,h)
 %
 % See also RK2_step, RK2_heun_step, RK2_ralston_step, RK3_step,
 % RK3_heun_step, RK3_ralston_step, SSPRK3_step, RK4_step, RK4_ralston_step,
 % RK4_38_step.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2021-12-12
+% Last Update: 2021-12-14
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
@@ -42,6 +42,6 @@
 %   --> p = dimension of state vector (for the scalar case, p = 1)
 %
 %==========================================================================
-function y_next = euler_step(f,t,y,h)
+function y_next = RK1_euler_step(f,t,y,h)
     y_next = y+h*f(t,y);
 end

@@ -8,7 +8,7 @@
 %   tableau2eqns(__,'decimal')
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2021-12-12
+% Last Update: 2021-12-14
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %

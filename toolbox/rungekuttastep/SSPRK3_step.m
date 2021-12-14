@@ -1,15 +1,16 @@
 %==========================================================================
 %
-% RK2_heun_step  Propagates the state vector forward one time step using
-% Heun's second-order method (Runge-Kutta second-order method).
+% SSPRK3_step  Propagates the state vector forward one time step using 
+% the strong stability preserving Runge-Kutta third-order method.
 %
-%   y_next = RK2_heun_step(f,t,y,h)
+%   y_next = SSPRK3_step(f,t,y,h)
 %
-% See also euler_step, RK2_step, RK2_ralston_step, RK3_step, RK3_heun_step,
-% RK3_ralston_step, SSPRK3_step, RK4_step, RK4_ralston_step, RK4_38_step.
+% See also RK1_euler_step, RK2_step, RK2_heun_step, RK2_ralston_step,
+% RK3_step, RK3_heun_step, RK3_ralston_step, RK4_step, RK4_ralston_step,
+% RK4_38_step.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2021-12-12
+% Last Update: 2021-12-14
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
@@ -18,7 +19,6 @@
 %
 % REFERENCES:
 %   [1] https://en.wikipedia.org/wiki/List_of_Runge-Kutta_methods
-%   [2] https://en.wikipedia.org/wiki/Runge-Kutta_methods
 %
 %--------------------------------------------------------------------------
 %
@@ -42,13 +42,14 @@
 %   --> p = dimension of state vector (for the scalar case, p = 1)
 %
 %==========================================================================
-function y_next = RK2_heun_step(f,t,y,h)
+function y_next = SSPRK3_step(f,t,y,h)
     
     % k terms
     k1 = f(t,y);
     k2 = f(t+h,y+h*k1);
+    k3 = f(t+h/2,y+h*k1/4+h*k2/4);
     
     % state vector propogated to next sample time
-    y_next = y+(h/2)*(k1+k2);
+    y_next = y+(h/6)*(k1+k2+4*k3);
     
 end

@@ -1,16 +1,16 @@
 %==========================================================================
 %
-% euler  Euler method (1st-order).
+% RK1_euler  Euler (1st-order) method.
 %
-%   [t,y] = euler(f,[t0,tf],y0,h)
-%   [t,y] = euler(f,{t0,C},y0,h)
-%   [t,y] = euler(__,wb)
+%   [t,y] = RK1_euler(f,[t0,tf],y0,h)
+%   [t,y] = RK1_euler(f,{t0,C},y0,h)
+%   [t,y] = RK1_euler(__,wb)
 %
 % See also RK2, RK2_heun, RK2_ralston, RK3, RK3_heun, RK3_ralston, SSPRK3, 
 % RK4, RK4_ralston, RK4_38.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2021-12-12
+% Last Update: 2021-12-14
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
@@ -56,7 +56,7 @@
 %       chosen to match the convention used by MATLAB's ODE suite.
 %
 %==========================================================================
-function [t,y] = euler(f,I,y0,h,wb)
+function [t,y] = RK1_euler(f,I,y0,h,wb)
     
     % -------------------
     % Setting up waitbar.

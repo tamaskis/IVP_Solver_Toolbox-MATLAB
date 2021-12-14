@@ -5,11 +5,12 @@
 %
 %   y_next = RK4_ralston_step(f,t,y,h)
 %
-% See also euler_step, RK2_step, RK2_heun_step, RK2_ralston_step, RK3_step,
-% RK3_heun_step, RK3_ralston_step, SSPRK3_step, RK4_step, RK4_38_step.
+% See also RK1_euler_step, RK2_step, RK2_heun_step, RK2_ralston_step,
+% RK3_step, RK3_heun_step, RK3_ralston_step, SSPRK3_step, RK4_step,
+% RK4_38_step.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2021-12-12
+% Last Update: 2021-12-14
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %

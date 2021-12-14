@@ -229,7 +229,7 @@ y10 = y(end)
 %% 
 % Note that this is the same result we obtained earlier in Example #3.
 %% See also
-% <euler_doc.html |euler|> | 
+% <RK1_euler_doc.html |RK1_euler|> | 
 % <RK2_doc.html |RK2|> | 
 % <RK2_heun_doc.html |RK2_heun|> | 
 % <RK2_ralston_doc.html |RK2_ralston|> |

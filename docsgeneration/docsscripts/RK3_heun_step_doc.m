@@ -98,7 +98,7 @@ max(abs(y_RK3_heun-y))
 %%
 % As expected, the two methods obtain identical results.
 %% See also
-% <euler_step_doc.html |euler_step|> | 
+% <RK1_euler_step_doc.html |RK1_euler_step|> | 
 % <RK2_step_doc.html |RK2_step|> | 
 % <RK2_heun_step_doc.html |RK2_heun_step|> | 
 % <RK2_ralston_step_doc.html |RK2_ralston_step|> |

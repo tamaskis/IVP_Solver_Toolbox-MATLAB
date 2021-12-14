@@ -1,9 +1,10 @@
-%% example_return_extra
-% Example of returning extra parameters from an ODE solution.
+%% example_return_extra.m
 % ODE Solver Toolbox
 %
+% Example of returning extra parameters from an ODE solution.
+%
 % Copyright © 2021 Tamas Kis
-% Last Update: 2021-12-13
+% Last Update: 2021-12-14
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 
@@ -22,7 +23,8 @@ clear; clc; close all;
 f = @(t,y) f_extra(t,y,5);
 
 % solve ODE
-y0 = [1;1];
+y0 = [1;
+      1];
 t0 = 0;
 tf = 10;
 [t,y] = ode45(f,[t0,tf],y0);
@@ -37,10 +39,10 @@ end
 figure;
 plot(t,x,'linewidth',1.5);
 grid on;
-xlabel('$t$','interpreter','latex','fontsize',18);
-ylabel('$x$','interpreter','latex','fontsize',18);
+xlabel('$t$','Interpreter','latex','FontSize',18);
+ylabel('$x$','Interpreter','latex','FontSize',18);
 
-% local function must be declared at end
+% MATLAB function must be declared at end
 function [f,x] = f_extra(t,y,a)
     x = 2*a-5*t;
     f = x*y;

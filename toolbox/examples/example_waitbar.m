@@ -1,8 +1,10 @@
-%% example_waitbar
+%% example_waitbar.m
+% ODE Solver Toolbox
+%
 % Examples demonstrating how to use waitbar.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2021-10-29
+% Last Update: 2021-12-14
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 

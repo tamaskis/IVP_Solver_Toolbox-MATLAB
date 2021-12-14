@@ -1,29 +1,24 @@
 %==========================================================================
 %
-% ode_mat2vec  Transforms a matrix-valued differential equation into a
-% vector-valued differential equation.
+% ode_mat2vec  Transforms a matrix-valued ODE into a vector-valued ODE.
 %
 %   ydot = odefun_mat2vec(F,t,y)
 %   ydot = odefun_mat2vec(F,t,y,n)
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2021-12-13
+% Last Update: 2021-12-14
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
 % TECHNICAL DOCUMENTATION:
-% https://tamaskis.github.io/documentation/Riccati_Differential_Equation.pdf
-%
-% REFERENCES:
-%   [1] https://www.mathworks.com/matlabcentral/answers/94722-how-can-i-solve-the-matrix-riccati-differential-equation-within-matlab
-%   [2] https://en.wikipedia.org/wiki/Linear%E2%80%93quadratic_regulator#Finite-horizon,_continuous-time_LQR
+% https://tamaskis.github.io/documentation/Fixed_Step_ODE_Solvers.pdf
 %
 %--------------------------------------------------------------------------
 %
 % ------
 % INPUT:
 % ------
-%   F       - (1×1 function_handle) dY/dt = F(t,Y) --> multivariate, 
+%   F       - (1×1 function_handle) dM/dt = F(t,M) --> multivariate, 
 %             matrix-valued function (f:R×R(p×q)->R(p×q)) defining ODE
 %   t       - (1×1 double) current time
 %   y       - (pq×1 double) state vector at current time
@@ -32,26 +27,29 @@
 % -------
 % OUTPUT:
 % -------
-%   ydot    - (pq×1 double) state vector derivative
+%   dydt    - (pq×1 double) state vector derivative
 %
 %==========================================================================
-function ydot = odefun_mat2vec(F,t,y,p)
+function dydt = odefun_mat2vec(F,t,y,p)
     
-    % determine state dimension if not input (assuming a Y is square)
+    % state dimension
+    pq = size(y,2);
+
+    % determine "p" if not input (assuming M is square)
     if nargin < 4
         p = sqrt(length(y));
     end
 
-    % determines q, where Y is a p×q matrix
-    q = length(y)/p;
+    % determines q
+    q = pq/p;
     
     % reshapes pq×1 state vector into p×q state matrix
-    Y = reshape(y,[p,q]);
+    M = reshape(y,[p,q]);
 
-    % evaluates matrix ODE
-    Ydot = F(t,Y);
+    % evaluates matrix-valued ODE
+    dMdt = F(t,M);
     
     % reshapes p×q state matrix derivative into pq×1 state vector deriv.
-    ydot = Ydot(:);
+    dydt = dMdt(:);
     
 end

@@ -1,11 +1,12 @@
-%% |euler_step|
-% Propagates the state vector forward one time step using the Euler method.
+%% |RK1_euler_step|
+% Propagates the state vector forward one time step using the Euler
+% (1st-order) method.
 % 
 % <index.html Back to ODE Solver Toolbox Contents>.
 %% Syntax
-%   y_next = euler_step(f,t,y,h)
+%   y_next = RK1_euler_step(f,t,y,h)
 %% Description
-% |y_next = euler_step(f,t,y,h)| returns the state vector at the next 
+% |y_next = RK1_euler_step(f,t,y,h)| returns the state vector at the next 
 % sample time, |y_next|, given the current state vector |y| at time |t|,
 % the function |f(t,y)| defining the ODE 
 % $\dot{\mathbf{y}}=\mathbf{f}(t,\mathbf{y})$, and the step size |h|.
@@ -86,11 +87,11 @@ y(1) = y2;
 
 % solving using "euler_step"
 for i = 1:(length(t)-1)
-    y(i+1) = euler_step(f,t(i),y(i),h);
+    y(i+1) = RK1_euler_step(f,t(i),y(i),h);
 end
 
 % solving using "euler"
-[t_euler,y_euler] = euler(f,[2,10],y2,h);
+[t_euler,y_euler] = RK1_euler(f,[2,10],y2,h);
 
 % maximum absolute error between the two results
 max(abs(y_euler-y))

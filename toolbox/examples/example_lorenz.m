@@ -1,9 +1,11 @@
-%% example_lorenz
+%% example_lorenz.m
+% ODE Solver Toolbox
+%
 % Example simulating the Lorenz system. This script is also used to create 
 % the thumbnail image for the ODE solver toolbox.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2021-10-29
+% Last Update: 2021-12-14
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 

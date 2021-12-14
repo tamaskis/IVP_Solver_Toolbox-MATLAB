@@ -9,7 +9,7 @@
 % See also AB2, AB3, AB4, AB5, AB6, AB8.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2021-12-12
+% Last Update: 2021-12-14
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
@@ -122,7 +122,7 @@ function [t,y] = AB7(f,I,y0,h,wb)
         tN = t0+N*h;
         
         % defines time vector, preallocates solution matrix, and 
-        % preallocates array to store last m function evaluations
+        % preallocates matrix to store previous m function evaluations
         t = (t0:h:tN)';
         y = zeros(length(y0),length(t));
         fm = zeros(length(y0),m);
@@ -188,7 +188,7 @@ function [t,y] = AB7(f,I,y0,h,wb)
     else
 
         % preallocates time vector, solution matrix, and array to store 
-        % last m function evaluations
+        % previous m function evaluations
         t = zeros(10000,1);
         y = zeros(length(y0),length(t));
         fm = zeros(length(y0),m);
@@ -218,6 +218,11 @@ function [t,y] = AB7(f,I,y0,h,wb)
 
         end
 
+        % stores function evaluations for first m sample times
+        for n = 1:m
+            fm(:,n) = f(t(n),y(:,n));
+        end
+        
         % state vector propagation while condition is satisfied
         n = m;
         while C(t(n),y(:,n))

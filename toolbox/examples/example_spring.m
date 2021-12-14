@@ -1,9 +1,10 @@
-%% example_brute_force
-% Example of a "brute force" method for solving ODEs.
+%% example_brute_force.m
 % ODE Solver Toolbox
 %
+% Example of a "brute force" method for solving ODEs.
+%
 % Copyright © 2021 Tamas Kis
-% Last Update: 2021-12-13
+% Last Update: 2021-12-14
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 

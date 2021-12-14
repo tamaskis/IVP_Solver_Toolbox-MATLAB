@@ -1,15 +1,16 @@
 %==========================================================================
 %
-% RK3_heun_step  Propagates the state vector forward one time step using 
-% Heun's third-order method (Runge-Kutta third-order method).
+% RK2_step  Propagates the state vector forward one time step using the
+% midpoint method (Runge-Kutta second-order method).
 %
-%   y_next = RK3_heun_step(f,t,y,h)
+%   y_next = RK2_step(f,t,y,h)
 %
-% See also euler_step, RK2_step, RK2_heun_step, RK2_ralston_step, RK3_step,
-% RK3_ralston_step, SSPRK3_step, RK4_step, RK4_ralston_step, RK4_38_step.
+% See also RK1_euler_step, RK2_heun_step, RK2_ralston_step, RK3_step,
+% RK3_heun_step, RK3_ralston_step, SSPRK3_step, RK4_step, RK4_ralston_step,
+% RK4_38_step.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2021-12-12
+% Last Update: 2021-12-14
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
@@ -17,10 +18,8 @@
 % https://tamaskis.github.io/documentation/Fixed_Step_ODE_Solvers.pdf
 %
 % REFERENCES:
-%   [1] Burden and Faires, "Numerical Analysis", 9th Ed. (p. 287)
-%   [2] Griffiths and Higham, "Numerical Methods for Ordinary Differential 
-%       Equations: Initial Value Problems" (pp. 129-131)
-%   [3] https://en.wikipedia.org/wiki/List_of_Runge-Kutta_methods
+%   [1] https://en.wikipedia.org/wiki/List_of_Runge-Kutta_methods
+%   [2] https://en.wikipedia.org/wiki/Runge-Kutta_methods
 %
 %--------------------------------------------------------------------------
 %
@@ -44,14 +43,13 @@
 %   --> p = dimension of state vector (for the scalar case, p = 1)
 %
 %==========================================================================
-function y_next = RK3_heun_step(f,t,y,h)
+function y_next = RK2_step(f,t,y,h)
     
     % k terms
     k1 = f(t,y);
-    k2 = f(t+h/3,y+h*k1/3);
-    k3 = f(t+2*h/3,y+2*h*k2/3);
+    k2 = f(t+h/2,y+h*k1/2);
     
     % state vector propogated to next sample time
-    y_next = y+(h/4)*(k1+3*k3);
+    y_next = y+h*k2;
     
 end

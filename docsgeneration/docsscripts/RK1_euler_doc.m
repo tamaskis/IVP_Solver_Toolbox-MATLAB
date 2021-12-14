@@ -1,24 +1,24 @@
-%% |euler|
+%% |RK1_euler|
 % Euler (1st-order) method.
 % 
 % <index.html Back to ODE Solver Toolbox Contents>.
 %% Syntax
-%   [t,y] = euler(f,[t0,tf],y0,h)
-%   [t,y] = euler(f,{t0,C},y0,h)
-%   [t,y] = euler(__,wb)
+%   [t,y] = RK1_euler(f,[t0,tf],y0,h)
+%   [t,y] = RK1_euler(f,{t0,C},y0,h)
+%   [t,y] = RK1_euler(__,wb)
 %% Description
-% |[t,y] = euler(f,[t0,tf],y0,h)| solves the ODE defined by |f(t,y)| from 
-% |t0| until |tf| using the Euler method with an initial condition |y0| and
-% step size |h|.
+% |[t,y] = RK1_euler(f,[t0,tf],y0,h)| solves the ODE defined by |f(t,y)|
+% from |t0| until |tf| using the Euler method with an initial condition 
+% |y0| and step size |h|.
 %%
-% |[t,y] = euler(f,{t0,C},y0,h)| does the same as the syntax above, but
+% |[t,y] = RK1_euler(f,{t0,C},y0,h)| does the same as the syntax above, but
 % instead of terminating at a final time |tf|, the solver terminates once
 % the condition function |C(t,y)| is no longer satisfied.
 %%
-% |[t,y] = euler(...,wb)| can be used with either of the syntaxes above to
-% define a waitbar. If |wb| is input as |true|, then a waitbar is displayed
-% with the default message 'Solving ODE...'. To specify a custom waitbar
-% message, input |wb| as a char array storing the desired message.
+% |[t,y] = RK1_euler(...,wb)| can be used with either of the syntaxes above
+% to define a waitbar. If |wb| is input as |true|, then a waitbar is 
+% displayed with the default message 'Solving ODE...'. To specify a custom
+% waitbar message, input |wb| as a char array storing the desired message.
 %% Input/Output Parameters
 % <html>
 %   <table border=1>
@@ -137,7 +137,7 @@ x0 = [0;
 %%
 % Solving the system for $t$ in the interval $[0,100]$ using a time step 
 % (i.e. step size) of $\Delta t=0.001$,
-[t,x] = euler(f,[0,100],x0,0.001);
+[t,x] = RK1_euler(f,[0,100],x0,0.001);
 %%
 % Plotting the solution,
 figure;
@@ -165,7 +165,7 @@ y2 = 3;
 C = @(t,y) y <= 10;
 %%
 % Solving for $y$ using a step size of $h=0.01$,
-[t,y] = euler(f,{2,C},y2,0.01);
+[t,y] = RK1_euler(f,{2,C},y2,0.01);
 %%
 % Plotting the solution,
 figure;
@@ -190,7 +190,7 @@ f = @(t,y) y;
 y20 = 50;
 %%
 % Solving for $y(t)$ from $t=20$ to $t=10$ using a step size of $h=0.001$,
-[t,y] = euler(f,[20,10],y20,0.001);
+[t,y] = RK1_euler(f,[20,10],y20,0.001);
 %%
 % The solution for $y$ corresponding to $t=10$ will be located at the last
 % element of the solution matrix, since $t=10$ is stored in the last
@@ -199,7 +199,7 @@ y10 = y(end)
 %%
 % Confirming our result by solving the same ODE but from $t=10$ to $t=20$
 % and using our result for $y(10)$ as the initial condition,
-[t,y] = euler(f,[10,20],y10,0.001);
+[t,y] = RK1_euler(f,[10,20],y10,0.001);
 y20 = y(end)
 %% Example #4: Backward integration (event-detection case).
 % _Once again, consider_ 
@@ -224,7 +224,7 @@ C = @(t,y) t > 10;
 % solver won't know to use a negative step size to integrate backwards in
 % time. Therefore, we must manually specify a negative step size. Solving
 % for $y(10)$,
-[t,y] = euler(f,{20,C},y20,-0.001);
+[t,y] = RK1_euler(f,{20,C},y20,-0.001);
 y10 = y(end)
 %% 
 % Note that this is the same result we obtained earlier in Example #3.
