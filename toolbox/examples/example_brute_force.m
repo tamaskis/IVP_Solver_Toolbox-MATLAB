@@ -1,8 +1,9 @@
-%% example_brute_force
+%% example_brute_force.m
 % Example of a "brute force" method for solving ODEs.
+% ODE Solver Toolbox
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2021-10-29
+% Last Update: 2021-12-13
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 
@@ -17,54 +18,61 @@ clear; clc; close all;
 
 %% SOLUTION
 
-% parameters
-b = 5;          % damping constant [N.s/m]
-k = 1;          % spring constant [N/m]
-m = 2;          % mass [kg]
-x0 = 1;         % initial position [m]
-dx0 = 0;        % initial velocity [m/s]
+% car parameters
+m = 1500;       % mass [kg]
+A = 2.5;        % cross-sectional area [m^2]
+CD = 0.25;      % drag coefficient [-]
+F_eng = 4500;   % applied force [N]
 
-% forcing function
-F = @(t) cos(pi*t);
+% IVP parameters
+x0 = 0;         % initial position [m]
+v0 = 0;         % initial velocity [m/s]
+xf = 300;       % final position [m]
 
-% initial condition
-y0 = [x0;dx0];
+% physical parameters
+rho = 1.2;      % air density [kg/m^3]
 
-% differential equation
-f = @(t,y) [y(2);-(b/m)*y(2)-(k/m)*y(1)+(1/m)*F(t)];
+% computational parameters
+dt = 0.1;       % time step [s]
 
+% preallocate arrays
+t = zeros(10000,1);
+x = zeros(size(t));
+v = zeros(size(t));
+a = zeros(size(t));
 
-
-%% ALTERNATE SOLUTION
-
-% parameters
-b = 5;          % damping constant [N.s/m]
-k = 1;          % spring constant [N/m]
-m = 2;          % mass [kg]
-x0 = 1;         % initial position [m]
-dx0 = 0;        % initial velocity [m/s]
-
-% forcing function
-F = @(t) cos(pi*t);
-
-% initial condition
-y0 = [x0;dx0];
-
-% assigns function handle to differential equation
-f = @(t,y) f_extra(t,y,b,k,m,F);
-
-% defines differential equation
-function dy = f_extra(t,y,b,k,m,F)
-
-    % unpacks state vector
-    x = y(1);
-    xdot = y(2);
+% solves initial value problem
+n = 1;
+while x(n) < xf
     
-    % preallocates state vector derivative
-    dy = zeros(size(y));
+    % calculates drag force [N]
+    FD = 0.5*CD*A*rho*v(n)^2;
     
-    % assembles state vector derivative
-    dy(1) = xdot;
-    dy(2) = -(b/m)*xdot-(k/m)*x+(1/m)*F(t);
+    % calculates acceleration [m/s^2]
+    a(n) = (F_eng-FD)/m;
+    
+    % integrates acceleration to find velocity [m/s]
+    v(n+1) = v(n)+a(n)*dt;
+    
+    % integrates velocity to find position [m]
+    x(n+1) = x(n)+v(n)*dt;
+    
+    % increments loop index
+    n = n+1;
     
 end
+    
+% trims arrays
+t = t(1:(n-1));
+x = x(1:(n-1));
+v = v(1:(n-1));
+a = a(1:(n-1));
+
+% velocity and acceleration of car when position is x = 300 m
+v300 = v(end);
+a300 = a(end);
+
+% prints results
+fprintf("    velocity = %.3f m/s\n",v300)
+fprintf("acceleration = %.3f m/s^2\n",a300)
+fprintf("  drag force = %.3f N\n\n",FD)

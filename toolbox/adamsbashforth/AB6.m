@@ -130,8 +130,8 @@ function [t,y] = AB6(f,I,y0,h,wb)
         % stores initial condition in solution matrix
         y(:,1) = y0;
         
-        % propagating state vector using RK4 for first "m" sample times
-        for n = 1:m
+        % propagating state vector using RK4 until mth sample time
+        for n = 1:(m-1)
 
             % current sample time and state vector
             tn = t(n);
@@ -145,7 +145,7 @@ function [t,y] = AB6(f,I,y0,h,wb)
 
             % state vector propagated to next sample time
             y(:,n+1) = yn+(h/6)*(k1+2*k2+2*k3+k4);
-            
+
             % updates waitbar
             if display_waitbar, prop = update_waitbar(n,N,wb,prop); end
 
@@ -200,8 +200,8 @@ function [t,y] = AB6(f,I,y0,h,wb)
         t(1) = t0;
         y(:,1) = y0;
         
-        % propagating state vector using RK4 for first m sample times
-        for n = 1:m
+        % propagating state vector using RK4 until mth sample time
+        for n = 1:(m-1)
 
             % current sample time and state vector
             tn = t(n);
@@ -218,8 +218,13 @@ function [t,y] = AB6(f,I,y0,h,wb)
 
         end
 
+        % stores function evaluations for first m sample times
+        for n = 1:m
+            fm(:,n) = f(t(n),y(:,n));
+        end
+
         % state vector propagation while condition is satisfied
-        n = m;
+        n = m-1;
         while C(t(n),y(:,n))
         
             % expands t and y if needed

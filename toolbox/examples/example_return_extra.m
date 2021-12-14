@@ -1,8 +1,9 @@
 %% example_return_extra
 % Example of returning extra parameters from an ODE solution.
+% ODE Solver Toolbox
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2021-10-29
+% Last Update: 2021-12-13
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 
