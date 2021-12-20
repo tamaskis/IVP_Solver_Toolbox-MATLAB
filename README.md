@@ -55,13 +55,13 @@ This toolbox supplies functions to evaluate derivatives, partial derivatives, gr
 `RK3_ralston_step`\
 `SSPRK3_step`\
 `RK4_step`\
-`RK4_ralston_step`\
+`RK4_ralston_step`
 
 
 ## Tools for Matrix-Valued ODEs
 `odefun_mat2vec`\
 `odeIC_mat2vec`\
-`odesol_vec2mat`\
+`odesol_vec2mat`
 
 
 ## Generating ODE Solver Equations
@@ -71,4 +71,3 @@ This toolbox supplies functions to evaluate derivatives, partial derivatives, gr
 `AM_correrctor`\
 `ABM_equations`\
 `tableau2eqns`
-`RK4_38`
