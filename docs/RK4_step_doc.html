@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>RK4_step</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-12-13"><meta name="DC.source" content="RK4_step_doc.m"><style type="text/css">
+      --><title>RK4_step</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-12-20"><meta name="DC.source" content="RK4_step_doc.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -85,7 +85,7 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
           src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{f}:\mathbb{R}\times\mathbb{R}^{p}\rightarrow\mathbb{R}^{p}"
           title="" />) defining the ordinary differential equation <img src="https://latex.codecogs.com/svg.latex?\inline&space;\frac{d\mathbf{y}}{dt}=\mathbf{f}(t,\mathbf{y})" title="" />
               <BR> - inputs to <TT>f</TT> are the current time (<TT>t</TT>, 1×1 double) and the current state vector (<TT>y</TT>, p×1 double)
-              <BR> - output of <TT>f</TT> is the state vector derivative (<TT>ydot</TT>, p×1 double) at the current time/state</td>
+              <BR> - output of <TT>f</TT> is the state vector derivative (<TT>dydt</TT>, p×1 double) at the current time/state</td>
           <td style="text-align:center">1×1<BR>function_handle</td>
       </tr>
       <tr>
@@ -139,7 +139,7 @@ ans =
 
      0
 
-</pre><p>As expected, the two methods obtain identical results.</p><h2 id="8">See also</h2><p><a href="euler_step_doc.html"><tt>euler_step</tt></a> | <a href="RK2_step_doc.html"><tt>RK2_step</tt></a> | <a href="RK2_heun_step_doc.html"><tt>RK2_heun_step</tt></a> | <a href="RK2_ralston_step_doc.html"><tt>RK2_ralston_step</tt></a> | <a href="RK3_step_doc.html"><tt>RK3_step</tt></a> | <a href="RK3_heun_step_doc.html"><tt>RK3_heun_step</tt></a> | <a href="RK3_ralston_step_doc.html"><tt>RK3_ralston_step</tt></a> | <a href="SSPRK3_step_doc.html"><tt>SSPRK3_step</tt></a> | <a href="RK4_ralston_step_doc.html"><tt>RK4_ralston_step</tt></a> | <a href="RK4_38_step_doc.html"><tt>RK4_38_step</tt></a></p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2021b</a><br></p></div><!--
+</pre><p>As expected, the two methods obtain identical results.</p><h2 id="8">See also</h2><p><a href="RK1_euler_step_doc.html"><tt>RK1_euler_step</tt></a> | <a href="RK2_step_doc.html"><tt>RK2_step</tt></a> | <a href="RK2_heun_step_doc.html"><tt>RK2_heun_step</tt></a> | <a href="RK2_ralston_step_doc.html"><tt>RK2_ralston_step</tt></a> | <a href="RK3_step_doc.html"><tt>RK3_step</tt></a> | <a href="RK3_heun_step_doc.html"><tt>RK3_heun_step</tt></a> | <a href="RK3_ralston_step_doc.html"><tt>RK3_ralston_step</tt></a> | <a href="SSPRK3_step_doc.html"><tt>SSPRK3_step</tt></a> | <a href="RK4_ralston_step_doc.html"><tt>RK4_ralston_step</tt></a> | <a href="RK4_38_step_doc.html"><tt>RK4_38_step</tt></a></p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2021b</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% |RK4_step|
 % Propagates the state vector forward one time step using the (classic) 
@@ -171,7 +171,7 @@ ans =
 %           src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{f}:\mathbb{R}\times\mathbb{R}^{p}\rightarrow\mathbb{R}^{p}"
 %           title="" />) defining the ordinary differential equation <img src="https://latex.codecogs.com/svg.latex?\inline&space;\frac{d\mathbf{y}}{dt}=\mathbf{f}(t,\mathbf{y})" title="" />
 %               <BR> - inputs to <TT>f</TT> are the current time (<TT>t</TT>, 1×1 double) and the current state vector (<TT>y</TT>, p×1 double)
-%               <BR> - output of <TT>f</TT> is the state vector derivative (<TT>ydot</TT>, p×1 double) at the current time/state</td>
+%               <BR> - output of <TT>f</TT> is the state vector derivative (<TT>dydt</TT>, p×1 double) at the current time/state</td>
 %           <td style="text-align:center">1×1<BR>function_handle</td>
 %       </tr>
 %       <tr>
@@ -241,7 +241,7 @@ max(abs(y_RK4-y))
 %%
 % As expected, the two methods obtain identical results.
 %% See also
-% <euler_step_doc.html |euler_step|> | 
+% <RK1_euler_step_doc.html |RK1_euler_step|> | 
 % <RK2_step_doc.html |RK2_step|> | 
 % <RK2_heun_step_doc.html |RK2_heun_step|> | 
 % <RK2_ralston_step_doc.html |RK2_ralston_step|> |

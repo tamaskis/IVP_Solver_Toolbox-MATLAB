@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>AB7</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-12-13"><meta name="DC.source" content="AB7_doc.m"><style type="text/css">
+      --><title>AB7</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-12-20"><meta name="DC.source" content="AB7_doc.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -83,9 +83,9 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
           <td rowspan="7" style="text-align:center"><b>Input</b></td>
           <td style="text-align:center"><TT>f</TT></td>
           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{f}(t,\mathbf{y})" title="" /></td>
-          <td>multivariate, vector-valued function (<img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{f}:\mathbb{R}\times\mathbb{R}^{p}\rightarrow\mathbb{R}^{p}" title="" />) defining the ordinary differential equation defining the ordinary differential equation <img src="https://latex.codecogs.com/svg.latex?\inline&space;\frac{d\mathbf{y}}{dt}=\mathbf{f}(t,\mathbf{y})" title="" />
+          <td>multivariate, vector-valued function (<img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{f}:\mathbb{R}\times\mathbb{R}^{p}\rightarrow\mathbb{R}^{p}" title="" />) defining the ordinary differential equation <img src="https://latex.codecogs.com/svg.latex?\inline&space;\frac{d\mathbf{y}}{dt}=\mathbf{f}(t,\mathbf{y})" title="" />
               <BR> - inputs to <TT>f</TT> are the current time (<TT>t</TT>, 1×1 double) and the current state vector (<TT>y</TT>, p×1 double)
-              <BR> - output of <TT>f</TT> is the state vector derivative (<TT>ydot</TT>, p×1 double) at the current time/state</td>
+              <BR> - output of <TT>f</TT> is the state vector derivative (<TT>dydt</TT>, p×1 double) at the current time/state</td>
           <td style="text-align:center">1×1<BR>function_handle</td>
       </tr>
       <tr>
@@ -178,14 +178,14 @@ y20 = 50;
 </pre><pre class="codeoutput">
 y10 =
 
-   0.002269996488124
+    0.0023
 
 </pre><p>Confirming our result by solving the same ODE but from <img src="AB7_doc_eq08325516970591449802.png" alt="$t=10$" style="width:29px;height:8px;"> to <img src="AB7_doc_eq01961946856973312452.png" alt="$t=20$" style="width:29px;height:8px;"> and using our result for <img src="AB7_doc_eq14770085807156189371.png" alt="$y(10)$" style="width:25px;height:11px;"> as the initial condition,</p><pre class="codeinput">[t,y] = AB7(f,[10,20],y10,0.001);
 y20 = y(end)
 </pre><pre class="codeoutput">
 y20 =
 
-  50.000000000000092
+   50.0000
 
 </pre><h2 id="18">Example #4: Backward integration (event-detection case).</h2><p><i>Once again, consider</i></p><p><img src="AB7_doc_eq15707102448259949290.png" alt="$$\frac{dy}{dt}=y,\quad y(20)=50$$" style="width:100px;height:23px;"></p><p><i>Find <img src="AB7_doc_eq14770085807156189371.png" alt="$y(10)$" style="width:25px;height:11px;"> using an ODE solver with a condition function (i.e. event-detection).</i></p><p>First, let's define our ODE (<img src="AB7_doc_eq15749537601348477239.png" alt="$\frac{dy}{dt}=f(t,y)$" style="width:53px;height:15px;">) and initial condition in MATLAB.</p><pre class="codeinput">f = @(t,y) y;
 y20 = 50;
@@ -195,7 +195,7 @@ y10 = y(end)
 </pre><pre class="codeoutput">
 y10 =
 
-   0.002271131675535
+    0.0023
 
 </pre><p>Note that this is the same result we obtained earlier in Example #3.</p><h2 id="23">See also</h2><p><a href="AB2_doc.html"><tt>AB2</tt></a> | <a href="AB3_doc.html"><tt>AB3</tt></a> | <a href="AB4_doc.html"><tt>AB4</tt></a> | <a href="AB5_doc.html"><tt>AB5</tt></a> | <a href="AB6_doc.html"><tt>AB6</tt></a> | <a href="AB8_doc.html"><tt>AB8</tt></a></p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2021b</a><br></p></div><!--
 ##### SOURCE BEGIN #####
@@ -234,9 +234,9 @@ y10 =
 %           <td rowspan="7" style="text-align:center"><b>Input</b></td>
 %           <td style="text-align:center"><TT>f</TT></td>
 %           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{f}(t,\mathbf{y})" title="" /></td>
-%           <td>multivariate, vector-valued function (<img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{f}:\mathbb{R}\times\mathbb{R}^{p}\rightarrow\mathbb{R}^{p}" title="" />) defining the ordinary differential equation defining the ordinary differential equation <img src="https://latex.codecogs.com/svg.latex?\inline&space;\frac{d\mathbf{y}}{dt}=\mathbf{f}(t,\mathbf{y})" title="" />
+%           <td>multivariate, vector-valued function (<img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{f}:\mathbb{R}\times\mathbb{R}^{p}\rightarrow\mathbb{R}^{p}" title="" />) defining the ordinary differential equation <img src="https://latex.codecogs.com/svg.latex?\inline&space;\frac{d\mathbf{y}}{dt}=\mathbf{f}(t,\mathbf{y})" title="" />
 %               <BR> - inputs to <TT>f</TT> are the current time (<TT>t</TT>, 1×1 double) and the current state vector (<TT>y</TT>, p×1 double)
-%               <BR> - output of <TT>f</TT> is the state vector derivative (<TT>ydot</TT>, p×1 double) at the current time/state</td>
+%               <BR> - output of <TT>f</TT> is the state vector derivative (<TT>dydt</TT>, p×1 double) at the current time/state</td>
 %           <td style="text-align:center">1×1<BR>function_handle</td>
 %       </tr>
 %       <tr>

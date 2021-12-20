@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>RK2_ralston</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-12-13"><meta name="DC.source" content="RK2_ralston_doc.m"><style type="text/css">
+      --><title>RK2_ralston</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-12-20"><meta name="DC.source" content="RK2_ralston_doc.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -83,9 +83,9 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
           <td rowspan="7" style="text-align:center"><b>Input</b></td>
           <td style="text-align:center"><TT>f</TT></td>
           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{f}(t,\mathbf{y})" title="" /></td>
-          <td>multivariate, vector-valued function (<img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{f}:\mathbb{R}\times\mathbb{R}^{p}\rightarrow\mathbb{R}^{p}" title="" />) defining the ordinary differential equation defining the ordinary differential equation <img src="https://latex.codecogs.com/svg.latex?\inline&space;\frac{d\mathbf{y}}{dt}=\mathbf{f}(t,\mathbf{y})" title="" />
+          <td>multivariate, vector-valued function (<img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{f}:\mathbb{R}\times\mathbb{R}^{p}\rightarrow\mathbb{R}^{p}" title="" />) defining the ordinary differential equation <img src="https://latex.codecogs.com/svg.latex?\inline&space;\frac{d\mathbf{y}}{dt}=\mathbf{f}(t,\mathbf{y})" title="" />
               <BR> - inputs to <TT>f</TT> are the current time (<TT>t</TT>, 1×1 double) and the current state vector (<TT>y</TT>, p×1 double)
-              <BR> - output of <TT>f</TT> is the state vector derivative (<TT>ydot</TT>, p×1 double) at the current time/state</td>
+              <BR> - output of <TT>f</TT> is the state vector derivative (<TT>dydt</TT>, p×1 double) at the current time/state</td>
           <td style="text-align:center">1×1<BR>function_handle</td>
       </tr>
       <tr>
@@ -197,7 +197,7 @@ y10 =
 
    0.002272271409567
 
-</pre><p>Note that this is the same result we obtained earlier in Example #3.</p><h2 id="23">See also</h2><p><a href="euler_doc.html"><tt>euler</tt></a> | <a href="RK2_doc.html"><tt>RK2</tt></a> | <a href="RK2_heun_doc.html"><tt>RK2_heun</tt></a> | <a href="RK3_doc.html"><tt>RK3</tt></a> | <a href="RK3_heun_doc.html"><tt>RK3_heun</tt></a> | <a href="RK3_ralston_doc.html"><tt>RK3_ralston</tt></a> | <a href="SSPRK3_doc.html"><tt>SSPRK3</tt></a> | <a href="RK4_doc.html"><tt>RK4</tt></a> | <a href="RK4_ralston_doc.html"><tt>RK4_ralston</tt></a> | <a href="RK4_38_doc.html"><tt>RK4_38</tt></a></p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2021b</a><br></p></div><!--
+</pre><p>Note that this is the same result we obtained earlier in Example #3.</p><h2 id="23">See also</h2><p><a href="RK1_euler_doc.html"><tt>RK1_euler</tt></a> | <a href="RK2_doc.html"><tt>RK2</tt></a> | <a href="RK2_heun_doc.html"><tt>RK2_heun</tt></a> | <a href="RK3_doc.html"><tt>RK3</tt></a> | <a href="RK3_heun_doc.html"><tt>RK3_heun</tt></a> | <a href="RK3_ralston_doc.html"><tt>RK3_ralston</tt></a> | <a href="SSPRK3_doc.html"><tt>SSPRK3</tt></a> | <a href="RK4_doc.html"><tt>RK4</tt></a> | <a href="RK4_ralston_doc.html"><tt>RK4_ralston</tt></a> | <a href="RK4_38_doc.html"><tt>RK4_38</tt></a></p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2021b</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% |RK2_ralston|
 % Ralston's second-order method (Runge-Kutta second-order method).
@@ -234,9 +234,9 @@ y10 =
 %           <td rowspan="7" style="text-align:center"><b>Input</b></td>
 %           <td style="text-align:center"><TT>f</TT></td>
 %           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{f}(t,\mathbf{y})" title="" /></td>
-%           <td>multivariate, vector-valued function (<img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{f}:\mathbb{R}\times\mathbb{R}^{p}\rightarrow\mathbb{R}^{p}" title="" />) defining the ordinary differential equation defining the ordinary differential equation <img src="https://latex.codecogs.com/svg.latex?\inline&space;\frac{d\mathbf{y}}{dt}=\mathbf{f}(t,\mathbf{y})" title="" />
+%           <td>multivariate, vector-valued function (<img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{f}:\mathbb{R}\times\mathbb{R}^{p}\rightarrow\mathbb{R}^{p}" title="" />) defining the ordinary differential equation <img src="https://latex.codecogs.com/svg.latex?\inline&space;\frac{d\mathbf{y}}{dt}=\mathbf{f}(t,\mathbf{y})" title="" />
 %               <BR> - inputs to <TT>f</TT> are the current time (<TT>t</TT>, 1×1 double) and the current state vector (<TT>y</TT>, p×1 double)
-%               <BR> - output of <TT>f</TT> is the state vector derivative (<TT>ydot</TT>, p×1 double) at the current time/state</td>
+%               <BR> - output of <TT>f</TT> is the state vector derivative (<TT>dydt</TT>, p×1 double) at the current time/state</td>
 %           <td style="text-align:center">1×1<BR>function_handle</td>
 %       </tr>
 %       <tr>
@@ -430,7 +430,7 @@ y10 = y(end)
 %% 
 % Note that this is the same result we obtained earlier in Example #3.
 %% See also
-% <euler_doc.html |euler|> | 
+% <RK1_euler_doc.html |RK1_euler|> | 
 % <RK2_doc.html |RK2|> | 
 % <RK2_heun_doc.html |RK2_heun|> | 
 % <RK3_doc.html |RK3|> |

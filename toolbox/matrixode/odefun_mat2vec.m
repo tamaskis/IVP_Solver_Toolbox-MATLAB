@@ -1,12 +1,12 @@
 %==========================================================================
 %
-% ode_mat2vec  Transforms a matrix-valued ODE into a vector-valued ODE.
+% odefun_mat2vec  Transforms a matrix-valued ODE into a vector-valued ODE.
 %
-%   ydot = odefun_mat2vec(F,t,y)
-%   ydot = odefun_mat2vec(F,t,y,n)
+%   dydt = odefun_mat2vec(F,t,y)
+%   dydt = odefun_mat2vec(F,t,y,p)
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2021-12-14
+% Last Update: 2021-12-20
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
@@ -19,10 +19,10 @@
 % INPUT:
 % ------
 %   F       - (1×1 function_handle) dM/dt = F(t,M) --> multivariate, 
-%             matrix-valued function (f:R×R(p×q)->R(p×q)) defining ODE
+%             matrix-valued function (F:R×R(p×q)->R(p×q)) defining ODE
 %   t       - (1×1 double) current time
 %   y       - (pq×1 double) state vector at current time
-%   p       - (OPTIONAL) (1×1 double) state dimension
+%   p       - (OPTIONAL) (1×1 double) number of rows of state matrix
 %
 % -------
 % OUTPUT:

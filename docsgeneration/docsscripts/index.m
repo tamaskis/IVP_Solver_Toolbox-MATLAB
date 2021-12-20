@@ -33,20 +33,8 @@
 % Alternatively, all the functions in the "toolbox/rungekutta", 
 % "toolbox/adamsbashforthmoulton", and "toolbox/adamsbashforth" folders can
 % be used independently.
-%% TODO: STEPS
-% * <euler_step_doc.html *|euler_step|*>
-% * <RK2_step_doc.html *|RK2_step|*>
-% * <RK2_heun_step_doc.html *|RK2_heun_step|*>
-% * <RK2_ralston_step_doc.html *|RK2_ralston_step|*>
-% * <RK3_step_doc.html *|RK3_step|*>
-% * <RK3_heun_step_doc.html *|RK3_heun_step|*>
-% * <RK3_ralston_step_doc.html *|RK3_ralston_step|*>
-% * <SSPRK3_step_doc.html *|SSPRK3_step|*>
-% * <RK4_step_doc.html *|RK4_step|*>
-% * <RK4_ralston_step_doc.html *|RK4_ralston_step|*>
-% * <RK4_38_step_doc.html *|RK4_38_step|*>
 %% Explicit Runge-Kutta (Single-Step) Methods
-% * <euler_doc.html *|euler|*> Euler method (1st-order).
+% * <RK1_euler_doc.html *|RK1_euler|*> Euler method (1st-order).
 % * <RK2_doc.html *|RK2|*> Midpoint method (2nd-order).
 % * <RK2_heun_doc.html *|RK2_heun|*> Heun's second-order method (2nd-order).
 % * <RK2_ralston_doc.html *|RK2_ralston|*> Ralston's second-order method (2nd-order).
@@ -56,7 +44,7 @@
 % * <SSPRK3_doc.html *|SSPRK3|*> Strong stability preserving Runge-Kutta third-order method (3rd-order).
 % * <RK4_doc.html *|RK4|*> (Classic) Runge-Kutta fourth-order method (4th-order).
 % * <RK4_ralston_doc.html *|RK4_ralston|*> Ralston's fourth-order method (4th-order).
-% * <RK4_38_doc.html *|RK4_38|*> 3/8-Rule fourth-order method (4th-order).
+% * <RK4_38_doc.html *|RK4_38|*> 3/8-rule fourth-order method (4th-order).
 %% Adams-Bashforth (Multistep Predictor) Methods
 % * <AB2_doc.html *|AB2|*> Adams-Bashforth 2nd-order method.
 % * <AB3_doc.html *|AB3|*> Adams-Bashforth 3rd-order method.
@@ -73,6 +61,22 @@
 % * <ABM6_doc.html *|ABM6|*> Adams-Bashforth-Moulton 6th-order method.
 % * <ABM7_doc.html *|ABM7|*> Adams-Bashforth-Moulton 7th-order method.
 % * <ABM8_doc.html *|ABM8|*> Adams-Bashforth-Moulton 8th-order method.
+%% One-Step Propagation
+% * <RK1_euler_step_doc.html *|RK1_euler_step|*> Propagates the state vector forward one time step using the Euler method (1st-order).
+% * <RK2_step_doc.html *|RK2_step|*> Propagates the state vector forward one time step using the midpoint method (2nd-order).
+% * <RK2_heun_step_doc.html *|RK2_heun_step|*> Propagates the state vector forward one time step using Heun's second-order method (2nd-order).
+% * <RK2_ralston_step_doc.html *|RK2_ralston_step|*> Propagates the state vector forward one time step using Ralston's second-order method (2nd-order).
+% * <RK3_step_doc.html *|RK3_step|*> Propagates the state vector forward one time step using (Kutta's) Runge-Kutta third-order method (3rd-order).
+% * <RK3_heun_step_doc.html *|RK3_heun_step|*> Propagates the state vector forward one time step using Heun's third-order method (3rd-order).
+% * <RK3_ralston_step_doc.html *|RK3_ralston_step|*> Propagates the state vector forward one time step using Ralston's third-order method (3rd-order).
+% * <SSPRK3_step_doc.html *|SSPRK3_step|*> Propagates the state vector forward one time step using the strong stability preserving Runge-Kutta third-order method (3rd-order).
+% * <RK4_step_doc.html *|RK4_step|*> Propagates the state vector forward one time step using the (classic) Runge-Kutta fourth-order method (4th-order).
+% * <RK4_ralston_step_doc.html *|RK4_ralston_step|*> Propagates the state vector forward one time step using Ralston's fourth-order method (4th-order).
+% * <RK4_38_step_doc.html *|RK4_38_step|*> Propagates the state vector forward one time step using the 3/8-rule Runge-Kutta fourth-order method (4th-order).
+%% Tools for Matrix-Valued ODEs
+% * <odefun_mat2vec_doc.html *|odefun_mat2vec|*> Transforms a matrix-valued ODE into a vector-valued ODE.
+% * <odeIC_mat2vec_doc.html *|odeIC_mat2vec|*> Transforms the initial condition for a matrix-valued ODE into the initial condition for the corresponding vector-valued ODE.
+% * <odesol_vec2mat_doc.html *|odesol_vec2mat|*> Transforms the solution matrix for a vector-valued ODE into the solution array for the corresponding matrix-valued ODE.
 %% Generating ODE Solver Equations
 % * <AB_coefficients_doc.html *|AB_coefficients|*> Coefficients for the mth-order Adams-Bashforth predictor.
 % * <AM_coefficients_doc.html *|AM_coefficients|*> Coefficients for the mth-order Adams-Moulton corrector.

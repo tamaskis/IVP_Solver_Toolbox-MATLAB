@@ -1,0 +1,185 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>odefun_mat2vec</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-12-20"><meta name="DC.source" content="odefun_mat2vec_doc.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>odefun_mat2vec</tt></h1><!--introduction--><p>Transforms a matrix-valued ODE into a vector-valued ODE.</p><p><a href="index.html">Back to ODE Solver Toolbox Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#4">Input/Output Parameters</a></li><li><a href="#5">See also</a></li></ul></div><h2 id="1">Syntax</h2><pre class="language-matlab">dydt = odefun_mat2vec(F,t,y)
+dydt = odefun_mat2vec(F,t,y,p)
+</pre><h2 id="2">Description</h2><p><tt>dydt = odefun_mat2vec(F,t,y)</tt> transforms the matrix-valued ODE dM/dt = F(t,M) (where F:R&times;R(p&times;p)-&gt;R(p&times;p) into the vector-valued ODE dy/dt = f(t,y) (where f:R&times;R(p^2)-&gt;R(p^2)). It is assumed that M is a square matrix.</p><p><tt>dydt = odefun_mat2vec(F,t,y,p)</tt> transforms the matrix-valued ODE dM/dt = F(t,M) (where F:R&times;R(p&times;q)-&gt;R(p&times;q) into the vector-valued ODE dy/dt = f(t,y) (where f:R&times;Rpq-&gt;Rpq). <tt>p</tt> specifies the number of rows of <tt>M</tt>.</p><h2 id="4">Input/Output Parameters</h2><p>
+  <table border=1>
+      <tr>
+          <td></td>
+          <td style="text-align:center"><b>Variable</b></td>
+          <td style="text-align:center"><b>Symbol</b></td>
+          <td style="text-align:center"><b>Description</b></td>
+          <td style="text-align:center"><b>Format</b></td>
+      </tr>
+      <tr>
+          <td rowspan="4" style="text-align:center"><b>Input</b></td>
+          <td style="text-align:center"><TT>F</TT></td>
+          <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{F}(t,\mathbf{M})" title="" /></td>
+          <td>multivariate, vector-valued function (<img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{F}:\mathbb{R}\times\mathbb{R}^{p\times q}\rightarrow\mathbb{R}^{p\times q}" title="" />) defining the ordinary differential equation <img src="https://latex.codecogs.com/svg.latex?\inline&space;\frac{d\mathbf{M}}{dt}=\mathbf{f}(t,\mathbf{M})" title="" />
+              <BR> - inputs to <TT>F</TT> are the current time (<TT>t</TT>, 1×1 double) and the current state matrix (<TT>M</TT>, p×q double)
+              <BR> - output of <TT>F</TT> is the state matrix derivative (<TT>dMdt</TT>, p×q double) at the current time/state</td>
+          <td style="text-align:center">1×1<BR>function_handle</td>
+      </tr>
+      <tr>
+          <td style="text-align:center"><TT>t</TT></td>
+          <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;t" title="" /></td>
+          <td>current time</td>
+          <td style="text-align:center">1×1<BR>double</td>
+      </tr>
+      <tr>
+          <td style="text-align:center"><TT>y</TT></td>
+          <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{y}" title="" /></td>
+          <td>state vector at current time</td>
+          <td style="text-align:center">pq×1<BR>double</td>
+      </tr>
+      <tr>
+          <td style="text-align:center"><TT>p</TT></td>
+          <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;p" title="" /></td>
+          <td>(OPTIONAL) number of rows of state matrix</td>
+          <td style="text-align:center">1×1<BR>double</td>
+      </tr>
+      <tr>
+          <td rowspan="1" style="text-align:center"><b>Output</b></td>
+          <td style="text-align:center"><TT>dydt</TT></td>
+          <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\frac{d\mathbf{y}}{dt}" title="" /></td>
+          <td>state vector derivative</td>
+          <td style="text-align:center">pq×1<BR>double</td>
+      </tr>
+  </table>
+</p><h2 id="5">See also</h2><p><a href="odeIC_mat2vec_doc.html"><tt>odeIC_mat2vec</tt></a> | <a href="odesol_vec2mat_doc.html"><tt>odesol_vec2mat</tt></a></p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2021b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |odefun_mat2vec|
+% Transforms a matrix-valued ODE into a vector-valued ODE.
+% 
+% <index.html Back to ODE Solver Toolbox Contents>.
+%% Syntax
+%   dydt = odefun_mat2vec(F,t,y)
+%   dydt = odefun_mat2vec(F,t,y,p)
+%% Description
+% |dydt = odefun_mat2vec(F,t,y)| transforms the matrix-valued ODE 
+% dM/dt = F(t,M) (where F:R×R(p×p)->R(p×p) into the vector-valued ODE
+% dy/dt = f(t,y) (where f:R×R(p^2)->R(p^2)). It is assumed that M is a
+% square matrix.
+%%
+% |dydt = odefun_mat2vec(F,t,y,p)| transforms the matrix-valued ODE 
+% dM/dt = F(t,M) (where F:R×R(p×q)->R(p×q) into the vector-valued ODE
+% dy/dt = f(t,y) (where f:R×Rpq->Rpq). |p| specifies the number of rows of
+% |M|.
+%% Input/Output Parameters
+% <html>
+%   <table border=1>
+%       <tr>
+%           <td></td>
+%           <td style="text-align:center"><b>Variable</b></td>
+%           <td style="text-align:center"><b>Symbol</b></td>
+%           <td style="text-align:center"><b>Description</b></td>
+%           <td style="text-align:center"><b>Format</b></td>
+%       </tr>
+%       <tr>
+%           <td rowspan="4" style="text-align:center"><b>Input</b></td>
+%           <td style="text-align:center"><TT>F</TT></td>
+%           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{F}(t,\mathbf{M})" title="" /></td>
+%           <td>multivariate, vector-valued function (<img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{F}:\mathbb{R}\times\mathbb{R}^{p\times q}\rightarrow\mathbb{R}^{p\times q}" title="" />) defining the ordinary differential equation <img src="https://latex.codecogs.com/svg.latex?\inline&space;\frac{d\mathbf{M}}{dt}=\mathbf{f}(t,\mathbf{M})" title="" />
+%               <BR> - inputs to <TT>F</TT> are the current time (<TT>t</TT>, 1×1 double) and the current state matrix (<TT>M</TT>, p×q double)
+%               <BR> - output of <TT>F</TT> is the state matrix derivative (<TT>dMdt</TT>, p×q double) at the current time/state</td>
+%           <td style="text-align:center">1×1<BR>function_handle</td>
+%       </tr>
+%       <tr>
+%           <td style="text-align:center"><TT>t</TT></td>
+%           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;t" title="" /></td>
+%           <td>current time</td>
+%           <td style="text-align:center">1×1<BR>double</td>
+%       </tr>
+%       <tr>
+%           <td style="text-align:center"><TT>y</TT></td>
+%           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{y}" title="" /></td>
+%           <td>state vector at current time</td>
+%           <td style="text-align:center">pq×1<BR>double</td>
+%       </tr>
+%       <tr>
+%           <td style="text-align:center"><TT>p</TT></td>
+%           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;p" title="" /></td>
+%           <td>(OPTIONAL) number of rows of state matrix</td>
+%           <td style="text-align:center">1×1<BR>double</td>
+%       </tr>
+%       <tr>
+%           <td rowspan="1" style="text-align:center"><b>Output</b></td>
+%           <td style="text-align:center"><TT>dydt</TT></td>
+%           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\frac{d\mathbf{y}}{dt}" title="" /></td>
+%           <td>state vector derivative</td>
+%           <td style="text-align:center">pq×1<BR>double</td>
+%       </tr>
+%   </table>
+% </html>
+%% See also
+% <odeIC_mat2vec_doc.html |odeIC_mat2vec|> | 
+% <odesol_vec2mat_doc.html |odesol_vec2mat|>
+##### SOURCE END #####
+--></body></html>

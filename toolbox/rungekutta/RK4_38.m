@@ -1,6 +1,6 @@
 %==========================================================================
 %
-% RK4_38  3/8-Rule fourth-order method (Runge-Kutta fourth-order method).
+% RK4_38  3/8-rule fourth-order method (Runge-Kutta fourth-order method).
 %
 %   [t,y] = RK4_38(f,[t0,tf],y0,h)
 %   [t,y] = RK4_38(f,{t0,C},y0,h)
@@ -10,7 +10,7 @@
 % RK3_ralston, SSPRK3, RK4, RK4_ralston.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2021-12-14
+% Last Update: 2021-12-20
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
