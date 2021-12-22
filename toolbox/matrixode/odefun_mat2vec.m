@@ -5,6 +5,8 @@
 %   f = odefun_mat2vec(F)
 %   f = odefun_mat2vec(F,p)
 %
+% See also odeIC_mat2vec, odesol_vec2mat.
+%
 % Copyright © 2021 Tamas Kis
 % Last Update: 2021-12-22
 % Website: https://tamaskis.github.io
@@ -31,10 +33,10 @@
 %             corresponding vector-valued ODE
 %
 %==========================================================================
-function f = odefun_mat2vec_new(F,p)
+function f = odefun_mat2vec(F,p)
     
     % assigns function handle to subfunction below that produces the state
-    % vector derivative given the matrix-valued ODE
+    % vector derivative, given the matrix-valued ODE
     if nargin == 2
         f = @(t,y) state_vector_derivative(F,t,y,p);
     else

@@ -3,11 +3,13 @@
 % odesol_vec2mat  Transforms the solution matrix for a vector-valued ODE
 % into the solution array for the corresponding matrix-valued ODE.
 %
-%   Y = odesol_vec2mat(y)
-%   Y = odesol_vec2mat(y,p)
+%   M = odesol_vec2mat(y)
+%   M = odesol_vec2mat(y,p)
+%
+% See also odefun_mat2vec, odeIC_mat2vec.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2021-12-20
+% Last Update: 2021-12-22
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
@@ -19,7 +21,7 @@
 % ------
 % INPUT:
 % ------
-%   y       - ((N+1)×p double) matrix storing time history of state vector
+%   y       - ((N+1)×pq double) matrix storing time history of state vector
 %   p       - (OPTIONAL) (1×1 double) number of rows of state matrix
 %
 % -------

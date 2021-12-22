@@ -55,7 +55,7 @@ T = 5;
 F = @(t,P) -(A.'*P+P*A-(P*B+N)/R*(B.'*P+N.')+Q);
 %%
 % Converting this matrix-valued ODE to a vector-valued ODE,
-f = @(t,y) odefun_mat2vec(F,t,y);
+f = odefun_mat2vec(F);
 %%
 % Note that since $\mathbf{P}$ is a square matrix, we did not have to
 % specify its number of rows for the |odefun_mat2vec| function.

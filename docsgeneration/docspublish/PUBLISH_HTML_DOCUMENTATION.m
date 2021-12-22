@@ -23,7 +23,8 @@ code_folders = ["../../toolbox"];
 %   --> define as "[]" if you want to publish all .m documentation files
 %mfiles = ["index.m"];
 %mfiles = ["ABM4_doc.m"];
-mfiles = ["odefun_mat2vec_doc.m"];
+%mfiles = ["odesol_vec2mat_doc.m"];
+%mfiles = ["odefun_mat2vec_doc.m"];
 %mfiles = ["odeIC_mat2vec_doc.m"];
 %mfiles = ["Matrix_ODE_Example_doc.m"];
 %mfiles = [];

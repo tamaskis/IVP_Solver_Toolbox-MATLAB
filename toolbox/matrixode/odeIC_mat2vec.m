@@ -5,8 +5,10 @@
 %
 %   y0 = odeIC_mat2vec(M0)
 %
+% See also odefun_mat2vec, odesol_vec2mat.
+%
 % Copyright © 2021 Tamas Kis
-% Last Update: 2021-12-20
+% Last Update: 2021-12-22
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %

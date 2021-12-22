@@ -86,7 +86,7 @@
 %       <tr>
 %           <td style="text-align:center"><TT>y</TT></td>
 %           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\mathbf{Y}" title="\mathbf{Y}" /></td>
-%           <td>solution matrix<BR>- the ith row of <TT>y</TT> stores the <i>transpose</i> of the solution corresponding to the ith time in <TT>t</TT> (see below)</td>
+%           <td>solution matrix<BR>- the nth row of <TT>y</TT> stores the <i>transpose</i> of the solution corresponding to the nth time in <TT>t</TT> (see below)</td>
 %           <td style="text-align:center">(N+1)×p<BR>double</td>
 %       </tr>
 %   </table>

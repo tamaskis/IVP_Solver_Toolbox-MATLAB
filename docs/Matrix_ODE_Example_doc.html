@@ -93,7 +93,7 @@ PT = [1   1;
 <span class="comment">% final time</span>
 T = 5;
 </pre><h2 id="4"><tt>odefun_mat2vec</tt></h2><p>Defining the Riccati differential equation (a matrix-valued ODE),</p><pre class="codeinput">F = @(t,P) -(A.'*P+P*A-(P*B+N)/R*(B.'*P+N.')+Q);
-</pre><p>Converting this matrix-valued ODE to a vector-valued ODE,</p><pre class="codeinput">f = @(t,y) odefun_mat2vec(F,t,y);
+</pre><p>Converting this matrix-valued ODE to a vector-valued ODE,</p><pre class="codeinput">f = odefun_mat2vec(F);
 </pre><p>Note that since <img src="Matrix_ODE_Example_doc_eq01284226214242475479.png" alt="$\mathbf{P}$" style="width:8px;height:8px;"> is a square matrix, we did not have to specify its number of rows for the <tt>odefun_mat2vec</tt> function.</p><h2 id="7"><tt>odeIC_mat2vec</tt></h2><p>In this case, we have a final condition at time <img src="Matrix_ODE_Example_doc_eq16373138058832967206.png" alt="$t=T=5$" style="width:47px;height:8px;">, and want to find the initial condition at time <img src="Matrix_ODE_Example_doc_eq02656990568186096865.png" alt="$t=t_{0}=0$" style="width:47px;height:10px;">. To do this, we will integrate backwards using an ODE solver, so the final condition <img src="Matrix_ODE_Example_doc_eq07282847098330546007.png" alt="$\mathbf{P}_{T}$" style="width:14px;height:10px;"> will actually form the initial condition. Therefore, finding the final condition for the corresponding vector-valued ODE,</p><pre class="codeinput">yT = odeIC_mat2vec(PT);
 </pre><p>Note that since <img src="Matrix_ODE_Example_doc_eq01284226214242475479.png" alt="$\mathbf{P}$" style="width:8px;height:8px;"> is a square matrix, we did not have to specify its number of rows for the <tt>odeIC_mat2vec</tt> function.</p><h2 id="9"><tt>odesol_vec2mat</tt></h2><p>First, let's solve the vector-valued ODE for <img src="Matrix_ODE_Example_doc_eq13802958261507554970.png" alt="$\mathbf{y}(t)$" style="width:19px;height:11px;">. Solving the ODE from <img src="Matrix_ODE_Example_doc_eq12231604572696234117.png" alt="$t=T$" style="width:27px;height:8px;"> to <img src="Matrix_ODE_Example_doc_eq00402237798869806649.png" alt="$t=0$" style="width:24px;height:8px;">,</p><pre class="codeinput">[t,y] = ode45(f,[T,0],yT);
 </pre><p>Transforming the solution matrix (<tt>y</tt>) for the vector-valued ODE into the solution <i>array</i> (<tt>P</tt>) for the matrix-valued ODE,</p><pre class="codeinput">P = odesol_vec2mat(y);
@@ -163,7 +163,7 @@ T = 5;
 F = @(t,P) -(A.'*P+P*A-(P*B+N)/R*(B.'*P+N.')+Q);
 %%
 % Converting this matrix-valued ODE to a vector-valued ODE,
-f = @(t,y) odefun_mat2vec(F,t,y);
+f = odefun_mat2vec(F);
 %%
 % Note that since $\mathbf{P}$ is a square matrix, we did not have to
 % specify its number of rows for the |odefun_mat2vec| function.

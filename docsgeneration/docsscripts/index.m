@@ -18,11 +18,11 @@
 % * *docs* → Contains the HTML documentation. To open a copy of the HTML
 % documentation locally on your computer (without need of an internet
 % connection), open docs/index.html.
+% * *examples* → Contains examples for using various functions of the ODE solver toolbox, as well as examples for some more elementary concepts discussed in the <https://tamaskis.github.io/documentation/Fixed-Step_ODE_Solvers.pdf technical documentation>.
 % * *INSTALL* → Contains the toolbox installer (ODE Solver Toolbox.mltbx).
 % * *licenses* → Contains the software licenses.
 % * *README.md* → Markdown documentation for GitHub repository.
 % * *Technical Documentation* → Contains the technical documentation (Fixed_Step_ODE_Solvers.pdf).
-% * *tests* → Code for unit tests.
 % * *toolbox* → Contains all the functions specific to this toolbox.
 % * *toolbox/lib* → External libraries/functions required by this toolbox.
 %
@@ -30,9 +30,10 @@
 % "INSTALL" folder. MATLAB will automatically perform the installation and 
 % add all the functions included in the toolbox to the MATLAB search path.
 %
-% Alternatively, all the functions in the "toolbox/rungekutta", 
-% "toolbox/adamsbashforthmoulton", and "toolbox/adamsbashforth" folders can
-% be used independently.
+% Alternatively, all the functions in the "toolbox" folder can be used
+% independently, _with the exception_ of the functions in the
+% "toolbox/generatingequations" folder, which require the
+% |same_denominator| function in "toolbox/lib".
 %% Explicit Runge-Kutta (Single-Step) Methods
 % * <RK1_euler_doc.html *|RK1_euler|*> Euler method (1st-order).
 % * <RK2_doc.html *|RK2|*> Midpoint method (2nd-order).
