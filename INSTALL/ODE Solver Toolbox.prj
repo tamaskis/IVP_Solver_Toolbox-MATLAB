@@ -7,7 +7,7 @@
     <param.summary>Collection of fixed-step ODE solvers, functions to generate ODE solver equations, and functions for transforming matrix ODEs to vector ODEs.</param.summary>
     <param.description>See documentation at https://tamaskis.github.io/ODE_Solver_Toolbox-MATLAB/.</param.description>
     <param.screenshot>/Users/tamaskis/Documents/Code/MATLAB/toolboxes/ODE_Solver_Toolbox-MATLAB/local/MATLAB Central File Exchange Picture.png</param.screenshot>
-    <param.version>1.0.0</param.version>
+    <param.version>1.0.1</param.version>
     <param.output>${PROJECT_ROOT}/ODE Solver Toolbox.mltbx</param.output>
     <param.products.name />
     <param.products.id />
