@@ -2,7 +2,7 @@
 % Wrapper script to publish HTML documentation.
 %
 % Author: Tamas Kis
-% Last Update: 2021-10-29
+% Last Update: 2021-12-22
 
 
 
@@ -24,7 +24,8 @@ code_folders = ["../../toolbox"];
 %mfiles = ["index.m"];
 %mfiles = ["ABM4_doc.m"];
 mfiles = ["odefun_mat2vec_doc.m"];
-%mfiles = ["RK4_38_step_doc.m","index.m"];
+%mfiles = ["odeIC_mat2vec_doc.m"];
+%mfiles = ["Matrix_ODE_Example_doc.m"];
 %mfiles = [];
 
 % specific image files that should be published

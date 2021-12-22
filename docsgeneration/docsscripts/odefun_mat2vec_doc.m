@@ -5,16 +5,26 @@
 %% Syntax
 %   dydt = odefun_mat2vec(F,t,y)
 %   dydt = odefun_mat2vec(F,t,y,p)
+%   f = @(t,y) odefun_mat2vec(__)
 %% Description
 % |dydt = odefun_mat2vec(F,t,y)| transforms the matrix-valued ODE 
-% dM/dt = F(t,M) (where F:R×R(p×p)->R(p×p) into the vector-valued ODE
-% dy/dt = f(t,y) (where f:R×R(p^2)->R(p^2)). It is assumed that M is a
-% square matrix.
+% $d\mathbf{M}/dt=\mathbf{F}(t,\mathbf{M})$ (where 
+% $\mathbf{F}:\mathrm{R}\times\mathrm{R}^{p\times p}\to\mathrm{R}^{p\times p}$
+% into the vector-valued ODE $d\mathbf{y}/dt=\mathbf{f}(t,\mathbf{y})$
+% (where $\mathbf{f}:\mathrm{R}\times\mathrm{R}^{p^{2}}\to\mathrm{R}^{p^{2}}$).
+% It is assumed that $\mathbf{M}$ is a square matrix.
 %%
 % |dydt = odefun_mat2vec(F,t,y,p)| transforms the matrix-valued ODE 
-% dM/dt = F(t,M) (where F:R×R(p×q)->R(p×q) into the vector-valued ODE
-% dy/dt = f(t,y) (where f:R×Rpq->Rpq). |p| specifies the number of rows of
-% |M|.
+% $d\mathbf{M}/dt=\mathbf{F}(t,\mathbf{M})$ (where 
+% $\mathbf{F}:\mathrm{R}\times\mathrm{R}^{p\times q}\to\mathrm{R}^{p\times q}$)
+% into the vector-valued ODE $d\mathbf{y}/dt=\mathbf{f}(t,\mathbf{y})$
+% (where $\mathbf{f}:\mathrm{R}\times\mathrm{R}^{pq}\to\mathrm{R}^{pq}$).
+% |p| specifies the number of rows of |M|.
+%%
+% |f = @(t,y) odefun_mat2vec(...)| is the syntax actually used when solving
+% ODEs. The input parameters to |odefun_mat2vec| can follow either of the
+% syntaxes above. This syntax will produce a function handle, |f|, defining
+% the corresponding vector-valued ODE.
 %% Input/Output Parameters
 % <html>
 %   <table border=1>
@@ -61,6 +71,8 @@
 %       </tr>
 %   </table>
 % </html>
+%% Example
+% Click <Matrix_ODE_Example_doc.html here> for an example.
 %% See also
 % <odeIC_mat2vec_doc.html |odeIC_mat2vec|> | 
 % <odesol_vec2mat_doc.html |odesol_vec2mat|>

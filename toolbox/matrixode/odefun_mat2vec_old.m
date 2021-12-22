@@ -6,7 +6,7 @@
 %   dydt = odefun_mat2vec(F,t,y,p)
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2021-12-20
+% Last Update: 2021-12-22
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
@@ -33,8 +33,8 @@
 function dydt = odefun_mat2vec(F,t,y,p)
     
     % state dimension
-    pq = size(y,2);
-
+    pq = size(y,1);
+    
     % determine "p" if not input (assuming M is square)
     if nargin < 4
         p = sqrt(length(y));
@@ -42,7 +42,7 @@ function dydt = odefun_mat2vec(F,t,y,p)
 
     % determines q
     q = pq/p;
-    
+
     % reshapes pq×1 state vector into p×q state matrix
     M = reshape(y,[p,q]);
 

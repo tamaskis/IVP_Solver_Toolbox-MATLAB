@@ -1,0 +1,203 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Matrix ODE Example</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-12-22"><meta name="DC.source" content="Matrix_ODE_Example_doc.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Matrix ODE Example</h1><!--introduction--><p><a href="index.html">Back to ODE Solver Toolbox Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Problem Statement</a></li><li><a href="#2">Matrices</a></li><li><a href="#3">Final Condition</a></li><li><a href="#4"><tt>odefun_mat2vec</tt></a></li><li><a href="#7"><tt>odeIC_mat2vec</tt></a></li><li><a href="#9"><tt>odesol_vec2mat</tt></a></li><li><a href="#12">Solution for <img src="Matrix_ODE_Example_doc_eq01737430298148732982.png" alt="$\mathbf{P}_{0}$" style="width:12px;height:10px;"></a></li><li><a href="#13">References</a></li></ul></div><h2 id="1">Problem Statement</h2><p>Consider the Riccati differential equation for the finite-horizon linear quadratic regulator problem:</p><p><img src="Matrix_ODE_Example_doc_eq18025082327632211741.png" alt="$$\dot{\mathbf{P}}=-\left[\mathbf{A}^{T}\mathbf{P}+\mathbf{P}\mathbf{A}-(\mathbf{P}\mathbf{B}+\mathbf{N})\mathbf{R}^{-1}(\mathbf{B}^{T}\mathbf{P}+\mathbf{N}^{T})+\mathbf{Q}\right]$$" style="width:263px;height:15px;"></p><p>Find <img src="Matrix_ODE_Example_doc_eq11156567409250041374.png" alt="$\mathbf{P}(0)=\mathbf{P}_{0}$" style="width:50px;height:11px;"> given that</p><p><img src="Matrix_ODE_Example_doc_eq06697316367777428526.png" alt="$$\mathbf{P}(T)=\mathbf{P}_{T}=\pmatrix{1&amp;1\cr1&amp;1}$$" style="width:109px;height:27px;"></p><p>where <img src="Matrix_ODE_Example_doc_eq04333988821981505429.png" alt="$T=5$" style="width:28px;height:8px;">. The state (<img src="Matrix_ODE_Example_doc_eq15190527482521674856.png" alt="$\mathbf{A}$" style="width:9px;height:8px;">) and input (<img src="Matrix_ODE_Example_doc_eq16427099040942302163.png" alt="$\mathbf{B}$" style="width:9px;height:8px;">) matrices are</p><p><img src="Matrix_ODE_Example_doc_eq08594218919394792437.png" alt="$$\mathbf{A}=\pmatrix{1&amp;1\cr2&amp;1},\quad\quad\mathbf{B}=\pmatrix{1\cr1}$$" style="width:142px;height:27px;"></p><p>The cross-coupling (<img src="Matrix_ODE_Example_doc_eq15866111403695682364.png" alt="$\mathbf{N}$" style="width:10px;height:8px;">), state (<img src="Matrix_ODE_Example_doc_eq04980437671470961831.png" alt="$\mathbf{Q}$" style="width:9px;height:10px;">), and input (<img src="Matrix_ODE_Example_doc_eq07378229934469313194.png" alt="$\mathbf{R}$" style="width:10px;height:8px;">) weighting matrices are</p><p><img src="Matrix_ODE_Example_doc_eq04665828541583697595.png" alt="$$\mathbf{N}=\pmatrix{0&amp;0\cr0&amp;0},\quad\quad\mathbf{Q}=\pmatrix{2&amp;1\cr1&amp;1},\quad\quad\mathbf{R}=\pmatrix{1&amp;0\cr0&amp;1}$$" style="width:254px;height:27px;"></p><h2 id="2">Matrices</h2><pre class="codeinput"><span class="comment">% state matrix</span>
+A = [1   1;
+     2   1];
+
+<span class="comment">% input matrix</span>
+B = [1;
+     1];
+
+<span class="comment">% cross-coupling weighting matrix</span>
+N = [0  0;
+     0  0];
+
+<span class="comment">% state weighting matrix</span>
+Q = [2   1;
+     1   1];
+
+<span class="comment">% input weighting matrix</span>
+R = [1   0;
+     0   1];
+</pre><h2 id="3">Final Condition</h2><pre class="codeinput"><span class="comment">% final condition</span>
+PT = [1   1;
+      1   1];
+
+<span class="comment">% final time</span>
+T = 5;
+</pre><h2 id="4"><tt>odefun_mat2vec</tt></h2><p>Defining the Riccati differential equation (a matrix-valued ODE),</p><pre class="codeinput">F = @(t,P) -(A.'*P+P*A-(P*B+N)/R*(B.'*P+N.')+Q);
+</pre><p>Converting this matrix-valued ODE to a vector-valued ODE,</p><pre class="codeinput">f = @(t,y) odefun_mat2vec(F,t,y);
+</pre><p>Note that since <img src="Matrix_ODE_Example_doc_eq01284226214242475479.png" alt="$\mathbf{P}$" style="width:8px;height:8px;"> is a square matrix, we did not have to specify its number of rows for the <tt>odefun_mat2vec</tt> function.</p><h2 id="7"><tt>odeIC_mat2vec</tt></h2><p>In this case, we have a final condition at time <img src="Matrix_ODE_Example_doc_eq16373138058832967206.png" alt="$t=T=5$" style="width:47px;height:8px;">, and want to find the initial condition at time <img src="Matrix_ODE_Example_doc_eq02656990568186096865.png" alt="$t=t_{0}=0$" style="width:47px;height:10px;">. To do this, we will integrate backwards using an ODE solver, so the final condition <img src="Matrix_ODE_Example_doc_eq07282847098330546007.png" alt="$\mathbf{P}_{T}$" style="width:14px;height:10px;"> will actually form the initial condition. Therefore, finding the final condition for the corresponding vector-valued ODE,</p><pre class="codeinput">yT = odeIC_mat2vec(PT);
+</pre><p>Note that since <img src="Matrix_ODE_Example_doc_eq01284226214242475479.png" alt="$\mathbf{P}$" style="width:8px;height:8px;"> is a square matrix, we did not have to specify its number of rows for the <tt>odeIC_mat2vec</tt> function.</p><h2 id="9"><tt>odesol_vec2mat</tt></h2><p>First, let's solve the vector-valued ODE for <img src="Matrix_ODE_Example_doc_eq13802958261507554970.png" alt="$\mathbf{y}(t)$" style="width:19px;height:11px;">. Solving the ODE from <img src="Matrix_ODE_Example_doc_eq12231604572696234117.png" alt="$t=T$" style="width:27px;height:8px;"> to <img src="Matrix_ODE_Example_doc_eq00402237798869806649.png" alt="$t=0$" style="width:24px;height:8px;">,</p><pre class="codeinput">[t,y] = ode45(f,[T,0],yT);
+</pre><p>Transforming the solution matrix (<tt>y</tt>) for the vector-valued ODE into the solution <i>array</i> (<tt>P</tt>) for the matrix-valued ODE,</p><pre class="codeinput">P = odesol_vec2mat(y);
+</pre><p>Note that since <img src="Matrix_ODE_Example_doc_eq01284226214242475479.png" alt="$\mathbf{P}$" style="width:8px;height:8px;"> is a square matrix, we did not have to specify its number of rows for the <tt>odesol_vec2mat</tt> function.</p><h2 id="12">Solution for <img src="Matrix_ODE_Example_doc_eq01737430298148732982.png" alt="$\mathbf{P}_{0}$" style="width:12px;height:10px;"></h2><p>Our original goal was to find <img src="Matrix_ODE_Example_doc_eq01737430298148732982.png" alt="$\mathbf{P}_{0}$" style="width:12px;height:10px;">. Extracting this matrix from the solution array (noting that the solution corresponding to <img src="Matrix_ODE_Example_doc_eq00402237798869806649.png" alt="$t=0$" style="width:24px;height:8px;"> will be stored at the end of the solution array since we integrated backwards in time), we find</p><pre class="codeinput">P0 = P(:,:,end)
+</pre><pre class="codeoutput">
+P0 =
+
+    1.2925    0.5483
+    0.5483    0.8169
+
+</pre><h2 id="13">References</h2><p>This example is adapted from the following sources:</p><div><ul><li><a href="https://www.mathworks.com/matlabcentral/answers/94722-how-can-i-solve-the-matrix-riccati-differential-equation-within-matlab">https://www.mathworks.com/matlabcentral/answers/94722-how-can-i-solve-the-matrix-riccati-differential-equation-within-matlab</a></li><li><a href="https://en.wikipedia.org/wiki/Linear-quadratic_regulator">https://en.wikipedia.org/wiki/Linear-quadratic_regulator</a></li></ul></div><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2021b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Matrix ODE Example
+% 
+% <index.html Back to ODE Solver Toolbox Contents>.
+%% Problem Statement
+% Consider the Riccati differential equation for the finite-horizon linear
+% quadratic regulator problem:
+%
+% $$\dot{\mathbf{P}}=-\left[\mathbf{A}^{T}\mathbf{P}+\mathbf{P}\mathbf{A}-(\mathbf{P}\mathbf{B}+\mathbf{N})\mathbf{R}^{-1}(\mathbf{B}^{T}\mathbf{P}+\mathbf{N}^{T})+\mathbf{Q}\right]$$
+%
+% Find $\mathbf{P}(0)=\mathbf{P}_{0}$ given that
+%
+% $$\mathbf{P}(T)=\mathbf{P}_{T}=\pmatrix{1&1\cr1&1}$$
+%
+% where $T=5$. The state ($\mathbf{A}$) and input ($\mathbf{B}$) matrices
+% are
+%
+% $$\mathbf{A}=\pmatrix{1&1\cr2&1},\quad\quad\mathbf{B}=\pmatrix{1\cr1}$$
+%
+% The cross-coupling ($\mathbf{N}$), state ($\mathbf{Q}$), and input
+% ($\mathbf{R}$) weighting matrices are
+%
+% $$\mathbf{N}=\pmatrix{0&0\cr0&0},\quad\quad\mathbf{Q}=\pmatrix{2&1\cr1&1},\quad\quad\mathbf{R}=\pmatrix{1&0\cr0&1}$$
+
+%% Matrices
+
+% state matrix
+A = [1   1;
+     2   1];
+
+% input matrix
+B = [1;
+     1];
+
+% cross-coupling weighting matrix
+N = [0  0;
+     0  0];
+
+% state weighting matrix
+Q = [2   1;
+     1   1];
+
+% input weighting matrix
+R = [1   0;
+     0   1];
+%% Final Condition
+
+% final condition
+PT = [1   1;
+      1   1];
+
+% final time
+T = 5;
+%% |odefun_mat2vec|
+% Defining the Riccati differential equation (a matrix-valued ODE),
+F = @(t,P) -(A.'*P+P*A-(P*B+N)/R*(B.'*P+N.')+Q);
+%%
+% Converting this matrix-valued ODE to a vector-valued ODE,
+f = @(t,y) odefun_mat2vec(F,t,y);
+%%
+% Note that since $\mathbf{P}$ is a square matrix, we did not have to
+% specify its number of rows for the |odefun_mat2vec| function.
+%% |odeIC_mat2vec|
+% In this case, we have a final condition at time $t=T=5$, and want to find
+% the initial condition at time $t=t_{0}=0$. To do this, we will integrate
+% backwards using an ODE solver, so the final condition $\mathbf{P}_{T}$
+% will actually form the initial condition. Therefore, finding the final
+% condition for the corresponding vector-valued ODE,
+yT = odeIC_mat2vec(PT);
+%%
+% Note that since $\mathbf{P}$ is a square matrix, we did not have to
+% specify its number of rows for the |odeIC_mat2vec| function.
+%% |odesol_vec2mat|
+% First, let's solve the vector-valued ODE for $\mathbf{y}(t)$. Solving the
+% ODE from $t=T$ to $t=0$,
+[t,y] = ode45(f,[T,0],yT);
+%%
+% Transforming the solution matrix (|y|) for the vector-valued ODE into the
+% solution _array_ (|P|) for the matrix-valued ODE,
+P = odesol_vec2mat(y);
+%%
+% Note that since $\mathbf{P}$ is a square matrix, we did not have to
+% specify its number of rows for the |odesol_vec2mat| function.
+%% Solution for $\mathbf{P}_{0}$
+% Our original goal was to find $\mathbf{P}_{0}$. Extracting this matrix
+% from the solution array (noting that the solution corresponding to $t=0$
+% will be stored at the end of the solution array since we integrated
+% backwards in time), we find
+P0 = P(:,:,end)
+%% References
+% This example is adapted from the following sources:
+%
+% * https://www.mathworks.com/matlabcentral/answers/94722-how-can-i-solve-the-matrix-riccati-differential-equation-within-matlab
+% * https://en.wikipedia.org/wiki/Linear-quadratic_regulator
+##### SOURCE END #####
+--></body></html>

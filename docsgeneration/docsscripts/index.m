@@ -74,6 +74,7 @@
 % * <RK4_ralston_step_doc.html *|RK4_ralston_step|*> Propagates the state vector forward one time step using Ralston's fourth-order method (4th-order).
 % * <RK4_38_step_doc.html *|RK4_38_step|*> Propagates the state vector forward one time step using the 3/8-rule Runge-Kutta fourth-order method (4th-order).
 %% Tools for Matrix-Valued ODEs
+% * <Matrix_ODE_Example_doc.html *Matrix ODE Example*> Example for solving a matrix-valued ODE.
 % * <odefun_mat2vec_doc.html *|odefun_mat2vec|*> Transforms a matrix-valued ODE into a vector-valued ODE.
 % * <odeIC_mat2vec_doc.html *|odeIC_mat2vec|*> Transforms the initial condition for a matrix-valued ODE into the initial condition for the corresponding vector-valued ODE.
 % * <odesol_vec2mat_doc.html *|odesol_vec2mat|*> Transforms the solution matrix for a vector-valued ODE into the solution array for the corresponding matrix-valued ODE.
