@@ -1,10 +1,10 @@
-%% example_brute_force.m
+%% example_pass_extra.m
 % ODE Solver Toolbox
 %
-% Example of a "brute force" method for solving ODEs.
+% Example of passing extra parameters to a function defining an ODE.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2021-12-14
+% Last Update: 2021-12-22
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 
@@ -30,10 +30,12 @@ dx0 = 0;        % initial velocity [m/s]
 F = @(t) cos(pi*t);
 
 % initial condition
-y0 = [x0;dx0];
+y0 = [x0;
+      dx0];
 
 % differential equation
-f = @(t,y) [y(2);-(b/m)*y(2)-(k/m)*y(1)+(1/m)*F(t)];
+f = @(t,y) [y(2);
+            -(b/m)*y(2)-(k/m)*y(1)+(1/m)*F(t)];
 
 
 
@@ -50,7 +52,8 @@ dx0 = 0;        % initial velocity [m/s]
 F = @(t) cos(pi*t);
 
 % initial condition
-y0 = [x0;dx0];
+y0 = [x0;
+      dx0];
 
 % assigns function handle to differential equation
 f = @(t,y) f_extra(t,y,b,k,m,F);

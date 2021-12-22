@@ -1,6 +1,6 @@
 # ODE Solver Toolbox
 
-This toolbox supplies functions to evaluate derivatives, partial derivatives, gradients, directional derivatives, Jacobian matrices, and Hessian matrices using the complex-step approximation of a derivative.
+Collection of fixed-step ODE solvers, functions to generate ODE solver equations, and functions for transforming matrix ODEs to vector ODEs.
 
 
 ## Documentation

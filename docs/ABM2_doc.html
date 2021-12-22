@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>ABM2</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-12-20"><meta name="DC.source" content="ABM2_doc.m"><style type="text/css">
+      --><title>ABM2</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-12-22"><meta name="DC.source" content="ABM2_doc.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -136,7 +136,7 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
       <tr>
           <td style="text-align:center"><TT>y</TT></td>
           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\mathbf{Y}" title="\mathbf{Y}" /></td>
-          <td>solution matrix<BR>- the ith row of <TT>y</TT> stores the <i>transpose</i> of the solution corresponding to the ith time in <TT>t</TT> (see below)</td>
+          <td>solution matrix<BR>- the nth row of <TT>y</TT> stores the <i>transpose</i> of the solution corresponding to the nth time in <TT>t</TT> (see below)</td>
           <td style="text-align:center">(N+1)×p<BR>double</td>
       </tr>
   </table>
@@ -178,14 +178,14 @@ y20 = 50;
 </pre><pre class="codeoutput">
 y10 =
 
-    0.0023
+   0.002269994591160
 
 </pre><p>Confirming our result by solving the same ODE but from <img src="ABM2_doc_eq08325516970591449802.png" alt="$t=10$" style="width:29px;height:8px;"> to <img src="ABM2_doc_eq01961946856973312452.png" alt="$t=20$" style="width:29px;height:8px;"> and using our result for <img src="ABM2_doc_eq14770085807156189371.png" alt="$y(10)$" style="width:25px;height:11px;"> as the initial condition,</p><pre class="codeinput">[t,y] = ABM2(f,[10,20],y10,0.001);
 y20 = y(end)
 </pre><pre class="codeoutput">
 y20 =
 
-   50.0000
+  49.999999750049845
 
 </pre><h2 id="18">Example #4: Backward integration (event-detection case).</h2><p><i>Once again, consider</i></p><p><img src="ABM2_doc_eq15707102448259949290.png" alt="$$\frac{dy}{dt}=y,\quad y(20)=50$$" style="width:100px;height:23px;"></p><p><i>Find <img src="ABM2_doc_eq14770085807156189371.png" alt="$y(10)$" style="width:25px;height:11px;"> using an ODE solver with a condition function (i.e. event-detection).</i></p><p>First, let's define our ODE (<img src="ABM2_doc_eq15749537601348477239.png" alt="$\frac{dy}{dt}=f(t,y)$" style="width:53px;height:15px;">) and initial condition in MATLAB.</p><pre class="codeinput">f = @(t,y) y;
 y20 = 50;
@@ -195,7 +195,7 @@ y10 = y(end)
 </pre><pre class="codeoutput">
 y10 =
 
-    0.0023
+   0.002272265721696
 
 </pre><p>Note that this is the same result we obtained earlier in Example #3.</p><h2 id="23">See also</h2><p><a href="ABM2_doc.html"><tt>ABM2</tt></a> | <a href="ABM3_doc.html"><tt>ABM3</tt></a> | <a href="ABM4_doc.html"><tt>ABM4</tt></a> | <a href="ABM5_doc.html"><tt>ABM5</tt></a> | <a href="ABM6_doc.html"><tt>ABM6</tt></a> | <a href="ABM7_doc.html"><tt>ABM7</tt></a> | <a href="ABM8_doc.html"><tt>ABM8</tt></a> |</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2021b</a><br></p></div><!--
 ##### SOURCE BEGIN #####
@@ -287,7 +287,7 @@ y10 =
 %       <tr>
 %           <td style="text-align:center"><TT>y</TT></td>
 %           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\mathbf{Y}" title="\mathbf{Y}" /></td>
-%           <td>solution matrix<BR>- the ith row of <TT>y</TT> stores the <i>transpose</i> of the solution corresponding to the ith time in <TT>t</TT> (see below)</td>
+%           <td>solution matrix<BR>- the nth row of <TT>y</TT> stores the <i>transpose</i> of the solution corresponding to the nth time in <TT>t</TT> (see below)</td>
 %           <td style="text-align:center">(N+1)×p<BR>double</td>
 %       </tr>
 %   </table>

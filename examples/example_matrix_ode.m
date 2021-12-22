@@ -1,7 +1,8 @@
 %% example_matrix_ode.m
 % ODE Solver Toolbox
 %
-% Example for solving a matrix-valued ODE (the Riccati differential eqn.).
+% Example for solving a matrix-valued ODE (the Riccati differential
+% equation).
 %
 % Copyright © 2021 Tamas Kis
 % Last Update: 2021-12-22
@@ -51,7 +52,7 @@ T = 5;
 
 
 
-%% SOLVING RICCATI DIFFERENTIAL EQUATION
+%% SOLVING RICCATI DIFFERENTIAL EQUATION USING ODE SOLVER
 
 % defines the Riccati differential equation (a matrix-valued ODE)
 F = @(t,P) -(A.'*P+P*A-(P*B+N)/R*(B.'*P+N.')+Q);
@@ -62,8 +63,8 @@ f = odefun_mat2vec(F);
 % final condition
 yT = odeIC_mat2vec(PT);
 
-% solves vector-valued ODE
-[t,y] = ode45(f,[T,0],yT);
+% solves vector-valued ODE using a step size of h = 0.001
+[t,y] = RK4(f,[T,0],yT,0.001);
 
 % transforms solution matrix for vector-valued ODE into solution array for
 % matrix-valued ODE
@@ -72,3 +73,28 @@ P = odesol_vec2mat(y);
 % solution for P0 (will be at end of array since P solved for backwards in
 % time)
 P0 = P(:,:,end)
+
+
+
+%% SOLVING RICCATI DIFFERENTIAL EQUATION USING ONE-STEP PROPAGATION
+
+% time vector between t = 5 and t = 0 with a spacing of h = 0.001.
+h = -0.001;
+t = (5:h:0)';
+
+% preallocate vector to store solution
+P = zeros(2,2,length(t));
+
+% store initial condition
+P(:,:,1) = PT;
+
+% solving using "RK4_step"
+for i = 1:(length(t)-1)
+    P(:,:,i+1) = RK4_step(F,t(i),P(:,:,i),h);
+end
+
+% solution for P0 using one-step propagation
+P0_step = P(:,:,end);
+
+% maximum absolute error between the two results (should be 0)
+max(abs(P0-P0_step),[],'all')

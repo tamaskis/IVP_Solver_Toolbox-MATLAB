@@ -5,7 +5,7 @@
 % the thumbnail image for the ODE solver toolbox.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2021-12-14
+% Last Update: 2021-12-22
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 
