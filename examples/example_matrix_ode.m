@@ -31,17 +31,16 @@ A = [1   1;
 B = [1;
      1];
 
-% cross-coupling weighting matrix
-N = [0  0;
-     0  0];
-
 % state weighting matrix
 Q = [2   1;
      1   1];
 
 % input weighting matrix
-R = [1   0;
-     0   1];
+R = 1;
+
+% cross-coupling weighting matrix
+S = [0;
+     0];
 
 % final condition
 PT = [1   1;
@@ -55,7 +54,7 @@ T = 5;
 %% SOLVING RICCATI DIFFERENTIAL EQUATION USING ODE SOLVER
 
 % defines the Riccati differential equation (a matrix-valued ODE)
-F = @(t,P) -(A.'*P+P*A-(P*B+N)/R*(B.'*P+N.')+Q);
+F = @(t,P) -(A.'*P+P*A-(P*B+S)/R*(B.'*P+S.')+Q);
 
 % converts the matrix-valued ODE to a vector-valued ODE
 f = odefun_mat2vec(F);
@@ -76,25 +75,44 @@ P0 = P(:,:,end)
 
 
 
-%% SOLVING RICCATI DIFFERENTIAL EQUATION USING ONE-STEP PROPAGATION
+% %% SOLVING RICCATI DIFFERENTIAL EQUATION USING ONE-STEP PROPAGATION
+% 
+% % time vector between t = 5 and t = 0 with a spacing of h = 0.001.
+% h = -0.001;
+% t = (5:h:0)';
+% 
+% % preallocate vector to store solution
+% P = zeros(2,2,length(t));
+% 
+% % store initial condition
+% P(:,:,1) = PT;
+% 
+% % solving using "RK4_step"
+% for i = 1:(length(t)-1)
+%     P(:,:,i+1) = RK4_step(F,t(i),P(:,:,i),h);
+% end
+% 
+% % solution for P0 using one-step propagation
+% P0_step = P(:,:,end);
+% 
+% % maximum absolute error between the two results (should be 0)
+% max(abs(P0-P0_step),[],'all')
 
-% time vector between t = 5 and t = 0 with a spacing of h = 0.001.
-h = -0.001;
-t = (5:h:0)';
 
-% preallocate vector to store solution
-P = zeros(2,2,length(t));
-
-% store initial condition
-P(:,:,1) = PT;
-
-% solving using "RK4_step"
-for i = 1:(length(t)-1)
-    P(:,:,i+1) = RK4_step(F,t(i),P(:,:,i),h);
+%% test
+Pinf = icare(A,B,Q,R);
+P_norm = zeros(size(t));
+for i = 1:length(t)
+    P_norm(i) = norm(P(:,:,i),'fro');
 end
 
-% solution for P0 using one-step propagation
-P0_step = P(:,:,end);
-
-% maximum absolute error between the two results (should be 0)
-max(abs(P0-P0_step),[],'all')
+figure;
+hold on;
+plot(t,P_norm,'LineWidth',1.5);
+plot(t,norm(Pinf,'fro')*ones(size(t)),'k--','LineWidth',1.5);
+hold off;
+grid on;
+xlabel('$t$','interpreter','latex','fontsize',18);
+ylabel('$\|\mathbf{P}\|_{\mathrm{F}}$','interpreter','latex','fontsize',18);
+legend('$\mathbf{P}(t)$','$\mathbf{P}_{\infty}$','interpreter','latex','fontsize',14,'location','southeast');
+hold off;
