@@ -267,5 +267,5 @@ function [t,y] = RK3(f,I,y0,h,wb)
         end
         
     end
-    
+
 end

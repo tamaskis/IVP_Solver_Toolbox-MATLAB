@@ -264,5 +264,5 @@ function [t,y] = RK2_heun(f,I,y0,h,wb)
         end
         
     end
-    
+
 end

@@ -266,5 +266,5 @@ function [t,y] = RK3_ralston(f,I,y0,h,wb)
         end
         
     end
-    
+
 end

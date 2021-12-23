@@ -247,5 +247,5 @@ function [t,y] = RK1_euler(f,I,y0,h,wb)
         end
         
     end
-    
+
 end

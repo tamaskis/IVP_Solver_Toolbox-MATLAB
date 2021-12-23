@@ -68,6 +68,6 @@ Collection of fixed-step ODE solvers, functions to generate ODE solver equations
 `AB_coefficients`\
 `AM_coefficients`\
 `AB_predictor`\
-`AM_correrctor`\
+`AM_corrector`\
 `ABM_equations`\
 `tableau2eqns`

@@ -266,5 +266,5 @@ function [t,y] = SSPRK3(f,I,y0,h,wb)
         end
         
     end
-    
+
 end

@@ -268,5 +268,5 @@ function [t,y] = RK3_heun(f,I,y0,h,wb)
         end
         
     end
-    
+
 end
