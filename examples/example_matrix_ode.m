@@ -5,7 +5,7 @@
 % equation).
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2021-12-22
+% Last Update: 2021-12-23
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 
@@ -75,44 +75,25 @@ P0 = P(:,:,end)
 
 
 
-% %% SOLVING RICCATI DIFFERENTIAL EQUATION USING ONE-STEP PROPAGATION
-% 
-% % time vector between t = 5 and t = 0 with a spacing of h = 0.001.
-% h = -0.001;
-% t = (5:h:0)';
-% 
-% % preallocate vector to store solution
-% P = zeros(2,2,length(t));
-% 
-% % store initial condition
-% P(:,:,1) = PT;
-% 
-% % solving using "RK4_step"
-% for i = 1:(length(t)-1)
-%     P(:,:,i+1) = RK4_step(F,t(i),P(:,:,i),h);
-% end
-% 
-% % solution for P0 using one-step propagation
-% P0_step = P(:,:,end);
-% 
-% % maximum absolute error between the two results (should be 0)
-% max(abs(P0-P0_step),[],'all')
+%% SOLVING RICCATI DIFFERENTIAL EQUATION USING ONE-STEP PROPAGATION
 
+% time vector between t = 5 and t = 0 with a spacing of h = 0.001.
+h = -0.001;
+t = (5:h:0)';
 
-%% test
-Pinf = icare(A,B,Q,R);
-P_norm = zeros(size(t));
-for i = 1:length(t)
-    P_norm(i) = norm(P(:,:,i),'fro');
+% preallocate vector to store solution
+P = zeros(2,2,length(t));
+
+% store initial condition
+P(:,:,1) = PT;
+
+% solving using "RK4_step"
+for i = 1:(length(t)-1)
+    P(:,:,i+1) = RK4_step(F,t(i),P(:,:,i),h);
 end
 
-figure;
-hold on;
-plot(t,P_norm,'LineWidth',1.5);
-plot(t,norm(Pinf,'fro')*ones(size(t)),'k--','LineWidth',1.5);
-hold off;
-grid on;
-xlabel('$t$','interpreter','latex','fontsize',18);
-ylabel('$\|\mathbf{P}\|_{\mathrm{F}}$','interpreter','latex','fontsize',18);
-legend('$\mathbf{P}(t)$','$\mathbf{P}_{\infty}$','interpreter','latex','fontsize',14,'location','southeast');
-hold off;
+% solution for P0 using one-step propagation
+P0_step = P(:,:,end);
+
+% maximum absolute error between the two results (should be 0)
+max(abs(P0-P0_step),[],'all')
