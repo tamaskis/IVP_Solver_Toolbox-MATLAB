@@ -24,7 +24,7 @@ function doc_OST(name)
 
     % opens index if no function name specified
     if nargin == 0
-        web('html/index.html');
+        web('html_OST/index.html');
 
     % opens technical documentation
     elseif strcmpi(name,'tech')
@@ -32,7 +32,7 @@ function doc_OST(name)
         
     % opens specified function documentation
     else
-        web(strcat('html/',name,'_doc.html'));
+        web(strcat('html_OST/',name,'_doc.html'));
 
     end
 end
