@@ -8,6 +8,23 @@ Collection of fixed-step ODE solvers, functions to generate ODE solver equations
 [Toolbox Documentation](https://tamaskis.github.io/ODE_Solver_Toolbox-MATLAB/)\
 [Technical Documentation](https://tamaskis.github.io/documentation/Fixed_Step_ODE_Solvers.pdf)
 
+To open the home page of the toolbox documentation in MATLAB, type
+
+```
+doc_OST
+```
+
+in the Command Window. To open the documentation of a specific function with name `function_name` from the Command Window, type
+
+```
+doc_OST function_name
+```
+
+To open the PDF file with the technical documentation (Fixed_Step_ODE_Solvers.pdf) from the Command Window, type
+
+```
+doc_OST tech
+```
 
 ## Explicit Runge-Kutta (Single-Step) Methods
 
