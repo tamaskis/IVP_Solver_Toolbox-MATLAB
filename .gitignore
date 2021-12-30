@@ -1,4 +1,5 @@
 .DS_Store
 local/
+INSTALL/remove_paths.m
 INSTALL/ODE Solver Toolbox.prj
 docsgeneration/
