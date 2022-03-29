@@ -10,7 +10,7 @@
 % See also lcm, gcd.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2021-08-28
+% Last Update: 2022-03-29
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
@@ -20,7 +20,7 @@
 % INPUT:
 % ------
 %   X       - (double array of any size) array of fractions
-%   print   - (OPTIONAL) (char) prints new fractions if input as 'print'
+%   print   - (char) (OPTIONAL) prints new fractions if input as 'print'
 %
 % -------
 % OUTPUT:

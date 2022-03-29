@@ -8,7 +8,7 @@
 % See also AB_coefficients, AB_predictor, AM_corrector, ABM_equations.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2021-12-22
+% Last Update: 2022-03-29
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
@@ -25,7 +25,7 @@
 % INPUT:
 % ------
 %   m       - (1×1 double) order of Adams-Moulton corrector
-%   print   - (OPTIONAL) (char) prints coefficients if input as 'print'
+%   print   - (char) (OPTIONAL) prints coefficients if input as 'print'
 %
 % -------
 % OUTPUT:

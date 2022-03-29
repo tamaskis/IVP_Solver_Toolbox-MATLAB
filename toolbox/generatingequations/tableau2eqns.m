@@ -8,7 +8,7 @@
 %   tableau2eqns(__,'decimal')
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2021-12-22
+% Last Update: 2022-03-29
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
@@ -25,8 +25,8 @@
 % INPUT:
 % ------
 %   T       - ((s+1)×(s+1) double) Butcher tableau
-%   name    - (OPTIONAL) (string) name of the method
-%   type    - (OPTIONAL) (char) print coefficients as 'decimal' or 
+%   name    - (1×1 string) (OPTIONAL) name of the method
+%   type    - (char) (OPTIONAL) print coefficients as 'decimal' or 
 %             'fraction' (defaults to 'fraction')
 %
 % -----
