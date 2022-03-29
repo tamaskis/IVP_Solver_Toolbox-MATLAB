@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>odesol_vec2mat</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-12-29"><meta name="DC.source" content="odesol_vec2mat_doc.m"><style type="text/css">
+      --><title>odesol_vec2mat</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-03-29"><meta name="DC.source" content="odesol_vec2mat_doc.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -69,7 +69,7 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
   </style></head><body><div class="content"><h1><tt>odesol_vec2mat</tt></h1><!--introduction--><p>Transforms the solution matrix for a vector-valued ODE into the solution array for the corresponding matrix-valued ODE.</p><p><a href="index.html">Back to ODE Solver Toolbox Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#4">Input/Output Parameters</a></li><li><a href="#5">Example</a></li><li><a href="#6">See also</a></li></ul></div><h2 id="1">Syntax</h2><pre class="language-matlab">M = odesol_vec2mat(y)
 M = odesol_vec2mat(y,p)
-</pre><h2 id="2">Description</h2><p><tt>M = odesol_vec2mat(y)</tt> transforms the solution matrix, <img src="odesol_vec2mat_doc_eq15932310666129641707.png" alt="$\mathbf{Y}\in\mathrm{R}^{(N+1)\times p^{2}}$" style="width:67px;height:11px;"> (<tt>y</tt> in MATLAB), for the vector-valued ODE into the solution array, <img src="odesol_vec2mat_doc_eq08885268059899993205.png" alt="$\mathbf{M}_{\mathrm{sol}}\in\mathrm{R}^{p\times p\times (N+1)}$" style="width:85px;height:12px;"> (<tt>M</tt> in MATLAB) for the corresponding matrix-valued ODE. It is assumed that <img src="odesol_vec2mat_doc_eq01518063970584319034.png" alt="$\mathbf{M}$" style="width:12px;height:8px;"> is a square matrix.</p><p><tt>M = odesol_vec2mat(y,p)</tt> transforms the solution matrix, <img src="odesol_vec2mat_doc_eq12319736524408872377.png" alt="$\mathbf{Y}\in\mathrm{R}^{(N+1)\times pq}$" style="width:68px;height:11px;"> (<tt>y</tt> in MATLAB), for the vector-valued ODE into the solution array, <img src="odesol_vec2mat_doc_eq17572015094562288133.png" alt="$\mathbf{M}_{\mathrm{sol}}\in\mathrm{R}^{p\times q\times (N+1)}$" style="width:85px;height:12px;"> (<tt>M</tt> in MATLAB) for the corresponding matrix-valued ODE. <tt>p</tt> specifies the number of rows of <tt>M</tt>.</p><h2 id="4">Input/Output Parameters</h2><p>
+</pre><h2 id="2">Description</h2><p><tt>M = odesol_vec2mat(y)</tt> transforms the solution matrix, <img src="odesol_vec2mat_doc_eq15932310666129641707.png" alt="$\mathbf{Y}\in\mathrm{R}^{(N+1)\times p^{2}}$" style="width:67px;height:11px;"> (<tt>y</tt> in MATLAB), for the vector-valued ODE into the solution array, <img src="odesol_vec2mat_doc_eq08885268059899993205.png" alt="$\mathbf{M}_{\mathrm{sol}}\in\mathrm{R}^{p\times p\times (N+1)}$" style="width:85px;height:12px;"> (<tt>M</tt> in MATLAB) for the corresponding matrix-valued ODE. It is assumed that <img src="odesol_vec2mat_doc_eq01518063970584319034.png" alt="$\mathbf{M}$" style="width:12px;height:8px;"> is a square matrix.</p><p><tt>M = odesol_vec2mat(y,p)</tt> transforms the solution matrix, <img src="odesol_vec2mat_doc_eq11850032898330222064.png" alt="$\mathbf{Y}\in\mathrm{R}^{(N+1)\times pr}$" style="width:68px;height:11px;"> (<tt>y</tt> in MATLAB), for the vector-valued ODE into the solution array, <img src="odesol_vec2mat_doc_eq09153747220475100319.png" alt="$\mathbf{M}_{\mathrm{sol}}\in\mathrm{R}^{p\times r\times (N+1)}$" style="width:85px;height:12px;"> (<tt>M</tt> in MATLAB) for the corresponding matrix-valued ODE. <tt>p</tt> specifies the number of rows of <tt>M</tt>.</p><h2 id="4">Input/Output Parameters</h2><p>
   <table border=1>
       <tr>
           <td></td>
@@ -83,7 +83,7 @@ M = odesol_vec2mat(y,p)
           <td style="text-align:center"><TT>y</TT></td>
           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\mathbf{Y}" title="\mathbf{Y}" /></td>
           <td>solution matrix<BR>- the nth row of <TT>y</TT> stores the <i>transpose</i> of the solution corresponding to the nth time in the time vector, <img src="https://latex.codecogs.com/svg.latex?\mathbf{t}" title="" /></td>
-          <td style="text-align:center">(N+1)×pq<BR>double</td>
+          <td style="text-align:center">(N+1)×pr<BR>double</td>
       </tr>
       <tr>
           <td style="text-align:center"><TT>p</TT></td>
@@ -96,7 +96,7 @@ M = odesol_vec2mat(y,p)
           <td style="text-align:center"><TT>M</TT></td>
           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\mathbf{M}_{\mathrm{sol}}" title="" /></td>
           <td>solution array<BR>- the nth layer of <TT>M</TT> stores the solution corresponding to the nth time in the time vector, <img src="https://latex.codecogs.com/svg.latex?\mathbf{t}" title="" /></td>
-          <td style="text-align:center">p×q×(N+1)<BR>double</td>
+          <td style="text-align:center">p×r×(N+1)<BR>double</td>
       </tr>
   </table>
 </p><h2 id="5">Example</h2><p>Click <a href="Matrix_ODE_Example_doc.html">here</a> for an example.</p><h2 id="6">See also</h2><p><a href="odefun_mat2vec_doc.html"><tt>odefun_mat2vec</tt></a> | <a href="odeIC_mat2vec_doc.html"><tt>odeIC_mat2vec</tt></a></p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2021b</a><br></p></div><!--
@@ -115,8 +115,8 @@ M = odesol_vec2mat(y,p)
 % (|M| in MATLAB) for the corresponding matrix-valued ODE. It is assumed 
 % that $\mathbf{M}$ is a square matrix.
 %%
-% |M = odesol_vec2mat(y,p)| transforms the solution matrix, $\mathbf{Y}\in\mathrm{R}^{(N+1)\times pq}$
-% (|y| in MATLAB), for the vector-valued ODE into the solution array, $\mathbf{M}_{\mathrm{sol}}\in\mathrm{R}^{p\times q\times (N+1)}$
+% |M = odesol_vec2mat(y,p)| transforms the solution matrix, $\mathbf{Y}\in\mathrm{R}^{(N+1)\times pr}$
+% (|y| in MATLAB), for the vector-valued ODE into the solution array, $\mathbf{M}_{\mathrm{sol}}\in\mathrm{R}^{p\times r\times (N+1)}$
 % (|M| in MATLAB) for the corresponding matrix-valued ODE. |p| specifies 
 % the number of rows of |M|.
 %% Input/Output Parameters
@@ -134,7 +134,7 @@ M = odesol_vec2mat(y,p)
 %           <td style="text-align:center"><TT>y</TT></td>
 %           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\mathbf{Y}" title="\mathbf{Y}" /></td>
 %           <td>solution matrix<BR>- the nth row of <TT>y</TT> stores the <i>transpose</i> of the solution corresponding to the nth time in the time vector, <img src="https://latex.codecogs.com/svg.latex?\mathbf{t}" title="" /></td>
-%           <td style="text-align:center">(N+1)×pq<BR>double</td>
+%           <td style="text-align:center">(N+1)×pr<BR>double</td>
 %       </tr>
 %       <tr>
 %           <td style="text-align:center"><TT>p</TT></td>
@@ -147,7 +147,7 @@ M = odesol_vec2mat(y,p)
 %           <td style="text-align:center"><TT>M</TT></td>
 %           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\mathbf{M}_{\mathrm{sol}}" title="" /></td>
 %           <td>solution array<BR>- the nth layer of <TT>M</TT> stores the solution corresponding to the nth time in the time vector, <img src="https://latex.codecogs.com/svg.latex?\mathbf{t}" title="" /></td>
-%           <td style="text-align:center">p×q×(N+1)<BR>double</td>
+%           <td style="text-align:center">p×r×(N+1)<BR>double</td>
 %       </tr>
 %   </table>
 % </html>

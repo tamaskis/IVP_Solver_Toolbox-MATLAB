@@ -11,7 +11,7 @@
 % RK4, RK4_ralston, RK4_38.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2021-12-22
+% Last Update: 2022-03-28
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
@@ -28,15 +28,15 @@
 % INPUT:
 % ------
 %   f       - (1×1 function_handle) dy/dt = f(t,y) --> multivariate, 
-%             vector-valued function (f:R×Rp->Rp) defining ODE
+%             vector-valued function (f : ℝ×ℝᵖ → ℝᵖ) defining ODE
 %   I       - defines interval over which to solve the ODE, 2 options:
 %               --> [t0,tf] - (1×2 double) initial and final times
-%               --> {t0,C}  - (1×2 cell) initial time, t0, and function 
+%               --> {t0,C}  - (1×2 cell) initial time, t₀, and function 
 %                             handle for condition function, C(t,y) 
-%                             (C:R×Rp->B)
-%   y0      - (p×1 double) initial condition
+%                             (C : ℝ×ℝᵖ → 𝔹)
+%   y0      - (p×1 double) initial condition, y₀ = y(t₀)
 %   h       - (1×1 double) step size
-%   wb      - (OPTIONAL) (1×1 logical or char) waitbar parameters
+%   wb      - (1×1 logical or char) (OPTIONAL) waitbar parameters
 %               --> input as "true" if you want waitbar with default 
 %                   message displayed
 %               --> input as a char array storing a message if you want a

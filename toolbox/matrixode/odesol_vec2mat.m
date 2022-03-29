@@ -9,7 +9,7 @@
 % See also odefun_mat2vec, odeIC_mat2vec.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2021-12-22
+% Last Update: 2022-03-29
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
@@ -21,20 +21,20 @@
 % ------
 % INPUT:
 % ------
-%   y       - ((N+1)×pq double) matrix storing time history of state vector
-%   p       - (OPTIONAL) (1×1 double) number of rows of state matrix
+%   y       - ((N+1)×pr double) matrix storing time history of state vector
+%   p       - (1×1 double) (OPTIONAL) number of rows of state matrix
 %
 % -------
 % OUTPUT:
 % -------
-%   M       - (p×q×(N+1) double) 3D array storing time history of state 
+%   M       - (p×r×(N+1) double) 3D array storing time history of state 
 %             matrix
 %
 % -----
 % NOTE:
 % -----
-%   --> [p,q] = size of the state matrix, M
-%   --> pq = dimension of the state vector, y
+%   --> [p,r] = size of the state matrix, M
+%   --> pr = dimension of the state vector, y
 %   --> If M is square, then p = √(x).
 %   --> N+1 = length of time vector (i.e. number of points in time that we
 %       are given y)
@@ -45,24 +45,24 @@
 %==========================================================================
 function M = odesol_vec2mat(y,p)
     
-    % state dimension (pq) and N (ODE solution given at N+1 times)
-    pq = size(y,2);
+    % state dimension (pr) and N (ODE solution given at N+1 times)
+    pr = size(y,2);
     N = size(y,1)-1;
 
     % determine state dimension if not input (assuming Y is square)
     if nargin < 2
-        p = sqrt(pq);
+        p = sqrt(pr);
     end
 
-    % determines q
-    q = pq/p;
+    % determines r
+    r = pr/p;
     
     % preallocate solution array to store time history of state matrix
-    M = zeros(p,q,N+1);
+    M = zeros(p,r,N+1);
 
     % populate solution array
     for n = 1:(N+1)
-        M(:,:,n) = reshape(y(n,:),[p,q]);
+        M(:,:,n) = reshape(y(n,:),[p,r]);
     end
     
 end

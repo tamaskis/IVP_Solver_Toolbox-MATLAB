@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>odefun_mat2vec</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-12-29"><meta name="DC.source" content="odefun_mat2vec_doc.m"><style type="text/css">
+      --><title>odefun_mat2vec</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-03-29"><meta name="DC.source" content="odefun_mat2vec_doc.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -69,7 +69,7 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
   </style></head><body><div class="content"><h1><tt>odefun_mat2vec</tt></h1><!--introduction--><p>Transforms a matrix-valued ODE into a vector-valued ODE.</p><p><a href="index.html">Back to ODE Solver Toolbox Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#4">Input/Output Parameters</a></li><li><a href="#5">Example</a></li><li><a href="#6">See also</a></li></ul></div><h2 id="1">Syntax</h2><pre class="language-matlab">f = odefun_mat2vec(F)
 f = odefun_mat2vec(F,p)
-</pre><h2 id="2">Description</h2><p><tt>f = odefun_mat2vec(F)</tt> transforms the matrix-valued ODE <img src="odefun_mat2vec_doc_eq01774414981705130240.png" alt="$d\mathbf{M}/dt=\mathbf{F}(t,\mathbf{M})$" style="width:84px;height:11px;"> (where <img src="odefun_mat2vec_doc_eq15903383774327063487.png" alt="$\mathbf{F}:\mathrm{R}\times\mathrm{R}^{p\times p}\to\mathrm{R}^{p\times p}$" style="width:100px;height:9px;"> into the vector-valued ODE <img src="odefun_mat2vec_doc_eq11546780198861005830.png" alt="$d\mathbf{y}/dt=\mathbf{f}(t,\mathbf{y})$" style="width:71px;height:11px;"> (where <img src="odefun_mat2vec_doc_eq15557481901179112500.png" alt="$\mathbf{f}:\mathrm{R}\times\mathrm{R}^{p^{2}}\to\mathrm{R}^{p^{2}}$" style="width:83px;height:11px;">). It is assumed that <img src="odefun_mat2vec_doc_eq01518063970584319034.png" alt="$\mathbf{M}$" style="width:12px;height:8px;"> is a square matrix.</p><p><tt>f = odefun_mat2vec(F,p)</tt> transforms the matrix-valued ODE <img src="odefun_mat2vec_doc_eq01774414981705130240.png" alt="$d\mathbf{M}/dt=\mathbf{F}(t,\mathbf{M})$" style="width:84px;height:11px;"> (where <img src="odefun_mat2vec_doc_eq06566044392317834005.png" alt="$\mathbf{F}:\mathrm{R}\times\mathrm{R}^{p\times q}\to\mathrm{R}^{p\times q}$" style="width:100px;height:9px;">) into the vector-valued ODE <img src="odefun_mat2vec_doc_eq11546780198861005830.png" alt="$d\mathbf{y}/dt=\mathbf{f}(t,\mathbf{y})$" style="width:71px;height:11px;"> (where <img src="odefun_mat2vec_doc_eq15747343472969075467.png" alt="$\mathbf{f}:\mathrm{R}\times\mathrm{R}^{pq}\to\mathrm{R}^{pq}$" style="width:85px;height:8px;">). <tt>p</tt> specifies the number of rows of <tt>M</tt>.</p><h2 id="4">Input/Output Parameters</h2><p>
+</pre><h2 id="2">Description</h2><p><tt>f = odefun_mat2vec(F)</tt> transforms the matrix-valued ODE <img src="odefun_mat2vec_doc_eq01774414981705130240.png" alt="$d\mathbf{M}/dt=\mathbf{F}(t,\mathbf{M})$" style="width:84px;height:11px;"> (where <img src="odefun_mat2vec_doc_eq15903383774327063487.png" alt="$\mathbf{F}:\mathrm{R}\times\mathrm{R}^{p\times p}\to\mathrm{R}^{p\times p}$" style="width:100px;height:9px;"> into the vector-valued ODE <img src="odefun_mat2vec_doc_eq11546780198861005830.png" alt="$d\mathbf{y}/dt=\mathbf{f}(t,\mathbf{y})$" style="width:71px;height:11px;"> (where <img src="odefun_mat2vec_doc_eq15557481901179112500.png" alt="$\mathbf{f}:\mathrm{R}\times\mathrm{R}^{p^{2}}\to\mathrm{R}^{p^{2}}$" style="width:83px;height:11px;">). It is assumed that <img src="odefun_mat2vec_doc_eq01518063970584319034.png" alt="$\mathbf{M}$" style="width:12px;height:8px;"> is a square matrix.</p><p><tt>f = odefun_mat2vec(F,p)</tt> transforms the matrix-valued ODE <img src="odefun_mat2vec_doc_eq01774414981705130240.png" alt="$d\mathbf{M}/dt=\mathbf{F}(t,\mathbf{M})$" style="width:84px;height:11px;"> (where <img src="odefun_mat2vec_doc_eq14844018579718567230.png" alt="$\mathbf{F}:\mathrm{R}\times\mathrm{R}^{p\times r}\to\mathrm{R}^{p\times r}$" style="width:99px;height:9px;">) into the vector-valued ODE <img src="odefun_mat2vec_doc_eq11546780198861005830.png" alt="$d\mathbf{y}/dt=\mathbf{f}(t,\mathbf{y})$" style="width:71px;height:11px;"> (where <img src="odefun_mat2vec_doc_eq16176746348441022933.png" alt="$\mathbf{f}:\mathrm{R}\times\mathrm{R}^{pr}\to\mathrm{R}^{pr}$" style="width:85px;height:8px;">). <tt>p</tt> specifies the number of rows of <tt>M</tt>.</p><h2 id="4">Input/Output Parameters</h2><p>
   <table border=1>
       <tr>
           <td></td>
@@ -82,9 +82,9 @@ f = odefun_mat2vec(F,p)
           <td rowspan="2" style="text-align:center"><b>Input</b></td>
           <td style="text-align:center"><TT>F</TT></td>
           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{F}(t,\mathbf{M})" title="" /></td>
-          <td>multivariate, matrix-valued function (<img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{F}:\mathbb{R}\times\mathbb{R}^{p\times q}\rightarrow\mathbb{R}^{p\times q}" title="" />) defining the ordinary differential equation <img src="https://latex.codecogs.com/svg.latex?\inline&space;\frac{d\mathbf{M}}{dt}=\mathbf{f}(t,\mathbf{M})" title="" />
-              <BR> - inputs to <TT>F</TT> are the current time (<TT>t</TT>, 1×1 double) and the current state matrix (<TT>M</TT>, p×q double)
-              <BR> - output of <TT>F</TT> is the state matrix derivative (<TT>dMdt</TT>, p×q double) at the current time/state</td>
+          <td>multivariate, matrix-valued function (<img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{F}:\mathbb{R}\times\mathbb{R}^{p\times r}\rightarrow\mathbb{R}^{p\times r}" title="" />) defining the ordinary differential equation <img src="https://latex.codecogs.com/svg.latex?\inline&space;\frac{d\mathbf{M}}{dt}=\mathbf{f}(t,\mathbf{M})" title="" />
+              <BR> - inputs to <TT>F</TT> are the current time (<TT>t</TT>, 1×1 double) and the current state matrix (<TT>M</TT>, p×r double)
+              <BR> - output of <TT>F</TT> is the state matrix derivative (<TT>dMdt</TT>, p×r double) at the current time/state</td>
           <td style="text-align:center">1×1<BR>function_handle</td>
       </tr>
       <tr>
@@ -97,9 +97,9 @@ f = odefun_mat2vec(F,p)
           <td rowspan="1" style="text-align:center"><b>Output</b></td>
           <td style="text-align:center"><TT>f</TT></td>
           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{f}(t,\mathbf{y})" title="" /></td>
-          <td>multivariate, vector-valued function (<img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{f}:\mathbb{R}\times\mathbb{R}^{pq}\rightarrow\mathbb{R}^{pq}" title="" />) defining the ordinary differential equation <img src="https://latex.codecogs.com/svg.latex?\inline&space;\frac{d\mathbf{y}}{dt}=\mathbf{f}(t,\mathbf{y})" title="" />
-              <BR> - inputs to <TT>f</TT> are the current time (<TT>t</TT>, 1×1 double) and the current state vector (<TT>y</TT>, pq×1 double)
-              <BR> - output of <TT>f</TT> is the state vector derivative (<TT>dydt</TT>, pq×1 double) at the current time/state</td>
+          <td>multivariate, vector-valued function (<img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{f}:\mathbb{R}\times\mathbb{R}^{pr}\rightarrow\mathbb{R}^{pr}" title="" />) defining the ordinary differential equation <img src="https://latex.codecogs.com/svg.latex?\inline&space;\frac{d\mathbf{y}}{dt}=\mathbf{f}(t,\mathbf{y})" title="" />
+              <BR> - inputs to <TT>f</TT> are the current time (<TT>t</TT>, 1×1 double) and the current state vector (<TT>y</TT>, pr×1 double)
+              <BR> - output of <TT>f</TT> is the state vector derivative (<TT>dydt</TT>, pr×1 double) at the current time/state</td>
           <td style="text-align:center">1×1<BR>function_handle</td>
       </tr>
   </table>
@@ -122,9 +122,9 @@ f = odefun_mat2vec(F,p)
 %%
 % |f = odefun_mat2vec(F,p)| transforms the matrix-valued ODE 
 % $d\mathbf{M}/dt=\mathbf{F}(t,\mathbf{M})$ (where 
-% $\mathbf{F}:\mathrm{R}\times\mathrm{R}^{p\times q}\to\mathrm{R}^{p\times q}$)
+% $\mathbf{F}:\mathrm{R}\times\mathrm{R}^{p\times r}\to\mathrm{R}^{p\times r}$)
 % into the vector-valued ODE $d\mathbf{y}/dt=\mathbf{f}(t,\mathbf{y})$
-% (where $\mathbf{f}:\mathrm{R}\times\mathrm{R}^{pq}\to\mathrm{R}^{pq}$).
+% (where $\mathbf{f}:\mathrm{R}\times\mathrm{R}^{pr}\to\mathrm{R}^{pr}$).
 % |p| specifies the number of rows of |M|.
 %% Input/Output Parameters
 % <html>
@@ -140,9 +140,9 @@ f = odefun_mat2vec(F,p)
 %           <td rowspan="2" style="text-align:center"><b>Input</b></td>
 %           <td style="text-align:center"><TT>F</TT></td>
 %           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{F}(t,\mathbf{M})" title="" /></td>
-%           <td>multivariate, matrix-valued function (<img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{F}:\mathbb{R}\times\mathbb{R}^{p\times q}\rightarrow\mathbb{R}^{p\times q}" title="" />) defining the ordinary differential equation <img src="https://latex.codecogs.com/svg.latex?\inline&space;\frac{d\mathbf{M}}{dt}=\mathbf{f}(t,\mathbf{M})" title="" />
-%               <BR> - inputs to <TT>F</TT> are the current time (<TT>t</TT>, 1×1 double) and the current state matrix (<TT>M</TT>, p×q double)
-%               <BR> - output of <TT>F</TT> is the state matrix derivative (<TT>dMdt</TT>, p×q double) at the current time/state</td>
+%           <td>multivariate, matrix-valued function (<img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{F}:\mathbb{R}\times\mathbb{R}^{p\times r}\rightarrow\mathbb{R}^{p\times r}" title="" />) defining the ordinary differential equation <img src="https://latex.codecogs.com/svg.latex?\inline&space;\frac{d\mathbf{M}}{dt}=\mathbf{f}(t,\mathbf{M})" title="" />
+%               <BR> - inputs to <TT>F</TT> are the current time (<TT>t</TT>, 1×1 double) and the current state matrix (<TT>M</TT>, p×r double)
+%               <BR> - output of <TT>F</TT> is the state matrix derivative (<TT>dMdt</TT>, p×r double) at the current time/state</td>
 %           <td style="text-align:center">1×1<BR>function_handle</td>
 %       </tr>
 %       <tr>
@@ -155,9 +155,9 @@ f = odefun_mat2vec(F,p)
 %           <td rowspan="1" style="text-align:center"><b>Output</b></td>
 %           <td style="text-align:center"><TT>f</TT></td>
 %           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{f}(t,\mathbf{y})" title="" /></td>
-%           <td>multivariate, vector-valued function (<img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{f}:\mathbb{R}\times\mathbb{R}^{pq}\rightarrow\mathbb{R}^{pq}" title="" />) defining the ordinary differential equation <img src="https://latex.codecogs.com/svg.latex?\inline&space;\frac{d\mathbf{y}}{dt}=\mathbf{f}(t,\mathbf{y})" title="" />
-%               <BR> - inputs to <TT>f</TT> are the current time (<TT>t</TT>, 1×1 double) and the current state vector (<TT>y</TT>, pq×1 double)
-%               <BR> - output of <TT>f</TT> is the state vector derivative (<TT>dydt</TT>, pq×1 double) at the current time/state</td>
+%           <td>multivariate, vector-valued function (<img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{f}:\mathbb{R}\times\mathbb{R}^{pr}\rightarrow\mathbb{R}^{pr}" title="" />) defining the ordinary differential equation <img src="https://latex.codecogs.com/svg.latex?\inline&space;\frac{d\mathbf{y}}{dt}=\mathbf{f}(t,\mathbf{y})" title="" />
+%               <BR> - inputs to <TT>f</TT> are the current time (<TT>t</TT>, 1×1 double) and the current state vector (<TT>y</TT>, pr×1 double)
+%               <BR> - output of <TT>f</TT> is the state vector derivative (<TT>dydt</TT>, pr×1 double) at the current time/state</td>
 %           <td style="text-align:center">1×1<BR>function_handle</td>
 %       </tr>
 %   </table>
