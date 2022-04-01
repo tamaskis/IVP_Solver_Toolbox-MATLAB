@@ -11,7 +11,7 @@
 % RK4, RK4_ralston, RK4_38.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2022-03-28
+% Last Update: 2022-03-31
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
@@ -239,9 +239,9 @@ function [t,y] = RK3_ralston(f,I,y0,h,wb)
     %----------------------------------------------------------------------
     %
     % INPUT:
-    %   wb      - (1×1 Figure) waitbar
     %   n       - (1×1 double) current sample number (i.e. iteration)
     %  	N       - (1×1 double) total number of samples (i.e. iterations)
+    %   wb      - (1×1 Figure) waitbar
     %   prop    - (1×1 double) cutoff proportion to trigger waitbar update
     %
     % OUTPUT:
@@ -252,13 +252,13 @@ function [t,y] = RK3_ralston(f,I,y0,h,wb)
     %       only updated after every additional 10% of progress.
     %
     %----------------------------------------------------------------------
-    function prop = update_waitbar(i,N,wb,prop)
+    function prop = update_waitbar(n,N,wb,prop)
         
         % only updates waitbar if current proportion exceeds cutoff prop.
-        if i/N > prop
+        if n/N > prop
             
             % updates waitbar
-            waitbar(i/N,wb);
+            waitbar(n/N,wb);
             
             % updates cutoff proportion needed to trigger waitbar update
             prop = prop+0.1;
