@@ -9,15 +9,15 @@
 % See also ABM2, ABM3, ABM4, ABM5, ABM7, ABM8.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2022-03-31
+% Last Update: 2022-04-16
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
+% TOOLBOX DOCUMENTATION:
+% https://tamaskis.github.io/ODE_Solver_Toolbox-MATLAB/
+%
 % TECHNICAL DOCUMENTATION:
 % https://tamaskis.github.io/documentation/Fixed_Step_ODE_Solvers.pdf
-%
-% REFERENCES:
-%   [1] Montenbruck and Gill, "Satellite Orbits" (pp. 135-138)
 %
 %--------------------------------------------------------------------------
 %

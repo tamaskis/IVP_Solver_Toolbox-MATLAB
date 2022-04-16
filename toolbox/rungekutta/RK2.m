@@ -10,16 +10,15 @@
 % SSPRK3, RK4, RK4_ralston, RK4_38.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2022-03-31
+% Last Update: 2022-04-16
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
+% TOOLBOX DOCUMENTATION:
+% https://tamaskis.github.io/ODE_Solver_Toolbox-MATLAB/
+%
 % TECHNICAL DOCUMENTATION:
 % https://tamaskis.github.io/documentation/Fixed_Step_ODE_Solvers.pdf
-%
-% REFERENCES:
-%   [1] https://en.wikipedia.org/wiki/List_of_Runge-Kutta_methods
-%   [2] https://en.wikipedia.org/wiki/Runge-Kutta_methods
 %
 %--------------------------------------------------------------------------
 %

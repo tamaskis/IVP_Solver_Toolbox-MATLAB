@@ -9,9 +9,12 @@
 % See also odefun_mat2vec, odeIC_mat2vec.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2022-03-29
+% Last Update: 2022-04-16
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
+%
+% TOOLBOX DOCUMENTATION:
+% https://tamaskis.github.io/ODE_Solver_Toolbox-MATLAB/
 %
 % TECHNICAL DOCUMENTATION:
 % https://tamaskis.github.io/documentation/Fixed_Step_ODE_Solvers.pdf

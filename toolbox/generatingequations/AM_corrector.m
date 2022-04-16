@@ -8,16 +8,15 @@
 % See also AB_coefficients, AM_coefficients, AB_predictor, ABM_equations.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2022-03-29
+% Last Update: 2022-04-16
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
+% TOOLBOX DOCUMENTATION:
+% https://tamaskis.github.io/ODE_Solver_Toolbox-MATLAB/
+%
 % TECHNICAL DOCUMENTATION:
 % https://tamaskis.github.io/documentation/Fixed_Step_ODE_Solvers.pdf
-%
-% REFERENCES:
-%   [1] Seidu, "A Matrix System for Computing the Coefficients of the Adams
-%       Bashforth-Moulton Predictor-Corrector formulae"
 %
 %--------------------------------------------------------------------------
 %
