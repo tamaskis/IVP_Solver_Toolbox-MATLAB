@@ -5,7 +5,7 @@
 % the thumbnail image for the ODE solver toolbox.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2021-12-22
+% Last Update: 2022-04-16
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 
@@ -15,9 +15,6 @@
 
 % clears Workspace and Command Window, closes all figures
 clear; clc; close all;
-
-% adds path to all "ODE Solver Toolbox" functions
-addpath(genpath("../../src"));
 
 
 
