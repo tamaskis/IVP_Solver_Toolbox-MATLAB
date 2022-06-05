@@ -1,10 +1,10 @@
 %% example_pass_extra.m
-% ODE Solver Toolbox
+% IVP Solver Toolbox
 %
-% Example of passing extra parameters to a function defining an ODE.
+% Example of passing extra parameters to a function defining an IVP.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2022-04-16
+% Last Update: 2022-06-05
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 

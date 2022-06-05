@@ -1,10 +1,10 @@
 %% example_waitbar.m
-% ODE Solver Toolbox
+% IVP Solver Toolbox
 %
 % Examples demonstrating how to use waitbar.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2022-04-16
+% Last Update: 2022-06-05
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 
@@ -33,12 +33,12 @@ f = @(t,x) [sigma*(x(2)-x(1));
 
 %% EXAMPLE #1 - WAITBAR WITH DEFAULT MESSAGE
 
-% solves ODE, displaying waitbar with default message
+% solves IVP, displaying waitbar with default message
 [t,y] = ABM8(f,[0,200],[0;1;1.05],0.001,true);
 
 
 
 %% EXAMPLE #2 - WAITBAR WITH CUSTOM MESSAGE
 
-% solves ODE, displaying waitbar with custom message
+% solves IVP, displaying waitbar with custom message
 [t,y] = ABM8(f,[0,200],[0;1;1.05],0.001,'Solving Lorenz system...');

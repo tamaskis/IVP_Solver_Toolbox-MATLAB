@@ -62,7 +62,7 @@
 function [t,y] = solve_ivp(f,I,y0,h,method,wb)
     
     % --------------------
-    % Time detection msolve_ivp.
+    % Time detection mode.
     % --------------------
     
     if ~iscell(I)
@@ -106,7 +106,7 @@ function [t,y] = solve_ivp(f,I,y0,h,method,wb)
         end
         
     % ---------------------
-    % Event detection msolve_ivp.
+    % Event detection mode.
     % ---------------------
     
     else

@@ -1,10 +1,10 @@
 %% example_return_extra.m
-% ODE Solver Toolbox
+% IVP Solver Toolbox
 %
-% Example of returning extra parameters from an ODE solution.
+% Example of returning extra parameters from an IVP solution.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2022-04-16
+% Last Update: 2022-06-05
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 
@@ -22,7 +22,7 @@ clear; clc; close all;
 % assign function handle and pass extra parameter
 f = @(t,y) f_extra(t,y,5);
 
-% solve ODE
+% solve IVP
 y0 = [1;
       1];
 t0 = 0;

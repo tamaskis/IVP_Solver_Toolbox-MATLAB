@@ -1,11 +1,11 @@
 %% example_lorenz.m
-% ODE Solver Toolbox
+% IVP Solver Toolbox
 %
 % Example simulating the Lorenz system. This script is also used to create 
-% the thumbnail image for the ODE solver toolbox.
+% the thumbnail image for the IVP solver toolbox.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2022-06-04
+% Last Update: 2022-06-05
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 

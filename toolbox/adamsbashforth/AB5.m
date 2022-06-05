@@ -8,15 +8,15 @@
 % See also AB2, AB3, AB4, AB6, AB7, AB8.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2022-06-04
+% Last Update: 2022-06-05
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
 % TOOLBOX DOCUMENTATION:
-% https://tamaskis.github.io/ODE_Solver_Toolbox-MATLAB/
+% https://tamaskis.github.io/IVP_Solver_Toolbox-MATLAB/
 %
 % TECHNICAL DOCUMENTATION:
-% https://tamaskis.github.io/documentation/Fixed_Step_ODE_Solvers.pdf
+% https://tamaskis.github.io/documentation/Solving_Initial_Value_Problems_for_ODEs.pdf
 %
 %--------------------------------------------------------------------------
 %

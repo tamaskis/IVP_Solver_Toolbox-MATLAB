@@ -1,11 +1,11 @@
 %% example_matrix_ode.m
-% ODE Solver Toolbox
+% IVP Solver Toolbox
 %
-% Example for solving a matrix-valued ODE (the Riccati differential
+% Example for solving a matrix-valued IVP (the Riccati differential
 % equation).
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2022-04-16
+% Last Update: 2022-06-05
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 
@@ -48,7 +48,7 @@ T = 5;
 
 
 
-%% SOLVING RICCATI DIFFERENTIAL EQUATION USING ODE SOLVER
+%% SOLVING RICCATI DIFFERENTIAL EQUATION USING IVP SOLVER
 
 % defines the Riccati differential equation (a matrix-valued ODE)
 F = @(t,P) -(A.'*P+P*A-(P*B+S)/R*(B.'*P+S.')+Q);
@@ -59,11 +59,11 @@ f = odefun_mat2vec(F);
 % final condition
 yT = odeIC_mat2vec(PT);
 
-% solves vector-valued ODE using a step size of h = 0.001
-[t,y] = RK4(f,[T,0],yT,0.001);
+% solves vector-valued IVP using a step size of h = 0.001
+[~,y] = RK4(f,[T,0],yT,0.001);
 
-% transforms solution matrix for vector-valued ODE into solution array for
-% matrix-valued ODE
+% transforms solution matrix for vector-valued IVP into solution array for
+% matrix-valued IVP
 P = odesol_vec2mat(y);
 
 % solution for P0 (will be at end of array since P solved for backwards in

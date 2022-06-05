@@ -1,10 +1,10 @@
 %% example_brute_force.m
-% ODE Solver Toolbox
+% IVP Solver Toolbox
 %
-% Example of a "brute force" method for solving ODEs.
+% Example of a "brute force" method for solving IVPs.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2022-04-16
+% Last Update: 2022-06-05
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 
