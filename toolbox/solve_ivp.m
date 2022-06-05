@@ -1,11 +1,11 @@
 %==========================================================================
 %
-% ode  Solve initial value problems using fixed-step ODE solvers.
+% solve_ivp  Solve initial value problems using fixed-step IVP solvers.
 %
-%   [t,y] = ode(f,[t0,tf],y0,h)
-%   [t,y] = ode(f,{t0,C},y0,h)
-%   [t,y] = ode(__,method)
-%   [t,y] = ode(__,method,wb)
+%   [t,y] = solve_ivp(f,[t0,tf],y0,h)
+%   [t,y] = solve_ivp(f,{t0,C},y0,h)
+%   [t,y] = solve_ivp(__,method)
+%   [t,y] = solve_ivp(__,method,wb)
 %
 % Copyright © 2021 Tamas Kis
 % Last Update: 2022-06-04
@@ -13,10 +13,10 @@
 % Contact: tamas.a.kis@outlook.com
 %
 % TOOLBOX DOCUMENTATION:
-% https://tamaskis.github.io/ODE_Solver_Toolbox-MATLAB/
+% https://tamaskis.github.io/IVP_Solver_Toolbox-MATLAB/
 %
 % TECHNICAL DOCUMENTATION:
-% https://tamaskis.github.io/documentation/Fixed_Step_ODE_Solvers.pdf
+% https://tamaskis.github.io/documentation/Fixed_Step_IVP_Solvers.pdf
 %
 %--------------------------------------------------------------------------
 %
@@ -25,7 +25,7 @@
 % ------
 %   f       - (1×1 function_handle) dy/dt = f(t,y) --> multivariate, 
 %             vector-valued function (f : ℝ×ℝᵖ → ℝᵖ) defining ODE
-%   I       - defines interval over which to solve the ODE, 2 options:
+%   I       - defines interval over which to solve the IVP, 2 options:
 %               --> [t0,tf] - (1×2 double) initial and final times
 %               --> {t0,C}  - (1×2 cell) initial time, t₀, and function 
 %                             handle for condition function, C(t,y) 
@@ -59,10 +59,10 @@
 %       chosen to match the convention used by MATLAB's ODE suite.
 %
 %==========================================================================
-function [t,y] = ode(f,I,y0,h,method,wb)
+function [t,y] = solve_ivp(f,I,y0,h,method,wb)
     
     % --------------------
-    % Time detection mode.
+    % Time detection msolve_ivp.
     % --------------------
     
     if ~iscell(I)
@@ -97,7 +97,7 @@ function [t,y] = ode(f,I,y0,h,method,wb)
         % turns waitbar on with default message
         elseif (nargin == 6) && wb
             display_waitbar = true;
-            [wb,prop] = initialize_waitbar('Solving ODE...');
+            [wb,prop] = initialize_waitbar('Solving IVP...');
             
         % turns waitbar off otherwise
         else
@@ -106,7 +106,7 @@ function [t,y] = ode(f,I,y0,h,method,wb)
         end
         
     % ---------------------
-    % Event detection mode.
+    % Event detection msolve_ivp.
     % ---------------------
     
     else
@@ -213,7 +213,7 @@ function [t,y] = ode(f,I,y0,h,method,wb)
     y(:,1) = y0;
     
     % ---------------------------------------
-    % Solves ODE (using single-step methods).
+    % Solves IVP (using single-step methods).
     % ---------------------------------------
     
     if single_step
@@ -242,7 +242,7 @@ function [t,y] = ode(f,I,y0,h,method,wb)
         end
         
     % --------------------------------------
-    % Solves ODE (using multi-step methods).
+    % Solves IVP (using multi-step methods).
     % --------------------------------------
     
     else
