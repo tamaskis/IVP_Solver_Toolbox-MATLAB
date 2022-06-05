@@ -1,12 +1,13 @@
 %==========================================================================
 %
-% oderk  Fixed-step ODE solver using the Runge-Kutta methods.
+% odeRK  Fixed-step ODE solver using the Runge-Kutta methods.
 %
-%   [t,y] = oderk(f,[t0,tf],y0,h)
-%   [t,y] = oderk(f,{t0,C},y0,h)
-%   [t,y] = oderk(__,method,wb)
+%   [t,y] = odeRK(f,[t0,tf],y0,h)
+%   [t,y] = odeRK(f,{t0,C},y0,h)
+%   [t,y] = odeRK(__,method)
+%   [t,y] = odeRK(__,method,wb)
 %
-% See also odeab, odeabm.
+% See also odeAB, odeABM.
 %
 % Copyright © 2021 Tamas Kis
 % Last Update: 2022-06-04
@@ -58,7 +59,7 @@
 %       chosen to match the convention used by MATLAB's ODE suite.
 %
 %==========================================================================
-function [t,y] = oderk(f,I,y0,h,method,wb)
+function [t,y] = odeRK(f,I,y0,h,method,wb)
     
     % -------------------
     % Setting up waitbar.
@@ -156,8 +157,7 @@ function [t,y] = oderk(f,I,y0,h,method,wb)
         % stores initial condition in solution matrix
         y(:,1) = y0;
         
-        % propagating state vector using the classic Runge-Kutta
-        % fourth-order method
+        % propagating state vector using a Runge-Kutta method
         for n = 1:N
             
             % state vector propagated to next sample time

@@ -1,7 +1,7 @@
 %==========================================================================
 %
 % RK1_euler  Propagates the state vector forward one time step using
-% the Euler (1st-order) method.
+% the Euler (first-order) method.
 %
 %   y_next = RK1_euler(f,t,y,h)
 %
