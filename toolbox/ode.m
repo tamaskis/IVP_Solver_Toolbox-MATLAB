@@ -1,6 +1,6 @@
 %==========================================================================
 %
-% ode  Fixed-step ODE solvers.
+% ode  Solve initial value problems using fixed-step ODE solvers.
 %
 %   [t,y] = ode(f,[t0,tf],y0,h)
 %   [t,y] = ode(f,{t0,C},y0,h)
@@ -32,9 +32,11 @@
 %                             (C : ℝ×ℝᵖ → 𝔹)
 %   y0      - (p×1 double) initial condition, y₀ = y(t₀)
 %   h       - (1×1 double) step size
-%   method  - (char) (OPTIONAL) Runge-Kutta method --> 'Euler', 'RK2', 
+%   method  - (char) (OPTIONAL) integration method --> 'Euler', 'RK2', 
 %             'RK2 Heun', 'RK2 Ralston', 'RK3', 'RK3 Heun', 'RK3 Ralston', 
-%             'SSPRK3', 'RK4', 'RK4 Ralston', 'RK4 3/8' (defaults to 'RK4')
+%             'SSPRK3', 'RK4', 'RK4 Ralston', 'RK4 3/8', 'AB2', 'AB3', 
+%             'AB4', 'AB5', 'AB6', 'AB7', 'AB8', 'ABM2', 'ABM3', 'ABM4', 
+%             'ABM5', 'ABM6', 'ABM7', 'ABM8' (defaults to 'RK4')
 %   wb      - (1×1 logical or char) (OPTIONAL) waitbar parameters
 %               --> input as "true" if you want waitbar with default 
 %                   message displayed
@@ -75,7 +77,11 @@ function [t,y] = ode(f,I,y0,h,method,wb)
         end
         
         % defines condition function
-        C = @(t,y) t <= tf;
+        if (tf > t0)
+            C = @(t,y) t <= tf;
+        else
+            C = @(t,y) t >= tf;
+        end
         
         % indicates that final time is known
         final_time_known = true;
@@ -124,27 +130,27 @@ function [t,y] = ode(f,I,y0,h,method,wb)
     end
     
     % sets propagation function for single-step methods
-    if strcmpi(method,'RK1_euler')
+    if strcmpi(method,'Euler')
         propagate = @(t,y) RK1_euler(f,t,y,h);
     elseif strcmpi(method,'RK2')
         propagate = @(t,y) RK2(f,t,y,h);
-    elseif strcmpi(method,'RK2_heun')
+    elseif strcmpi(method,'RK2 Heun')
         propagate = @(t,y) RK2_heun(f,t,y,h);
-    elseif strcmpi(method,'RK2_ralston')
+    elseif strcmpi(method,'RK2 Ralston')
         propagate = @(t,y) RK2_ralston(f,t,y,h);
     elseif strcmpi(method,'RK3')
         propagate = @(t,y) RK3(f,t,y,h);
-    elseif strcmpi(method,'RK3_heun')
+    elseif strcmpi(method,'RK3 Heun')
         propagate = @(t,y) RK3_heun(f,t,y,h);
-    elseif strcmpi(method,'RK3_ralston')
+    elseif strcmpi(method,'RK3 Ralston')
         propagate = @(t,y) RK3_ralston(f,t,y,h);
     elseif strcmpi(method,'SSPRK3')
         propagate = @(t,y) SSPRK3(f,t,y,h);
     elseif strcmpi(method,'RK4')
         propagate = @(t,y) RK4(f,t,y,h);
-    elseif strcmpi(method,'RK4_38')
+    elseif strcmpi(method,'RK4 3/8')
         propagate = @(t,y) RK4_38(f,t,y,h);
-    elseif strcmpi(method,'RK4_ralston')
+    elseif strcmpi(method,'RK4 Ralston')
         propagate = @(t,y) RK4_ralston(f,t,y,h);
     end
     
@@ -183,7 +189,7 @@ function [t,y] = ode(f,I,y0,h,method,wb)
     end
     
     % determines if the method is a single-step method
-    if strcmpi(method(1:2),'RK')
+    if ~strcmpi(method(1:2),'AB')
         single_step = true;
     else
         single_step = false;
