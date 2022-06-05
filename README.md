@@ -1,12 +1,12 @@
-# ODE Solver Toolbox [![View ODE Solver Toolbox on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/103975-ode-solver-toolbox)
+# IVP Solver Toolbox [![View ODE Solver Toolbox on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/103975-ode-solver-toolbox)
 
 Collection of fixed-step IVP solvers, functions to generate IVP solver equations, and functions for transforming matrix IVPs to vector IVPs.
 
 
 ## Documentation
 
-[Toolbox Documentation](https://tamaskis.github.io/ODE_Solver_Toolbox-MATLAB/)\
-[Technical Documentation](https://tamaskis.github.io/documentation/Fixed_Step_ODE_Solvers.pdf)
+[Toolbox Documentation](https://tamaskis.github.io/IVP_Solver_Toolbox-MATLAB/)\
+[Technical Documentation](https://tamaskis.github.io/documentation/Solving_Initial_Value_Problems_for_ODEs.pdf)
 
 To open the home page of the toolbox documentation in MATLAB, type
 
@@ -20,7 +20,7 @@ in the Command Window. To open the documentation of a specific function with nam
 doc_IST function_name
 ```
 
-To open the PDF file with the technical documentation (Fixed_Step_ODE_Solvers.pdf) from the Command Window, type
+To open the PDF file with the technical documentation (Solving_Initial_Value_Problems_for_ODEs.pdf) from the Command Window, type
 
 ```
 doc_IST tech
@@ -75,13 +75,13 @@ doc_IST tech
 `RK4_ralston_step`
 
 
-## Tools for Matrix-Valued ODEs
+## Tools for Matrix-Valued IVPs
 `odefun_mat2vec`\
-`odeIC_mat2vec`\
-`odesol_vec2mat`
+`ivpIC_mat2vec`\
+`ivpsol_vec2mat`
 
 
-## Generating ODE Solver Equations
+## Generating IVP Solver Equations
 `AB_coefficients`\
 `AM_coefficients`\
 `AB_predictor`\
