@@ -1,13 +1,11 @@
 %==========================================================================
 %
-% odeRK  Fixed-step ODE solver using the Runge-Kutta methods.
+% ode  Fixed-step ODE solvers.
 %
-%   [t,y] = odeRK(f,[t0,tf],y0,h)
-%   [t,y] = odeRK(f,{t0,C},y0,h)
-%   [t,y] = odeRK(__,method)
-%   [t,y] = odeRK(__,method,wb)
-%
-% See also odeAB, odeABM.
+%   [t,y] = ode(f,[t0,tf],y0,h)
+%   [t,y] = ode(f,{t0,C},y0,h)
+%   [t,y] = ode(__,method)
+%   [t,y] = ode(__,method,wb)
 %
 % Copyright © 2021 Tamas Kis
 % Last Update: 2022-06-04
@@ -59,7 +57,7 @@
 %       chosen to match the convention used by MATLAB's ODE suite.
 %
 %==========================================================================
-function [t,y] = odeRK(f,I,y0,h,method,wb)
+function [t,y] = ode(f,I,y0,h,method,wb)
     
     % --------------------
     % Time detection mode.
@@ -125,10 +123,8 @@ function [t,y] = odeRK(f,I,y0,h,method,wb)
         method = 'RK4';
     end
     
-    % sets propagation function
-    if strcmpi(method,'RK4')
-        propagate = @(t,y) RK4(f,t,y,h);
-    elseif strcmpi(method,'RK1_euler')
+    % sets propagation function for single-step methods
+    if strcmpi(method,'RK1_euler')
         propagate = @(t,y) RK1_euler(f,t,y,h);
     elseif strcmpi(method,'RK2')
         propagate = @(t,y) RK2(f,t,y,h);
@@ -144,46 +140,150 @@ function [t,y] = odeRK(f,I,y0,h,method,wb)
         propagate = @(t,y) RK3_ralston(f,t,y,h);
     elseif strcmpi(method,'SSPRK3')
         propagate = @(t,y) SSPRK3(f,t,y,h);
+    elseif strcmpi(method,'RK4')
+        propagate = @(t,y) RK4(f,t,y,h);
     elseif strcmpi(method,'RK4_38')
         propagate = @(t,y) RK4_38(f,t,y,h);
     elseif strcmpi(method,'RK4_ralston')
         propagate = @(t,y) RK4_ralston(f,t,y,h);
     end
     
-    % -----------
-    % Solves ODE.
-    % -----------
+    % sets propagation function for multi-step predictor methods
+    if strcmpi(method,'AB2')
+        propagate = @(t,F) AB2(f,t,F,h);
+    elseif strcmpi(method,'AB3')
+        propagate = @(t,F) AB3(f,t,F,h);
+    elseif strcmpi(method,'AB4')
+        propagate = @(t,F) AB4(f,t,F,h);
+    elseif strcmpi(method,'AB5')
+        propagate = @(t,F) AB5(f,t,F,h);
+    elseif strcmpi(method,'AB6')
+        propagate = @(t,F) AB6(f,t,F,h);
+    elseif strcmpi(method,'AB7')
+        propagate = @(t,F) AB7(f,t,F,h);
+    elseif strcmpi(method,'AB8')
+        propagate = @(t,F) AB8(f,t,F,h);
+    end
+    
+    % sets propagation function for multi-step predictor-corrector methods
+    if strcmpi(method,'ABM2')
+        propagate = @(t,F) ABM2(f,t,F,h);
+    elseif strcmpi(method,'ABM3')
+        propagate = @(t,F) ABM3(f,t,F,h);
+    elseif strcmpi(method,'ABM4')
+        propagate = @(t,F) ABM4(f,t,F,h);
+    elseif strcmpi(method,'ABM5')
+        propagate = @(t,F) ABM5(f,t,F,h);
+    elseif strcmpi(method,'ABM6')
+        propagate = @(t,F) ABM6(f,t,F,h);
+    elseif strcmpi(method,'ABM7')
+        propagate = @(t,F) ABM7(f,t,F,h);
+    elseif strcmpi(method,'ABM8')
+        propagate = @(t,F) ABM8(f,t,F,h);
+    end
+    
+    % determines if the method is a single-step method
+    if strcmpi(method(1:2),'RK')
+        single_step = true;
+    else
+        single_step = false;
+    end
+    
+    % determines order for multistep methods
+    if ~single_step
+        m = str2double(method(end));
+    end
+    
+    % --------------------------------------------------
+    % Preallocates arrays and stores initial conditions.
+    % --------------------------------------------------
     
     % preallocates time vector and solution matrix
     t = zeros(10000,1);
     y = zeros(length(y0),length(t));
     
-    % stores initial condition in solution matrix
+    % stores initial conditions
     t(1) = t0;
     y(:,1) = y0;
     
-    % state vector propagation while condition is satisfied
-    n = 1;
-    while C(t(n),y(:,n))
+    % ---------------------------------------
+    % Solves ODE (using single-step methods).
+    % ---------------------------------------
+    
+    if single_step
         
-        % expands t and y if needed
-        if (n+1) > length(t)
-            [t,y] = expand_solution_arrays(t,y);
+        % state vector propagation while condition is satisfied
+        n = 1;
+        while C(t(n),y(:,n))
+            
+            % expands t and y if needed
+            if (n+1) > length(t)
+                [t,y] = expand_solution_arrays(t,y);
+            end
+            
+            % state vector propagated to next sample time
+            y(:,n+1) = propagate(t(n),y(:,n));
+            
+            % increments time and loop index
+            t(n+1) = t(n)+h;
+            n = n+1;
+            
+            % updates waitbar
+            if final_time_known && display_waitbar
+                prop = update_waitbar(n,N,wb,prop);
+            end
+            
         end
         
-        % state vector propagated to next sample time
-        y(:,n+1) = propagate(t(n),y(:,n));
+    % --------------------------------------
+    % Solves ODE (using multi-step methods).
+    % --------------------------------------
+    
+    else
         
-        % increments time and loop index
-        t(n+1) = t(n)+h;
-        n = n+1;
+        % time vector for first m sample times
+        t(1:m) = (t0:h:(t0+(m-1)*h))';
         
-        % updates waitbar
-        if final_time_known && display_waitbar
-            prop = update_waitbar(n,N,wb,prop);
+        % propagating state vector using RK4 for first "m" sample times
+        for n = 1:m
+            y(:,n+1) = RK4(f,t(n),y(:,n),h);
+        end
+        
+        % initializes F matrix (stores function evaluations for first m 
+        % sample times in first m columns, state vector at (m+1)th sample
+        % time in (m+1)th column)
+        F = zeros(length(y0),m+1);
+        for n = 1:m
+            F(:,n) = f(t(n),y(:,n));
+        end
+        F(:,n+1) = y(:,m+1);
+        
+        % state vector propagation while condition is satisfied
+        n = 1;
+        while C(t(n),y(:,n))
+            
+            % expands t and y if needed
+            if (n+1) > length(t)
+                [t,y] = expand_solution_arrays(t,y);
+            end
+            
+            % updates F matrix
+            F = propagate(t(n),F);
+            
+            % extracts/stores state vector propagated to next sample time
+            y(:,n+1) = F(:,m+1);
+            
+            % increments time and loop index
+            t(n+1) = t(n)+h;
+            n = n+1;
+            
         end
         
     end
+    
+    % -----------------
+    % Final formatting.
+    % -----------------
     
     % trims arrays
     y = y(:,1:(n-1));

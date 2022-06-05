@@ -61,68 +61,56 @@
 %==========================================================================
 function [t,y] = odeRK(f,I,y0,h,method,wb)
     
-    % --------------------
-    % Time detection mode.
-    % --------------------
+    % -------------------
+    % Setting up waitbar.
+    % -------------------
     
-    if ~iscell(I)
+    % turns waitbar on with custom message
+    if (nargin == 6) && ischar(wb)
+        display_waitbar = true;
+        [wb,prop] = initialize_waitbar(msg);
         
-        % extracts initial and final times
-        t0 = I(1);
-        tf = I(2);
+    % turns waitbar on with default message
+    elseif (nargin == 6) && wb
+        display_waitbar = true;
+        [wb,prop] = initialize_waitbar('Solving ODE...');
         
-        % makes step size negative if t0 > tf
-        if (t0 > tf)
-            h = -h;
-        end
-        
-        % defines condition function
-        C = @(t,y) t <= tf;
-        
-        % indicates that final time is known
-        final_time_known = true;
-        
-        % number of subintervals between sample times
-        N = ceil((tf-t0)/h);
-        
-        % turns waitbar on with custom message
-        if (nargin == 6) && ischar(wb)
-            display_waitbar = true;
-            [wb,prop] = initialize_waitbar(msg);
-            
-        % turns waitbar on with default message
-        elseif (nargin == 6) && wb
-            display_waitbar = true;
-            [wb,prop] = initialize_waitbar('Solving ODE...');
-            
-        % turns waitbar off otherwise
-        else
-            display_waitbar = false;
-            
-        end
-        
-    % ---------------------
-    % Event detection mode.
-    % ---------------------
-    
+    % turns waitbar off otherwise
     else
-        
-        % extracts initial time and condition function
-        t0 = I{1};
-        C = I{2};
-        
-        % indicates that final time is unknown
-        final_time_known = false;
+        display_waitbar = false;
         
     end
     
-    % -------------------
-    % Integration method.
-    % -------------------
+    % ---------------------------------------
+    % Determines which implementation to use.
+    % ---------------------------------------
+    
+    % event detection implementation
+    if iscell(I)
+        t0 = I{1};
+        C = I{2};
+        time_detection_implementation = false;
+        
+    % time detection implementation
+    else
+        t0 = I(1);
+        tf = I(2);
+        time_detection_implementation = true;
+
+    end
+    
+    % --------------------
+    % Sets up integration.
+    % --------------------
     
     % defaults integration method to RK4
     if (nargin < 5) || isempty(method)
         method = 'RK4';
+    end
+    
+    % makes step size negative if t0 > tf
+    if time_detection_implementation && (t0 > tf)
+        h = -h;
     end
     
     % sets propagation function
@@ -150,51 +138,84 @@ function [t,y] = odeRK(f,I,y0,h,method,wb)
         propagate = @(t,y) RK4_ralston(f,t,y,h);
     end
     
-    % -----------
-    % Solves ODE.
-    % -----------
+    % --------------------------------------------------------
+    % Time detection implementation (solves until final time).
+    % --------------------------------------------------------
     
-    % preallocates time vector and solution matrix
-    t = zeros(10000,1);
-    y = zeros(length(y0),length(t));
-    
-    % stores initial condition in solution matrix
-    t(1) = t0;
-    y(:,1) = y0;
-    
-    % state vector propagation while condition is satisfied
-    n = 1;
-    while C(t(n),y(:,n))
+    if time_detection_implementation
         
-        % expands t and y if needed
-        if (n+1) > length(t)
-            [t,y] = expand_solution_arrays(t,y);
+        % number of subintervals between sample times
+        N = ceil((tf-t0)/h);
+        
+        % last element of the time vector
+        tN = t0+N*h;
+        
+        % defines time vector and preallocates solution matrix
+        t = (t0:h:tN)';
+        y = zeros(length(y0),length(t));
+        
+        % stores initial condition in solution matrix
+        y(:,1) = y0;
+        
+        % propagating state vector using a Runge-Kutta method
+        for n = 1:N
+            
+            % state vector propagated to next sample time
+            y(:,n+1) = propagate(t(n),y(:,n));
+            
+            % updates waitbar
+            if display_waitbar, prop = update_waitbar(n,N,wb,prop); end
+            
         end
         
-        % state vector propagated to next sample time
-        y(:,n+1) = propagate(t(n),y(:,n));
+        % linearly interpolates for solution at tf
+        y(:,N+1) = y(:,N)+((y(:,N+1)-y(:,N))/(t(N+1)-t(N)))*(tf-t(N));
         
-        % increments time and loop index
-        t(n+1) = t(n)+h;
-        n = n+1;
+        % replaces last element of "t" with tf
+        t(N+1) = tf;
         
-        % updates waitbar
-        if final_time_known && display_waitbar
-            prop = update_waitbar(n,N,wb,prop);
+        % closes waitbar
+        if display_waitbar, close(wb); end
+        
+    % ---------------------------------------------------------------------
+    % Event detection implementation (solves while condition is satisfied).
+    % ---------------------------------------------------------------------
+    
+    else
+        
+        % preallocates time vector and solution matrix
+        t = zeros(10000,1);
+        y = zeros(length(y0),length(t));
+        
+        % stores initial condition in solution matrix
+        t(1) = t0;
+        y(:,1) = y0;
+        
+        % state vector propagation while condition is satisfied
+        n = 1;
+        while C(t(n),y(:,n))
+            
+            % expands t and y if needed
+            if (n+1) > length(t)
+                [t,y] = expand_solution_arrays(t,y);
+            end
+            
+            % state vector propagated to next sample time
+            y(:,n+1) = propagate(t(n),y(:,n));
+            
+            % increments time and loop index
+            t(n+1) = t(n)+h;
+            n = n+1;
+            
         end
+        
+        % trims arrays
+        y = y(:,1:(n-1));
+        t = t(1:(n-1));
         
     end
-    
-    % trims arrays
-    y = y(:,1:(n-1));
-    t = t(1:(n-1));
     
     % transposes solution matrix so it is returned in "standard form"
     y = y';
-    
-    % closes waitbar
-    if final_time_known && display_waitbar
-        close(wb);
-    end
     
 end

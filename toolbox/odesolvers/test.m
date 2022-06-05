@@ -19,7 +19,7 @@ x0 = [0;
 % Solving the system for $t$ in the interval $[0,100]$ using the AB8 method 
 % with a time step (i.e. step size) of $\Delta t=0.001$,
 %tic
-[t,x] = odeABM(f,[0,100],x0,0.001);
+[t,x] = odeRK(f,[0,100],x0,0.001,'RK1_euler',true);
 %toc
 
 tic
@@ -27,7 +27,7 @@ C = @(t,x) t <= 100;
 toc
 
 %tic
-[t,x] = odeABM(f,{0,C},x0,0.001);
+[t,x] = odeRK(f,{0,C},x0,0.001);
 %toc
 
 % Plotting the solution,
