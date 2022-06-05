@@ -114,11 +114,11 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
           <td style="text-align:center">p×1<BR>double</td>
       </tr>
   </table>
-</p><h2 id="4">Example</h2><p><i>Consider the initial value problem</i></p><p><img src="RK2_doc_eq12868018520907325398.png" alt="$$\frac{dy}{dt}=y,\quad y(2)=3$$" style="width:89px;height:23px;"></p><p><i>Find the solution <img src="RK2_doc_eq17784377804790973832.png" alt="$y(t)$" style="width:18px;height:11px;"> until <img src="RK2_doc_eq08325516970591449802.png" alt="$t=10$" style="width:29px;height:8px;"> using <tt>RK2</tt>. Then, compare your result to the solution found by <tt>oderk</tt> using the midpoint method.</i></p><p>First, let's define our ODE (<img src="RK2_doc_eq15749537601348477239.png" alt="$\frac{dy}{dt}=f(t,y)$" style="width:53px;height:15px;">) and initial condition in MATLAB.</p><pre class="codeinput">f = @(t,y) y;
+</p><h2 id="4">Example</h2><p><i>Consider the initial value problem</i></p><p><img src="RK2_doc_eq12868018520907325398.png" alt="$$\frac{dy}{dt}=y,\quad y(2)=3$$" style="width:89px;height:23px;"></p><p><i>Find the solution <img src="RK2_doc_eq17784377804790973832.png" alt="$y(t)$" style="width:18px;height:11px;"> until <img src="RK2_doc_eq08325516970591449802.png" alt="$t=10$" style="width:29px;height:8px;"> using <tt>RK2</tt>. Then, compare your result to the solution found by <tt>ode</tt> using the midpoint method.</i></p><p>First, let's define our ODE (<img src="RK2_doc_eq15749537601348477239.png" alt="$\frac{dy}{dt}=f(t,y)$" style="width:53px;height:15px;">) and initial condition in MATLAB.</p><pre class="codeinput">f = @(t,y) y;
 y2 = 3;
 </pre><p>Let's define a time vector between <img src="RK2_doc_eq11906475312356421895.png" alt="$t=2$" style="width:24px;height:8px;"> and <img src="RK2_doc_eq08325516970591449802.png" alt="$t=10$" style="width:29px;height:8px;"> with a spacing of <img src="RK2_doc_eq10072498013177321932.png" alt="$h=0.01$" style="width:40px;height:8px;">.</p><pre class="codeinput">h = 0.01;
 t = (2:h:10)';
-</pre><p>Solving for <img src="RK2_doc_eq17784377804790973832.png" alt="$y(t)$" style="width:18px;height:11px;"> using <tt>RK2</tt> and comparing the result to the result obtained using <tt>oderk</tt> with the midpoint method,</p><pre class="codeinput"><span class="comment">% preallocate vector to store solution</span>
+</pre><p>Solving for <img src="RK2_doc_eq17784377804790973832.png" alt="$y(t)$" style="width:18px;height:11px;"> using <tt>RK2</tt> and comparing the result to the result obtained using <tt>ode</tt> with the midpoint method,</p><pre class="codeinput"><span class="comment">% preallocate vector to store solution</span>
 y = zeros(size(t));
 
 <span class="comment">% store initial condition</span>
@@ -129,11 +129,11 @@ y(1) = y2;
     y(i+1) = RK2(f,t(i),y(i),h);
 <span class="keyword">end</span>
 
-<span class="comment">% solving using "oderk"</span>
-[t_oderk,y_oderk] = oderk(f,[2,10],y2,h,<span class="string">'RK2'</span>);
+<span class="comment">% solving using "ode"</span>
+[t_ode,y_ode] = ode(f,[2,10],y2,h,<span class="string">'RK2'</span>);
 
 <span class="comment">% maximum absolute error between the two results</span>
-max(abs(y_oderk-y))
+max(abs(y_ode-y))
 </pre><pre class="codeoutput">
 ans =
 
@@ -207,7 +207,7 @@ ans =
 % $$\frac{dy}{dt}=y,\quad y(2)=3$$
 %
 % _Find the solution $y(t)$ until $t=10$ using |RK2|. Then, compare your 
-% result to the solution found by |oderk| using the midpoint method._
+% result to the solution found by |ode| using the midpoint method._
 %
 % First, let's define our ODE ($\frac{dy}{dt}=f(t,y)$) and initial
 % condition in MATLAB.
@@ -220,7 +220,7 @@ h = 0.01;
 t = (2:h:10)';
 %%
 % Solving for $y(t)$ using |RK2| and comparing the result to the
-% result obtained using |oderk| with the midpoint method,
+% result obtained using |ode| with the midpoint method,
 
 % preallocate vector to store solution
 y = zeros(size(t));
@@ -233,11 +233,11 @@ for i = 1:(length(t)-1)
     y(i+1) = RK2(f,t(i),y(i),h);
 end
 
-% solving using "oderk"
-[t_oderk,y_oderk] = oderk(f,[2,10],y2,h,'RK2');
+% solving using "ode"
+[t_ode,y_ode] = ode(f,[2,10],y2,h,'RK2');
 
 % maximum absolute error between the two results
-max(abs(y_oderk-y))
+max(abs(y_ode-y))
 %%
 % As expected, the two methods obtain identical results.
 %% See also
