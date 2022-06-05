@@ -5,7 +5,7 @@
 % the thumbnail image for the ODE solver toolbox.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2022-04-16
+% Last Update: 2022-06-04
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 
@@ -31,7 +31,7 @@ f = @(t,x) [sigma*(x(2)-x(1));
             x(1)*x(2)-beta*x(3)];
 
 % solution
-[t,y] = ABM8(f,[0,100],[0;1;1.05],0.001);
+[t,y] = odeabm(f,[0,100],[0;1;1.05],0.001);
 
 % plots figure
 figure;
