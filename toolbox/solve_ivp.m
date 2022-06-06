@@ -8,7 +8,7 @@
 %   [t,y] = solve_ivp(__,method,wb)
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2022-06-04
+% Last Update: 2022-06-05
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
@@ -131,61 +131,61 @@ function [t,y] = solve_ivp(f,I,y0,h,method,wb)
     
     % sets propagation function for single-step methods
     if strcmpi(method,'Euler')
-        propagate = @(t,y) RK1_euler(f,t,y,h);
+        g = @(t,y) RK1_euler(f,t,y,h);
     elseif strcmpi(method,'RK2')
-        propagate = @(t,y) RK2(f,t,y,h);
+        g = @(t,y) RK2(f,t,y,h);
     elseif strcmpi(method,'RK2 Heun')
-        propagate = @(t,y) RK2_heun(f,t,y,h);
+        g = @(t,y) RK2_heun(f,t,y,h);
     elseif strcmpi(method,'RK2 Ralston')
-        propagate = @(t,y) RK2_ralston(f,t,y,h);
+        g = @(t,y) RK2_ralston(f,t,y,h);
     elseif strcmpi(method,'RK3')
-        propagate = @(t,y) RK3(f,t,y,h);
+        g = @(t,y) RK3(f,t,y,h);
     elseif strcmpi(method,'RK3 Heun')
-        propagate = @(t,y) RK3_heun(f,t,y,h);
+        g = @(t,y) RK3_heun(f,t,y,h);
     elseif strcmpi(method,'RK3 Ralston')
-        propagate = @(t,y) RK3_ralston(f,t,y,h);
+        g = @(t,y) RK3_ralston(f,t,y,h);
     elseif strcmpi(method,'SSPRK3')
-        propagate = @(t,y) SSPRK3(f,t,y,h);
+        g = @(t,y) SSPRK3(f,t,y,h);
     elseif strcmpi(method,'RK4')
-        propagate = @(t,y) RK4(f,t,y,h);
+        g = @(t,y) RK4(f,t,y,h);
     elseif strcmpi(method,'RK4 3/8')
-        propagate = @(t,y) RK4_38(f,t,y,h);
+        g = @(t,y) RK4_38(f,t,y,h);
     elseif strcmpi(method,'RK4 Ralston')
-        propagate = @(t,y) RK4_ralston(f,t,y,h);
+        g = @(t,y) RK4_ralston(f,t,y,h);
     end
     
     % sets propagation function for multi-step predictor methods
     if strcmpi(method,'AB2')
-        propagate = @(t,F) AB2(f,t,F,h);
+        g = @(t,F) AB2(f,t,F,h);
     elseif strcmpi(method,'AB3')
-        propagate = @(t,F) AB3(f,t,F,h);
+        g = @(t,F) AB3(f,t,F,h);
     elseif strcmpi(method,'AB4')
-        propagate = @(t,F) AB4(f,t,F,h);
+        g = @(t,F) AB4(f,t,F,h);
     elseif strcmpi(method,'AB5')
-        propagate = @(t,F) AB5(f,t,F,h);
+        g = @(t,F) AB5(f,t,F,h);
     elseif strcmpi(method,'AB6')
-        propagate = @(t,F) AB6(f,t,F,h);
+        g = @(t,F) AB6(f,t,F,h);
     elseif strcmpi(method,'AB7')
-        propagate = @(t,F) AB7(f,t,F,h);
+        g = @(t,F) AB7(f,t,F,h);
     elseif strcmpi(method,'AB8')
-        propagate = @(t,F) AB8(f,t,F,h);
+        g = @(t,F) AB8(f,t,F,h);
     end
     
     % sets propagation function for multi-step predictor-corrector methods
     if strcmpi(method,'ABM2')
-        propagate = @(t,F) ABM2(f,t,F,h);
+        g = @(t,F) ABM2(f,t,F,h);
     elseif strcmpi(method,'ABM3')
-        propagate = @(t,F) ABM3(f,t,F,h);
+        g = @(t,F) ABM3(f,t,F,h);
     elseif strcmpi(method,'ABM4')
-        propagate = @(t,F) ABM4(f,t,F,h);
+        g = @(t,F) ABM4(f,t,F,h);
     elseif strcmpi(method,'ABM5')
-        propagate = @(t,F) ABM5(f,t,F,h);
+        g = @(t,F) ABM5(f,t,F,h);
     elseif strcmpi(method,'ABM6')
-        propagate = @(t,F) ABM6(f,t,F,h);
+        g = @(t,F) ABM6(f,t,F,h);
     elseif strcmpi(method,'ABM7')
-        propagate = @(t,F) ABM7(f,t,F,h);
+        g = @(t,F) ABM7(f,t,F,h);
     elseif strcmpi(method,'ABM8')
-        propagate = @(t,F) ABM8(f,t,F,h);
+        g = @(t,F) ABM8(f,t,F,h);
     end
     
     % determines if the method is a single-step method
@@ -204,9 +204,12 @@ function [t,y] = solve_ivp(f,I,y0,h,method,wb)
     % Preallocates arrays and stores initial conditions.
     % --------------------------------------------------
     
+    % state dimension
+    p = length(y0);
+    
     % preallocates time vector and solution matrix
     t = zeros(10000,1);
-    y = zeros(length(y0),length(t));
+    y = zeros(p,length(t));
     
     % stores initial conditions
     t(1) = t0;
@@ -228,7 +231,7 @@ function [t,y] = solve_ivp(f,I,y0,h,method,wb)
             end
             
             % state vector propagated to next sample time
-            y(:,n+1) = propagate(t(n),y(:,n));
+            y(:,n+1) = g(t(n),y(:,n));
             
             % increments time and loop index
             t(n+1) = t(n)+h;
@@ -258,7 +261,7 @@ function [t,y] = solve_ivp(f,I,y0,h,method,wb)
         % initializes F matrix (stores function evaluations for first m 
         % sample times in first m columns, state vector at (m+1)th sample
         % time in (m+1)th column)
-        F = zeros(length(y0),m+1);
+        F = zeros(p,m+1);
         for n = 1:m
             F(:,n) = f(t(n),y(:,n));
         end
@@ -274,7 +277,7 @@ function [t,y] = solve_ivp(f,I,y0,h,method,wb)
             end
             
             % updates F matrix
-            F = propagate(t(n),F);
+            F = g(t(n),F);
             
             % extracts/stores state vector propagated to next sample time
             y(:,n+1) = F(:,m+1);
