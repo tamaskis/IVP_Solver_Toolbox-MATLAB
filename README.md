@@ -26,6 +26,10 @@ To open the PDF file with the technical documentation (Solving_Initial_Value_Pro
 doc_IST tech
 ```
 
+## Main IVP Solver Function
+
+
+
 ## Explicit Runge-Kutta (Single-Step) Methods
 
 `RK1_euler`\

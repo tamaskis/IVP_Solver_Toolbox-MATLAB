@@ -251,7 +251,7 @@ function [t,y] = solve_ivp(f,I,y0,h,method,wb)
     else
         
         % time vector for first m+1 sample times
-        t(1:(m+1)) = (t0:h:(t0+m*h)).';
+        t(1:(m+1)) = (t0:h:(t0+m*h))';
         
         % propagating state vector using RK4 for first "m" sample times
         for n = 1:m
@@ -295,8 +295,8 @@ function [t,y] = solve_ivp(f,I,y0,h,method,wb)
     % -----------------
     
     % trims arrays
-    y = y(:,1:n);
-    t = t(1:n);
+    y = y(:,1:(n-1));
+    t = t(1:(n-1));
     
     % linearly interpolates to find solution at desired final time
     if final_time_known

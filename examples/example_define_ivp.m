@@ -24,14 +24,14 @@ b = 5;          % damping constant [N.s/m]
 k = 1;          % spring constant [N/m]
 m = 2;          % mass [kg]
 x0 = 1;         % initial position [m]
-dx0 = 0;        % initial velocity [m/s]
+xdot0 = 0;        % initial velocity [m/s]
 
 % forcing function
 F = @(t) cos(pi*t);
 
 % initial condition
 y0 = [x0;
-      dx0];
+      xdot0];
 
 % ODE
 f = @(t,y) [y(2);
@@ -46,14 +46,14 @@ b = 5;          % damping constant [N.s/m]
 k = 1;          % spring constant [N/m]
 m = 2;          % mass [kg]
 x0 = 1;         % initial position [m]
-dx0 = 0;        % initial velocity [m/s]
+xdot0 = 0;      % initial velocity [m/s]
 
 % forcing function
 F = @(t) cos(pi*t);
 
 % initial condition
 y0 = [x0;
-      dx0];
+      xdot0];
 
 % assigns function handle to ODE
 f = @(t,y) f_extra(t,y,b,k,m,F);
