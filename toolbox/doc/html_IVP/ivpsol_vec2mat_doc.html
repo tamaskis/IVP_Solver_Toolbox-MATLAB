@@ -69,7 +69,7 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
   </style></head><body><div class="content"><h1><tt>ivpsol_vec2mat</tt></h1><!--introduction--><p>Transforms the solution matrix for a vector-valued IVP into the solution array for the corresponding matrix-valued IVP.</p><p><a href="index.html">Back to IVP Solver Toolbox Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#4">Input/Output Parameters</a></li><li><a href="#5">Example</a></li><li><a href="#6">See also</a></li></ul></div><h2 id="1">Syntax</h2><pre class="language-matlab">M = ivpsol_vec2mat(y)
 M = ivpsol_vec2mat(y,p)
-</pre><h2 id="2">Description</h2><p><tt>M = ivpsol_vec2mat(y)</tt> transforms the solution matrix, <img src="ivpsol_vec2mat_doc_eq15932310666129641707.png" alt="$\mathbf{Y}\in\mathrm{R}^{(N+1)\times p^{2}}$" style="width:67px;height:11px;"> (<tt>y</tt> in MATLAB), for the vector-valued IVP into the solution array, <img src="ivpsol_vec2mat_doc_eq08885268059899993205.png" alt="$\mathbf{M}_{\mathrm{sol}}\in\mathrm{R}^{p\times p\times (N+1)}$" style="width:85px;height:12px;"> (<tt>M</tt> in MATLAB) for the corresponding matrix-valued IVP. It is assumed that <img src="ivpsol_vec2mat_doc_eq01518063970584319034.png" alt="$\mathbf{M}$" style="width:12px;height:8px;"> is a square matrix.</p><p><tt>M = ivpsol_vec2mat(y,p)</tt> transforms the solution matrix, <img src="ivpsol_vec2mat_doc_eq11850032898330222064.png" alt="$\mathbf{Y}\in\mathrm{R}^{(N+1)\times pr}$" style="width:68px;height:11px;"> (<tt>y</tt> in MATLAB), for the vector-valued IVP into the solution array, <img src="ivpsol_vec2mat_doc_eq09153747220475100319.png" alt="$\mathbf{M}_{\mathrm{sol}}\in\mathrm{R}^{p\times r\times (N+1)}$" style="width:85px;height:12px;"> (<tt>M</tt> in MATLAB) for the corresponding matrix-valued IVP. <tt>p</tt> specifies the number of rows of <tt>M</tt>.</p><h2 id="4">Input/Output Parameters</h2><p>
+</pre><h2 id="2">Description</h2><p><tt>M = ivpsol_vec2mat(y)</tt> transforms the solution matrix, <img src="ivpsol_vec2mat_doc_eq05510629066224650637.png" alt="$[\mathbf{y}]\in\mathrm{R}^{(N+1)\times p^{2}}$" style="width:69px;height:14px;"> (<tt>y</tt> in MATLAB), for the vector-valued IVP into the solution array, <img src="ivpsol_vec2mat_doc_eq08885268059899993205.png" alt="$\mathbf{M}_{\mathrm{sol}}\in\mathrm{R}^{p\times p\times (N+1)}$" style="width:85px;height:12px;"> (<tt>M</tt> in MATLAB) for the corresponding matrix-valued IVP. It is assumed that <img src="ivpsol_vec2mat_doc_eq01518063970584319034.png" alt="$\mathbf{M}$" style="width:12px;height:8px;"> is a square matrix.</p><p><tt>M = ivpsol_vec2mat(y,p)</tt> transforms the solution matrix, <img src="ivpsol_vec2mat_doc_eq08980551379751452677.png" alt="$[\mathbf{y}]\in\mathrm{R}^{(N+1)\times pr}$" style="width:70px;height:13px;"> (<tt>y</tt> in MATLAB), for the vector-valued IVP into the solution array, <img src="ivpsol_vec2mat_doc_eq09153747220475100319.png" alt="$\mathbf{M}_{\mathrm{sol}}\in\mathrm{R}^{p\times r\times (N+1)}$" style="width:85px;height:12px;"> (<tt>M</tt> in MATLAB) for the corresponding matrix-valued IVP. <tt>p</tt> specifies the number of rows of <tt>M</tt>.</p><h2 id="4">Input/Output Parameters</h2><p>
   <table border=1>
       <tr>
           <td></td>
@@ -81,7 +81,7 @@ M = ivpsol_vec2mat(y,p)
       <tr>
           <td rowspan="2" style="text-align:center"><b>Input</b></td>
           <td style="text-align:center"><TT>y</TT></td>
-          <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\mathbf{Y}" title="\mathbf{Y}" /></td>
+          <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?[\mathbf{y}]" title="[\mathbf{y}]" /></td>
           <td>solution matrix<BR>- the nth row of <TT>y</TT> stores the <i>transpose</i> of the solution corresponding to the nth time in the time vector, <img src="https://latex.codecogs.com/svg.latex?\mathbf{t}" title="" /></td>
           <td style="text-align:center">(N+1)×pr<BR>double</td>
       </tr>
@@ -110,12 +110,12 @@ M = ivpsol_vec2mat(y,p)
 %   M = ivpsol_vec2mat(y)
 %   M = ivpsol_vec2mat(y,p)
 %% Description
-% |M = ivpsol_vec2mat(y)| transforms the solution matrix, $\mathbf{Y}\in\mathrm{R}^{(N+1)\times p^{2}}$
+% |M = ivpsol_vec2mat(y)| transforms the solution matrix, $[\mathbf{y}]\in\mathrm{R}^{(N+1)\times p^{2}}$
 % (|y| in MATLAB), for the vector-valued IVP into the solution array, $\mathbf{M}_{\mathrm{sol}}\in\mathrm{R}^{p\times p\times (N+1)}$
 % (|M| in MATLAB) for the corresponding matrix-valued IVP. It is assumed 
 % that $\mathbf{M}$ is a square matrix.
 %%
-% |M = ivpsol_vec2mat(y,p)| transforms the solution matrix, $\mathbf{Y}\in\mathrm{R}^{(N+1)\times pr}$
+% |M = ivpsol_vec2mat(y,p)| transforms the solution matrix, $[\mathbf{y}]\in\mathrm{R}^{(N+1)\times pr}$
 % (|y| in MATLAB), for the vector-valued IVP into the solution array, $\mathbf{M}_{\mathrm{sol}}\in\mathrm{R}^{p\times r\times (N+1)}$
 % (|M| in MATLAB) for the corresponding matrix-valued IVP. |p| specifies 
 % the number of rows of |M|.
@@ -132,7 +132,7 @@ M = ivpsol_vec2mat(y,p)
 %       <tr>
 %           <td rowspan="2" style="text-align:center"><b>Input</b></td>
 %           <td style="text-align:center"><TT>y</TT></td>
-%           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\mathbf{Y}" title="\mathbf{Y}" /></td>
+%           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?[\mathbf{y}]" title="[\mathbf{y}]" /></td>
 %           <td>solution matrix<BR>- the nth row of <TT>y</TT> stores the <i>transpose</i> of the solution corresponding to the nth time in the time vector, <img src="https://latex.codecogs.com/svg.latex?\mathbf{t}" title="" /></td>
 %           <td style="text-align:center">(N+1)×pr<BR>double</td>
 %       </tr>

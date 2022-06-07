@@ -28,6 +28,16 @@ doc_IVP tech
 
 ## Main IVP Solver Function
 
+`[t,y] = solve_ivp(f,[t0,tf],y0,h)`\
+`[t,y] = solve_ivp(f,{t0,C},y0,h)`\
+`[t,y] = solve_ivp(__,method)`\
+`[t,y] = solve_ivp(__,method,wb)`
+
+
+## Tools for Matrix-Valued IVPs
+`ivpIC_mat2vec`\
+`ivpsol_vec2mat`\
+`odefun_mat2vec`
 
 
 ## Explicit Runge-Kutta (Single-Step) Methods
@@ -63,26 +73,6 @@ doc_IVP tech
 `ABM6`\
 `ABM7`\
 `ABM8`
-
-
-## One-Step Propagation
-
-`RK1_euler_step`\
-`RK2_step`\
-`RK2_heun_step`\
-`RK2_ralston_step`\
-`RK3_step`\
-`RK3_heun_step`\
-`RK3_ralston_step`\
-`SSPRK3_step`\
-`RK4_step`\
-`RK4_ralston_step`
-
-
-## Tools for Matrix-Valued IVPs
-`odefun_mat2vec`\
-`ivpIC_mat2vec`\
-`ivpsol_vec2mat`
 
 
 ## Generating IVP Solver Equations

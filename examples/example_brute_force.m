@@ -4,7 +4,7 @@
 % Example of a "brute force" method for solving IVPs.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2022-06-06
+% Last Update: 2022-06-07
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 
