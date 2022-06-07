@@ -8,7 +8,7 @@
 % See also AB_coefficients, AB_predictor, AM_corrector, ABM_equations.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2022-06-05
+% Last Update: 2022-06-06
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %

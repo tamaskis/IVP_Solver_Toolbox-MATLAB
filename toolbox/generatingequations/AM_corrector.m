@@ -8,7 +8,7 @@
 % See also AB_coefficients, AM_coefficients, AB_predictor, ABM_equations.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2022-06-05
+% Last Update: 2022-06-06
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
@@ -29,7 +29,7 @@
 % -------
 % OUTPUT:
 % -------
-%   eqn     - (string) mth-order Adams-Moulton corrector
+%   eqn     - (1×1 string) mth-order Adams-Moulton corrector
 %
 %==========================================================================
 function eqn = AM_corrector(m,print)

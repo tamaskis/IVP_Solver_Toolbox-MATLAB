@@ -9,7 +9,7 @@
 % See also AB_coefficients, AM_coefficients, AM_corrector, ABM_equations.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2022-06-05
+% Last Update: 2022-06-06
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
@@ -30,7 +30,7 @@
 % -------
 % OUTPUT:
 % -------
-%   eqn     - (string) mth-order Adams-Bashforth predictor
+%   eqn     - (1×1 string) mth-order Adams-Bashforth predictor
 %
 %==========================================================================
 function eqn = AB_predictor(m,print)
