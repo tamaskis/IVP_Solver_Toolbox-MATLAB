@@ -78,9 +78,9 @@ function [t,y] = solve_ivp(f,I,y0,h,method,wb)
         
         % defines condition function
         if (tf > t0)
-            C = @(t,y) t <= tf;
+            C = @(t,y) t-h <= tf;
         else
-            C = @(t,y) t >= tf;
+            C = @(t,y) t-h >= tf;
         end
         
         % indicates that final time is known
@@ -293,16 +293,16 @@ function [t,y] = solve_ivp(f,I,y0,h,method,wb)
     % -----------------
     % Final formatting.
     % -----------------
-    %n=n+1;
+    
     % trims arrays
     y = y(:,1:(n-1));
     t = t(1:(n-1));
     
+    % number of subintervals
+    N = length(t)-1;
+
     % linearly interpolates to find solution at desired final time
     if final_time_known
-        
-        % number of subintervals
-        N = length(t)-1;
         
         % linearly interpolates for solution at tf
         y(:,N+1) = y(:,N)+((y(:,N+1)-y(:,N))/(t(N+1)-t(N)))*(tf-t(N));
@@ -310,6 +310,12 @@ function [t,y] = solve_ivp(f,I,y0,h,method,wb)
         % replaces last element of "t" with tf
         t(N+1) = tf;
         
+    end
+
+    % deletes penultimate solution if at same time as last solution
+    if (abs(t(N+1)-t(N)) < 1e-10)
+        t(N) = [];
+        y(:,N) = [];
     end
     
     % transposes solution matrix so it is returned in "standard form"
