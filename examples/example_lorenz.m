@@ -5,7 +5,7 @@
 % the thumbnail image for the IVP solver toolbox.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2022-06-05
+% Last Update: 2022-06-06
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 
@@ -31,7 +31,7 @@ f = @(t,x) [sigma*(x(2)-x(1));
             x(1)*x(2)-beta*x(3)];
 
 % solution
-[t,y] = odeabm(f,[0,100],[0;1;1.05],0.001);
+[t,y] = solve_ivp(f,[0,100],[0;1;1.05],0.001,'ABM8');
 
 % plots figure
 figure;

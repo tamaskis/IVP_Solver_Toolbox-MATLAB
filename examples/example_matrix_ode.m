@@ -5,7 +5,7 @@
 % equation).
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2022-06-05
+% Last Update: 2022-06-06
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 
@@ -57,14 +57,14 @@ F = @(t,P) -(A.'*P+P*A-(P*B+S)/R*(B.'*P+S.')+Q);
 f = odefun_mat2vec(F);
 
 % final condition
-yT = odeIC_mat2vec(PT);
+yT = ivpIC_mat2vec(PT);
 
 % solves vector-valued IVP using a step size of h = 0.001
-[~,y] = RK4(f,[T,0],yT,0.001);
+[~,y] = solve_ivp(f,[T,0],yT,0.001,'RK4');
 
 % transforms solution matrix for vector-valued IVP into solution array for
 % matrix-valued IVP
-P = odesol_vec2mat(y);
+P = ivpsol_vec2mat(y);
 
 % solution for P0 (will be at end of array since P solved for backwards in
 % time)
@@ -84,9 +84,9 @@ P = zeros(2,2,length(t));
 % store initial condition
 P(:,:,1) = PT;
 
-% solving using "RK4_step"
+% solving using "RK4"
 for i = 1:(length(t)-1)
-    P(:,:,i+1) = RK4_step(F,t(i),P(:,:,i),h);
+    P(:,:,i+1) = RK4(F,t(i),P(:,:,i),h);
 end
 
 % solution for P0 using one-step propagation

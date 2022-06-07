@@ -1,10 +1,10 @@
 %% example_pass_extra.m
 % IVP Solver Toolbox
 %
-% Example of passing extra parameters to a function defining an IVP.
+% Example of passing extra parameters to functions.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2022-06-05
+% Last Update: 2022-06-06
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 
@@ -17,59 +17,65 @@ clear; clc; close all;
 
 
 
-%% SOLUTION
+%% EXAMPLE #1
 
-% parameters
-b = 5;          % damping constant [N.s/m]
-k = 1;          % spring constant [N/m]
-m = 2;          % mass [kg]
-x0 = 1;         % initial position [m]
-dx0 = 0;        % initial velocity [m/s]
+% function definition
+a = 5; b = 5; c = 5; d = 5;
+f = @(x,y) -a*(x-b)^2-c*(y-d)^2;
 
-% forcing function
-F = @(t) cos(pi*t);
+% call function, update "a", then call function again
+f(2,2)
+a = 20;
+f(2,2)
 
-% initial condition
-y0 = [x0;
-      dx0];
-
-% differential equation
-f = @(t,y) [y(2);
-            -(b/m)*y(2)-(k/m)*y(1)+(1/m)*F(t)];
+% NOTE: Both evaluations of "f" yield the same result.
 
 
 
-%% ALTERNATE SOLUTION
+%% EXAMPLE #2
 
-% parameters
-b = 5;          % damping constant [N.s/m]
-k = 1;          % spring constant [N/m]
-m = 2;          % mass [kg]
-x0 = 1;         % initial position [m]
-dx0 = 0;        % initial velocity [m/s]
+% original function definition
+a = 5; b = 5; c = 5; d = 5;
+f = @(x,y) -a*(x-b)^2-c*(y-d)^2;
+f(2,2)
 
-% forcing function
-F = @(t) cos(pi*t);
+% update values of constants
+a = 10; b = 10; c = 10; d = 10;
+f = @(x,y) -a*(x-b)^2-c*(y-d)^2;
+f(2,2)
 
-% initial condition
-y0 = [x0;
-      dx0];
+% NOTE: The two evaluations of "f" no longer yield the same result.
 
-% assigns function handle to differential equation
-f = @(t,y) f_extra(t,y,b,k,m,F);
 
-% defines differential equation
-function dy = f_extra(t,y,b,k,m,F)
 
-    % unpacks state vector
-    x = y(1);
-    xdot = y(2);
-    
-    % preallocates state vector derivative
-    dy = zeros(size(y));
-    
-    % assembles state vector derivative
-    dy(1) = xdot;
-    dy(2) = -(b/m)*xdot-(k/m)*x+(1/m)*F(t);
-    
+%% EXAMPLE #3
+
+% define function where constants can vary as well
+f_extra = @(x,y,a,b,c,d) -a*(x-b)^2-c*(y-d)^2;
+
+% define original function by assigning function handle to f_extra
+f = @(x,y) f_extra(x,y,5,5,5,5);
+f(2,2)
+
+% update values of constants
+f = @(x,y) f_extra(x,y,10,10,10,10);
+f(2,2)
+
+% NOTE: This example is an alternate solution to Example #2.
+
+
+
+%% EXAMPLE #4
+
+% sets values of constants
+a = 10; b = 10; c = 10; d = 10;
+f = @(x,y) f_extra2(x,y,a,b,c,d);
+f(2,2)
+
+% MATLAB function must be declared at end
+function f = f_extra2(x,y,a,b,c,d)
+    f = -a*(x-b)^2-c*(y-d)^2;
 end
+
+% NOTE: This example is an alternate solution to the second part of 
+%       Example #2.

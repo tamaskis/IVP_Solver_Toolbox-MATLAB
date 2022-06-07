@@ -5,7 +5,7 @@
 %   [t_new,y_new] = expand_solution_arrays(t,y)
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2022-06-05
+% Last Update: 2022-06-06
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
@@ -40,6 +40,17 @@
 %
 %==========================================================================
 function [t_new,y_new] = expand_solution_arrays(t,y)
-    t_new = [t;zeros(length(t),1)];
-    y_new = [y,zeros(size(y,1),length(t))];
+    
+    % number of subintervals
+    N = length(t)-1;
+    
+    % state dimension
+    p = size(y,1);
+    
+    % expands time vector
+    t_new = [t;zeros(N+1,1)];
+    
+    % expands solution matrix
+    y_new = [y,zeros(p,N+1)];
+    
 end

@@ -8,7 +8,7 @@
 %   [t,y] = solve_ivp(__,method,wb)
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2022-06-05
+% Last Update: 2022-06-06
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
@@ -29,7 +29,7 @@
 %               --> [t0,tf] - (1×2 double) initial and final times
 %               --> {t0,C}  - (1×2 cell) initial time, t₀, and function 
 %                             handle for condition function, C(t,y) 
-%                             (C : ℝ×ℝᵖ → 𝔹)
+%                             (C : ℝ×ℝᵖ → B)
 %   y0      - (p×1 double) initial condition, y₀ = y(t₀)
 %   h       - (1×1 double) step size
 %   method  - (char) (OPTIONAL) integration method --> 'Euler', 'RK2', 
@@ -209,7 +209,7 @@ function [t,y] = solve_ivp(f,I,y0,h,method,wb)
     
     % preallocates time vector and solution matrix
     t = zeros(10000,1);
-    y = zeros(p,length(t));
+    y = zeros(p,10000);
     
     % stores initial conditions
     t(1) = t0;
@@ -227,10 +227,10 @@ function [t,y] = solve_ivp(f,I,y0,h,method,wb)
             
             % expands t and y if needed
             if (n+1) > length(t)
-                [t,y] = expand_solution_arrays(t,y);
+                [t,y] = expand_ivp_arrays(t,y);
             end
             
-            % state vector propagated to next sample time
+            % propagates state vector to next sample time
             y(:,n+1) = g(t(n),y(:,n));
             
             % increments time and loop index
@@ -268,18 +268,18 @@ function [t,y] = solve_ivp(f,I,y0,h,method,wb)
         F(:,n+1) = y(:,m+1);
         
         % state vector propagation while condition is satisfied
-        n = 1;
+        n = m+1;
         while C(t(n),y(:,n))
             
             % expands t and y if needed
             if (n+1) > length(t)
-                [t,y] = expand_solution_arrays(t,y);
+                [t,y] = expand_ivp_arrays(t,y);
             end
             
-            % updates F matrix
+            % updates F matrix (propagates to next sample time)
             F = g(t(n),F);
             
-            % extracts/stores state vector propagated to next sample time
+            % extracts/stores state vector at next sample time
             y(:,n+1) = F(:,m+1);
             
             % increments time and loop index
@@ -298,8 +298,22 @@ function [t,y] = solve_ivp(f,I,y0,h,method,wb)
     y = y(:,1:(n-1));
     t = t(1:(n-1));
     
+    % linearly interpolates to find solution at desired final time
+    if final_time_known
+        
+        % number of subintervals
+        N = length(t)-1;
+        
+        % linearly interpolates for solution at tf
+        y(:,N+1) = y(:,N)+((y(:,N+1)-y(:,N))/(t(N+1)-t(N)))*(tf-t(N));
+        
+        % replaces last element of "t" with tf
+        t(N+1) = tf;
+        
+    end
+    
     % transposes solution matrix so it is returned in "standard form"
-    y = y';
+    y = y.';
     
     % closes waitbar
     if final_time_known && display_waitbar
