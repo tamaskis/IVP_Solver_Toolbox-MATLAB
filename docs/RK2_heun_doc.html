@@ -68,7 +68,7 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
   </style></head><body><div class="content"><h1><tt>RK2_heun</tt></h1><!--introduction--><p>Propagates the state vector forward one time step using Heun's second-order method (Runge-Kutta second-order method).</p><p><a href="index.html">Back to IVP Solver Toolbox Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Input/Output Parameters</a></li><li><a href="#4">Example</a></li><li><a href="#8">See also</a></li></ul></div><h2 id="1">Syntax</h2><pre class="language-matlab">y_next = RK2_heun(f,t,y,h)
-</pre><h2 id="2">Description</h2><p><tt>y_next = RK2_heun(f,t,y,h)</tt> returns the state vector at the next sample time, <tt>y_next</tt>, given the current state vector <tt>y</tt> at time <tt>t</tt>, the function <tt>f(t,y)</tt> defining the ODE <img src="RK2_heun_doc_eq13964145860186194730.png" alt="$\dot{\mathbf{y}}=\mathbf{f}(t,\mathbf{y})$" style="width:50px;height:11px;">, and the step size <tt>h</tt>.</p><h2 id="3">Input/Output Parameters</h2><p>
+</pre><h2 id="2">Description</h2><p><tt>y_next = RK2_heun(f,t,y,h)</tt> returns the state vector at the next sample time, <tt>y_next</tt>, given the current state vector <tt>y</tt> at time <tt>t</tt>, the function <tt>f(t,y)</tt> defining the ODE <img src="RK2_heun_doc_eq11546780198861005830.png" alt="$d\mathbf{y}/dt=\mathbf{f}(t,\mathbf{y})$" style="width:71px;height:11px;">, and the step size <tt>h</tt>.</p><h2 id="3">Input/Output Parameters</h2><p>
   <table border=1>
       <tr>
           <td></td>
@@ -152,7 +152,7 @@ ans =
 % |y_next = RK2_heun(f,t,y,h)| returns the state vector at the next sample 
 % time, |y_next|, given the current state vector |y| at time |t|, the 
 % function |f(t,y)| defining the ODE 
-% $\dot{\mathbf{y}}=\mathbf{f}(t,\mathbf{y})$, and the step size |h|.
+% $d\mathbf{y}/dt=\mathbf{f}(t,\mathbf{y})$, and the step size |h|.
 %% Input/Output Parameters
 % <html>
 %   <table border=1>

@@ -92,7 +92,7 @@ function [t,y] = solve_ivp(f,I,y0,h,method,wb)
         % turns waitbar on with custom message
         if (nargin == 6) && ischar(wb)
             display_waitbar = true;
-            [wb,prop] = initialize_waitbar(msg);
+            [wb,prop] = initialize_waitbar(wb);
             
         % turns waitbar on with default message
         elseif (nargin == 6) && wb
@@ -285,6 +285,11 @@ function [t,y] = solve_ivp(f,I,y0,h,method,wb)
             % increments time and loop index
             t(n+1) = t(n)+h;
             n = n+1;
+            
+            % updates waitbar
+            if final_time_known && display_waitbar
+                prop = update_waitbar(n,N,wb,prop);
+            end
             
         end
         
