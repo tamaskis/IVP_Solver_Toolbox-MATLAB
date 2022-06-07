@@ -1,0 +1,189 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>ABM7</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-06-07"><meta name="DC.source" content="ABM7_doc.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>ABM7</tt></h1><!--introduction--><p>Propagates the state vector forward one time step using the Adams-Bashforth-Moulton 7th-order method.</p><p><a href="index.html">Back to IVP Solver Toolbox Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Input/Output Parameters</a></li><li><a href="#4">Note</a></li><li><a href="#5">See also</a></li></ul></div><h2 id="1">Syntax</h2><pre class="language-matlab">F = ABM7(f,t,F,h)
+</pre><h2 id="2">Description</h2><p><tt>F = ABM7(f,t,y,h)</tt> updates the <img src="ABM7_doc_eq03148538246847756930.png" alt="$\mathbf{F}$" style="width:8px;height:8px;"> matrix, <tt>F</tt>, for the next sample time, given the <img src="ABM7_doc_eq03148538246847756930.png" alt="$\mathbf{F}$" style="width:8px;height:8px;"> matrix at the current time <tt>t</tt>, the function <tt>f(t,y)</tt> defining the ODE <img src="ABM7_doc_eq11546780198861005830.png" alt="$d\mathbf{y}/dt=\mathbf{f}(t,\mathbf{y})$" style="width:71px;height:11px;">, and the step size <tt>h</tt>.</p><h2 id="3">Input/Output Parameters</h2><p>
+  <table border=1>
+      <tr>
+          <td></td>
+          <td style="text-align:center"><b>Variable</b></td>
+          <td style="text-align:center"><b>Symbol</b></td>
+          <td style="text-align:center"><b>Description</b></td>
+          <td style="text-align:center"><b>Format</b></td>
+      </tr>
+      <tr>
+          <td rowspan="4" style="text-align:center"><b>Input</b></td>
+          <td style="text-align:center"><TT>f</TT></td>
+          <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{f}(t,\mathbf{y})" title="" /></td>
+          <td>multivariate, vector-valued function (<img
+          src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{f}:\mathbb{R}\times\mathbb{R}^{p}\rightarrow\mathbb{R}^{p}"
+          title="" />) defining the ordinary differential equation <img src="https://latex.codecogs.com/svg.latex?\inline&space;\frac{d\mathbf{y}}{dt}=\mathbf{f}(t,\mathbf{y})" title="" />
+              <BR> - inputs to <TT>f</TT> are the current time (<TT>t</TT>, 1×1 double) and the current state vector (<TT>y</TT>, p×1 double)
+              <BR> - output of <TT>f</TT> is the state vector derivative (<TT>dydt</TT>, p×1 double) at the current time/state</td>
+          <td style="text-align:center">1×1<BR>function_handle</td>
+      </tr>
+      <tr>
+          <td style="text-align:center"><TT>t</TT></td>
+          <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;t_{n}" title="" /></td>
+          <td>current sample time</td>
+          <td style="text-align:center">1×1<BR>double</td>
+      </tr>
+      <tr>
+          <td style="text-align:center"><TT>F</TT></td>
+          <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{F}" title="" /></td>
+          <td><img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{F}" title="" /> matrix (see Section 3.5.2 of the <a href="https://tamaskis.github.io/documentation/Solving_Initial_Value_Problems_for_ODEs.pdf">technical documentation</a>) for the current sample time</td>
+          <td style="text-align:center">p×8<BR>double</td>
+      </tr>
+      <tr>
+          <td style="text-align:center"><TT>h</TT></td>
+          <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;h" title="h" /></td>
+          <td>step size</td>
+          <td style="text-align:center">1×1<BR>double</td>
+      </tr>
+      <tr>
+          <td rowspan="1" style="text-align:center"><b>Output</b></td>
+          <td style="text-align:center"><TT>F</TT></td>
+          <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{F}" title="" /></td>
+          <td><img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{F}" title="" /> matrix (see Section 3.5.2 of the <a href="https://tamaskis.github.io/documentation/Solving_Initial_Value_Problems_for_ODEs.pdf">technical documentation</a>) for the next sample time</td>
+          <td style="text-align:center">p×8<BR>double</td>
+      </tr>
+  </table>
+</p><h2 id="4">Note</h2><div><ul><li><img src="ABM7_doc_eq06235627993914477729.png" alt="$p=$" style="width:17px;height:8px;"> dimension of the state vector (for the scalar case, <img src="ABM7_doc_eq14406891124849479077.png" alt="$p=1$" style="width:25px;height:10px;">).</li></ul></div><h2 id="5">See also</h2><p><a href="ABM2_doc.html"><tt>ABM2</tt></a> | <a href="ABM3_doc.html"><tt>ABM3</tt></a> | <a href="ABM4_doc.html"><tt>ABM4</tt></a> | <a href="ABM5_doc.html"><tt>ABM5</tt></a> | <a href="ABM6_doc.html"><tt>ABM6</tt></a> | <a href="ABM8_doc.html"><tt>ABM8</tt></a></p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2021b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |ABM7|
+% Propagates the state vector forward one time step using the 
+% Adams-Bashforth-Moulton 7th-order method.
+% 
+% <index.html Back to IVP Solver Toolbox Contents>.
+%% Syntax
+%   F = ABM7(f,t,F,h)
+%% Description
+% |F = ABM7(f,t,y,h)| updates the $\mathbf{F}$ matrix, |F|, for the next 
+% sample time, given the $\mathbf{F}$ matrix at the current time |t|, the 
+% function |f(t,y)| defining the ODE 
+% $d\mathbf{y}/dt=\mathbf{f}(t,\mathbf{y})$, and the step size |h|.
+%% Input/Output Parameters
+% <html>
+%   <table border=1>
+%       <tr>
+%           <td></td>
+%           <td style="text-align:center"><b>Variable</b></td>
+%           <td style="text-align:center"><b>Symbol</b></td>
+%           <td style="text-align:center"><b>Description</b></td>
+%           <td style="text-align:center"><b>Format</b></td>
+%       </tr>
+%       <tr>
+%           <td rowspan="4" style="text-align:center"><b>Input</b></td>
+%           <td style="text-align:center"><TT>f</TT></td>
+%           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{f}(t,\mathbf{y})" title="" /></td>
+%           <td>multivariate, vector-valued function (<img
+%           src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{f}:\mathbb{R}\times\mathbb{R}^{p}\rightarrow\mathbb{R}^{p}"
+%           title="" />) defining the ordinary differential equation <img src="https://latex.codecogs.com/svg.latex?\inline&space;\frac{d\mathbf{y}}{dt}=\mathbf{f}(t,\mathbf{y})" title="" />
+%               <BR> - inputs to <TT>f</TT> are the current time (<TT>t</TT>, 1×1 double) and the current state vector (<TT>y</TT>, p×1 double)
+%               <BR> - output of <TT>f</TT> is the state vector derivative (<TT>dydt</TT>, p×1 double) at the current time/state</td>
+%           <td style="text-align:center">1×1<BR>function_handle</td>
+%       </tr>
+%       <tr>
+%           <td style="text-align:center"><TT>t</TT></td>
+%           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;t_{n}" title="" /></td>
+%           <td>current sample time</td>
+%           <td style="text-align:center">1×1<BR>double</td>
+%       </tr>
+%       <tr>
+%           <td style="text-align:center"><TT>F</TT></td>
+%           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{F}" title="" /></td>
+%           <td><img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{F}" title="" /> matrix (see Section 3.5.2 of the <a href="https://tamaskis.github.io/documentation/Solving_Initial_Value_Problems_for_ODEs.pdf">technical documentation</a>) for the current sample time</td>
+%           <td style="text-align:center">p×8<BR>double</td>
+%       </tr>
+%       <tr>
+%           <td style="text-align:center"><TT>h</TT></td>
+%           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;h" title="h" /></td>
+%           <td>step size</td>
+%           <td style="text-align:center">1×1<BR>double</td>
+%       </tr>
+%       <tr>
+%           <td rowspan="1" style="text-align:center"><b>Output</b></td>
+%           <td style="text-align:center"><TT>F</TT></td>
+%           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{F}" title="" /></td>
+%           <td><img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{F}" title="" /> matrix (see Section 3.5.2 of the <a href="https://tamaskis.github.io/documentation/Solving_Initial_Value_Problems_for_ODEs.pdf">technical documentation</a>) for the next sample time</td>
+%           <td style="text-align:center">p×8<BR>double</td>
+%       </tr>
+%   </table>
+% </html>
+%% Note
+% * $p=$ dimension of the state vector (for the scalar case, $p=1$).
+%% See also
+% <ABM2_doc.html |ABM2|> | 
+% <ABM3_doc.html |ABM3|> | 
+% <ABM4_doc.html |ABM4|> | 
+% <ABM5_doc.html |ABM5|> | 
+% <ABM6_doc.html |ABM6|> | 
+% <ABM8_doc.html |ABM8|>
+##### SOURCE END #####
+--></body></html>

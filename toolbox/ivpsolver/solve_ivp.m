@@ -8,7 +8,7 @@
 %   [t,y] = solve_ivp(__,method,wb)
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2022-06-06
+% Last Update: 2022-06-07
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
@@ -300,7 +300,7 @@ function [t,y] = solve_ivp(f,I,y0,h,method,wb)
     
     % number of subintervals
     N = length(t)-1;
-
+    
     % linearly interpolates to find solution at desired final time
     if final_time_known
         
@@ -311,7 +311,7 @@ function [t,y] = solve_ivp(f,I,y0,h,method,wb)
         t(N+1) = tf;
         
     end
-
+    
     % deletes penultimate solution if at same time as last solution
     if (abs(t(N+1)-t(N)) < 1e-10)
         t(N) = [];

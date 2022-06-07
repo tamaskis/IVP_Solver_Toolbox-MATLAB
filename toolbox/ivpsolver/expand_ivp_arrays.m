@@ -5,7 +5,7 @@
 %   [t_new,y_new] = expand_solution_arrays(t,y)
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2022-06-06
+% Last Update: 2022-06-07
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %

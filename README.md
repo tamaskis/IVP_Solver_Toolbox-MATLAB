@@ -1,4 +1,4 @@
-# IVP Solver Toolbox [![View ODE Solver Toolbox on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/103975-ode-solver-toolbox)
+# IVP Solver Toolbox [![View IVP Solver Toolbox on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/103975-ivp-solver-toolbox)
 
 Collection of fixed-step IVP solvers, functions to generate IVP solver equations, and functions for transforming matrix IVPs to vector IVPs.
 
@@ -11,19 +11,19 @@ Collection of fixed-step IVP solvers, functions to generate IVP solver equations
 To open the home page of the toolbox documentation in MATLAB, type
 
 ```
-doc_IST
+doc_IVP
 ```
 
 in the Command Window. To open the documentation of a specific function with name `function_name` from the Command Window, type
 
 ```
-doc_IST function_name
+doc_IVP function_name
 ```
 
 To open the PDF file with the technical documentation (Solving_Initial_Value_Problems_for_ODEs.pdf) from the Command Window, type
 
 ```
-doc_IST tech
+doc_IVP tech
 ```
 
 ## Main IVP Solver Function
