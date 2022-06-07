@@ -82,6 +82,13 @@ function [t,y] = solve_ivp(f,I,y0,h,method,wb)
         else
             C = @(t,y) t >= tf;
         end
+
+%         % defines condition function TODO
+%         if (tf > t0)
+%             C = @(t,y) t < tf;
+%         else
+%             C = @(t,y) t > tf;
+%         end
         
         % indicates that final time is known
         final_time_known = true;
@@ -293,10 +300,10 @@ function [t,y] = solve_ivp(f,I,y0,h,method,wb)
     % -----------------
     % Final formatting.
     % -----------------
-    %n=n+1;
+    
     % trims arrays
-    y = y(:,1:(n-1));
-    t = t(1:(n-1));
+    y = y(:,1:n);
+    t = t(1:n);
     
     % linearly interpolates to find solution at desired final time
     if final_time_known
