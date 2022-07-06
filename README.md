@@ -6,7 +6,7 @@ Collection of fixed-step IVP solvers, functions to generate IVP solver equations
 ## Documentation
 
 [Toolbox Documentation](https://tamaskis.github.io/IVP_Solver_Toolbox-MATLAB/)\
-[Technical Documentation](https://tamaskis.github.io/documentation/Solving_Initial_Value_Problems_for_ODEs.pdf)
+[Technical Documentation](https://tamaskis.github.io/files/Solving_Initial_Value_Problems_for_ODEs.pdf)
 
 To open the home page of the toolbox documentation in MATLAB, type
 

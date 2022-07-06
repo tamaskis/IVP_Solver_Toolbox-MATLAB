@@ -9,7 +9,7 @@
 % See also AM_coefficients, AB_predictor, AM_corrector, ABM_equations.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2022-06-07
+% Last Update: 2022-07-06
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
@@ -17,7 +17,7 @@
 % https://tamaskis.github.io/IVP_Solver_Toolbox-MATLAB/
 %
 % TECHNICAL DOCUMENTATION:
-% https://tamaskis.github.io/documentation/Solving_Initial_Value_Problems_for_ODEs.pdf
+% https://tamaskis.github.io/files/Solving_Initial_Value_Problems_for_ODEs.pdf
 %
 %--------------------------------------------------------------------------
 %

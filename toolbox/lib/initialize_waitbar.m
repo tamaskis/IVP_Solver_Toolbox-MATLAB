@@ -5,7 +5,7 @@
 %   [wb,prop] = initialize_waitbar(msg)
 %
 % Copyright © 2022 Tamas Kis
-% Last Update: 2022-06-04
+% Last Update: 2022-07-05
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
