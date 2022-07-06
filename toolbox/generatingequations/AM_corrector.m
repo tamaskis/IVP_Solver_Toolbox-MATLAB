@@ -24,7 +24,7 @@
 % INPUT:
 % ------
 %   m       - (1×1 double) order of Adams-Moulton corrector
-%   print   - (char) (OPTIONAL) prints coefficients if input as 'print'
+%   print   - (OPTIONAL) (char) prints coefficients if input as 'print'
 %
 % -------
 % OUTPUT:

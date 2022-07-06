@@ -24,8 +24,8 @@
 % INPUT:
 % ------
 %   T       - ((s+1)×(s+1) double) Butcher tableau
-%   name    - (1×1 string) (OPTIONAL) name of the method
-%   type    - (char) (OPTIONAL) print coefficients as 'decimal' or 
+%   name    - (OPTIONAL) (1×1 string) name of the method
+%   type    - (OPTIONAL) (char) print coefficients as 'decimal' or 
 %             'fraction' (defaults to 'fraction')
 %
 % -----
@@ -72,7 +72,7 @@ function tableau2eqns(T,name,type)
     % k terms with coefficients as fractions
     if strcmpi(type,'fraction')
         for i = 1:s
-
+            
             % first half of the argument of f(__,__)
             [nl,dl] = rat(c(i));
             if nl == 0            
@@ -86,7 +86,7 @@ function tableau2eqns(T,name,type)
             elseif (nl ~= 1) && (dl ~= 1)
                 fprintf("k%d = f(t(n) + %dh/%d, y(n)",i,nl,dl);
             end
-
+            
             % second half of the argument of f(__,__)
             for j = 1:s
                 [nr,dr] = rat(A(i,j));
@@ -108,11 +108,11 @@ function tableau2eqns(T,name,type)
             end
             fprintf(")\n");
         end
-    
+        
     % k terms with coefficients as decimals
     else
         for i = 1:s
-
+            
             % first half of the argument of f(__,__)
             if c(i) == 0            
                 fprintf("k%d = f(t(n), y(n)",i);
@@ -121,7 +121,7 @@ function tableau2eqns(T,name,type)
             else
                 fprintf("k%d = f(t(n) + %.8fh, y(n)",i,c(i));
             end
-
+            
             % second half of the argument of f(__,__)
             for j = 1:s
                 if A(i,j) > 0

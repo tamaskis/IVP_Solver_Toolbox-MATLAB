@@ -25,7 +25,7 @@
 % INPUT:
 % ------
 %   y       - ((N+1)×pr double) matrix storing time history of state vector
-%   p       - (1×1 double) (OPTIONAL) number of rows of state matrix
+%   p       - (OPTIONAL) (1×1 double) number of rows of state matrix
 %
 % -------
 % OUTPUT:

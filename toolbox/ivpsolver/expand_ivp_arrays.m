@@ -39,7 +39,7 @@
 %       have become full.
 %
 %==========================================================================
-function [t_new,y_new] = expand_solution_arrays(t,y)
+function [t_new,y_new] = expand_ivp_arrays(t,y)
     
     % number of subintervals
     N = length(t)-1;

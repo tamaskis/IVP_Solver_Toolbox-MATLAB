@@ -26,7 +26,7 @@
 %   F       - (1×1 function_handle) dM/dt = F(t,M) --> multivariate, 
 %             matrix-valued function (F : ℝ×ℝᵖˣʳ → ℝᵖˣʳ) defining
 %             matrix-valued ODE
-%   p       - (1×1 double) (OPTIONAL) number of rows of state matrix
+%   p       - (OPTIONAL) (1×1 double) number of rows of state matrix
 %
 % -------
 % OUTPUT:

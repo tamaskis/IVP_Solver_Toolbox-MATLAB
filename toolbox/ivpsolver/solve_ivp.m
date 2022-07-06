@@ -32,12 +32,12 @@
 %                             (C : ℝ×ℝᵖ → B)
 %   y0      - (p×1 double) initial condition, y₀ = y(t₀)
 %   h       - (1×1 double) step size
-%   method  - (char) (OPTIONAL) integration method --> 'Euler', 'RK2', 
+%   method  - (OPTIONAL) (char) integration method --> 'Euler', 'RK2', 
 %             'RK2 Heun', 'RK2 Ralston', 'RK3', 'RK3 Heun', 'RK3 Ralston', 
 %             'SSPRK3', 'RK4', 'RK4 Ralston', 'RK4 3/8', 'AB2', 'AB3', 
 %             'AB4', 'AB5', 'AB6', 'AB7', 'AB8', 'ABM2', 'ABM3', 'ABM4', 
 %             'ABM5', 'ABM6', 'ABM7', 'ABM8' (defaults to 'RK4')
-%   wb      - (1×1 logical or char) (OPTIONAL) waitbar parameters
+%   wb      - (OPTIONAL) (1×1 logical or char) waitbar parameters
 %               --> input as "true" if you want waitbar with default 
 %                   message displayed
 %               --> input as a char array storing a message if you want a
