@@ -5,7 +5,7 @@
 % equation).
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2022-07-06
+% Last Update: 2022-08-28
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 
@@ -53,18 +53,8 @@ T = 5;
 % defines the Riccati differential equation (a matrix-valued ODE)
 F = @(t,P) -(A.'*P+P*A-(P*B+S)/R*(B.'*P+S.')+Q);
 
-% converts the matrix-valued ODE to a vector-valued ODE
-f = odefun_mat2vec(F);
-
-% final condition
-yT = ivpIC_mat2vec(PT);
-
-% solves vector-valued IVP using a step size of h = 0.001
-[~,y] = solve_ivp(f,[T,0],yT,0.001,'RK4');
-
-% transforms solution matrix for vector-valued IVP into solution array for
-% matrix-valued IVP
-P = ivpsol_vec2mat(y);
+% solves matrix-valued IVP using a step size of h = 0.001
+[~,P] = solve_ivp_matrix(F,[T,0],PT,0.001,'RK4');
 
 % solution for P0 (will be at end of array since P solved for backwards in
 % time)

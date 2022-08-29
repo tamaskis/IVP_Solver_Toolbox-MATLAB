@@ -1,0 +1,456 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>solve_ivp_matrix</title><meta name="generator" content="MATLAB 9.12"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-08-28"><meta name="DC.source" content="solve_ivp_matrix_doc.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>solve_ivp_matrix</tt></h1><!--introduction--><p>Solve matrix-valued initial value problems using fixed-step IVP solvers.</p><p><a href="index.html">Back to IVP Solver Toolbox Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#7">Input/Output Parameters</a></li><li><a href="#8">Note</a></li><li><a href="#9">Example</a></li><li><a href="#16">References</a></li><li><a href="#17">See also</a></li></ul></div><h2 id="1">Syntax</h2><pre class="language-matlab">[t,M] = solve_ivp_matrix(F,[t0,tf],M0,h)
+[t,M] = solve_ivp_matrix(F,{t0,C},M0,h)
+[t,M] = solve_ivp_matrix(__,p)
+[t,M] = solve_ivp_matrix(__,p,method)
+[t,M] = solve_ivp_matrix(__,p,method,wb)
+</pre><h2 id="2">Description</h2><p><tt>[t,M] = solve_ivp_matrix(F,[t0,tf],M0,h)</tt> solves the IVP defined by <tt>F(t,M)</tt> from <tt>t0</tt> until <tt>tf</tt> using the classic Runge-Kutta fourth-order method with an initial condition <tt>M0</tt> and step size <tt>h</tt>. This syntax assumes that the state matrix is a square matrix.</p><p><tt>[t,M] = solve_ivp_matrix(F,{t0,C},M0,h)</tt> does the same as the syntax above, but instead of terminating at a final time <tt>tf</tt>, the solver terminates once the condition function <tt>C(t,y)</tt> is no longer satisfied. This syntax assumes that the state matrix (<img src="solve_ivp_matrix_doc_eq01518063970584319034.png" alt="$\mathbf{M}$" style="width:12px;height:8px;">) is a square matrix.</p><p><tt>[t,M] = solve_ivp_matrix(...,p)</tt> can be used with either of the syntaxes above to specify the number of rows of the state matrix (<img src="solve_ivp_matrix_doc_eq14577781216167612366.png" alt="$\mathbf{M}\in\mathbf{R}^{p\times r}$" style="width:48px;height:9px;">). The parameter <tt>p</tt> should <b>always</b> be input if the state matrix is <i>not</i> square.</p><p><tt>[t,M] = solve_ivp_matrix(...,p,method)</tt> can be used with any of the syntaxes above to specify the integration method (i.e. the function will use the specified integration method, instead of the classic Runge-Kutta fourth-order method used by the previous two syntaxes). Options for the integration method are listed in the "Input/Output Parameters" section.</p><p><tt>[t,M] = solve_ivp_matrix(...,p,method,wb)</tt> can be used with any of the syntaxes above to define a waitbar. If <tt>wb</tt> is input as <tt>true</tt>, then a waitbar is displayed with the default message 'Solving IVP...'. To specify a custom waitbar message, input <tt>wb</tt> as a char array storing the desired message.</p><h2 id="7">Input/Output Parameters</h2><p>
+  <table border=1>
+      <tr>
+          <td></td>
+          <td style="text-align:center"><b>Variable</b></td>
+          <td style="text-align:center"><b>Symbol</b></td>
+          <td style="text-align:center"><b>Description</b></td>
+          <td style="text-align:center"><b>Format</b></td>
+      </tr>
+      <tr>
+          <td rowspan="9" style="text-align:center"><b>Input</b></td>
+          <td style="text-align:center"><TT>F</TT></td>
+          <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{F}(t,\mathbf{M})" title="" /></td>
+          <td>multivariate, matrix-valued function (<img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{F}:\mathbb{R}\times\mathbb{R}^{p\times r}\rightarrow\mathbb{R}^{p\times r}" title="" />) defining the ordinary differential equation <img src="https://latex.codecogs.com/svg.latex?\inline&space;d\mathbf{M}/dt=\mathbf{F}(t,\mathbf{M})" title="" />
+              <BR> - inputs to <TT>F</TT> are the current time (<TT>t</TT>, 1×1 double) and the current state matrix (<TT>M</TT>, p×r double)
+              <BR> - output of <TT>f</TT> is the state matrix derivative (<TT>dMdt</TT>, p×r double) at the current time/state</td>
+          <td style="text-align:center">1×1<BR>function_handle</td>
+      </tr>
+      <tr>
+          <td style="text-align:center"><TT>t0</TT></td>
+          <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;t_{0}" title="t_{0}" /></td>
+          <td>initial time</td>
+          <td style="text-align:center">1×1<BR>double</td>
+      </tr>
+      <tr>
+          <td style="text-align:center"><TT>tf</TT></td>
+          <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;t_{f}" title="t_{f}" /></td>
+          <td>final time</td>
+          <td style="text-align:center">1×1<BR>double</td>
+      </tr>
+      <tr>
+          <td style="text-align:center"><TT>C</TT></td>
+          <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;C(t,\mathbf{M})" title="C(t,\mathbf{M})" /></td>
+          <td>condition function (<img src="https://latex.codecogs.com/svg.latex?\inline&space;C:\mathbb{R}\times\mathbb{R}^{p\times r}\rightarrow\mathbb{B}" title="" />)
+              <BR> - inputs are the current time (<TT>t</TT>, 1×1 double) and the current state matrix (<TT>M</TT>, p×r double)
+              <BR> - output is a 1×1 logical (<TT>true</TT> if solver should continue running, <TT>false</TT> if solver should terminate)</td>
+          <td style="text-align:center">1×1<BR>function_handle</td>
+      </tr>
+      <tr>
+          <td style="text-align:center"><TT>M0</TT></td>
+          <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{M}_{0}" title="\mathbf{M}_{0}" /></td>
+          <td>initial condition</td>
+          <td style="text-align:center">p×r<BR>double</td>
+      </tr>
+      <tr>
+          <td style="text-align:center"><TT>h</TT></td>
+          <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;h" title="h" /></td>
+          <td>step size</td>
+          <td style="text-align:center">1×1<BR>double</td>
+      </tr>
+      <tr>
+          <td style="text-align:center"><TT>p</TT></td>
+          <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;p" title="" /></td>
+          <td>(OPTIONAL) number of rows of state matrix</td>
+          <td style="text-align:center">1×1<BR>double</td>
+      </tr>
+      <tr>
+          <td style="text-align:center"><TT>method</TT></td>
+          <td style="text-align:center">-</td>
+          <td>(OPTIONAL) integration method (defaults to <TT>'RK4'</TT>)
+              <BR>  - <TT>'Euler'</TT> (Euler 1st-order method)
+              <BR>  - <TT>'RK2'</TT> (midpoint method)
+              <BR>  - <TT>'RK2 Heun'</TT> (Heun's 2nd-order method)
+              <BR>  - <TT>'RK2 Ralston'</TT> (Ralston's 2nd-order method)
+              <BR>  - <TT>'RK3'</TT> (Kutta's 3rd-order method)
+              <BR>  - <TT>'RK3 Heun'</TT> (Heun's 3rd-order method)
+              <BR>  - <TT>'RK3 Ralston'</TT> (Ralston's 3rd-order method)
+              <BR>  - <TT>'SSPRK3'</TT> (strong stability preserving 3rd-order method)
+              <BR>  - <TT>'RK4'</TT> (classic Runge-Kutta 4th-order method)
+              <BR>  - <TT>'RK4 Ralston'</TT> (Ralston's 4th-order method)
+              <BR>  - <TT>'RK4 3/8'</TT> (3/8-rule 4th-order method)
+              <BR>  - <TT>'AB2'</TT> (Adams-Bashforth 2nd-order method)
+              <BR>  - <TT>'AB3'</TT> (Adams-Bashforth 3rd-order method)
+              <BR>  - <TT>'AB4'</TT> (Adams-Bashforth 4th-order method)
+              <BR>  - <TT>'AB5'</TT> (Adams-Bashforth 5th-order method)
+              <BR>  - <TT>'AB6'</TT> (Adams-Bashforth 6th-order method)
+              <BR>  - <TT>'AB7'</TT> (Adams-Bashforth 7th-order method)
+              <BR>  - <TT>'AB8'</TT> (Adams-Bashforth 8th-order method)
+              <BR>  - <TT>'ABM2'</TT> (Adams-Bashforth-Moulton 2nd-order method)
+              <BR>  - <TT>'ABM3'</TT> (Adams-Bashforth-Moulton 3rd-order method)
+              <BR>  - <TT>'ABM4'</TT> (Adams-Bashforth-Moulton 4th-order method)
+              <BR>  - <TT>'ABM5'</TT> (Adams-Bashforth-Moulton 5th-order method)
+              <BR>  - <TT>'ABM6'</TT> (Adams-Bashforth-Moulton 6th-order method)
+              <BR>  - <TT>'ABM7'</TT> (Adams-Bashforth-Moulton 7th-order method)
+              <BR>  - <TT>'ABM8'</TT> (Adams-Bashforth-Moulton 8th-order method)
+              </td>
+          <td style="text-align:center">char</td>
+      </tr>
+      <tr>
+          <td style="text-align:center"><TT>wb</TT></td>
+          <td style="text-align:center">-</td>
+          <td>(OPTIONAL) waitbar parameters (defaults to <TT>false</TT>)
+              <BR>  - input as "<TT>true</TT>" if you want waitbar with default message displayed
+              <BR>  - input as a char array storing a message if you want a custom message displayed on the waitbar
+              </td>
+          <td style="text-align:center">char<BR><i>or</i><BR>1×1 logical</td>
+      </tr>
+      <tr>
+          <td rowspan="2" style="text-align:center"><b>Output</b></td>
+          <td style="text-align:center"><TT>t</TT></td>
+          <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\mathbf{t}" title="" /></td>
+          <td>time vector</td>
+          <td style="text-align:center">(N+1)×1<BR>double</td>
+      </tr>
+      <tr>
+          <td style="text-align:center"><TT>M</TT></td>
+          <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?[\mathbf{M}]" title="" /></td>
+          <td>solution array</td>
+          <td style="text-align:center">p×r×(N+1)<BR>double</td>
+      </tr>
+  </table>
+</p><h2 id="8">Note</h2><div><ul><li>If <img src="solve_ivp_matrix_doc_eq03729901751903020778.png" alt="$p$" style="width:6px;height:8px;"> is not input, it is assumed that the state matrix (<img src="solve_ivp_matrix_doc_eq01518063970584319034.png" alt="$\mathbf{M}$" style="width:12px;height:8px;">) is a square matrix.</li><li><img src="solve_ivp_matrix_doc_eq06607519364670964398.png" alt="$p\times r=$" style="width:36px;height:8px;"> size of state matrix, <img src="solve_ivp_matrix_doc_eq01518063970584319034.png" alt="$\mathbf{M}$" style="width:12px;height:8px;"></li><li><img src="solve_ivp_matrix_doc_eq06692517212066213177.png" alt="$N+1=$" style="width:40px;height:9px;"> length of time vector</li><li>The nth layer of <img src="solve_ivp_matrix_doc_eq07742130518583913975.png" alt="$[\mathbf{M}]$" style="width:16px;height:11px;"> stores the state matrix (i.e. the solution) corresponding to the nth time in <img src="solve_ivp_matrix_doc_eq01442555386716173869.png" alt="$\mathbf{t}$" style="width:5px;height:8px;">.</li></ul></div><h2 id="9">Example</h2><p><i>Consider the Riccati differential equation for the finite-horizon linear quadratic regulator problem:</i></p><p><img src="solve_ivp_matrix_doc_eq15499043028313771354.png" alt="$$\dot{\mathbf{P}}=-\left[\mathbf{A}^{T}\mathbf{P}+\mathbf{P}\mathbf{A}-(\mathbf{P}\mathbf{B}+\mathbf{S})\mathbf{R}^{-1}(\mathbf{B}^{T}\mathbf{P}+\mathbf{S}^{T})+\mathbf{Q}\right]$$" style="width:258px;height:15px;"></p><p><i>Find <img src="solve_ivp_matrix_doc_eq11156567409250041374.png" alt="$\mathbf{P}(0)=\mathbf{P}_{0}$" style="width:50px;height:11px;"> given that</i></p><p><img src="solve_ivp_matrix_doc_eq06697316367777428526.png" alt="$$\mathbf{P}(T)=\mathbf{P}_{T}=\pmatrix{1&amp;1\cr1&amp;1}$$" style="width:109px;height:27px;"></p><p><i>where <img src="solve_ivp_matrix_doc_eq04333988821981505429.png" alt="$T=5$" style="width:28px;height:8px;">. The state (<img src="solve_ivp_matrix_doc_eq15190527482521674856.png" alt="$\mathbf{A}$" style="width:9px;height:8px;">) and input (<img src="solve_ivp_matrix_doc_eq16427099040942302163.png" alt="$\mathbf{B}$" style="width:9px;height:8px;">) matrices are</i></p><p><img src="solve_ivp_matrix_doc_eq08594218919394792437.png" alt="$$\mathbf{A}=\pmatrix{1&amp;1\cr2&amp;1},\quad\quad\mathbf{B}=\pmatrix{1\cr1}$$" style="width:142px;height:27px;"></p><p><i>The state (<img src="solve_ivp_matrix_doc_eq04980437671470961831.png" alt="$\mathbf{Q}$" style="width:9px;height:10px;">), input (<img src="solve_ivp_matrix_doc_eq07378229934469313194.png" alt="$\mathbf{R}$" style="width:10px;height:8px;">), and cross-coupling (<img src="solve_ivp_matrix_doc_eq17705281529142768610.png" alt="$\mathbf{S}$" style="width:6px;height:8px;">) weighting matrices are</i></p><p><img src="solve_ivp_matrix_doc_eq06656902451109221026.png" alt="$$\mathbf{Q}=\pmatrix{2&amp;1\cr1&amp;1},\quad\quad\mathbf{R}=\pmatrix{1},\quad\quad\mathbf{S}=\pmatrix{0\cr0}$$" style="width:210px;height:27px;"></p><p>Define the matrices.</p><pre class="codeinput"><span class="comment">% state matrix</span>
+A = [1   1;
+     2   1];
+
+<span class="comment">% input matrix</span>
+B = [1;
+     1];
+
+<span class="comment">% state weighting matrix</span>
+Q = [2   1;
+     1   1];
+
+<span class="comment">% input weighting matrix</span>
+R = 1;
+
+<span class="comment">% cross-coupling weighting matrix</span>
+S = [0;
+     0];
+</pre><p>Define the terminal condition and final time.</p><pre class="codeinput"><span class="comment">% terminal condition</span>
+PT = [1   1;
+      1   1];
+
+<span class="comment">% final time</span>
+T = 5;
+</pre><p>Define the Riccati differential equation (a matrix-valued ODE).</p><pre class="codeinput">F = @(t,P) -(A.'*P+P*A-(P*B+S)/R*(B.'*P+S.')+Q);
+</pre><p>In this case, we have a terminal condition at time <img src="solve_ivp_matrix_doc_eq16373138058832967206.png" alt="$t=T=5$" style="width:47px;height:8px;">, and want to find the initial condition at time <img src="solve_ivp_matrix_doc_eq02656990568186096865.png" alt="$t=t_{0}=0$" style="width:47px;height:10px;">. To do this, we will integrate backwards using an IVP solver, so the terminal condition <img src="solve_ivp_matrix_doc_eq07282847098330546007.png" alt="$\mathbf{P}_{T}$" style="width:14px;height:10px;"> will actually form the initial condition. Solving the matrix-valued IVP with a step size of <img src="solve_ivp_matrix_doc_eq00842521489666112223.png" alt="$h=0.001$" style="width:45px;height:8px;">,</p><pre class="codeinput">[t,P] = solve_ivp_matrix(F,[T,0],PT,0.001);
+</pre><p>Note that since <img src="solve_ivp_matrix_doc_eq01284226214242475479.png" alt="$\mathbf{P}$" style="width:8px;height:8px;"> is a square matrix, we did not have to specify its number of rows for the <tt>solve_ivp_matrix</tt> function.</p><p>Our original goal was to find <img src="solve_ivp_matrix_doc_eq01737430298148732982.png" alt="$\mathbf{P}_{0}$" style="width:12px;height:10px;">. Extracting this matrix from the solution array (noting that the solution corresponding to <img src="solve_ivp_matrix_doc_eq00402237798869806649.png" alt="$t=0$" style="width:24px;height:8px;"> will be stored at the end of the solution array since we integrated backwards in time), we find</p><pre class="codeinput">P0 = P(:,:,end)
+</pre><pre class="codeoutput">
+P0 =
+
+   2.147130739665738   1.158223807741478
+   1.158223807741478   1.254683874725441
+
+</pre><h2 id="16">References</h2><p>The example above is adapted from the following sources:</p><div><ul><li><a href="https://www.mathworks.com/matlabcentral/answers/94722-how-can-i-solve-the-matrix-riccati-differential-equation-within-matlab">https://www.mathworks.com/matlabcentral/answers/94722-how-can-i-solve-the-matrix-riccati-differential-equation-within-matlab</a></li><li><a href="https://en.wikipedia.org/wiki/Linear-quadratic_regulator">https://en.wikipedia.org/wiki/Linear-quadratic_regulator</a></li></ul></div><h2 id="17">See also</h2><p><a href="solve_ivp_doc.html"><tt>solve_ivp</tt></a></p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2022a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |solve_ivp_matrix|
+% Solve matrix-valued initial value problems using fixed-step IVP solvers.
+% 
+% <index.html Back to IVP Solver Toolbox Contents>.
+%% Syntax
+%   [t,M] = solve_ivp_matrix(F,[t0,tf],M0,h)
+%   [t,M] = solve_ivp_matrix(F,{t0,C},M0,h)
+%   [t,M] = solve_ivp_matrix(__,p)
+%   [t,M] = solve_ivp_matrix(__,p,method)
+%   [t,M] = solve_ivp_matrix(__,p,method,wb)
+%% Description
+% |[t,M] = solve_ivp_matrix(F,[t0,tf],M0,h)| solves the IVP defined by 
+% |F(t,M)| from |t0| until |tf| using the classic Runge-Kutta fourth-order 
+% method with an initial condition |M0| and step size |h|. This syntax
+% assumes that the state matrix is a square matrix.
+%%
+% |[t,M] = solve_ivp_matrix(F,{t0,C},M0,h)| does the same as the syntax 
+% above, but instead of terminating at a final time |tf|, the solver 
+% terminates once the condition function |C(t,y)| is no longer satisfied. 
+% This syntax assumes that the state matrix ($\mathbf{M}$) is a square 
+% matrix.
+%%
+% |[t,M] = solve_ivp_matrix(...,p)| can be used with either of the 
+% syntaxes above to specify the number of rows of the state matrix
+% ($\mathbf{M}\in\mathbf{R}^{p\times r}$). The parameter |p| should
+% *always* be input if the state matrix is _not_ square.
+%%
+% |[t,M] = solve_ivp_matrix(...,p,method)| can be used with any of the 
+% syntaxes above to specify the integration method (i.e. the function will 
+% use the specified integration method, instead of the classic Runge-Kutta 
+% fourth-order method used by the previous two syntaxes). Options for the
+% integration method are listed in the "Input/Output Parameters" section.
+%%
+% |[t,M] = solve_ivp_matrix(...,p,method,wb)| can be used with any of the 
+% syntaxes above to define a waitbar. If |wb| is input as |true|, then a 
+% waitbar is displayed with the default message 'Solving IVP...'. To 
+% specify a custom waitbar message, input |wb| as a char array storing the 
+% desired message.
+%% Input/Output Parameters
+% <html>
+%   <table border=1>
+%       <tr>
+%           <td></td>
+%           <td style="text-align:center"><b>Variable</b></td>
+%           <td style="text-align:center"><b>Symbol</b></td>
+%           <td style="text-align:center"><b>Description</b></td>
+%           <td style="text-align:center"><b>Format</b></td>
+%       </tr>
+%       <tr>
+%           <td rowspan="9" style="text-align:center"><b>Input</b></td>
+%           <td style="text-align:center"><TT>F</TT></td>
+%           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{F}(t,\mathbf{M})" title="" /></td>
+%           <td>multivariate, matrix-valued function (<img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{F}:\mathbb{R}\times\mathbb{R}^{p\times r}\rightarrow\mathbb{R}^{p\times r}" title="" />) defining the ordinary differential equation <img src="https://latex.codecogs.com/svg.latex?\inline&space;d\mathbf{M}/dt=\mathbf{F}(t,\mathbf{M})" title="" />
+%               <BR> - inputs to <TT>F</TT> are the current time (<TT>t</TT>, 1×1 double) and the current state matrix (<TT>M</TT>, p×r double)
+%               <BR> - output of <TT>f</TT> is the state matrix derivative (<TT>dMdt</TT>, p×r double) at the current time/state</td>
+%           <td style="text-align:center">1×1<BR>function_handle</td>
+%       </tr>
+%       <tr>
+%           <td style="text-align:center"><TT>t0</TT></td>
+%           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;t_{0}" title="t_{0}" /></td>
+%           <td>initial time</td>
+%           <td style="text-align:center">1×1<BR>double</td>
+%       </tr>
+%       <tr>
+%           <td style="text-align:center"><TT>tf</TT></td>
+%           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;t_{f}" title="t_{f}" /></td>
+%           <td>final time</td>
+%           <td style="text-align:center">1×1<BR>double</td>
+%       </tr>
+%       <tr>
+%           <td style="text-align:center"><TT>C</TT></td>
+%           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;C(t,\mathbf{M})" title="C(t,\mathbf{M})" /></td>
+%           <td>condition function (<img src="https://latex.codecogs.com/svg.latex?\inline&space;C:\mathbb{R}\times\mathbb{R}^{p\times r}\rightarrow\mathbb{B}" title="" />)
+%               <BR> - inputs are the current time (<TT>t</TT>, 1×1 double) and the current state matrix (<TT>M</TT>, p×r double)
+%               <BR> - output is a 1×1 logical (<TT>true</TT> if solver should continue running, <TT>false</TT> if solver should terminate)</td>
+%           <td style="text-align:center">1×1<BR>function_handle</td>
+%       </tr>
+%       <tr>
+%           <td style="text-align:center"><TT>M0</TT></td>
+%           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{M}_{0}" title="\mathbf{M}_{0}" /></td>
+%           <td>initial condition</td>
+%           <td style="text-align:center">p×r<BR>double</td>
+%       </tr>
+%       <tr>
+%           <td style="text-align:center"><TT>h</TT></td>
+%           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;h" title="h" /></td>
+%           <td>step size</td>
+%           <td style="text-align:center">1×1<BR>double</td>
+%       </tr>
+%       <tr>
+%           <td style="text-align:center"><TT>p</TT></td>
+%           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;p" title="" /></td>
+%           <td>(OPTIONAL) number of rows of state matrix</td>
+%           <td style="text-align:center">1×1<BR>double</td>
+%       </tr>
+%       <tr>
+%           <td style="text-align:center"><TT>method</TT></td>
+%           <td style="text-align:center">-</td>
+%           <td>(OPTIONAL) integration method (defaults to <TT>'RK4'</TT>)
+%               <BR>  - <TT>'Euler'</TT> (Euler 1st-order method)
+%               <BR>  - <TT>'RK2'</TT> (midpoint method)
+%               <BR>  - <TT>'RK2 Heun'</TT> (Heun's 2nd-order method)
+%               <BR>  - <TT>'RK2 Ralston'</TT> (Ralston's 2nd-order method)
+%               <BR>  - <TT>'RK3'</TT> (Kutta's 3rd-order method)
+%               <BR>  - <TT>'RK3 Heun'</TT> (Heun's 3rd-order method)
+%               <BR>  - <TT>'RK3 Ralston'</TT> (Ralston's 3rd-order method)
+%               <BR>  - <TT>'SSPRK3'</TT> (strong stability preserving 3rd-order method)
+%               <BR>  - <TT>'RK4'</TT> (classic Runge-Kutta 4th-order method)
+%               <BR>  - <TT>'RK4 Ralston'</TT> (Ralston's 4th-order method)
+%               <BR>  - <TT>'RK4 3/8'</TT> (3/8-rule 4th-order method)
+%               <BR>  - <TT>'AB2'</TT> (Adams-Bashforth 2nd-order method)
+%               <BR>  - <TT>'AB3'</TT> (Adams-Bashforth 3rd-order method)
+%               <BR>  - <TT>'AB4'</TT> (Adams-Bashforth 4th-order method)
+%               <BR>  - <TT>'AB5'</TT> (Adams-Bashforth 5th-order method)
+%               <BR>  - <TT>'AB6'</TT> (Adams-Bashforth 6th-order method)
+%               <BR>  - <TT>'AB7'</TT> (Adams-Bashforth 7th-order method)
+%               <BR>  - <TT>'AB8'</TT> (Adams-Bashforth 8th-order method)
+%               <BR>  - <TT>'ABM2'</TT> (Adams-Bashforth-Moulton 2nd-order method)
+%               <BR>  - <TT>'ABM3'</TT> (Adams-Bashforth-Moulton 3rd-order method)
+%               <BR>  - <TT>'ABM4'</TT> (Adams-Bashforth-Moulton 4th-order method)
+%               <BR>  - <TT>'ABM5'</TT> (Adams-Bashforth-Moulton 5th-order method)
+%               <BR>  - <TT>'ABM6'</TT> (Adams-Bashforth-Moulton 6th-order method)
+%               <BR>  - <TT>'ABM7'</TT> (Adams-Bashforth-Moulton 7th-order method)
+%               <BR>  - <TT>'ABM8'</TT> (Adams-Bashforth-Moulton 8th-order method)
+%               </td>
+%           <td style="text-align:center">char</td>
+%       </tr>
+%       <tr>
+%           <td style="text-align:center"><TT>wb</TT></td>
+%           <td style="text-align:center">-</td>
+%           <td>(OPTIONAL) waitbar parameters (defaults to <TT>false</TT>)
+%               <BR>  - input as "<TT>true</TT>" if you want waitbar with default message displayed
+%               <BR>  - input as a char array storing a message if you want a custom message displayed on the waitbar
+%               </td>
+%           <td style="text-align:center">char<BR><i>or</i><BR>1×1 logical</td>
+%       </tr>
+%       <tr>
+%           <td rowspan="2" style="text-align:center"><b>Output</b></td>
+%           <td style="text-align:center"><TT>t</TT></td>
+%           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\mathbf{t}" title="" /></td>
+%           <td>time vector</td>
+%           <td style="text-align:center">(N+1)×1<BR>double</td>
+%       </tr>
+%       <tr>
+%           <td style="text-align:center"><TT>M</TT></td>
+%           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?[\mathbf{M}]" title="" /></td>
+%           <td>solution array</td>
+%           <td style="text-align:center">p×r×(N+1)<BR>double</td>
+%       </tr>
+%   </table>
+% </html>
+%% Note
+% * If $p$ is not input, it is assumed that the state matrix ($\mathbf{M}$)
+% is a square matrix.
+% * $p\times r=$ size of state matrix, $\mathbf{M}$
+% * $N+1=$ length of time vector
+% * The nth layer of $[\mathbf{M}]$ stores the state matrix (i.e. the 
+% solution) corresponding to the nth time in $\mathbf{t}$.
+%% Example
+% _Consider the Riccati differential equation for the finite-horizon linear
+% quadratic regulator problem:_
+%
+% $$\dot{\mathbf{P}}=-\left[\mathbf{A}^{T}\mathbf{P}+\mathbf{P}\mathbf{A}-(\mathbf{P}\mathbf{B}+\mathbf{S})\mathbf{R}^{-1}(\mathbf{B}^{T}\mathbf{P}+\mathbf{S}^{T})+\mathbf{Q}\right]$$
+%
+% _Find $\mathbf{P}(0)=\mathbf{P}_{0}$ given that_
+%
+% $$\mathbf{P}(T)=\mathbf{P}_{T}=\pmatrix{1&1\cr1&1}$$
+%
+% _where $T=5$. The state ($\mathbf{A}$) and input ($\mathbf{B}$) matrices
+% are_
+%
+% $$\mathbf{A}=\pmatrix{1&1\cr2&1},\quad\quad\mathbf{B}=\pmatrix{1\cr1}$$
+%
+% _The state ($\mathbf{Q}$), input ($\mathbf{R}$), and cross-coupling
+% ($\mathbf{S}$) weighting matrices are_
+%
+% $$\mathbf{Q}=\pmatrix{2&1\cr1&1},\quad\quad\mathbf{R}=\pmatrix{1},\quad\quad\mathbf{S}=\pmatrix{0\cr0}$$
+
+%%
+% Define the matrices.
+
+% state matrix
+A = [1   1;
+     2   1];
+
+% input matrix
+B = [1;
+     1];
+
+% state weighting matrix
+Q = [2   1;
+     1   1];
+
+% input weighting matrix
+R = 1;
+
+% cross-coupling weighting matrix
+S = [0;
+     0];
+%%
+% Define the terminal condition and final time.
+
+% terminal condition
+PT = [1   1;
+      1   1];
+
+% final time
+T = 5;
+%%
+% Define the Riccati differential equation (a matrix-valued ODE).
+F = @(t,P) -(A.'*P+P*A-(P*B+S)/R*(B.'*P+S.')+Q);
+%%
+% In this case, we have a terminal condition at time $t=T=5$, and want to 
+% find the initial condition at time $t=t_{0}=0$. To do this, we will 
+% integrate backwards using an IVP solver, so the terminal condition 
+% $\mathbf{P}_{T}$ will actually form the initial condition. Solving the
+% matrix-valued IVP with a step size of $h=0.001$,
+[t,P] = solve_ivp_matrix(F,[T,0],PT,0.001);
+%%
+% Note that since $\mathbf{P}$ is a square matrix, we did not have to
+% specify its number of rows for the |solve_ivp_matrix| function.
+%%
+% Our original goal was to find $\mathbf{P}_{0}$. Extracting this matrix
+% from the solution array (noting that the solution corresponding to $t=0$
+% will be stored at the end of the solution array since we integrated
+% backwards in time), we find
+P0 = P(:,:,end)
+%% References
+% The example above is adapted from the following sources:
+%
+% * https://www.mathworks.com/matlabcentral/answers/94722-how-can-i-solve-the-matrix-riccati-differential-equation-within-matlab
+% * https://en.wikipedia.org/wiki/Linear-quadratic_regulator
+%% See also
+% <solve_ivp_doc.html |solve_ivp|>
+##### SOURCE END #####
+--></body></html>
