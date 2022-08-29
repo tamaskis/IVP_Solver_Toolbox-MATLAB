@@ -1,6 +1,6 @@
 # IVP Solver Toolbox [![View IVP Solver Toolbox on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/103975-ivp-solver-toolbox)
 
-Collection of fixed-step IVP solvers, functions to generate IVP solver equations, and functions for transforming matrix IVPs to vector IVPs.
+Collection of fixed-step IVP solvers. Includes support for matrix-valued IVPs, and provides functions for generating IVP solver equations.
 
 
 ## Documentation
