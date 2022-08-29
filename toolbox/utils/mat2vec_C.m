@@ -46,13 +46,14 @@ function Cv = mat2vec_C(Cm,p)
     % defaults "p" to empty vector if not input
     if (nargin < 2), p = []; end
     
-    % assigns function handle to subfunction below that produces the state
-    % vector derivative, given the matrix-valued ODE
+    % function handle for condition function for corresponding 
+    % vector-valued IVP
     Cv = @(t,y) vector_condition_function(Cm,t,y,p);
     
     %----------------------------------------------------------------------
-    % state_vector_derivative  Evaluates the condition function given a
-    % matrix-valued IVP.
+    % state_vector_derivative  Evaluates the condition function for a
+    % matrix-valued IVP given the current time and corresponding state
+    % vector.
     %----------------------------------------------------------------------
     %
     % INPUT:

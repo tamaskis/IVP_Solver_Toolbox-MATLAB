@@ -9,7 +9,7 @@
 % RK3_ralston, SSPRK3, RK4, RK4_38.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2022-07-06
+% Last Update: 2022-08-28
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
@@ -38,7 +38,6 @@
 % -----
 % NOTE:
 % -----
-%   --> p = dimension of state vector (for the scalar case, p = 1)
 %   --> The documentation above is written specifically for the case of
 %       vector-valued ODEs, but this function can also be used for matrix-
 %       valued ODEs of the form dM/dt = F(t,M), where 

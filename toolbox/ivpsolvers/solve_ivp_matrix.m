@@ -29,11 +29,11 @@
 %   F       - (1×1 function_handle) dM/dt = F(t,M) --> multivariate, 
 %             matrix-valued function (F : ℝ×ℝᵖˣʳ → ℝᵖˣʳ) defining
 %             matrix-valued ODE
-%   I       - defines interval over which to solve the IVP, 2 options: TODO
+%   I       - defines interval over which to solve the IVP, 2 options:
 %               --> [t0,tf] - (1×2 double) initial and final times
 %               --> {t0,C}  - (1×2 cell) initial time, t₀, and function 
-%                             handle for condition function, C(t,y) 
-%                             (C : ℝ×ℝᵖ → B)
+%                             handle for condition function, C(t,M) 
+%                             (C : ℝ×ℝᵖˣʳ → B)
 %   M0      - (p×r double) initial condition, M₀ = M(t₀)
 %   h       - (1×1 double) step size
 %   p       - (OPTIONAL) (1×1 double) number of rows of state matrix
@@ -59,8 +59,6 @@
 % -----
 %   --> If "p" is not input, it is assumed that the state matrix (M) is
 %       a square matrix.
-%   --> p×r = size of state matrix, M
-%   --> N+1 = length of time vector
 %   --> The nth layer of "M" stores the state matrix (i.e. the solution)
 %       corresponding to the nth time in "t".
 %
@@ -78,11 +76,11 @@ function [t,M] = solve_ivp_matrix(F,I,M0,h,p,method,wb)
     % converts matrix initial condition to vector initial condition
     y0 = mat2vec_IC(M0);
     
-    % converts matrix-valued condition function to vector-valued condition
-    % function
+    % converts condition function for matrix-valued IVP into the condition 
+    % function for the corresponding vector-valued IVP
     if iscell(I), I(2) = mat2vec_C(I(2),p); end
     
-    % solves corresponding vector-valued ODE
+    % solves corresponding vector-valued IVP
     [t,y] = solve_ivp(f,I,y0,h,method,wb);
     
     % transforms solution matrix for vector-valued IVP into solution array

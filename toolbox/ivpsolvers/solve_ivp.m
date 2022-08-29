@@ -7,7 +7,7 @@
 %   [t,y] = solve_ivp(__,method)
 %   [t,y] = solve_ivp(__,method,wb)
 %
-% See also solve_ivp_matrix
+% See also solve_ivp_matrix.
 %
 % Copyright © 2021 Tamas Kis
 % Last Update: 2022-08-28
@@ -54,8 +54,6 @@
 % -----
 % NOTE:
 % -----
-%   --> p = dimension of state vector (for the scalar case, p = 1)
-%   --> N+1 = length of time vector
 %   --> The nth row of "y" stores the TRANSPOSE of the state vector (i.e. 
 %       the solution) corresponding to the nth time in "t". This convention
 %       is chosen to match the convention used by MATLAB's ODE suite.

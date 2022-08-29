@@ -8,7 +8,7 @@
 % See also ABM2, ABM3, ABM4, ABM5, ABM6, ABM7.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2022-07-06
+% Last Update: 2022-08-28
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
@@ -43,11 +43,6 @@
 %                                times
 %               -->    column 9: state (i.e. solution) at next sample 
 %                                time, t+h
-%
-% -----
-% NOTE:
-% -----
-%   --> p = dimension of state vector (for the scalar case, p = 1)
 %
 %==========================================================================
 function F = ABM8(f,t,F,h)

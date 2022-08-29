@@ -5,7 +5,7 @@
 %   [t_new,y_new] = expand_solution_arrays(t,y)
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2022-07-06
+% Last Update: 2022-08-28
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
@@ -32,8 +32,6 @@
 % -----
 % NOTE:
 % -----
-%   --> p = dimension of state vector (for the scalar case, p = 1) 
-%   --> N+1 = original length of time vector
 %   --> This function is used to preallocate more space for the solution 
 %       arrays (i.e. the time vector and the solution matrix) once they 
 %       have become full.

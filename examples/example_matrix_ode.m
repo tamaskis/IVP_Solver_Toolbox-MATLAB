@@ -54,7 +54,7 @@ T = 5;
 F = @(t,P) -(A.'*P+P*A-(P*B+S)/R*(B.'*P+S.')+Q);
 
 % solves matrix-valued IVP using a step size of h = 0.001
-[~,P] = solve_ivp_matrix(F,[T,0],PT,0.001,'RK4');
+[~,P] = solve_ivp_matrix(F,[T,0],PT,0.001,[],'RK4');
 
 % solution for P0 (will be at end of array since P solved for backwards in
 % time)

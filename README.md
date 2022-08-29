@@ -34,10 +34,20 @@ doc_IVP tech
 `[t,y] = solve_ivp(__,method,wb)`
 
 
-## Tools for Matrix-Valued IVPs
-`ivpIC_mat2vec`\
-`ivpsol_vec2mat`\
-`odefun_mat2vec`
+## Matrix-Valued IVP Solver Function
+
+`[t,M] = solve_ivp_matrix(F,[t0,tf],M0,h)`\
+`[t,M] = solve_ivp_matrix(F,{t0,C},M0,h)`\
+`[t,M] = solve_ivp_matrix(__,p,method)`\
+`[t,M] = solve_ivp_matrix(__,p,method,wb)`
+
+
+## Utilities for IVP Solvers
+`expand_ivp_arrays`\
+`mat2vec_fun`\
+`mat2vec_IC`\
+`mat2vec_C`\
+`vec2mat_sol`
 
 
 ## Explicit Runge-Kutta (Single-Step) Methods

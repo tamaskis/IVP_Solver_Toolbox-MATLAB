@@ -38,9 +38,9 @@
 % -----
 %   --> If "p" is not input, it is assumed that the state matrix (M) is
 %       a square matrix.
-%   --> p×r = size of state matrix, M
-%   --> pr = dimension of corresponding state vector, y
-%   --> N+1 = length of time vector
+%   --> M ∈ ℝᵖˣʳ
+%   --> y ∈ ℝᵖʳ
+%   --> t ∈ ℝᴺ⁺¹
 %   --> The nth layer of "M" stores the state matrix (i.e. the solution)
 %       corresponding to the nth time in "t".
 %

@@ -67,7 +67,7 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1><tt>tableau2eqns</tt></h1><!--introduction--><p>Propagation equations from Butcher tableau.</p><p><a href="index.html">Back to IVP Solver Toolbox Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#5">Input/Output Parameters</a></li><li><a href="#6">Example #1: RK2 (Midpoint method)</a></li><li><a href="#7">Example #2: RK2 (Heun's method)</a></li><li><a href="#8">Example #3: (Ralston's method)</a></li><li><a href="#9">Example #4: (Kutta's third-order method)</a></li><li><a href="#10">Example #5: (Heun's third-order method)</a></li><li><a href="#11">Example #6: (Ralston's third-order method)</a></li><li><a href="#12">Example #7: (Strong Stability Preserving Runge-Kutta third-order method)</a></li><li><a href="#13">Example #8: (Runge-Kutta fourth-order method)</a></li><li><a href="#14">Example #9: (Ralston's fourth-order method)</a></li><li><a href="#15">Example #10: (3/8-Rule fourth-order method)</a></li></ul></div><h2 id="1">Syntax</h2><pre class="language-matlab">tableau2eqns(T)
+  </style></head><body><div class="content"><h1><tt>tableau2eqns</tt></h1><!--introduction--><p>Propagation equations from Butcher tableau.</p><p><a href="index.html">Back to IVP Solver Toolbox Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#5">Input/Output Parameters</a></li><li><a href="#6">Note</a></li><li><a href="#7">Example #1: RK2 (Midpoint method)</a></li><li><a href="#8">Example #2: RK2 (Heun's method)</a></li><li><a href="#9">Example #3: (Ralston's method)</a></li><li><a href="#10">Example #4: (Kutta's third-order method)</a></li><li><a href="#11">Example #5: (Heun's third-order method)</a></li><li><a href="#12">Example #6: (Ralston's third-order method)</a></li><li><a href="#13">Example #7: (Strong Stability Preserving Runge-Kutta third-order method)</a></li><li><a href="#14">Example #8: (Runge-Kutta fourth-order method)</a></li><li><a href="#15">Example #9: (Ralston's fourth-order method)</a></li><li><a href="#16">Example #10: (3/8-Rule fourth-order method)</a></li></ul></div><h2 id="1">Syntax</h2><pre class="language-matlab">tableau2eqns(T)
 tableau2eqns(T,name)
 tableau2eqns(__,<span class="string">'decimal'</span>)
 </pre><h2 id="2">Description</h2><p><tt>tableau2eqns(T)</tt> prints the propagation equations corresponding to a Butcher Tableau defined by <tt>T</tt> to the Command Window.</p><p><tt>tableau2eqns(T,name)</tt> does the same as the syntax above, but labels the equations with the name specified by <tt>name</tt>.</p><p><tt>tableau2eqns(...,'decimal')</tt> does the same as the syntaxes above, but writes the coefficients of the propagation equations in decimal form.</p><h2 id="5">Input/Output Parameters</h2><p>
@@ -99,7 +99,7 @@ tableau2eqns(__,<span class="string">'decimal'</span>)
           <td style="text-align:center">char</td>
       </tr>
   </table>
-</p><p><b>NOTE:</b> s = number of stages of the explicit Runge-Kutta method</p><h2 id="6">Example #1: RK2 (Midpoint method)</h2><pre class="codeinput">T = [0    0    0;
+</p><h2 id="6">Note</h2><div><ul><li><img src="tableau2eqns_doc_eq07819305600188113301.png" alt="$s=$" style="width:16px;height:6px;"> number of stages of the explicit Runge-Kutta method</li></ul></div><h2 id="7">Example #1: RK2 (Midpoint method)</h2><pre class="codeinput">T = [0    0    0;
      1/2  1/2  0;
      0    0    1];
 tableau2eqns(T,<span class="string">"RK2 (Midpoint method)"</span>);
@@ -110,7 +110,7 @@ k2 = f(t(n) + h/2, y(n) + h*k1/2)
 y(n+1) = y(n) + h(k2)
 
 
-</pre><h2 id="7">Example #2: RK2 (Heun's method)</h2><pre class="codeinput">T = [0  0    0;
+</pre><h2 id="8">Example #2: RK2 (Heun's method)</h2><pre class="codeinput">T = [0  0    0;
      1  1    0;
      0  1/2  1/2];
 tableau2eqns(T,<span class="string">"RK2 (Heun's method)"</span>);
@@ -121,7 +121,7 @@ k2 = f(t(n) + h, y(n) + h*k1)
 y(n+1) = y(n) + (h/2)(k1 + k2)
 
 
-</pre><h2 id="8">Example #3: (Ralston's method)</h2><pre class="codeinput">T = [0    0    0;
+</pre><h2 id="9">Example #3: (Ralston's method)</h2><pre class="codeinput">T = [0    0    0;
      2/3  2/3  0;
      0    1/4  3/4];
 tableau2eqns(T,<span class="string">"RK2 (Ralston's method)"</span>);
@@ -132,7 +132,7 @@ k2 = f(t(n) + 2h/3, y(n) + 2h*k1/3)
 y(n+1) = y(n) + (h/4)(k1 + 3k2)
 
 
-</pre><h2 id="9">Example #4: (Kutta's third-order method)</h2><pre class="codeinput">T = [0     0    0    0;
+</pre><h2 id="10">Example #4: (Kutta's third-order method)</h2><pre class="codeinput">T = [0     0    0    0;
      1/2   1/2  0    0;
      1    -1    2    0;
      0     1/6  2/3  1/6];
@@ -145,7 +145,7 @@ k3 = f(t(n) + h, y(n) - h*k1 + 2h*k2)
 y(n+1) = y(n) + (h/6)(k1 + 4k2 + k3)
 
 
-</pre><h2 id="10">Example #5: (Heun's third-order method)</h2><pre class="codeinput">T = [0    0    0    0;
+</pre><h2 id="11">Example #5: (Heun's third-order method)</h2><pre class="codeinput">T = [0    0    0    0;
      1/3  1/3  0    0;
      2/3  0    2/3  0;
      0    1/4  0    3/4];
@@ -158,7 +158,7 @@ k3 = f(t(n) + 2h/3, y(n) + 2h*k2/3)
 y(n+1) = y(n) + (h/4)(k1 + 3k3)
 
 
-</pre><h2 id="11">Example #6: (Ralston's third-order method)</h2><pre class="codeinput">T = [0    0    0    0;
+</pre><h2 id="12">Example #6: (Ralston's third-order method)</h2><pre class="codeinput">T = [0    0    0    0;
      1/2  1/2  0    0;
      3/4  0    3/4  0;
      0    2/9  1/3  4/9];
@@ -171,7 +171,7 @@ k3 = f(t(n) + 3h/4, y(n) + 3h*k2/4)
 y(n+1) = y(n) + (h/9)(2k1 + 3k2 + 4k3)
 
 
-</pre><h2 id="12">Example #7: (Strong Stability Preserving Runge-Kutta third-order method)</h2><pre class="codeinput">T = [0    0     0    0;
+</pre><h2 id="13">Example #7: (Strong Stability Preserving Runge-Kutta third-order method)</h2><pre class="codeinput">T = [0    0     0    0;
      1    1     0    0;
      1/2  1/4   1/4  0;
      0    1/6   1/6  2/3];
@@ -184,7 +184,7 @@ k3 = f(t(n) + h/2, y(n) + h*k1/4 + h*k2/4)
 y(n+1) = y(n) + (h/6)(k1 + k2 + 4k3)
 
 
-</pre><h2 id="13">Example #8: (Runge-Kutta fourth-order method)</h2><pre class="codeinput">T = [0     0     0    0    0;
+</pre><h2 id="14">Example #8: (Runge-Kutta fourth-order method)</h2><pre class="codeinput">T = [0     0     0    0    0;
      1/2   1/2   0    0    0;
      1/2   0     1/2  0    0;
      1     0     0    1    0;
@@ -199,7 +199,7 @@ k4 = f(t(n) + h, y(n) + h*k3)
 y(n+1) = y(n) + (h/6)(k1 + 2k2 + 2k3 + k4)
 
 
-</pre><h2 id="14">Example #9: (Ralston's fourth-order method)</h2><pre class="codeinput">T = [0           0            0             0            0;
+</pre><h2 id="15">Example #9: (Ralston's fourth-order method)</h2><pre class="codeinput">T = [0           0            0             0            0;
      0.4         0.4          0             0            0;
      0.45573725  0.29697761   0.15875964    0            0;
      1           0.21810040  -3.05096516    3.83286476   0;
@@ -214,7 +214,7 @@ k4 = f(t(n) + h, y(n) + 0.21810040h*k1 - 3.05096516h*k2 + 3.83286476h*k3)
 y(n+1) = y(n) + h(0.17476028k1 - 0.55148066k2 + 1.20553560k3 + 0.17118478k4)
 
 
-</pre><h2 id="15">Example #10: (3/8-Rule fourth-order method)</h2><pre class="codeinput">T = [0     0     0    0    0;
+</pre><h2 id="16">Example #10: (3/8-Rule fourth-order method)</h2><pre class="codeinput">T = [0     0     0    0    0;
      1/3   1/3   0    0    0;
      2/3  -1/3   1    0    0;
      1     1    -1    1    0;
@@ -279,8 +279,8 @@ y(n+1) = y(n) + (h/8)(k1 + 3k2 + 3k3 + k4)
 %       </tr>
 %   </table>
 % </html>
-%
-% *NOTE:* s = number of stages of the explicit Runge-Kutta method
+%% Note
+% * $s=$ number of stages of the explicit Runge-Kutta method
 %% Example #1: RK2 (Midpoint method)
 T = [0    0    0;
      1/2  1/2  0;

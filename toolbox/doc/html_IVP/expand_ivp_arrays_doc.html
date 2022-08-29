@@ -104,7 +104,7 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
           <td style="text-align:center">p×2(N+1)<BR>double</td>
       </tr>
   </table>
-</p><h2 id="4">Note</h2><div><ul><li><img src="expand_ivp_arrays_doc_eq06235627993914477729.png" alt="$p=$" style="width:17px;height:8px;"> dimension of state vector (for the scalar case, <img src="expand_ivp_arrays_doc_eq14406891124849479077.png" alt="$p=1$" style="width:25px;height:10px;">).</li><li><img src="expand_ivp_arrays_doc_eq06692517212066213177.png" alt="$N+1=$" style="width:40px;height:9px;"> original length of time vector</li><li>This function is ussed to preallocate more space for the solution arrays (i.e. the time vector and the solution matrix) once they become full.</li></ul></div><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2022a</a><br></p></div><!--
+</p><h2 id="4">Note</h2><div><ul><li>This function is ussed to preallocate more space for the solution arrays (i.e. the time vector and the solution matrix) once they become full.</li></ul></div><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2022a</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% |expand_ivp_arrays|
 % Expands the arrays storing the IVP solution.
@@ -154,8 +154,6 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 %   </table>
 % </html>
 %% Note
-% * $p=$ dimension of state vector (for the scalar case, $p=1$).
-% * $N+1=$ original length of time vector
 % * This function is ussed to preallocate more space for the solution
 % arrays (i.e. the time vector and the solution matrix) once they become
 % full.

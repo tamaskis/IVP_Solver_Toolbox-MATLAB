@@ -69,7 +69,7 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
   </style></head><body><div class="content"><h1><tt>vec2mat_sol</tt></h1><!--introduction--><p>Transforms the solution matrix for a vector-valued IVP into the solution array for the corresponding matrix-valued IVP.</p><p><a href="index.html">Back to IVP Solver Toolbox Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#4">Input/Output Parameters</a></li><li><a href="#5">Note</a></li><li><a href="#6">See also</a></li></ul></div><h2 id="1">Syntax</h2><pre class="language-matlab">M = vec2mat_sol(y)
 M = vec2mat_sol(y,p)
-</pre><h2 id="2">Description</h2><p><tt>M = vec2mat_sol(y)</tt> transforms the solution matrix, <img src="vec2mat_sol_doc_eq05510629066224650637.png" alt="$[\mathbf{y}]\in\mathrm{R}^{(N+1)\times p^{2}}$" style="width:69px;height:14px;"> (<tt>y</tt> in MATLAB), for the vector-valued IVP into the solution array, <img src="vec2mat_sol_doc_eq08885268059899993205.png" alt="$\mathbf{M}_{\mathrm{sol}}\in\mathrm{R}^{p\times p\times (N+1)}$" style="width:85px;height:12px;"> (<tt>M</tt> in MATLAB) for the corresponding matrix-valued IVP. It is assumed that <img src="vec2mat_sol_doc_eq01518063970584319034.png" alt="$\mathbf{M}$" style="width:12px;height:8px;"> is a square matrix.</p><p><tt>M = vec2mat_sol(y,p)</tt> transforms the solution matrix, <img src="vec2mat_sol_doc_eq08980551379751452677.png" alt="$[\mathbf{y}]\in\mathrm{R}^{(N+1)\times pr}$" style="width:70px;height:13px;"> (<tt>y</tt> in MATLAB), for the vector-valued IVP into the solution array, <img src="vec2mat_sol_doc_eq09153747220475100319.png" alt="$\mathbf{M}_{\mathrm{sol}}\in\mathrm{R}^{p\times r\times (N+1)}$" style="width:85px;height:12px;"> (<tt>M</tt> in MATLAB) for the corresponding matrix-valued IVP. <tt>p</tt> specifies the number of rows of <tt>M</tt>.</p><h2 id="4">Input/Output Parameters</h2><p>
+</pre><h2 id="2">Description</h2><p><tt>M = vec2mat_sol(y)</tt> transforms the solution matrix, <img src="vec2mat_sol_doc_eq05510629066224650637.png" alt="$[\mathbf{y}]\in\mathrm{R}^{(N+1)\times p^{2}}$" style="width:69px;height:14px;"> (<tt>y</tt> in MATLAB), for the vector-valued IVP into the solution array, <img src="vec2mat_sol_doc_eq12196841189823136547.png" alt="$[\mathbf{M}]\in\mathrm{R}^{p\times p\times (N+1)}$" style="width:81px;height:13px;"> (<tt>M</tt> in MATLAB) for the corresponding matrix-valued IVP. It is assumed that <img src="vec2mat_sol_doc_eq01518063970584319034.png" alt="$\mathbf{M}$" style="width:12px;height:8px;"> is a square matrix.</p><p><tt>M = vec2mat_sol(y,p)</tt> transforms the solution matrix, <img src="vec2mat_sol_doc_eq08980551379751452677.png" alt="$[\mathbf{y}]\in\mathrm{R}^{(N+1)\times pr}$" style="width:70px;height:13px;"> (<tt>y</tt> in MATLAB), for the vector-valued IVP into the solution array, <img src="vec2mat_sol_doc_eq04096253379015678133.png" alt="$[\mathbf{M}]\in\mathrm{R}^{p\times r\times (N+1)}$" style="width:80px;height:13px;"> (<tt>M</tt> in MATLAB) for the corresponding matrix-valued IVP. <tt>p</tt> specifies the number of rows of <tt>M</tt>.</p><h2 id="4">Input/Output Parameters</h2><p>
   <table border=1>
       <tr>
           <td></td>
@@ -94,12 +94,12 @@ M = vec2mat_sol(y,p)
       <tr>
           <td rowspan="1" style="text-align:center"><b>Output</b></td>
           <td style="text-align:center"><TT>M</TT></td>
-          <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\mathbf{M}_{\mathrm{sol}}" title="" /></td>
-          <td>solution array<BR>- the nth layer of <TT>M</TT> stores the solution corresponding to the nth time in the time vector, <img src="https://latex.codecogs.com/svg.latex?\mathbf{t}" title="" /></td>
+          <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?[\mathbf{M}]" title="" /></td>
+          <td>solution array</td>
           <td style="text-align:center">p×r×(N+1)<BR>double</td>
       </tr>
   </table>
-</p><h2 id="5">Note</h2><div><ul><li>If <img src="vec2mat_sol_doc_eq03729901751903020778.png" alt="$p$" style="width:6px;height:8px;"> is not input, it is assumed that the state matrix (<img src="vec2mat_sol_doc_eq01518063970584319034.png" alt="$\mathbf{M}$" style="width:12px;height:8px;">) is a square matrix.</li><li><img src="vec2mat_sol_doc_eq06607519364670964398.png" alt="$p\times r=$" style="width:36px;height:8px;"> size of state matrix, <img src="vec2mat_sol_doc_eq01518063970584319034.png" alt="$\mathbf{M}$" style="width:12px;height:8px;"></li><li><img src="vec2mat_sol_doc_eq00031692290028549752.png" alt="$pr=$" style="width:22px;height:8px;"> length of corresponding state vector, <img src="vec2mat_sol_doc_eq06736311022754009248.png" alt="$\mathbf{y}$" style="width:7px;height:8px;"></li><li><img src="vec2mat_sol_doc_eq06692517212066213177.png" alt="$N+1=$" style="width:40px;height:9px;"> length of time vector</li><li>The nth layer of <img src="vec2mat_sol_doc_eq07742130518583913975.png" alt="$[\mathbf{M}]$" style="width:16px;height:11px;"> stores the state matrix (i.e. the solution) corresponding to the nth time in <img src="vec2mat_sol_doc_eq01442555386716173869.png" alt="$\mathbf{t}$" style="width:5px;height:8px;">.</li></ul></div><h2 id="6">See also</h2><p><a href="mat2vec_fun_doc.html"><tt>mat2vec_fun</tt></a> | <a href="mat2vec_IC_doc.html"><tt>mat2vec_IC</tt></a> | <a href="mat2vec_C_doc.html"><tt>mat2vec_C</tt></a></p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2022a</a><br></p></div><!--
+</p><h2 id="5">Note</h2><div><ul><li>If <img src="vec2mat_sol_doc_eq03729901751903020778.png" alt="$p$" style="width:6px;height:8px;"> is not input, it is assumed that the state matrix (<img src="vec2mat_sol_doc_eq01518063970584319034.png" alt="$\mathbf{M}$" style="width:12px;height:8px;">) is a square matrix.</li><li><img src="vec2mat_sol_doc_eq14577781216167612366.png" alt="$\mathbf{M}\in\mathbf{R}^{p\times r}$" style="width:48px;height:9px;"></li><li><img src="vec2mat_sol_doc_eq08448184081582174560.png" alt="$\mathbf{y}\in\mathbf{R}^{pr}$" style="width:37px;height:10px;"></li><li><img src="vec2mat_sol_doc_eq00614485794024923100.png" alt="$\mathbf{t}\in\mathbf{R}^{N+1}$" style="width:45px;height:10px;"></li><li>The nth layer of <img src="vec2mat_sol_doc_eq07742130518583913975.png" alt="$[\mathbf{M}]$" style="width:16px;height:11px;"> stores the state matrix (i.e. the solution) corresponding to the nth time in <img src="vec2mat_sol_doc_eq01442555386716173869.png" alt="$\mathbf{t}$" style="width:5px;height:8px;">.</li></ul></div><h2 id="6">See also</h2><p><a href="mat2vec_fun_doc.html"><tt>mat2vec_fun</tt></a> | <a href="mat2vec_IC_doc.html"><tt>mat2vec_IC</tt></a> | <a href="mat2vec_C_doc.html"><tt>mat2vec_C</tt></a></p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2022a</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% |vec2mat_sol|
 % Transforms the solution matrix for a vector-valued IVP into the solution
@@ -111,12 +111,12 @@ M = vec2mat_sol(y,p)
 %   M = vec2mat_sol(y,p)
 %% Description
 % |M = vec2mat_sol(y)| transforms the solution matrix, $[\mathbf{y}]\in\mathrm{R}^{(N+1)\times p^{2}}$
-% (|y| in MATLAB), for the vector-valued IVP into the solution array, $\mathbf{M}_{\mathrm{sol}}\in\mathrm{R}^{p\times p\times (N+1)}$
+% (|y| in MATLAB), for the vector-valued IVP into the solution array, $[\mathbf{M}]\in\mathrm{R}^{p\times p\times (N+1)}$
 % (|M| in MATLAB) for the corresponding matrix-valued IVP. It is assumed 
 % that $\mathbf{M}$ is a square matrix.
 %%
 % |M = vec2mat_sol(y,p)| transforms the solution matrix, $[\mathbf{y}]\in\mathrm{R}^{(N+1)\times pr}$
-% (|y| in MATLAB), for the vector-valued IVP into the solution array, $\mathbf{M}_{\mathrm{sol}}\in\mathrm{R}^{p\times r\times (N+1)}$
+% (|y| in MATLAB), for the vector-valued IVP into the solution array, $[\mathbf{M}]\in\mathrm{R}^{p\times r\times (N+1)}$
 % (|M| in MATLAB) for the corresponding matrix-valued IVP. |p| specifies 
 % the number of rows of |M|.
 %% Input/Output Parameters
@@ -145,8 +145,8 @@ M = vec2mat_sol(y,p)
 %       <tr>
 %           <td rowspan="1" style="text-align:center"><b>Output</b></td>
 %           <td style="text-align:center"><TT>M</TT></td>
-%           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\mathbf{M}_{\mathrm{sol}}" title="" /></td>
-%           <td>solution array<BR>- the nth layer of <TT>M</TT> stores the solution corresponding to the nth time in the time vector, <img src="https://latex.codecogs.com/svg.latex?\mathbf{t}" title="" /></td>
+%           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?[\mathbf{M}]" title="" /></td>
+%           <td>solution array</td>
 %           <td style="text-align:center">p×r×(N+1)<BR>double</td>
 %       </tr>
 %   </table>
@@ -154,9 +154,9 @@ M = vec2mat_sol(y,p)
 %% Note
 % * If $p$ is not input, it is assumed that the state matrix ($\mathbf{M}$)
 % is a square matrix.
-% * $p\times r=$ size of state matrix, $\mathbf{M}$
-% * $pr=$ length of corresponding state vector, $\mathbf{y}$
-% * $N+1=$ length of time vector
+% * $\mathbf{M}\in\mathbf{R}^{p\times r}$
+% * $\mathbf{y}\in\mathbf{R}^{pr}$
+% * $\mathbf{t}\in\mathbf{R}^{N+1}$
 % * The nth layer of $[\mathbf{M}]$ stores the state matrix (i.e. the 
 % solution) corresponding to the nth time in $\mathbf{t}$.
 %% See also

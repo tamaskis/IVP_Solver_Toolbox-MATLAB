@@ -47,8 +47,7 @@ function f = mat2vec_fun(F,p)
     % defaults "p" to empty vector if not input
     if (nargin < 2), p = []; end
 
-    % assigns function handle to subfunction below that produces the state
-    % vector derivative, given the matrix-valued ODE
+    % function handle for corresponding vector-valued ODE
     f = @(t,y) state_vector_derivative(F,t,y,p);
     
     %----------------------------------------------------------------------

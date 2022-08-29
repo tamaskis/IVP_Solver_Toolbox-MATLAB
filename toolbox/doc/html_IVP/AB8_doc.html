@@ -67,7 +67,7 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1><tt>AB8</tt></h1><!--introduction--><p>Propagates the state vector forward one time step using the Adams-Bashforth 8th-order method.</p><p><a href="index.html">Back to IVP Solver Toolbox Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Input/Output Parameters</a></li><li><a href="#4">Note</a></li><li><a href="#5">See also</a></li></ul></div><h2 id="1">Syntax</h2><pre class="language-matlab">F = AB8(f,t,F,h)
+  </style></head><body><div class="content"><h1><tt>AB8</tt></h1><!--introduction--><p>Propagates the state vector forward one time step using the Adams-Bashforth 8th-order method.</p><p><a href="index.html">Back to IVP Solver Toolbox Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Input/Output Parameters</a></li><li><a href="#4">See also</a></li></ul></div><h2 id="1">Syntax</h2><pre class="language-matlab">F = AB8(f,t,F,h)
 </pre><h2 id="2">Description</h2><p><tt>F = AB8(f,t,y,h)</tt> updates the <img src="AB8_doc_eq03148538246847756930.png" alt="$\mathbf{F}$" style="width:8px;height:8px;"> matrix, <tt>F</tt>, for the next sample time, given the <img src="AB8_doc_eq03148538246847756930.png" alt="$\mathbf{F}$" style="width:8px;height:8px;"> matrix at the current time <tt>t</tt>, the function <tt>f(t,y)</tt> defining the ODE <img src="AB8_doc_eq11546780198861005830.png" alt="$d\mathbf{y}/dt=\mathbf{f}(t,\mathbf{y})$" style="width:71px;height:11px;">, and the step size <tt>h</tt>.</p><h2 id="3">Input/Output Parameters</h2><p>
   <table border=1>
       <tr>
@@ -114,7 +114,7 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
           <td style="text-align:center">p×9<BR>double</td>
       </tr>
   </table>
-</p><h2 id="4">Note</h2><div><ul><li><img src="AB8_doc_eq06235627993914477729.png" alt="$p=$" style="width:17px;height:8px;"> dimension of state vector (for the scalar case, <img src="AB8_doc_eq14406891124849479077.png" alt="$p=1$" style="width:25px;height:10px;">).</li></ul></div><h2 id="5">See also</h2><p><a href="AB2_doc.html"><tt>AB2</tt></a> | <a href="AB3_doc.html"><tt>AB3</tt></a> | <a href="AB4_doc.html"><tt>AB4</tt></a> | <a href="AB5_doc.html"><tt>AB5</tt></a> | <a href="AB6_doc.html"><tt>AB6</tt></a> | <a href="AB7_doc.html"><tt>AB7</tt></a></p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2022a</a><br></p></div><!--
+</p><h2 id="4">See also</h2><p><a href="AB2_doc.html"><tt>AB2</tt></a> | <a href="AB3_doc.html"><tt>AB3</tt></a> | <a href="AB4_doc.html"><tt>AB4</tt></a> | <a href="AB5_doc.html"><tt>AB5</tt></a> | <a href="AB6_doc.html"><tt>AB6</tt></a> | <a href="AB7_doc.html"><tt>AB7</tt></a></p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2022a</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% |AB8|
 % Propagates the state vector forward one time step using the 
@@ -176,8 +176,6 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 %       </tr>
 %   </table>
 % </html>
-%% Note
-% * $p=$ dimension of state vector (for the scalar case, $p=1$).
 %% See also
 % <AB2_doc.html |AB2|> | 
 % <AB3_doc.html |AB3|> | 

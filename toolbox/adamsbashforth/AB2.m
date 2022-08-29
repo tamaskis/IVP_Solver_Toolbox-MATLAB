@@ -8,7 +8,7 @@
 % See also AB3, AB4, AB5, AB6, AB7, AB8.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2022-07-06
+% Last Update: 2022-08-28
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
@@ -41,11 +41,6 @@
 %               --> column 2: function evaluation at previous sample time
 %               --> column 3: state (i.e. solution) at next sample time, 
 %                             t+h
-%
-% -----
-% NOTE:
-% -----
-%   --> p = dimension of state vector (for the scalar case, p = 1)
 %
 %==========================================================================
 function F = AB2(f,t,F,h)
