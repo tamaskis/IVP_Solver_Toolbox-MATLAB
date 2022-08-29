@@ -5,7 +5,7 @@
 %
 %   y0 = mat2vec_IC(M0)
 %
-% See also mat2vec_fun, mat2vec_C, vec2mat_sol.
+% See also mat2vec_ode, mat2vec_C, vec2mat_sol.
 %
 % Copyright © 2021 Tamas Kis
 % Last Update: 2022-08-28

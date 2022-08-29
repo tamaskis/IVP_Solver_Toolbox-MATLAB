@@ -1,9 +1,9 @@
 %==========================================================================
 %
-% mat2vec_fun  Transforms a matrix-valued ODE into a vector-valued ODE.
+% mat2vec_ode  Transforms a matrix-valued ODE into a vector-valued ODE.
 %
-%   f = mat2vec_fun(F)
-%   f = mat2vec_fun(F,p)
+%   f = mat2vec_ode(F)
+%   f = mat2vec_ode(F,p)
 %
 % See also mat2vec_IC, mat2vec_C, vec2mat_sol.
 %
@@ -42,7 +42,7 @@
 %       a square matrix.
 %
 %==========================================================================
-function f = mat2vec_fun(F,p)
+function f = mat2vec_ode(F,p)
     
     % defaults "p" to empty vector if not input
     if (nargin < 2), p = []; end

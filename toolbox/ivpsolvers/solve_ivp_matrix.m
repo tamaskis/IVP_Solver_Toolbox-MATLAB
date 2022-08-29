@@ -71,7 +71,7 @@ function [t,M] = solve_ivp_matrix(F,I,M0,h,p,method,wb)
     if (nargin < 7), wb = []; end
     
     % converts matrix-valued ODE to vector-valued ODE
-    f = mat2vec_fun(F,p);
+    f = mat2vec_ode(F,p);
     
     % converts matrix initial condition to vector initial condition
     y0 = mat2vec_IC(M0);

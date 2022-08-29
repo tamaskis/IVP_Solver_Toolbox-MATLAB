@@ -6,7 +6,7 @@
 %   M = vec2mat_sol(y)
 %   M = vec2mat_sol(y,p)
 %
-% See also mat2vec_fun, mat2vec_IC, mat2vec_C.
+% See also mat2vec_ode, mat2vec_IC, mat2vec_C.
 %
 % Copyright © 2021 Tamas Kis
 % Last Update: 2022-08-28

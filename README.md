@@ -44,7 +44,7 @@ doc_IVP tech
 
 ## Utilities for IVP Solvers
 `expand_ivp_arrays`\
-`mat2vec_fun`\
+`mat2vec_ode`\
 `mat2vec_IC`\
 `mat2vec_C`\
 `vec2mat_sol`
