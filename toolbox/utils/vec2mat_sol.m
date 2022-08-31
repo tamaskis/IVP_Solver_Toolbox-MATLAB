@@ -9,7 +9,7 @@
 % See also mat2vec_ode, mat2vec_IC, mat2vec_C.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2022-08-28
+% Last Update: 2022-08-30
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
@@ -41,7 +41,7 @@
 %   --> M ∈ ℝᵖˣʳ
 %   --> y ∈ ℝᵖʳ
 %   --> t ∈ ℝᴺ⁺¹
-%   --> The nth layer of "M" stores the state matrix (i.e. the solution)
+%   --> The nth page of "M" stores the state matrix (i.e. the solution)
 %       corresponding to the nth time in "t".
 %
 %==========================================================================

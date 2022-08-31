@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>vec2mat_sol</title><meta name="generator" content="MATLAB 9.12"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-08-28"><meta name="DC.source" content="vec2mat_sol_doc.m"><style type="text/css">
+      --><title>vec2mat_sol</title><meta name="generator" content="MATLAB 9.12"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-08-30"><meta name="DC.source" content="vec2mat_sol_doc.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -99,7 +99,7 @@ M = vec2mat_sol(y,p)
           <td style="text-align:center">p×r×(N+1)<BR>double</td>
       </tr>
   </table>
-</p><h2 id="5">Note</h2><div><ul><li>If <img src="vec2mat_sol_doc_eq03729901751903020778.png" alt="$p$" style="width:6px;height:8px;"> is not input, it is assumed that the state matrix (<img src="vec2mat_sol_doc_eq01518063970584319034.png" alt="$\mathbf{M}$" style="width:12px;height:8px;">) is a square matrix.</li><li><img src="vec2mat_sol_doc_eq14577781216167612366.png" alt="$\mathbf{M}\in\mathbf{R}^{p\times r}$" style="width:48px;height:9px;"></li><li><img src="vec2mat_sol_doc_eq08448184081582174560.png" alt="$\mathbf{y}\in\mathbf{R}^{pr}$" style="width:37px;height:10px;"></li><li><img src="vec2mat_sol_doc_eq00614485794024923100.png" alt="$\mathbf{t}\in\mathbf{R}^{N+1}$" style="width:45px;height:10px;"></li><li>The nth layer of <img src="vec2mat_sol_doc_eq07742130518583913975.png" alt="$[\mathbf{M}]$" style="width:16px;height:11px;"> stores the state matrix (i.e. the solution) corresponding to the nth time in <img src="vec2mat_sol_doc_eq01442555386716173869.png" alt="$\mathbf{t}$" style="width:5px;height:8px;">.</li></ul></div><h2 id="6">See also</h2><p><a href="mat2vec_ode_doc.html"><tt>mat2vec_ode</tt></a> | <a href="mat2vec_IC_doc.html"><tt>mat2vec_IC</tt></a> | <a href="mat2vec_C_doc.html"><tt>mat2vec_C</tt></a></p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2022a</a><br></p></div><!--
+</p><h2 id="5">Note</h2><div><ul><li>If <img src="vec2mat_sol_doc_eq03729901751903020778.png" alt="$p$" style="width:6px;height:8px;"> is not input, it is assumed that the state matrix (<img src="vec2mat_sol_doc_eq01518063970584319034.png" alt="$\mathbf{M}$" style="width:12px;height:8px;">) is a square matrix.</li><li><img src="vec2mat_sol_doc_eq14577781216167612366.png" alt="$\mathbf{M}\in\mathbf{R}^{p\times r}$" style="width:48px;height:9px;"></li><li><img src="vec2mat_sol_doc_eq08448184081582174560.png" alt="$\mathbf{y}\in\mathbf{R}^{pr}$" style="width:37px;height:10px;"></li><li><img src="vec2mat_sol_doc_eq00614485794024923100.png" alt="$\mathbf{t}\in\mathbf{R}^{N+1}$" style="width:45px;height:10px;"></li><li>The nth page of <img src="vec2mat_sol_doc_eq07742130518583913975.png" alt="$[\mathbf{M}]$" style="width:16px;height:11px;"> stores the state matrix (i.e. the solution) corresponding to the nth time in <img src="vec2mat_sol_doc_eq01442555386716173869.png" alt="$\mathbf{t}$" style="width:5px;height:8px;">.</li></ul></div><h2 id="6">See also</h2><p><a href="mat2vec_ode_doc.html"><tt>mat2vec_ode</tt></a> | <a href="mat2vec_IC_doc.html"><tt>mat2vec_IC</tt></a> | <a href="mat2vec_C_doc.html"><tt>mat2vec_C</tt></a></p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2022a</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% |vec2mat_sol|
 % Transforms the solution matrix for a vector-valued IVP into the solution
@@ -157,7 +157,7 @@ M = vec2mat_sol(y,p)
 % * $\mathbf{M}\in\mathbf{R}^{p\times r}$
 % * $\mathbf{y}\in\mathbf{R}^{pr}$
 % * $\mathbf{t}\in\mathbf{R}^{N+1}$
-% * The nth layer of $[\mathbf{M}]$ stores the state matrix (i.e. the 
+% * The nth page of $[\mathbf{M}]$ stores the state matrix (i.e. the 
 % solution) corresponding to the nth time in $\mathbf{t}$.
 %% See also
 % <mat2vec_ode_doc.html |mat2vec_ode|> | 

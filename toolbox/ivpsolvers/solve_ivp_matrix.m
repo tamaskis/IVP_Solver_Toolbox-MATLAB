@@ -11,7 +11,7 @@
 % See also solve_ivp.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2022-08-28
+% Last Update: 2022-08-30
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
@@ -59,7 +59,7 @@
 % -----
 %   --> If "p" is not input, it is assumed that the state matrix (M) is
 %       a square matrix.
-%   --> The nth layer of "M" stores the state matrix (i.e. the solution)
+%   --> The nth page of "M" stores the state matrix (i.e. the solution)
 %       corresponding to the nth time in "t".
 %
 %==========================================================================
