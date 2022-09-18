@@ -1,14 +1,14 @@
 %==========================================================================
 %
-% solve_ivp_matrix  Solve matrix-valued initial value problems using 
-% fixed-step IVP solvers.
+% solve_ivp_matrix  Fixed-step IVP solvers for solving matrix-valued
+% initial value problems.
 %
 %   [t,M] = solve_ivp_matrix(F,[t0,tf],M0,h)
 %   [t,M] = solve_ivp_matrix(F,{t0,E},M0,h)
 %   [t,M] = solve_ivp_matrix(__,method)
 %   [t,M] = solve_ivp_matrix(__,method,wb)
 %
-% See also solve_ivp, solve_ivp_vector.
+% See also solve_ivp.
 %
 % Copyright © 2021 Tamas Kis
 % Last Update: 2022-09-17
@@ -82,7 +82,7 @@ function [t,M] = solve_ivp_matrix(F,I,M0,h,method,wb)
     if iscell(I), I(2) = mat2vec_E(I(2),p); end
     
     % solves corresponding vector-valued IVP
-    [t,y] = solve_ivp_vector(f,I,y0,h,method,wb);
+    [t,y] = solve_ivp(f,I,y0,h,method,wb);
     
     % transforms solution matrix for vector-valued IVP into solution array
     % for matrix-valued IVP
