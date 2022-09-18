@@ -1,14 +1,13 @@
 %==========================================================================
 %
-% mat2vec_ode  Transforms a matrix-valued ODE into a vector-valued ODE.
+% mat2vec_ODE  Transforms a matrix-valued ODE into a vector-valued ODE.
 %
-%   f = mat2vec_ode(F)
-%   f = mat2vec_ode(F,p)
+%   f = mat2vec_ODE(F,p)
 %
-% See also mat2vec_IC, mat2vec_C, vec2mat_sol.
+% See also mat2vec_E, mat2vec_IC, vec2mat_sol.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2022-08-28
+% Last Update: 2022-09-17
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
@@ -26,7 +25,7 @@
 %   F       - (1×1 function_handle) dM/dt = F(t,M) --> multivariate, 
 %             matrix-valued function (F : ℝ×ℝᵖˣʳ → ℝᵖˣʳ) defining
 %             matrix-valued ODE
-%   p       - (OPTIONAL) (1×1 double) number of rows of state matrix
+%   p       - (1×1 double) number of rows of state matrix
 %
 % -------
 % OUTPUT:
@@ -35,18 +34,9 @@
 %             vector-valued function (f : ℝ×ℝᵖʳ → ℝᵖʳ) defining
 %             corresponding vector-valued ODE
 %
-% -----
-% NOTE:
-% -----
-%   --> If "p" is not input, it is assumed that the state matrix (M) is
-%       a square matrix.
-%
 %==========================================================================
-function f = mat2vec_ode(F,p)
+function f = mat2vec_ODE(F,p)
     
-    % defaults "p" to empty vector if not input
-    if (nargin < 2), p = []; end
-
     % function handle for corresponding vector-valued ODE
     f = @(t,y) state_vector_derivative(F,t,y,p);
     
@@ -70,11 +60,6 @@ function f = mat2vec_ode(F,p)
         
         % state dimension
         pr = length(y);
-        
-        % determine "p" if not specified (assuming M is square)
-        if isempty(p)
-            p = sqrt(pr);
-        end
         
         % determines r
         r = pr/p;

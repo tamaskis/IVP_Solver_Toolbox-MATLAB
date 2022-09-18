@@ -4,14 +4,14 @@
 % fixed-step IVP solvers.
 %
 %   [t,M] = solve_ivp_matrix(F,[t0,tf],M0,h)
-%   [t,M] = solve_ivp_matrix(F,{t0,C},M0,h)
-%   [t,M] = solve_ivp_matrix(__,p,method)
-%   [t,M] = solve_ivp_matrix(__,p,method,wb)
+%   [t,M] = solve_ivp_matrix(F,{t0,E},M0,h)
+%   [t,M] = solve_ivp_matrix(__,method)
+%   [t,M] = solve_ivp_matrix(__,method,wb)
 %
-% See also solve_ivp.
+% See also solve_ivp, solve_ivp_vector.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2022-08-30
+% Last Update: 2022-09-17
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
@@ -31,20 +31,20 @@
 %             matrix-valued ODE
 %   I       - defines interval over which to solve the IVP, 2 options:
 %               --> [t0,tf] - (1×2 double) initial and final times
-%               --> {t0,C}  - (1×2 cell) initial time, t₀, and function 
-%                             handle for condition function, C(t,M) 
-%                             (C : ℝ×ℝᵖˣʳ → B)
+%               --> {t0,E}  - (1×2 cell) initial time, t₀, and function 
+%                             handle for event function, E(t,M) 
+%                             (E : ℝ×ℝᵖˣʳ → B)
 %   M0      - (p×r double) initial condition, M₀ = M(t₀)
 %   h       - (1×1 double) step size
-%   p       - (OPTIONAL) (1×1 double) number of rows of state matrix
 %   method  - (OPTIONAL) (char) integration method --> 'Euler', 'RK2', 
 %             'RK2 Heun', 'RK2 Ralston', 'RK3', 'RK3 Heun', 'RK3 Ralston', 
 %             'SSPRK3', 'RK4', 'RK4 Ralston', 'RK4 3/8', 'AB2', 'AB3', 
 %             'AB4', 'AB5', 'AB6', 'AB7', 'AB8', 'ABM2', 'ABM3', 'ABM4', 
 %             'ABM5', 'ABM6', 'ABM7', 'ABM8' (defaults to 'RK4')
-%   wb      - (OPTIONAL) (1×1 logical or char) waitbar parameters
-%               --> input as "true" if you want waitbar with default 
-%                   message displayed
+%   wb      - (OPTIONAL) (1×1 logical or char) waitbar parameters (defaults
+%             to false)
+%               --> input as true if you want waitbar with default message 
+%                   displayed
 %               --> input as a char array storing a message if you want a
 %                   custom message displayed on the waitbar
 %
@@ -57,31 +57,32 @@
 % -----
 % NOTE:
 % -----
-%   --> If "p" is not input, it is assumed that the state matrix (M) is
-%       a square matrix.
 %   --> The nth page of "M" stores the state matrix (i.e. the solution)
 %       corresponding to the nth time in "t".
 %
 %==========================================================================
-function [t,M] = solve_ivp_matrix(F,I,M0,h,p,method,wb)
+function [t,M] = solve_ivp_matrix(F,I,M0,h,method,wb)
     
     % defaults optional parameters to empty vector if not input
-    if (nargin < 5), p = []; end
-    if (nargin < 6), method = []; end
-    if (nargin < 7), wb = []; end
+    if (nargin < 5), method = []; end
+    if (nargin < 6), wb = []; end
+    
+    % number of rows of state matrix
+    p = size(M0,1);
     
     % converts matrix-valued ODE to vector-valued ODE
     f = mat2vec_ode(F,p);
     
-    % converts matrix initial condition to vector initial condition
+    % converts initial condition for matrix-valued IVP into initial 
+    % condition for the corresponding vector-valued IVP
     y0 = mat2vec_IC(M0);
     
-    % converts condition function for matrix-valued IVP into the condition 
-    % function for the corresponding vector-valued IVP
-    if iscell(I), I(2) = mat2vec_C(I(2),p); end
+    % converts event function for matrix-valued IVP into event function for
+    % the corresponding vector-valued IVP
+    if iscell(I), I(2) = mat2vec_E(I(2),p); end
     
     % solves corresponding vector-valued IVP
-    [t,y] = solve_ivp(f,I,y0,h,method,wb);
+    [t,y] = solve_ivp_vector(f,I,y0,h,method,wb);
     
     % transforms solution matrix for vector-valued IVP into solution array
     % for matrix-valued IVP

@@ -1,15 +1,14 @@
 %==========================================================================
 %
-% mat2vec_C  Transforms the condition function for a matrix-valued IVP into
-% the condition function for its corresponding vector-valued IVP.
+% mat2vec_E  Transforms the event function for a matrix-valued IVP into the
+% event function for its corresponding vector-valued IVP.
 %
-%   Cv = mat2vec_C(Cm)
-%   Cv = mat2vec_C(Cm,p)
+%   Ev = mat2vec_E(Em,p)
 %
-% See also mat2vec_ode, mat2vec_IC, vec2mat_sol.
+% See also mat2vec_IC, mat2vec_ODE, vec2mat_sol.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2022-08-28
+% Last Update: 2022-09-17
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
@@ -24,49 +23,40 @@
 % ------
 % INPUT:
 % ------
-%   Cm      - (1×1 function_handle) condition function for matrix-valued 
-%             IVP, Cₘ(t,M) (Cₘ : ℝ×ℝᵖˣʳ → B)
-%   p       - (OPTIONAL) (1×1 double) number of rows of state matrix
+%   Em      - (1×1 function_handle) event function for matrix-valued 
+%             IVP, Eₘ(t,M) (Eₘ : ℝ×ℝᵖˣʳ → B)
+%   p       - (1×1 double) number of rows of state matrix
 %
 % -------
 % OUTPUT:
 % -------
-%   Cv      - (1×1 function_handle) condition function for corresponding
-%             vector-valued IVP, Cᵥ(t,y) (Cᵥ : ℝ×ℝᵖʳ → B)
-%
-% -----
-% NOTE:
-% -----
-%   --> If "p" is not input, it is assumed that the state matrix (M) is
-%       a square matrix.
+%   Ev      - (1×1 function_handle) event function for corresponding
+%             vector-valued IVP, Eᵥ(t,y) (Eᵥ : ℝ×ℝᵖʳ → B)
 %
 %==========================================================================
-function Cv = mat2vec_C(Cm,p)
+function Ev = mat2vec_E(Em,p)
     
-    % defaults "p" to empty vector if not input
-    if (nargin < 2), p = []; end
-    
-    % function handle for condition function for corresponding 
+    % function handle for event function for corresponding 
     % vector-valued IVP
-    Cv = @(t,y) vector_condition_function(Cm,t,y,p);
+    Ev = @(t,y) vector_event_function(Em,t,y,p);
     
     %----------------------------------------------------------------------
-    % state_vector_derivative  Evaluates the condition function for a
+    % state_vector_derivative  Evaluates the event function for a
     % matrix-valued IVP given the current time and corresponding state
     % vector.
     %----------------------------------------------------------------------
     %
     % INPUT:
-    %   Cm      - (1×1 function_handle) condition function for matrix-
-    %              valued IVP, Cₘ(t,M) (Cₘ : ℝ×ℝᵖˣʳ → B)
+    %   Em      - (1×1 function_handle) event function for matrix-
+    %              valued IVP, Eₘ(t,M) (Eₘ : ℝ×ℝᵖˣʳ → B)
     %   t       - (1×1 double) current time
     %   y       - (pr×1 double) state vector at current time
     %   p       - (1×1 double) number of rows of state matrix
     %
     % OUTPUT:
-    %   C       - (1×1 logical) evaluation of condition function
+    %   E       - (1×1 logical) evaluation of event function
     %----------------------------------------------------------------------
-    function C = vector_condition_function(Cm,t,y,p)
+    function E = vector_event_function(Em,t,y,p)
         
         % state dimension
         pr = length(y);
@@ -82,8 +72,8 @@ function Cv = mat2vec_C(Cm,p)
         % reshapes pr×1 state vector into p×r state matrix
         M = reshape(y,[p,r]);
         
-        % evaluates condition function
-        C = Cm(t,M);
+        % evaluates event function
+        E = Em(t,M);
         
     end
     

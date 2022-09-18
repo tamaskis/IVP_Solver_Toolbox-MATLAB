@@ -1,14 +1,14 @@
 %==========================================================================
 %
 % mat2vec_IC  Transforms the initial condition for a matrix-valued IVP into
-% the initial condition for the corresponding vector-valued IVP.
+% the initial condition for its corresponding vector-valued IVP.
 %
 %   y0 = mat2vec_IC(M0)
 %
-% See also mat2vec_ode, mat2vec_C, vec2mat_sol.
+% See also mat2vec_E, mat2vec_ODE, vec2mat_sol.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2022-08-28
+% Last Update: 2022-09-17
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %

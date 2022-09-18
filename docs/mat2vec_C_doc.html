@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>mat2vec_C</title><meta name="generator" content="MATLAB 9.12"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-08-30"><meta name="DC.source" content="mat2vec_C_doc.m"><style type="text/css">
+      --><title>mat2vec_C</title><meta name="generator" content="MATLAB 9.12"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-09-17"><meta name="DC.source" content="mat2vec_C_doc.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -67,9 +67,8 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1><tt>mat2vec_C</tt></h1><!--introduction--><p>Transforms the condition function for a matrix-valued IVP into the condition function for its corresponding vector-valued IVP.</p><p><a href="index.html">Back to IVP Solver Toolbox Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#4">Input/Output Parameters</a></li><li><a href="#5">Note</a></li><li><a href="#6">See also</a></li></ul></div><h2 id="1">Syntax</h2><pre class="language-matlab">Cv = mat2vec_C(Cm)
-Cv = mat2vec_C(Cm,p)
-</pre><h2 id="2">Description</h2><p><tt>Cv = mat2vec_C(Cm)</tt> transforms the condition function <img src="mat2vec_C_doc_eq00129393535309650535.png" alt="$C(t,\mathbf{M})$" style="width:37px;height:11px;"> (where <img src="mat2vec_C_doc_eq03500430948250792091.png" alt="$C:\mathrm{R}\times\mathrm{R}^{p\times p}\to\mathrm{B}$" style="width:86px;height:9px;">) for a matrix-valued IVP into a condition function <img src="mat2vec_C_doc_eq08442474580442073854.png" alt="$C(t,\mathbf{y})$" style="width:32px;height:11px;"> (where <img src="mat2vec_C_doc_eq08809622711522139656.png" alt="$C:\mathrm{R}\times\mathrm{R}^{p^{2}}\to\mathrm{B}$" style="width:79px;height:11px;">) (where <img src="mat2vec_C_doc_eq15557481901179112500.png" alt="$\mathbf{f}:\mathrm{R}\times\mathrm{R}^{p^{2}}\to\mathrm{R}^{p^{2}}$" style="width:83px;height:11px;">) for its corresponding vector-valued IVP. It is assumed that <img src="mat2vec_C_doc_eq01518063970584319034.png" alt="$\mathbf{M}$" style="width:12px;height:8px;"> is a square matrix.</p><p><tt>Cv = mat2vec_C(Cm,p)</tt> transforms the condition function <img src="mat2vec_C_doc_eq00129393535309650535.png" alt="$C(t,\mathbf{M})$" style="width:37px;height:11px;"> (where <img src="mat2vec_C_doc_eq09727063517930851148.png" alt="$C:\mathrm{R}\times\mathrm{R}^{p\times r}\to\mathrm{B}$" style="width:86px;height:9px;">) for a matrix-valued IVP into a condition function <img src="mat2vec_C_doc_eq08442474580442073854.png" alt="$C(t,\mathbf{y})$" style="width:32px;height:11px;"> (where <img src="mat2vec_C_doc_eq11074000726716562484.png" alt="$C:\mathrm{R}\times\mathrm{R}^{pr}\to\mathrm{B}$" style="width:80px;height:8px;">) (where <img src="mat2vec_C_doc_eq00831713686490939019.png" alt="$\mathbf{f}:\mathrm{R}\times\mathrm{R}^{pr}\to\mathrm{R}^{p^{2}}$" style="width:84px;height:11px;">) for its corresponding vector-valued IVP.</p><h2 id="4">Input/Output Parameters</h2><p>
+  </style></head><body><div class="content"><h1><tt>mat2vec_C</tt></h1><!--introduction--><p>Transforms the condition function for a matrix-valued IVP into the condition function for its corresponding vector-valued IVP.</p><p><a href="index.html">Back to IVP Solver Toolbox Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Input/Output Parameters</a></li><li><a href="#4">See also</a></li></ul></div><h2 id="1">Syntax</h2><pre class="language-matlab">Cv = mat2vec_C(Cm,p)
+</pre><h2 id="2">Description</h2><p><tt>Cv = mat2vec_C(Cm,p)</tt> transforms the condition function <img src="mat2vec_C_doc_eq00129393535309650535.png" alt="$C(t,\mathbf{M})$" style="width:37px;height:11px;"> (where <img src="mat2vec_C_doc_eq09727063517930851148.png" alt="$C:\mathrm{R}\times\mathrm{R}^{p\times r}\to\mathrm{B}$" style="width:86px;height:9px;">) for a matrix-valued IVP into a condition function <img src="mat2vec_C_doc_eq08442474580442073854.png" alt="$C(t,\mathbf{y})$" style="width:32px;height:11px;"> (where <img src="mat2vec_C_doc_eq11074000726716562484.png" alt="$C:\mathrm{R}\times\mathrm{R}^{pr}\to\mathrm{B}$" style="width:80px;height:8px;">) for its corresponding vector-valued IVP.</p><h2 id="3">Input/Output Parameters</h2><p>
   <table border=1>
       <tr>
           <td></td>
@@ -90,7 +89,7 @@ Cv = mat2vec_C(Cm,p)
       <tr>
           <td style="text-align:center"><TT>p</TT></td>
           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;p" title="" /></td>
-          <td>(OPTIONAL) number of rows of state matrix</td>
+          <td>number of rows of state matrix</td>
           <td style="text-align:center">1×1<BR>double</td>
       </tr>
       <tr>
@@ -103,7 +102,7 @@ Cv = mat2vec_C(Cm,p)
           <td style="text-align:center">1×1<BR>function_handle</td>
       </tr>
   </table>
-</p><h2 id="5">Note</h2><div><ul><li>If <img src="mat2vec_C_doc_eq03729901751903020778.png" alt="$p$" style="width:6px;height:8px;"> is not input, it is assumed that the state matrix (<img src="mat2vec_C_doc_eq01518063970584319034.png" alt="$\mathbf{M}$" style="width:12px;height:8px;">) is a square matrix.</li></ul></div><h2 id="6">See also</h2><p><a href="mat2vec_ode_doc.html"><tt>mat2vec_ode</tt></a> | <a href="mat2vec_IC_doc.html"><tt>mat2vec_IC</tt></a> | <a href="vec2mat_sol_doc.html"><tt>vec2mat_sol</tt></a></p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2022a</a><br></p></div><!--
+</p><h2 id="4">See also</h2><p><a href="mat2vec_IC_doc.html"><tt>mat2vec_IC</tt></a> | <a href="mat2vec_ode_doc.html"><tt>mat2vec_ode</tt></a> | <a href="vec2mat_sol_doc.html"><tt>vec2mat_sol</tt></a></p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2022a</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% |mat2vec_C|
 % Transforms the condition function for a matrix-valued IVP into the 
@@ -111,26 +110,14 @@ Cv = mat2vec_C(Cm,p)
 % 
 % <index.html Back to IVP Solver Toolbox Contents>.
 %% Syntax
-%   Cv = mat2vec_C(Cm)
 %   Cv = mat2vec_C(Cm,p)
 %% Description
-% |Cv = mat2vec_C(Cm)| transforms the condition function
-% $C(t,\mathbf{M})$ (where $C:\mathrm{R}\times\mathrm{R}^{p\times p}\to\mathrm{B}$)
-% for a matrix-valued IVP into a condition function
-% $C(t,\mathbf{y})$ (where
-% $C:\mathrm{R}\times\mathrm{R}^{p^{2}}\to\mathrm{B}$)
-% (where
-% $\mathbf{f}:\mathrm{R}\times\mathrm{R}^{p^{2}}\to\mathrm{R}^{p^{2}}$) for
-% its corresponding vector-valued IVP. It is assumed that $\mathbf{M}$ is a
-% square matrix.
-%%
 % |Cv = mat2vec_C(Cm,p)| transforms the condition function
 % $C(t,\mathbf{M})$ (where $C:\mathrm{R}\times\mathrm{R}^{p\times r}\to\mathrm{B}$)
 % for a matrix-valued IVP into a condition function
 % $C(t,\mathbf{y})$ (where
-% $C:\mathrm{R}\times\mathrm{R}^{pr}\to\mathrm{B}$)
-% (where $\mathbf{f}:\mathrm{R}\times\mathrm{R}^{pr}\to\mathrm{R}^{p^{2}}$)
-% for its corresponding vector-valued IVP.
+% $C:\mathrm{R}\times\mathrm{R}^{pr}\to\mathrm{B}$) for its corresponding 
+% vector-valued IVP.
 %% Input/Output Parameters
 % <html>
 %   <table border=1>
@@ -153,7 +140,7 @@ Cv = mat2vec_C(Cm,p)
 %       <tr>
 %           <td style="text-align:center"><TT>p</TT></td>
 %           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;p" title="" /></td>
-%           <td>(OPTIONAL) number of rows of state matrix</td>
+%           <td>number of rows of state matrix</td>
 %           <td style="text-align:center">1×1<BR>double</td>
 %       </tr>
 %       <tr>
@@ -167,12 +154,9 @@ Cv = mat2vec_C(Cm,p)
 %       </tr>
 %   </table>
 % </html>
-%% Note
-% * If $p$ is not input, it is assumed that the state matrix ($\mathbf{M}$)
-% is a square matrix.
 %% See also
-% <mat2vec_ode_doc.html |mat2vec_ode|> | 
 % <mat2vec_IC_doc.html |mat2vec_IC|> | 
+% <mat2vec_ode_doc.html |mat2vec_ode|> | 
 % <vec2mat_sol_doc.html |vec2mat_sol|>
 ##### SOURCE END #####
 --></body></html>

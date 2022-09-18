@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>solve_ivp_matrix</title><meta name="generator" content="MATLAB 9.12"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-08-30"><meta name="DC.source" content="solve_ivp_matrix_doc.m"><style type="text/css">
+      --><title>solve_ivp_matrix</title><meta name="generator" content="MATLAB 9.12"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-09-17"><meta name="DC.source" content="solve_ivp_matrix_doc.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -67,12 +67,11 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1><tt>solve_ivp_matrix</tt></h1><!--introduction--><p>Solve matrix-valued initial value problems using fixed-step IVP solvers.</p><p><a href="index.html">Back to IVP Solver Toolbox Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#7">Input/Output Parameters</a></li><li><a href="#8">Note</a></li><li><a href="#9">Example</a></li><li><a href="#16">References</a></li><li><a href="#17">See also</a></li></ul></div><h2 id="1">Syntax</h2><pre class="language-matlab">[t,M] = solve_ivp_matrix(F,[t0,tf],M0,h)
+  </style></head><body><div class="content"><h1><tt>solve_ivp_matrix</tt></h1><!--introduction--><p>Solve matrix-valued initial value problems using fixed-step IVP solvers.</p><p><a href="index.html">Back to IVP Solver Toolbox Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#6">Input/Output Parameters</a></li><li><a href="#7">Note</a></li><li><a href="#8">Example</a></li><li><a href="#14">References</a></li><li><a href="#15">See also</a></li></ul></div><h2 id="1">Syntax</h2><pre class="language-matlab">[t,M] = solve_ivp_matrix(F,[t0,tf],M0,h)
 [t,M] = solve_ivp_matrix(F,{t0,C},M0,h)
-[t,M] = solve_ivp_matrix(__,p)
-[t,M] = solve_ivp_matrix(__,p,method)
-[t,M] = solve_ivp_matrix(__,p,method,wb)
-</pre><h2 id="2">Description</h2><p><tt>[t,M] = solve_ivp_matrix(F,[t0,tf],M0,h)</tt> solves the IVP defined by <tt>F(t,M)</tt> from <tt>t0</tt> until <tt>tf</tt> using the classic Runge-Kutta fourth-order method with an initial condition <tt>M0</tt> and step size <tt>h</tt>. This syntax assumes that the state matrix is a square matrix.</p><p><tt>[t,M] = solve_ivp_matrix(F,{t0,C},M0,h)</tt> does the same as the syntax above, but instead of terminating at a final time <tt>tf</tt>, the solver terminates once the condition function <tt>C(t,y)</tt> is no longer satisfied. This syntax assumes that the state matrix (<img src="solve_ivp_matrix_doc_eq01518063970584319034.png" alt="$\mathbf{M}$" style="width:12px;height:8px;">) is a square matrix.</p><p><tt>[t,M] = solve_ivp_matrix(...,p)</tt> can be used with either of the syntaxes above to specify the number of rows of the state matrix (<img src="solve_ivp_matrix_doc_eq14577781216167612366.png" alt="$\mathbf{M}\in\mathbf{R}^{p\times r}$" style="width:48px;height:9px;">). The parameter <tt>p</tt> should <b>always</b> be input if the state matrix is <i>not</i> square.</p><p><tt>[t,M] = solve_ivp_matrix(...,p,method)</tt> can be used with any of the syntaxes above to specify the integration method (i.e. the function will use the specified integration method, instead of the classic Runge-Kutta fourth-order method used by the previous two syntaxes). Options for the integration method are listed in the "Input/Output Parameters" section.</p><p><tt>[t,M] = solve_ivp_matrix(...,p,method,wb)</tt> can be used with any of the syntaxes above to define a waitbar. If <tt>wb</tt> is input as <tt>true</tt>, then a waitbar is displayed with the default message 'Solving IVP...'. To specify a custom waitbar message, input <tt>wb</tt> as a char array storing the desired message.</p><h2 id="7">Input/Output Parameters</h2><p>
+[t,M] = solve_ivp_matrix(__,method)
+[t,M] = solve_ivp_matrix(__,method,wb)
+</pre><h2 id="2">Description</h2><p><tt>[t,M] = solve_ivp_matrix(F,[t0,tf],M0,h)</tt> solves the IVP defined by <tt>F(t,M)</tt> from <tt>t0</tt> until <tt>tf</tt> using the classic Runge-Kutta fourth-order method with an initial condition <tt>M0</tt> and step size <tt>h</tt>. This syntax assumes that the state matrix is a square matrix.</p><p><tt>[t,M] = solve_ivp_matrix(F,{t0,C},M0,h)</tt> does the same as the syntax above, but instead of terminating at a final time <tt>tf</tt>, the solver terminates once the condition function <tt>C(t,y)</tt> is no longer satisfied. This syntax assumes that the state matrix (<img src="solve_ivp_matrix_doc_eq01518063970584319034.png" alt="$\mathbf{M}$" style="width:12px;height:8px;">) is a square matrix.</p><p><tt>[t,M] = solve_ivp_matrix(...,method)</tt> can be used with any of the syntaxes above to specify the integration method (i.e. the function will use the specified integration method, instead of the classic Runge-Kutta fourth-order method used by the previous two syntaxes). Options for the integration method are listed in the "Input/Output Parameters" section.</p><p><tt>[t,M] = solve_ivp_matrix(...,method,wb)</tt> can be used with any of the syntaxes above to define a waitbar. If <tt>wb</tt> is input as <tt>true</tt>, then a waitbar is displayed with the default message 'Solving IVP...'. To specify a custom waitbar message, input <tt>wb</tt> as a char array storing the desired message.</p><h2 id="6">Input/Output Parameters</h2><p>
   <table border=1>
       <tr>
           <td></td>
@@ -82,7 +81,7 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
           <td style="text-align:center"><b>Format</b></td>
       </tr>
       <tr>
-          <td rowspan="9" style="text-align:center"><b>Input</b></td>
+          <td rowspan="8" style="text-align:center"><b>Input</b></td>
           <td style="text-align:center"><TT>F</TT></td>
           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{F}(t,\mathbf{M})" title="" /></td>
           <td>multivariate, matrix-valued function (<img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{F}:\mathbb{R}\times\mathbb{R}^{p\times r}\rightarrow\mathbb{R}^{p\times r}" title="" />) defining the ordinary differential equation <img src="https://latex.codecogs.com/svg.latex?\inline&space;d\mathbf{M}/dt=\mathbf{F}(t,\mathbf{M})" title="" />
@@ -120,12 +119,6 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
           <td style="text-align:center"><TT>h</TT></td>
           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;h" title="h" /></td>
           <td>step size</td>
-          <td style="text-align:center">1×1<BR>double</td>
-      </tr>
-      <tr>
-          <td style="text-align:center"><TT>p</TT></td>
-          <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;p" title="" /></td>
-          <td>(OPTIONAL) number of rows of state matrix</td>
           <td style="text-align:center">1×1<BR>double</td>
       </tr>
       <tr>
@@ -183,7 +176,7 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
           <td style="text-align:center">p×r×(N+1)<BR>double</td>
       </tr>
   </table>
-</p><h2 id="8">Note</h2><div><ul><li>If <img src="solve_ivp_matrix_doc_eq03729901751903020778.png" alt="$p$" style="width:6px;height:8px;"> is not input, it is assumed that the state matrix (<img src="solve_ivp_matrix_doc_eq01518063970584319034.png" alt="$\mathbf{M}$" style="width:12px;height:8px;">) is a square matrix.</li><li>The nth page of <img src="solve_ivp_matrix_doc_eq07742130518583913975.png" alt="$[\mathbf{M}]$" style="width:16px;height:11px;"> stores the state matrix (i.e. the solution) corresponding to the nth time in <img src="solve_ivp_matrix_doc_eq01442555386716173869.png" alt="$\mathbf{t}$" style="width:5px;height:8px;">.</li></ul></div><h2 id="9">Example</h2><p><i>Consider the Riccati differential equation for the finite-horizon linear quadratic regulator problem:</i></p><p><img src="solve_ivp_matrix_doc_eq15499043028313771354.png" alt="$$\dot{\mathbf{P}}=-\left[\mathbf{A}^{T}\mathbf{P}+\mathbf{P}\mathbf{A}-(\mathbf{P}\mathbf{B}+\mathbf{S})\mathbf{R}^{-1}(\mathbf{B}^{T}\mathbf{P}+\mathbf{S}^{T})+\mathbf{Q}\right]$$" style="width:258px;height:15px;"></p><p><i>Find <img src="solve_ivp_matrix_doc_eq11156567409250041374.png" alt="$\mathbf{P}(0)=\mathbf{P}_{0}$" style="width:50px;height:11px;"> given that</i></p><p><img src="solve_ivp_matrix_doc_eq06697316367777428526.png" alt="$$\mathbf{P}(T)=\mathbf{P}_{T}=\pmatrix{1&amp;1\cr1&amp;1}$$" style="width:109px;height:27px;"></p><p><i>where <img src="solve_ivp_matrix_doc_eq04333988821981505429.png" alt="$T=5$" style="width:28px;height:8px;">. The state (<img src="solve_ivp_matrix_doc_eq15190527482521674856.png" alt="$\mathbf{A}$" style="width:9px;height:8px;">) and input (<img src="solve_ivp_matrix_doc_eq16427099040942302163.png" alt="$\mathbf{B}$" style="width:9px;height:8px;">) matrices are</i></p><p><img src="solve_ivp_matrix_doc_eq08594218919394792437.png" alt="$$\mathbf{A}=\pmatrix{1&amp;1\cr2&amp;1},\quad\quad\mathbf{B}=\pmatrix{1\cr1}$$" style="width:142px;height:27px;"></p><p><i>The state (<img src="solve_ivp_matrix_doc_eq04980437671470961831.png" alt="$\mathbf{Q}$" style="width:9px;height:10px;">), input (<img src="solve_ivp_matrix_doc_eq07378229934469313194.png" alt="$\mathbf{R}$" style="width:10px;height:8px;">), and cross-coupling (<img src="solve_ivp_matrix_doc_eq17705281529142768610.png" alt="$\mathbf{S}$" style="width:6px;height:8px;">) weighting matrices are</i></p><p><img src="solve_ivp_matrix_doc_eq06656902451109221026.png" alt="$$\mathbf{Q}=\pmatrix{2&amp;1\cr1&amp;1},\quad\quad\mathbf{R}=\pmatrix{1},\quad\quad\mathbf{S}=\pmatrix{0\cr0}$$" style="width:210px;height:27px;"></p><p>Define the matrices.</p><pre class="codeinput"><span class="comment">% state matrix</span>
+</p><h2 id="7">Note</h2><div><ul><li>The nth page of <img src="solve_ivp_matrix_doc_eq07742130518583913975.png" alt="$[\mathbf{M}]$" style="width:16px;height:11px;"> stores the state matrix (i.e. the solution) corresponding to the nth time in <img src="solve_ivp_matrix_doc_eq01442555386716173869.png" alt="$\mathbf{t}$" style="width:5px;height:8px;">.</li></ul></div><h2 id="8">Example</h2><p><i>Consider the Riccati differential equation for the finite-horizon linear quadratic regulator problem:</i></p><p><img src="solve_ivp_matrix_doc_eq15499043028313771354.png" alt="$$\dot{\mathbf{P}}=-\left[\mathbf{A}^{T}\mathbf{P}+\mathbf{P}\mathbf{A}-(\mathbf{P}\mathbf{B}+\mathbf{S})\mathbf{R}^{-1}(\mathbf{B}^{T}\mathbf{P}+\mathbf{S}^{T})+\mathbf{Q}\right]$$" style="width:258px;height:15px;"></p><p><i>Find <img src="solve_ivp_matrix_doc_eq11156567409250041374.png" alt="$\mathbf{P}(0)=\mathbf{P}_{0}$" style="width:50px;height:11px;"> given that</i></p><p><img src="solve_ivp_matrix_doc_eq06697316367777428526.png" alt="$$\mathbf{P}(T)=\mathbf{P}_{T}=\pmatrix{1&amp;1\cr1&amp;1}$$" style="width:109px;height:27px;"></p><p><i>where <img src="solve_ivp_matrix_doc_eq04333988821981505429.png" alt="$T=5$" style="width:28px;height:8px;">. The state (<img src="solve_ivp_matrix_doc_eq15190527482521674856.png" alt="$\mathbf{A}$" style="width:9px;height:8px;">) and input (<img src="solve_ivp_matrix_doc_eq16427099040942302163.png" alt="$\mathbf{B}$" style="width:9px;height:8px;">) matrices are</i></p><p><img src="solve_ivp_matrix_doc_eq08594218919394792437.png" alt="$$\mathbf{A}=\pmatrix{1&amp;1\cr2&amp;1},\quad\quad\mathbf{B}=\pmatrix{1\cr1}$$" style="width:142px;height:27px;"></p><p><i>The state (<img src="solve_ivp_matrix_doc_eq04980437671470961831.png" alt="$\mathbf{Q}$" style="width:9px;height:10px;">), input (<img src="solve_ivp_matrix_doc_eq07378229934469313194.png" alt="$\mathbf{R}$" style="width:10px;height:8px;">), and cross-coupling (<img src="solve_ivp_matrix_doc_eq17705281529142768610.png" alt="$\mathbf{S}$" style="width:6px;height:8px;">) weighting matrices are</i></p><p><img src="solve_ivp_matrix_doc_eq06656902451109221026.png" alt="$$\mathbf{Q}=\pmatrix{2&amp;1\cr1&amp;1},\quad\quad\mathbf{R}=\pmatrix{1},\quad\quad\mathbf{S}=\pmatrix{0\cr0}$$" style="width:210px;height:27px;"></p><p>Define the matrices.</p><pre class="codeinput"><span class="comment">% state matrix</span>
 A = [1   1;
      2   1];
 
@@ -209,14 +202,14 @@ PT = [1   1;
 T = 5;
 </pre><p>Define the Riccati differential equation (a matrix-valued ODE).</p><pre class="codeinput">F = @(t,P) -(A.'*P+P*A-(P*B+S)/R*(B.'*P+S.')+Q);
 </pre><p>In this case, we have a terminal condition at time <img src="solve_ivp_matrix_doc_eq16373138058832967206.png" alt="$t=T=5$" style="width:47px;height:8px;">, and want to find the initial condition at time <img src="solve_ivp_matrix_doc_eq02656990568186096865.png" alt="$t=t_{0}=0$" style="width:47px;height:10px;">. To do this, we will integrate backwards using an IVP solver, so the terminal condition <img src="solve_ivp_matrix_doc_eq07282847098330546007.png" alt="$\mathbf{P}_{T}$" style="width:14px;height:10px;"> will actually form the initial condition. Solving the matrix-valued IVP with a step size of <img src="solve_ivp_matrix_doc_eq00842521489666112223.png" alt="$h=0.001$" style="width:45px;height:8px;">,</p><pre class="codeinput">[t,P] = solve_ivp_matrix(F,[T,0],PT,0.001);
-</pre><p>Note that since <img src="solve_ivp_matrix_doc_eq01284226214242475479.png" alt="$\mathbf{P}$" style="width:8px;height:8px;"> is a square matrix, we did not have to specify its number of rows for the <tt>solve_ivp_matrix</tt> function.</p><p>Our original goal was to find <img src="solve_ivp_matrix_doc_eq01737430298148732982.png" alt="$\mathbf{P}_{0}$" style="width:12px;height:10px;">. Extracting this matrix from the solution array (noting that the solution corresponding to <img src="solve_ivp_matrix_doc_eq00402237798869806649.png" alt="$t=0$" style="width:24px;height:8px;"> will be stored at the end of the solution array since we integrated backwards in time), we find</p><pre class="codeinput">P0 = P(:,:,end)
+</pre><p>Our original goal was to find <img src="solve_ivp_matrix_doc_eq01737430298148732982.png" alt="$\mathbf{P}_{0}$" style="width:12px;height:10px;">. Extracting this matrix from the solution array (noting that the solution corresponding to <img src="solve_ivp_matrix_doc_eq00402237798869806649.png" alt="$t=0$" style="width:24px;height:8px;"> will be stored at the end of the solution array since we integrated backwards in time), we find</p><pre class="codeinput">P0 = P(:,:,end)
 </pre><pre class="codeoutput">
 P0 =
 
-   2.147130739665738   1.158223807741478
-   1.158223807741478   1.254683874725441
+    2.1471    1.1582
+    1.1582    1.2547
 
-</pre><h2 id="16">References</h2><p>The example above is adapted from the following sources:</p><div><ul><li><a href="https://www.mathworks.com/matlabcentral/answers/94722-how-can-i-solve-the-matrix-riccati-differential-equation-within-matlab">https://www.mathworks.com/matlabcentral/answers/94722-how-can-i-solve-the-matrix-riccati-differential-equation-within-matlab</a></li><li><a href="https://en.wikipedia.org/wiki/Linear-quadratic_regulator">https://en.wikipedia.org/wiki/Linear-quadratic_regulator</a></li></ul></div><h2 id="17">See also</h2><p><a href="solve_ivp_doc.html"><tt>solve_ivp</tt></a></p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2022a</a><br></p></div><!--
+</pre><h2 id="14">References</h2><p>The example above is adapted from the following sources:</p><div><ul><li><a href="https://www.mathworks.com/matlabcentral/answers/94722-how-can-i-solve-the-matrix-riccati-differential-equation-within-matlab">https://www.mathworks.com/matlabcentral/answers/94722-how-can-i-solve-the-matrix-riccati-differential-equation-within-matlab</a></li><li><a href="https://en.wikipedia.org/wiki/Linear-quadratic_regulator">https://en.wikipedia.org/wiki/Linear-quadratic_regulator</a></li></ul></div><h2 id="15">See also</h2><p><a href="solve_ivp_doc.html"><tt>solve_ivp</tt></a></p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2022a</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% |solve_ivp_matrix|
 % Solve matrix-valued initial value problems using fixed-step IVP solvers.
@@ -225,9 +218,8 @@ P0 =
 %% Syntax
 %   [t,M] = solve_ivp_matrix(F,[t0,tf],M0,h)
 %   [t,M] = solve_ivp_matrix(F,{t0,C},M0,h)
-%   [t,M] = solve_ivp_matrix(__,p)
-%   [t,M] = solve_ivp_matrix(__,p,method)
-%   [t,M] = solve_ivp_matrix(__,p,method,wb)
+%   [t,M] = solve_ivp_matrix(__,method)
+%   [t,M] = solve_ivp_matrix(__,method,wb)
 %% Description
 % |[t,M] = solve_ivp_matrix(F,[t0,tf],M0,h)| solves the IVP defined by 
 % |F(t,M)| from |t0| until |tf| using the classic Runge-Kutta fourth-order 
@@ -240,18 +232,13 @@ P0 =
 % This syntax assumes that the state matrix ($\mathbf{M}$) is a square 
 % matrix.
 %%
-% |[t,M] = solve_ivp_matrix(...,p)| can be used with either of the 
-% syntaxes above to specify the number of rows of the state matrix
-% ($\mathbf{M}\in\mathbf{R}^{p\times r}$). The parameter |p| should
-% *always* be input if the state matrix is _not_ square.
-%%
-% |[t,M] = solve_ivp_matrix(...,p,method)| can be used with any of the 
+% |[t,M] = solve_ivp_matrix(...,method)| can be used with any of the 
 % syntaxes above to specify the integration method (i.e. the function will 
 % use the specified integration method, instead of the classic Runge-Kutta 
 % fourth-order method used by the previous two syntaxes). Options for the
 % integration method are listed in the "Input/Output Parameters" section.
 %%
-% |[t,M] = solve_ivp_matrix(...,p,method,wb)| can be used with any of the 
+% |[t,M] = solve_ivp_matrix(...,method,wb)| can be used with any of the 
 % syntaxes above to define a waitbar. If |wb| is input as |true|, then a 
 % waitbar is displayed with the default message 'Solving IVP...'. To 
 % specify a custom waitbar message, input |wb| as a char array storing the 
@@ -267,7 +254,7 @@ P0 =
 %           <td style="text-align:center"><b>Format</b></td>
 %       </tr>
 %       <tr>
-%           <td rowspan="9" style="text-align:center"><b>Input</b></td>
+%           <td rowspan="8" style="text-align:center"><b>Input</b></td>
 %           <td style="text-align:center"><TT>F</TT></td>
 %           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{F}(t,\mathbf{M})" title="" /></td>
 %           <td>multivariate, matrix-valued function (<img src="https://latex.codecogs.com/svg.latex?\inline&space;\mathbf{F}:\mathbb{R}\times\mathbb{R}^{p\times r}\rightarrow\mathbb{R}^{p\times r}" title="" />) defining the ordinary differential equation <img src="https://latex.codecogs.com/svg.latex?\inline&space;d\mathbf{M}/dt=\mathbf{F}(t,\mathbf{M})" title="" />
@@ -305,12 +292,6 @@ P0 =
 %           <td style="text-align:center"><TT>h</TT></td>
 %           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;h" title="h" /></td>
 %           <td>step size</td>
-%           <td style="text-align:center">1×1<BR>double</td>
-%       </tr>
-%       <tr>
-%           <td style="text-align:center"><TT>p</TT></td>
-%           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;p" title="" /></td>
-%           <td>(OPTIONAL) number of rows of state matrix</td>
 %           <td style="text-align:center">1×1<BR>double</td>
 %       </tr>
 %       <tr>
@@ -370,8 +351,6 @@ P0 =
 %   </table>
 % </html>
 %% Note
-% * If $p$ is not input, it is assumed that the state matrix ($\mathbf{M}$)
-% is a square matrix.
 % * The nth page of $[\mathbf{M}]$ stores the state matrix (i.e. the 
 % solution) corresponding to the nth time in $\mathbf{t}$.
 %% Example
@@ -434,9 +413,6 @@ F = @(t,P) -(A.'*P+P*A-(P*B+S)/R*(B.'*P+S.')+Q);
 % $\mathbf{P}_{T}$ will actually form the initial condition. Solving the
 % matrix-valued IVP with a step size of $h=0.001$,
 [t,P] = solve_ivp_matrix(F,[T,0],PT,0.001);
-%%
-% Note that since $\mathbf{P}$ is a square matrix, we did not have to
-% specify its number of rows for the |solve_ivp_matrix| function.
 %%
 % Our original goal was to find $\mathbf{P}_{0}$. Extracting this matrix
 % from the solution array (noting that the solution corresponding to $t=0$

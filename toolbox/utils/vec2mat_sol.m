@@ -1,15 +1,14 @@
 %==========================================================================
 %
 % vec2mat_sol  Transforms the solution matrix for a vector-valued IVP into
-% the solution array for the corresponding matrix-valued IVP.
+% the solution array for its corresponding matrix-valued IVP.
 %
-%   M = vec2mat_sol(y)
 %   M = vec2mat_sol(y,p)
 %
-% See also mat2vec_ode, mat2vec_IC, mat2vec_C.
+% See also mat2vec_E, mat2vec_IC, mat2vec_ODE.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2022-08-30
+% Last Update: 2022-09-17
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
@@ -25,7 +24,7 @@
 % INPUT:
 % ------
 %   y       - ((N+1)×pr double) matrix storing time history of state vector
-%   p       - (OPTIONAL) (1×1 double) number of rows of state matrix
+%   p       - (1×1 double) number of rows of state matrix
 %
 % -------
 % OUTPUT:
@@ -36,8 +35,6 @@
 % -----
 % NOTE:
 % -----
-%   --> If "p" is not input, it is assumed that the state matrix (M) is
-%       a square matrix.
 %   --> M ∈ ℝᵖˣʳ
 %   --> y ∈ ℝᵖʳ
 %   --> t ∈ ℝᴺ⁺¹
@@ -50,11 +47,6 @@ function M = vec2mat_sol(y,p)
     % state dimension (pr) and N (IVP solution given at N+1 times)
     pr = size(y,2);
     N = size(y,1)-1;
-    
-    % determine state dimension if not input (assuming Y is square)
-    if (nargin < 2) || isempty(p)
-        p = sqrt(pr);
-    end
     
     % determines r
     r = pr/p;
