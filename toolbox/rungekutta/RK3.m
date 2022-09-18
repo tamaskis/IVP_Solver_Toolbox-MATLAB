@@ -9,7 +9,7 @@
 % SSPRK3, RK4, RK4_ralston, RK4_38.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2022-08-28
+% Last Update: 2022-09-18
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
@@ -24,8 +24,8 @@
 % ------
 % INPUT:
 % ------
-%   f       - (1×1 function_handle) dy/dt = f(t,y) --> multivariate, 
-%             vector-valued function (f : ℝ×ℝᵖ → ℝᵖ) defining ODE
+%   f       - (1×1 function_handle) multivariate, vector-valued function 
+%             defining vector-valued ODE, dy/dt = f(t,y) (f : ℝ×ℝᵖ → ℝᵖ)
 %   t       - (1×1 double) current sample time
 %   y       - (p×1 double) state (i.e. solution) at current sample time, t
 %   h       - (1×1 double) step size

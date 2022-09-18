@@ -29,7 +29,7 @@ doc_IVP tech
 ## Main IVP Solver Function
 
 `[t,y] = solve_ivp(f,[t0,tf],y0,h)`\
-`[t,y] = solve_ivp(f,{t0,C},y0,h)`\
+`[t,y] = solve_ivp(f,{t0,E},y0,h)`\
 `[t,y] = solve_ivp(__,method)`\
 `[t,y] = solve_ivp(__,method,wb)`
 
@@ -37,7 +37,7 @@ doc_IVP tech
 ## Matrix-Valued IVP Solver Function
 
 `[t,M] = solve_ivp_matrix(F,[t0,tf],M0,h)`\
-`[t,M] = solve_ivp_matrix(F,{t0,C},M0,h)`\
+`[t,M] = solve_ivp_matrix(F,{t0,E},M0,h)`\
 `[t,M] = solve_ivp_matrix(__,p,method)`\
 `[t,M] = solve_ivp_matrix(__,p,method,wb)`
 

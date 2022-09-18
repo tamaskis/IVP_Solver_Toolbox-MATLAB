@@ -11,7 +11,7 @@
 % See also solve_ivp_matrix.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2022-09-17
+% Last Update: 2022-09-18
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
@@ -26,8 +26,8 @@
 % ------
 % INPUT:
 % ------
-%   f       - (1×1 function_handle) dy/dt = f(t,y) --> multivariate, 
-%             vector-valued function (f : ℝ×ℝᵖ → ℝᵖ) defining ODE
+%   f       - (1×1 function_handle) multivariate, vector-valued function 
+%             defining vector-valued ODE, dy/dt = f(t,y) (f : ℝ×ℝᵖ → ℝᵖ)
 %   I       - defines interval over which to solve the IVP, 2 options:
 %               --> [t0,tf] - (1×2 double) initial and final times
 %               --> {t0,E}  - (1×2 cell) initial time, t₀, and function 

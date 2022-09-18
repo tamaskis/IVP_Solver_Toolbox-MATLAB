@@ -11,7 +11,7 @@
 % See also solve_ivp.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2022-09-17
+% Last Update: 2022-09-18
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
@@ -26,9 +26,9 @@
 % ------
 % INPUT:
 % ------
-%   F       - (1×1 function_handle) dM/dt = F(t,M) --> multivariate, 
-%             matrix-valued function (F : ℝ×ℝᵖˣʳ → ℝᵖˣʳ) defining
-%             matrix-valued ODE
+%   F       - (1×1 function_handle) multivariate, matrix-valued function
+%             defining matrix-valued ODE, dM/dt = F(t,M) 
+%             (F : ℝ×ℝᵖˣʳ → ℝᵖˣʳ)
 %   I       - defines interval over which to solve the IVP, 2 options:
 %               --> [t0,tf] - (1×2 double) initial and final times
 %               --> {t0,E}  - (1×2 cell) initial time, t₀, and function 
@@ -71,7 +71,7 @@ function [t,M] = solve_ivp_matrix(F,I,M0,h,method,wb)
     p = size(M0,1);
     
     % converts matrix-valued ODE to vector-valued ODE
-    f = mat2vec_ode(F,p);
+    f = mat2vec_ODE(F,p);
     
     % converts initial condition for matrix-valued IVP into initial 
     % condition for the corresponding vector-valued IVP

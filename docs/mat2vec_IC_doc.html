@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>mat2vec_IC</title><meta name="generator" content="MATLAB 9.12"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-09-17"><meta name="DC.source" content="mat2vec_IC_doc.m"><style type="text/css">
+      --><title>mat2vec_IC</title><meta name="generator" content="MATLAB 9.12"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-09-18"><meta name="DC.source" content="mat2vec_IC_doc.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -67,8 +67,8 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1><tt>mat2vec_IC</tt></h1><!--introduction--><p>Transforms the initial condition for a matrix-valued IVP into the initial condition for the corresponding vector-valued IVP.</p><p><a href="index.html">Back to IVP Solver Toolbox Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Input/Output Parameters</a></li><li><a href="#4">See also</a></li></ul></div><h2 id="1">Syntax</h2><pre class="language-matlab">y0 = mat2vec_IC(M0)
-</pre><h2 id="2">Description</h2><p><tt>y0 = mat2vec_IC(M0)</tt> transforms the initial condition <img src="mat2vec_IC_doc_eq01866163084224256806.png" alt="$\mathbf{M}_{0}\in\mathrm{R}^{p\times r}$" style="width:51px;height:10px;"> for a matrix-valued IVP into the initial condition <img src="mat2vec_IC_doc_eq15282979089752469712.png" alt="$\mathbf{y}_{0}\in\mathrm{R}^{pr}$" style="width:40px;height:10px;"> for the corresponding vector-valued IVP.</p><h2 id="3">Input/Output Parameters</h2><p>
+  </style></head><body><div class="content"><h1><tt>mat2vec_IC</tt></h1><!--introduction--><p>Transforms the initial condition for a matrix-valued IVP into the initial condition for its corresponding vector-valued IVP.</p><p><a href="index.html">Back to IVP Solver Toolbox Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Input/Output Parameters</a></li><li><a href="#4">See also</a></li></ul></div><h2 id="1">Syntax</h2><pre class="language-matlab">y0 = mat2vec_IC(M0)
+</pre><h2 id="2">Description</h2><p><tt>y0 = mat2vec_IC(M0)</tt> transforms the initial condition <img src="mat2vec_IC_doc_eq01866163084224256806.png" alt="$\mathbf{M}_{0}\in\mathrm{R}^{p\times r}$" style="width:51px;height:10px;"> for a matrix-valued IVP into the initial condition <img src="mat2vec_IC_doc_eq15282979089752469712.png" alt="$\mathbf{y}_{0}\in\mathrm{R}^{pr}$" style="width:40px;height:10px;"> for its corresponding vector-valued IVP.</p><h2 id="3">Input/Output Parameters</h2><p>
   <table border=1>
       <tr>
           <td></td>
@@ -92,11 +92,11 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
           <td style="text-align:center">pr×1<BR>double</td>
       </tr>
   </table>
-</p><h2 id="4">See also</h2><p><a href="mat2vec_C_doc.html"><tt>mat2vec_C</tt></a> | <a href="mat2vec_ode_doc.html"><tt>mat2vec_ode</tt></a> | <a href="vec2mat_sol_doc.html"><tt>vec2mat_sol</tt></a></p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2022a</a><br></p></div><!--
+</p><h2 id="4">See also</h2><p><a href="mat2vec_E_doc.html"><tt>mat2vec_E</tt></a> | <a href="mat2vec_ODE_doc.html"><tt>mat2vec_ODE</tt></a> | <a href="vec2mat_sol_doc.html"><tt>vec2mat_sol</tt></a></p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2022a</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% |mat2vec_IC|
 % Transforms the initial condition for a matrix-valued IVP into the initial
-% condition for the corresponding vector-valued IVP.
+% condition for its corresponding vector-valued IVP.
 % 
 % <index.html Back to IVP Solver Toolbox Contents>.
 %% Syntax
@@ -104,7 +104,7 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 %% Description
 % |y0 = mat2vec_IC(M0)| transforms the initial condition 
 % $\mathbf{M}_{0}\in\mathrm{R}^{p\times r}$ for a matrix-valued IVP into 
-% the initial condition $\mathbf{y}_{0}\in\mathrm{R}^{pr}$ for the 
+% the initial condition $\mathbf{y}_{0}\in\mathrm{R}^{pr}$ for its
 % corresponding vector-valued IVP.
 %% Input/Output Parameters
 % <html>
@@ -133,8 +133,8 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 %   </table>
 % </html>
 %% See also
-% <mat2vec_C_doc.html |mat2vec_C|> | 
-% <mat2vec_ode_doc.html |mat2vec_ode|> | 
+% <mat2vec_E_doc.html |mat2vec_E|> | 
+% <mat2vec_ODE_doc.html |mat2vec_ODE|> | 
 % <vec2mat_sol_doc.html |vec2mat_sol|>
 ##### SOURCE END #####
 --></body></html>

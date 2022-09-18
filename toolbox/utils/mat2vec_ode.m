@@ -7,7 +7,7 @@
 % See also mat2vec_E, mat2vec_IC, vec2mat_sol.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2022-09-17
+% Last Update: 2022-09-18
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
@@ -22,17 +22,17 @@
 % ------
 % INPUT:
 % ------
-%   F       - (1×1 function_handle) dM/dt = F(t,M) --> multivariate, 
-%             matrix-valued function (F : ℝ×ℝᵖˣʳ → ℝᵖˣʳ) defining
-%             matrix-valued ODE
+%   F       - (1×1 function_handle) multivariate, matrix-valued function
+%             defining the matrix-valued ODE, dM/dt = F(t,M) 
+%             (F : ℝ×ℝᵖˣʳ → ℝᵖˣʳ)
 %   p       - (1×1 double) number of rows of state matrix
 %
 % -------
 % OUTPUT:
 % -------
-%   f       - (1×1 function_handle) dy/dt = f(t,y) --> multivariate, 
-%             vector-valued function (f : ℝ×ℝᵖʳ → ℝᵖʳ) defining
-%             corresponding vector-valued ODE
+%   f       - (1×1 function_handle) multivariate, vector-valued function 
+%             defining corresponding vector-valued ODE, dy/dt = f(t,y) 
+%             (f : ℝ×ℝᵖʳ → ℝᵖʳ)
 %
 %==========================================================================
 function f = mat2vec_ODE(F,p)
@@ -45,14 +45,19 @@ function f = mat2vec_ODE(F,p)
     % matrix-valued ODE.
     %----------------------------------------------------------------------
     %
+    % ------
     % INPUT:
-    %   F       - (1×1 function_handle) dM/dt = F(t,M) --> multivariate, 
-    %             matrix-valued function (F : ℝ×ℝᵖˣʳ → ℝᵖˣʳ) defining ODE
+    % ------
+    %   F       - (1×1 function_handle) multivariate, matrix-valued 
+    %             function defining matrix-valued ODE, dM/dt = F(t,M) 
+    %             (F : ℝ×ℝᵖˣʳ → ℝᵖˣʳ)
     %   t       - (1×1 double) current time
     %   y       - (pr×1 double) state vector at current time
     %   p       - (1×1 double) number of rows of state matrix
     %
+    % -------
     % OUTPUT:
+    % -------
     %   dydt    - (pr×1 double) state vector derivative
     %
     %----------------------------------------------------------------------

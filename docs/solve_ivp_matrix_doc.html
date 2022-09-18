@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>solve_ivp_matrix</title><meta name="generator" content="MATLAB 9.12"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-09-17"><meta name="DC.source" content="solve_ivp_matrix_doc.m"><style type="text/css">
+      --><title>solve_ivp_matrix</title><meta name="generator" content="MATLAB 9.12"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-09-18"><meta name="DC.source" content="solve_ivp_matrix_doc.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -67,11 +67,11 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1><tt>solve_ivp_matrix</tt></h1><!--introduction--><p>Solve matrix-valued initial value problems using fixed-step IVP solvers.</p><p><a href="index.html">Back to IVP Solver Toolbox Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#6">Input/Output Parameters</a></li><li><a href="#7">Note</a></li><li><a href="#8">Example</a></li><li><a href="#14">References</a></li><li><a href="#15">See also</a></li></ul></div><h2 id="1">Syntax</h2><pre class="language-matlab">[t,M] = solve_ivp_matrix(F,[t0,tf],M0,h)
-[t,M] = solve_ivp_matrix(F,{t0,C},M0,h)
+  </style></head><body><div class="content"><h1><tt>solve_ivp_matrix</tt></h1><!--introduction--><p>Fixed-step IVP solvers for solving matrix-valued initial value problems.</p><p><a href="index.html">Back to IVP Solver Toolbox Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#6">Input/Output Parameters</a></li><li><a href="#7">Note</a></li><li><a href="#8">Example</a></li><li><a href="#14">References</a></li><li><a href="#15">See also</a></li></ul></div><h2 id="1">Syntax</h2><pre class="language-matlab">[t,M] = solve_ivp_matrix(F,[t0,tf],M0,h)
+[t,M] = solve_ivp_matrix(F,{t0,E},M0,h)
 [t,M] = solve_ivp_matrix(__,method)
 [t,M] = solve_ivp_matrix(__,method,wb)
-</pre><h2 id="2">Description</h2><p><tt>[t,M] = solve_ivp_matrix(F,[t0,tf],M0,h)</tt> solves the IVP defined by <tt>F(t,M)</tt> from <tt>t0</tt> until <tt>tf</tt> using the classic Runge-Kutta fourth-order method with an initial condition <tt>M0</tt> and step size <tt>h</tt>. This syntax assumes that the state matrix is a square matrix.</p><p><tt>[t,M] = solve_ivp_matrix(F,{t0,C},M0,h)</tt> does the same as the syntax above, but instead of terminating at a final time <tt>tf</tt>, the solver terminates once the condition function <tt>C(t,y)</tt> is no longer satisfied. This syntax assumes that the state matrix (<img src="solve_ivp_matrix_doc_eq01518063970584319034.png" alt="$\mathbf{M}$" style="width:12px;height:8px;">) is a square matrix.</p><p><tt>[t,M] = solve_ivp_matrix(...,method)</tt> can be used with any of the syntaxes above to specify the integration method (i.e. the function will use the specified integration method, instead of the classic Runge-Kutta fourth-order method used by the previous two syntaxes). Options for the integration method are listed in the "Input/Output Parameters" section.</p><p><tt>[t,M] = solve_ivp_matrix(...,method,wb)</tt> can be used with any of the syntaxes above to define a waitbar. If <tt>wb</tt> is input as <tt>true</tt>, then a waitbar is displayed with the default message 'Solving IVP...'. To specify a custom waitbar message, input <tt>wb</tt> as a char array storing the desired message.</p><h2 id="6">Input/Output Parameters</h2><p>
+</pre><h2 id="2">Description</h2><p><tt>[t,M] = solve_ivp_matrix(F,[t0,tf],M0,h)</tt> solves the IVP defined by <tt>F(t,M)</tt> from <tt>t0</tt> until <tt>tf</tt> using the classic Runge-Kutta fourth-order method with an initial condition <tt>M0</tt> and step size <tt>h</tt>. This syntax assumes that the state matrix is a square matrix.</p><p><tt>[t,M] = solve_ivp_matrix(F,{t0,E},M0,h)</tt> does the same as the syntax above, but instead of terminating at a final time <tt>tf</tt>, the solver terminates once the event function <tt>E(t,y)</tt> is no longer satisfied. This syntax assumes that the state matrix (<img src="solve_ivp_matrix_doc_eq01518063970584319034.png" alt="$\mathbf{M}$" style="width:12px;height:8px;">) is a square matrix.</p><p><tt>[t,M] = solve_ivp_matrix(...,method)</tt> can be used with any of the syntaxes above to specify the integration method (i.e. the function will use the specified integration method, instead of the classic Runge-Kutta fourth-order method used by the previous two syntaxes). Options for the integration method are listed in the "Input/Output Parameters" section.</p><p><tt>[t,M] = solve_ivp_matrix(...,method,wb)</tt> can be used with any of the syntaxes above to define a waitbar. If <tt>wb</tt> is input as <tt>true</tt>, then a waitbar is displayed with the default message 'Solving IVP...'. To specify a custom waitbar message, input <tt>wb</tt> as a char array storing the desired message.</p><h2 id="6">Input/Output Parameters</h2><p>
   <table border=1>
       <tr>
           <td></td>
@@ -103,8 +103,8 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
       </tr>
       <tr>
           <td style="text-align:center"><TT>C</TT></td>
-          <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;C(t,\mathbf{M})" title="C(t,\mathbf{M})" /></td>
-          <td>condition function (<img src="https://latex.codecogs.com/svg.latex?\inline&space;C:\mathbb{R}\times\mathbb{R}^{p\times r}\rightarrow\mathbb{B}" title="" />)
+          <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;E(t,\mathbf{M})" title="E(t,\mathbf{M})" /></td>
+          <td>event function (<img src="https://latex.codecogs.com/svg.latex?\inline&space;E:\mathbb{R}\times\mathbb{R}^{p\times r}\rightarrow\mathbb{B}" title="" />)
               <BR> - inputs are the current time (<TT>t</TT>, 1×1 double) and the current state matrix (<TT>M</TT>, p×r double)
               <BR> - output is a 1×1 logical (<TT>true</TT> if solver should continue running, <TT>false</TT> if solver should terminate)</td>
           <td style="text-align:center">1×1<BR>function_handle</td>
@@ -206,18 +206,18 @@ T = 5;
 </pre><pre class="codeoutput">
 P0 =
 
-    2.1471    1.1582
-    1.1582    1.2547
+   2.147130739665738   1.158223807741478
+   1.158223807741478   1.254683874725441
 
 </pre><h2 id="14">References</h2><p>The example above is adapted from the following sources:</p><div><ul><li><a href="https://www.mathworks.com/matlabcentral/answers/94722-how-can-i-solve-the-matrix-riccati-differential-equation-within-matlab">https://www.mathworks.com/matlabcentral/answers/94722-how-can-i-solve-the-matrix-riccati-differential-equation-within-matlab</a></li><li><a href="https://en.wikipedia.org/wiki/Linear-quadratic_regulator">https://en.wikipedia.org/wiki/Linear-quadratic_regulator</a></li></ul></div><h2 id="15">See also</h2><p><a href="solve_ivp_doc.html"><tt>solve_ivp</tt></a></p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2022a</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% |solve_ivp_matrix|
-% Solve matrix-valued initial value problems using fixed-step IVP solvers.
+% Fixed-step IVP solvers for solving matrix-valued initial value problems.
 % 
 % <index.html Back to IVP Solver Toolbox Contents>.
 %% Syntax
 %   [t,M] = solve_ivp_matrix(F,[t0,tf],M0,h)
-%   [t,M] = solve_ivp_matrix(F,{t0,C},M0,h)
+%   [t,M] = solve_ivp_matrix(F,{t0,E},M0,h)
 %   [t,M] = solve_ivp_matrix(__,method)
 %   [t,M] = solve_ivp_matrix(__,method,wb)
 %% Description
@@ -226,9 +226,9 @@ P0 =
 % method with an initial condition |M0| and step size |h|. This syntax
 % assumes that the state matrix is a square matrix.
 %%
-% |[t,M] = solve_ivp_matrix(F,{t0,C},M0,h)| does the same as the syntax 
+% |[t,M] = solve_ivp_matrix(F,{t0,E},M0,h)| does the same as the syntax 
 % above, but instead of terminating at a final time |tf|, the solver 
-% terminates once the condition function |C(t,y)| is no longer satisfied. 
+% terminates once the event function |E(t,y)| is no longer satisfied. 
 % This syntax assumes that the state matrix ($\mathbf{M}$) is a square 
 % matrix.
 %%
@@ -276,8 +276,8 @@ P0 =
 %       </tr>
 %       <tr>
 %           <td style="text-align:center"><TT>C</TT></td>
-%           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;C(t,\mathbf{M})" title="C(t,\mathbf{M})" /></td>
-%           <td>condition function (<img src="https://latex.codecogs.com/svg.latex?\inline&space;C:\mathbb{R}\times\mathbb{R}^{p\times r}\rightarrow\mathbb{B}" title="" />)
+%           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;E(t,\mathbf{M})" title="E(t,\mathbf{M})" /></td>
+%           <td>event function (<img src="https://latex.codecogs.com/svg.latex?\inline&space;E:\mathbb{R}\times\mathbb{R}^{p\times r}\rightarrow\mathbb{B}" title="" />)
 %               <BR> - inputs are the current time (<TT>t</TT>, 1×1 double) and the current state matrix (<TT>M</TT>, p×r double)
 %               <BR> - output is a 1×1 logical (<TT>true</TT> if solver should continue running, <TT>false</TT> if solver should terminate)</td>
 %           <td style="text-align:center">1×1<BR>function_handle</td>

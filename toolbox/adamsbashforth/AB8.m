@@ -8,7 +8,7 @@
 % See also AB2, AB3, AB4, AB5, AB6, AB7.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2022-08-28
+% Last Update: 2022-09-18
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
@@ -23,8 +23,8 @@
 % ------
 % INPUT:
 % ------
-%   f       - (1×1 function_handle) dy/dt = f(t,y) --> multivariate, 
-%             vector-valued function (f : ℝ×ℝᵖ → ℝᵖ) defining ODE
+%   f       - (1×1 function_handle) multivariate, vector-valued function 
+%             defining vector-valued ODE, dy/dt = f(t,y) (f : ℝ×ℝᵖ → ℝᵖ)
 %   t       - (1×1 double) current sample time
 %   F       - (p×9 double) F matrix for current sample time
 %               --> columns 1-8: function evaluations at previous 8 sample

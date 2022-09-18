@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>solve_ivp</title><meta name="generator" content="MATLAB 9.12"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-09-17"><meta name="DC.source" content="solve_ivp_doc.m"><style type="text/css">
+      --><title>solve_ivp</title><meta name="generator" content="MATLAB 9.12"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-09-18"><meta name="DC.source" content="solve_ivp_doc.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -67,11 +67,11 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1><tt>solve_ivp</tt></h1><!--introduction--><p>Solve initial value problems using fixed-step IVP solvers.</p><p><a href="index.html">Back to IVP Solver Toolbox Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#6">Input/Output Parameters</a></li><li><a href="#7">Note</a></li><li><a href="#8">Example #1: Time detection.</a></li><li><a href="#12">Example #2: Event detection.</a></li><li><a href="#16">Example #3: Backward integration (time detection case).</a></li><li><a href="#20">Example #4: Backward integration (event-detection case).</a></li><li><a href="#25">See also</a></li></ul></div><h2 id="1">Syntax</h2><pre class="language-matlab">[t,y] = solve_ivp(f,[t0,tf],y0,h)
-[t,y] = solve_ivp(f,{t0,C},y0,h)
+  </style></head><body><div class="content"><h1><tt>solve_ivp</tt></h1><!--introduction--><p>Fixed-step IVP solvers for solving vector-valued initial value problems.</p><p><a href="index.html">Back to IVP Solver Toolbox Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#6">Input/Output Parameters</a></li><li><a href="#7">Note</a></li><li><a href="#8">Example #1: Time detection.</a></li><li><a href="#12">Example #2: Event detection.</a></li><li><a href="#16">Example #3: Backward integration (time detection case).</a></li><li><a href="#20">Example #4: Backward integration (event-detection case).</a></li><li><a href="#25">See also</a></li></ul></div><h2 id="1">Syntax</h2><pre class="language-matlab">[t,y] = solve_ivp(f,[t0,tf],y0,h)
+[t,y] = solve_ivp(f,{t0,E},y0,h)
 [t,y] = solve_ivp(__,method)
 [t,y] = solve_ivp(__,method,wb)
-</pre><h2 id="2">Description</h2><p><tt>[t,y] = solve_ivp(f,[t0,tf],y0,h)</tt> solves the IVP defined by <tt>f(t,y)</tt> from <tt>t0</tt> until <tt>tf</tt> using the classic Runge-Kutta fourth-order method with an initial condition <tt>y0</tt> and step size <tt>h</tt>.</p><p><tt>[t,y] = solve_ivp(f,{t0,C},y0,h)</tt> does the same as the syntax above, but instead of terminating at a final time <tt>tf</tt>, the solver terminates once the condition function <tt>C(t,y)</tt> is no longer satisfied.</p><p><tt>[t,y] = solve_ivp(...,method)</tt> can be used with either of the syntaxes above to specify the integration method (i.e. the function will use the specified integration method, instead of the classic Runge-Kutta fourth-order method used by the previous two syntaxes). Options for the integration method are listed in the "Input/Output Parameters" section.</p><p><tt>[t,y] = solve_ivp(...,method,wb)</tt> can be used with any of the syntaxes above to define a waitbar. If <tt>wb</tt> is input as <tt>true</tt>, then a waitbar is displayed with the default message 'Solving IVP...'. To specify a custom waitbar message, input <tt>wb</tt> as a char array storing the desired message.</p><h2 id="6">Input/Output Parameters</h2><p>
+</pre><h2 id="2">Description</h2><p><tt>[t,y] = solve_ivp(f,[t0,tf],y0,h)</tt> solves the IVP defined by <tt>f(t,y)</tt> from <tt>t0</tt> until <tt>tf</tt> using the classic Runge-Kutta fourth-order method with an initial condition <tt>y0</tt> and step size <tt>h</tt>.</p><p><tt>[t,y] = solve_ivp(f,{t0,E},y0,h)</tt> does the same as the syntax above, but instead of terminating at a final time <tt>tf</tt>, the solver terminates once the event function <tt>E(t,y)</tt> is no longer satisfied.</p><p><tt>[t,y] = solve_ivp(...,method)</tt> can be used with either of the syntaxes above to specify the integration method (i.e. the function will use the specified integration method, instead of the classic Runge-Kutta fourth-order method used by the previous two syntaxes). Options for the integration method are listed in the "Input/Output Parameters" section.</p><p><tt>[t,y] = solve_ivp(...,method,wb)</tt> can be used with any of the syntaxes above to define a waitbar. If <tt>wb</tt> is input as <tt>true</tt>, then a waitbar is displayed with the default message 'Solving IVP...'. To specify a custom waitbar message, input <tt>wb</tt> as a char array storing the desired message.</p><h2 id="6">Input/Output Parameters</h2><p>
   <table border=1>
       <tr>
           <td></td>
@@ -103,8 +103,8 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
       </tr>
       <tr>
           <td style="text-align:center"><TT>C</TT></td>
-          <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;C(t,\mathbf{y})" title="C(t,\mathbf{y})" /></td>
-          <td>condition function (<img src="https://latex.codecogs.com/svg.latex?\inline&space;C:\mathbb{R}\times\mathbb{R}^{p}\rightarrow\mathbb{B}" title="" />)
+          <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;E(t,\mathbf{y})" title="E(t,\mathbf{y})" /></td>
+          <td>event function (<img src="https://latex.codecogs.com/svg.latex?\inline&space;E:\mathbb{R}\times\mathbb{R}^{p}\rightarrow\mathbb{B}" title="" />)
               <BR> - inputs are the current time (<TT>t</TT>, 1×1 double) and the current state vector (<TT>y</TT>, p×1 double)
               <BR> - output is a 1×1 logical (<TT>true</TT> if solver should continue running, <TT>false</TT> if solver should terminate)</td>
           <td style="text-align:center">1×1<BR>function_handle</td>
@@ -200,8 +200,8 @@ ylabel(<span class="string">'$y$'</span>,<span class="string">'Interpreter'</spa
 zlabel(<span class="string">'$z$'</span>,<span class="string">'Interpreter'</span>,<span class="string">'latex'</span>,<span class="string">'FontSize'</span>,18);
 </pre><img vspace="5" hspace="5" src="solve_ivp_doc_01.png" alt=""> <h2 id="12">Example #2: Event detection.</h2><p><i>Consider the initial value problem</i></p><p><img src="solve_ivp_doc_eq12868018520907325398.png" alt="$$\frac{dy}{dt}=y,\quad y(2)=3$$" style="width:89px;height:23px;"></p><p><i>Find the solution <img src="solve_ivp_doc_eq17784377804790973832.png" alt="$y(t)$" style="width:18px;height:11px;"> until <img src="solve_ivp_doc_eq08226474961517088074.png" alt="$y=10$" style="width:31px;height:10px;">.</i></p><p>First, let's define our ODE (<img src="solve_ivp_doc_eq15749537601348477239.png" alt="$\frac{dy}{dt}=f(t,y)$" style="width:53px;height:15px;">) and initial condition in MATLAB.</p><pre class="codeinput">f = @(t,y) y;
 y2 = 3;
-</pre><p>Next, let's define the condition function, <img src="solve_ivp_doc_eq05396980523725042131.png" alt="$C(t,y)$" style="width:31px;height:11px;">. Since we want to continue solving until <img src="solve_ivp_doc_eq08226474961517088074.png" alt="$y=10$" style="width:31px;height:10px;">, we want the solver to run while <img src="solve_ivp_doc_eq11724124807923600915.png" alt="$y\leq10$" style="width:31px;height:10px;">; this forms our condition. Therefore,</p><pre class="codeinput">C = @(t,y) y &lt;= 10;
-</pre><p>Solving for <img src="solve_ivp_doc_eq14521328786523663806.png" alt="$y$" style="width:6px;height:8px;"> using the Euler method with a step size of <img src="solve_ivp_doc_eq10072498013177321932.png" alt="$h=0.01$" style="width:40px;height:8px;">,</p><pre class="codeinput">[t,y] = solve_ivp(f,{2,C},y2,0.01,<span class="string">'Euler'</span>);
+</pre><p>Next, let's define the event function, <img src="solve_ivp_doc_eq18002211034454830408.png" alt="$E(t,y)$" style="width:31px;height:11px;">. Since we want to continue solving until <img src="solve_ivp_doc_eq08226474961517088074.png" alt="$y=10$" style="width:31px;height:10px;">, we want the solver to run while <img src="solve_ivp_doc_eq11724124807923600915.png" alt="$y\leq10$" style="width:31px;height:10px;">; this forms our condition. Therefore,</p><pre class="codeinput">E = @(t,y) y &lt;= 10;
+</pre><p>Solving for <img src="solve_ivp_doc_eq14521328786523663806.png" alt="$y$" style="width:6px;height:8px;"> using the Euler method with a step size of <img src="solve_ivp_doc_eq10072498013177321932.png" alt="$h=0.01$" style="width:40px;height:8px;">,</p><pre class="codeinput">[t,y] = solve_ivp(f,{2,E},y2,0.01,<span class="string">'Euler'</span>);
 </pre><p>Plotting the solution,</p><pre class="codeinput">figure;
 plot(t,y,<span class="string">'LineWidth'</span>,1.5);
 grid <span class="string">on</span>;
@@ -214,34 +214,34 @@ y20 = 50;
 </pre><pre class="codeoutput">
 y10 =
 
-    0.0023
+   0.002269996488128
 
 </pre><p>Confirming our result by solving the same ODE but from <img src="solve_ivp_doc_eq08325516970591449802.png" alt="$t=10$" style="width:29px;height:8px;"> to <img src="solve_ivp_doc_eq01961946856973312452.png" alt="$t=20$" style="width:29px;height:8px;"> and using our result for <img src="solve_ivp_doc_eq14770085807156189371.png" alt="$y(10)$" style="width:25px;height:11px;"> as the initial condition,</p><pre class="codeinput">[t,y] = solve_ivp(f,[10,20],y10,0.001,<span class="string">'ABM8'</span>);
 y20 = y(end)
 </pre><pre class="codeoutput">
 y20 =
 
-   50.0000
+  49.999999999999226
 
-</pre><h2 id="20">Example #4: Backward integration (event-detection case).</h2><p><i>Once again, consider</i></p><p><img src="solve_ivp_doc_eq15707102448259949290.png" alt="$$\frac{dy}{dt}=y,\quad y(20)=50$$" style="width:100px;height:23px;"></p><p><i>Find <img src="solve_ivp_doc_eq14770085807156189371.png" alt="$y(10)$" style="width:25px;height:11px;"> using an IVP solver with a condition function (i.e. event-detection).</i></p><p>First, let's define our ODE (<img src="solve_ivp_doc_eq15749537601348477239.png" alt="$\frac{dy}{dt}=f(t,y)$" style="width:53px;height:15px;">) and initial condition in MATLAB.</p><pre class="codeinput">f = @(t,y) y;
+</pre><h2 id="20">Example #4: Backward integration (event-detection case).</h2><p><i>Once again, consider</i></p><p><img src="solve_ivp_doc_eq15707102448259949290.png" alt="$$\frac{dy}{dt}=y,\quad y(20)=50$$" style="width:100px;height:23px;"></p><p><i>Find <img src="solve_ivp_doc_eq14770085807156189371.png" alt="$y(10)$" style="width:25px;height:11px;"> using an IVP solver with a event function (i.e. event-detection).</i></p><p>First, let's define our ODE (<img src="solve_ivp_doc_eq15749537601348477239.png" alt="$\frac{dy}{dt}=f(t,y)$" style="width:53px;height:15px;">) and initial condition in MATLAB.</p><pre class="codeinput">f = @(t,y) y;
 y20 = 50;
-</pre><p>The event that terminates the solver is when <img src="solve_ivp_doc_eq08325516970591449802.png" alt="$t=10$" style="width:29px;height:8px;">. Therefore, we define the condition function as</p><pre class="codeinput">C = @(t,y) t &gt; 10;
-</pre><p>In the time-detection case (Example #3) we input <tt>[t0,tf] = [20,10]</tt>, so the solver knew to integrate backwards in time since <tt>t0 &gt; tf</tt>. Consequently, internally, the solver made the step size negative. However, for the event-detection case, just given <tt>t</tt> and <tt>C(t,y)</tt>, the solver won't know to use a negative step size to integrate backwards in time. Therefore, we must manually specify a negative step size. Solving for <img src="solve_ivp_doc_eq14770085807156189371.png" alt="$y(10)$" style="width:25px;height:11px;">,</p><pre class="codeinput">[t,y] = solve_ivp(f,{20,C},y20,-0.001,<span class="string">'ABM8'</span>);
+</pre><p>The event that terminates the solver is when <img src="solve_ivp_doc_eq08325516970591449802.png" alt="$t=10$" style="width:29px;height:8px;">. Therefore, we define the event function as</p><pre class="codeinput">E = @(t,y) t &gt; 10;
+</pre><p>In the time-detection case (Example #3) we input <tt>[t0,tf] = [20,10]</tt>, so the solver knew to integrate backwards in time since <tt>t0 &gt; tf</tt>. Consequently, internally, the solver made the step size negative. However, for the event-detection case, just given <tt>t</tt> and <tt>E(t,y)</tt>, the solver won't know to use a negative step size to integrate backwards in time. Therefore, we must manually specify a negative step size. Solving for <img src="solve_ivp_doc_eq14770085807156189371.png" alt="$y(10)$" style="width:25px;height:11px;">,</p><pre class="codeinput">[t,y] = solve_ivp(f,{20,E},y20,-0.001,<span class="string">'ABM8'</span>);
 y10 = y(end)
 </pre><pre class="codeoutput">
 y10 =
 
-    0.0023
+   0.002272267619989
 
 </pre><p>Note that this is the same result we obtained earlier in Example #3.</p><h2 id="25">See also</h2><p><a href="solve_ivp_matrix_doc.html"><tt>solve_ivp_matrix</tt></a></p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2022a</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% |solve_ivp|
-% Solve initial value problems using fixed-step IVP solvers.
+% Fixed-step IVP solvers for solving vector-valued initial value problems.
 % 
 % <index.html Back to IVP Solver Toolbox Contents>.
 %% Syntax
 %   [t,y] = solve_ivp(f,[t0,tf],y0,h)
-%   [t,y] = solve_ivp(f,{t0,C},y0,h)
+%   [t,y] = solve_ivp(f,{t0,E},y0,h)
 %   [t,y] = solve_ivp(__,method)
 %   [t,y] = solve_ivp(__,method,wb)
 %% Description
@@ -249,9 +249,9 @@ y10 =
 % from |t0| until |tf| using the classic Runge-Kutta fourth-order method 
 % with an initial condition |y0| and step size |h|.
 %%
-% |[t,y] = solve_ivp(f,{t0,C},y0,h)| does the same as the syntax above, but
+% |[t,y] = solve_ivp(f,{t0,E},y0,h)| does the same as the syntax above, but
 % instead of terminating at a final time |tf|, the solver terminates once
-% the condition function |C(t,y)| is no longer satisfied.
+% the event function |E(t,y)| is no longer satisfied.
 %%
 % |[t,y] = solve_ivp(...,method)| can be used with either of the syntaxes 
 % above to specify the integration method (i.e. the function will use the
@@ -296,8 +296,8 @@ y10 =
 %       </tr>
 %       <tr>
 %           <td style="text-align:center"><TT>C</TT></td>
-%           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;C(t,\mathbf{y})" title="C(t,\mathbf{y})" /></td>
-%           <td>condition function (<img src="https://latex.codecogs.com/svg.latex?\inline&space;C:\mathbb{R}\times\mathbb{R}^{p}\rightarrow\mathbb{B}" title="" />)
+%           <td style="text-align:center"><img src="https://latex.codecogs.com/svg.latex?\inline&space;E(t,\mathbf{y})" title="E(t,\mathbf{y})" /></td>
+%           <td>event function (<img src="https://latex.codecogs.com/svg.latex?\inline&space;E:\mathbb{R}\times\mathbb{R}^{p}\rightarrow\mathbb{B}" title="" />)
 %               <BR> - inputs are the current time (<TT>t</TT>, 1×1 double) and the current state vector (<TT>y</TT>, p×1 double)
 %               <BR> - output is a 1×1 logical (<TT>true</TT> if solver should continue running, <TT>false</TT> if solver should terminate)</td>
 %           <td style="text-align:center">1×1<BR>function_handle</td>
@@ -443,13 +443,13 @@ zlabel('$z$','Interpreter','latex','FontSize',18);
 f = @(t,y) y;
 y2 = 3;
 %%
-% Next, let's define the condition function, $C(t,y)$. Since we want to
+% Next, let's define the event function, $E(t,y)$. Since we want to
 % continue solving until $y=10$, we want the solver to run while $y\leq10$;
 % this forms our condition. Therefore,
-C = @(t,y) y <= 10;
+E = @(t,y) y <= 10;
 %%
 % Solving for $y$ using the Euler method with a step size of $h=0.01$,
-[t,y] = solve_ivp(f,{2,C},y2,0.01,'Euler');
+[t,y] = solve_ivp(f,{2,E},y2,0.01,'Euler');
 %%
 % Plotting the solution,
 figure;
@@ -491,7 +491,7 @@ y20 = y(end)
 %
 % $$\frac{dy}{dt}=y,\quad y(20)=50$$
 %
-% _Find $y(10)$ using an IVP solver with a condition function (i.e. 
+% _Find $y(10)$ using an IVP solver with a event function (i.e. 
 % event-detection)._
 %%
 % First, let's define our ODE ($\frac{dy}{dt}=f(t,y)$) and initial 
@@ -500,17 +500,17 @@ f = @(t,y) y;
 y20 = 50;
 %%
 % The event that terminates the solver is when $t=10$. Therefore, we define
-% the condition function as
-C = @(t,y) t > 10;
+% the event function as
+E = @(t,y) t > 10;
 %%
 % In the time-detection case (Example #3) we input |[t0,tf] = [20,10]|, so 
 % the solver knew to integrate backwards in time since |t0 > tf|. 
 % Consequently, internally, the solver made the step size negative. 
-% However, for the event-detection case, just given |t| and |C(t,y)|, the 
+% However, for the event-detection case, just given |t| and |E(t,y)|, the 
 % solver won't know to use a negative step size to integrate backwards in
 % time. Therefore, we must manually specify a negative step size. Solving
 % for $y(10)$,
-[t,y] = solve_ivp(f,{20,C},y20,-0.001,'ABM8');
+[t,y] = solve_ivp(f,{20,E},y20,-0.001,'ABM8');
 y10 = y(end)
 %% 
 % Note that this is the same result we obtained earlier in Example #3.

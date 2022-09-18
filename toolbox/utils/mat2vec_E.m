@@ -8,7 +8,7 @@
 % See also mat2vec_IC, mat2vec_ODE, vec2mat_sol.
 %
 % Copyright © 2021 Tamas Kis
-% Last Update: 2022-09-17
+% Last Update: 2022-09-18
 % Website: https://tamaskis.github.io
 % Contact: tamas.a.kis@outlook.com
 %
@@ -46,25 +46,24 @@ function Ev = mat2vec_E(Em,p)
     % vector.
     %----------------------------------------------------------------------
     %
+    % ------
     % INPUT:
+    % ------
     %   Em      - (1×1 function_handle) event function for matrix-
     %              valued IVP, Eₘ(t,M) (Eₘ : ℝ×ℝᵖˣʳ → B)
     %   t       - (1×1 double) current time
     %   y       - (pr×1 double) state vector at current time
     %   p       - (1×1 double) number of rows of state matrix
     %
+    % -------
     % OUTPUT:
+    % -------
     %   E       - (1×1 logical) evaluation of event function
     %----------------------------------------------------------------------
     function E = vector_event_function(Em,t,y,p)
         
         % state dimension
         pr = length(y);
-        
-        % determine "p" if not specified (assuming M is square)
-        if isempty(p)
-            p = sqrt(pr);
-        end
         
         % determines r
         r = pr/p;
